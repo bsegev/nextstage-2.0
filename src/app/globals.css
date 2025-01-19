@@ -5,6 +5,16 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --white: #ffffff;
+  --black: #000000;
+  --transparent: transparent;
+  --blue-300: #93c5fd;
+  --blue-400: #60a5fa;
+  --blue-500: #3b82f6;
+  --indigo-300: #a5b4fc;
+  --violet-200: #ddd6fe;
+  --ethereal-light: #FFFFF0;
+  --ethereal-dark: #1C1C1C;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -18,4 +28,61 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+@keyframes aurora {
+  from {
+    background-position: 50% 50%, 50% 50%;
+  }
+  to {
+    background-position: 350% 50%, 350% 50%;
+  }
+}
+
+.aurora-text-gradient {
+  background: linear-gradient(
+    to right,
+    rgb(255, 255, 255) 20%,
+    rgb(220, 230, 255) 30%,
+    rgb(230, 240, 255) 70%,
+    rgb(255, 255, 255) 80%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  background-size: 200% auto;
+  animation: aurora 4s ease infinite;
+}
+
+@keyframes aurora {
+  0% {
+    background-position: 0% center;
+  }
+  50% {
+    background-position: 100% center;
+  }
+  100% {
+    background-position: 0% center;
+  }
+}
+
+.aurora-text-gradient-light {
+  background: linear-gradient(
+    to right,
+    #3b82f6 0%,    /* Deep blue anchor */
+    #4f46e5 15%,   /* Deep indigo */
+    #38bdf8 30%,   /* Bright sky blue */
+    #818cf8 45%,   /* Soft indigo */
+    #2dd4bf 60%,   /* Teal accent */
+    #4f46e5 75%,   /* Back to deep indigo */
+    #38bdf8 90%,   /* Sky blue finish */
+    #3b82f6 100%   /* Deep blue anchor */
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  background-size: 200% auto;
+  animation: aurora 6s ease infinite; /* Slowed down animation for more ethereal feel */
 }
