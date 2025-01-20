@@ -82,6 +82,8 @@ export function TransformationMessage() {
   const [touchEnd, setTouchEnd] = useState(0);
   const [isSwiping, setIsSwiping] = useState(false);
   const [swipeDirection, setSwipeDirection] = useState<'left' | 'right' | null>(null);
+  const [touchStartY, setTouchStartY] = useState(0);
+  const [touchEndY, setTouchEndY] = useState(0);
 
   useEffect(() => {
     // Handle window resize
@@ -106,24 +108,37 @@ export function TransformationMessage() {
 
   const handleTouchStart = (e: React.TouchEvent) => {
     setTouchStart(e.touches[0].clientX);
+    setTouchStartY(e.touches[0].clientY);
     setIsSwiping(true);
-    setTouchEnd(e.touches[0].clientX); // Reset touchEnd to prevent unwanted swipes
+    setTouchEnd(e.touches[0].clientX);
+    setTouchEndY(e.touches[0].clientY);
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
     if (!isSwiping) return;
     
-    const currentTouch = e.touches[0].clientX;
-    const diff = touchStart - currentTouch;
+    const currentTouchX = e.touches[0].clientX;
+    const currentTouchY = e.touches[0].clientY;
     
-    if (Math.abs(diff) > 5) { // Add a small threshold to detect intentional swipes
-      if (diff > 0) {
-        setSwipeDirection('left');
-      } else {
-        setSwipeDirection('right');
-      }
+    // Calculate angle of swipe
+    const deltaX = currentTouchX - touchStart;
+    const deltaY = currentTouchY - touchStartY;
+    const angle = Math.abs(Math.atan2(deltaY, deltaX) * 180 / Math.PI);
+    
+    // If the angle is within 45 degrees of horizontal, treat it as a horizontal swipe
+    if (angle <= 45 || angle >= 135) {
+      e.preventDefault(); // Prevent vertical scrolling
       
-      setTouchEnd(currentTouch);
+      const diff = touchStart - currentTouchX;
+      if (Math.abs(diff) > 5) {
+        if (diff > 0) {
+          setSwipeDirection('left');
+        } else {
+          setSwipeDirection('right');
+        }
+        setTouchEnd(currentTouchX);
+        setTouchEndY(currentTouchY);
+      }
     }
   };
 
@@ -133,7 +148,12 @@ export function TransformationMessage() {
     const minSwipeDistance = 50;
     const diff = touchStart - touchEnd;
     
-    if (Math.abs(diff) > minSwipeDistance) {
+    // Calculate final angle to ensure it was primarily horizontal
+    const deltaX = touchEnd - touchStart;
+    const deltaY = touchEndY - touchStartY;
+    const angle = Math.abs(Math.atan2(deltaY, deltaX) * 180 / Math.PI);
+    
+    if (Math.abs(diff) > minSwipeDistance && (angle <= 45 || angle >= 135)) {
       if (diff > 0) {
         handleNext();
       } else {
@@ -145,6 +165,8 @@ export function TransformationMessage() {
     setSwipeDirection(null);
     setTouchStart(0);
     setTouchEnd(0);
+    setTouchStartY(0);
+    setTouchEndY(0);
   };
 
   const handleMouseMove = useCallback((e: React.MouseEvent) => {
@@ -241,7 +263,7 @@ export function TransformationMessage() {
       </div>
 
       {/* Content Layer */}
-      <div className="relative z-10 w-full mx-auto px-4 sm:px-6 py-24 lg:py-32">
+      <div className="relative z-10 w-full mx-auto px-2 sm:px-3 py-24 lg:py-32">
         {/* Header */}
         <motion.div
           className="relative max-w-4xl mx-auto text-center mb-20"
@@ -361,7 +383,7 @@ export function TransformationMessage() {
             <AnimatePresence initial={false} mode="wait">
               <motion.div
                 key={currentIndex}
-                className="relative w-[80%] max-w-[1700px] mx-auto"
+                className="relative w-[90%] max-w-[1800px] mx-auto"
                 initial={{ opacity: 0, x: swipeDirection === 'left' ? 100 : swipeDirection === 'right' ? -100 : 0 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: swipeDirection === 'left' ? -100 : swipeDirection === 'right' ? 100 : 0 }}
