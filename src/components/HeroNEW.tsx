@@ -32,7 +32,7 @@ const BackgroundShapes = () => {
   };
 
   return (
-    <motion.div className="absolute inset-0 overflow-hidden" style={{ zIndex: 1 }}>
+    <motion.div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ zIndex: 1 }}>
       {/* Square */}
       <motion.div
         className="absolute w-32 h-32 border border-ethereal-dark/30"
@@ -209,13 +209,13 @@ export const Hero = () => {
   return (
     <motion.section 
       ref={containerRef}
-      className="relative min-h-[100vh] flex items-center justify-center overflow-hidden font-['DM_Sans']"
+      className="relative min-h-[100vh] flex items-center justify-center overflow-hidden font-['DM_Sans'] select-none"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
     >
       {/* Background Video Layer */}
-      <div className="absolute inset-0" style={{ zIndex: 0 }}>
+      <div className="absolute inset-0 select-none" style={{ zIndex: 0 }}>
         <motion.video
           ref={videoRef}
           autoPlay
@@ -228,8 +228,8 @@ export const Hero = () => {
         </motion.video>
         
         <motion.img
-          src="/videos/video_finalframe.png"
-          alt="Background"
+          src="/video_finalframe.png"
+          alt=""
           className="absolute inset-0 w-full h-full object-cover"
           style={{ 
             scale: backgroundScale,

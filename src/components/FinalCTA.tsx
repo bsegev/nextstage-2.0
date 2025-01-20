@@ -186,25 +186,30 @@ export function FinalCTA() {
           transition={{ duration: 0.6 }}
           className="text-center relative z-10"
         >
-          <div className="flex items-center justify-center space-x-4 mb-6">
+          <div className="inline-flex items-center gap-3 mb-6">
+            <div className="h-px w-8 bg-gradient-to-r from-[#FFFFF0]/0 via-[#FFFFF0]/20 to-[#FFFFF0]/0" />
             <motion.span 
-              initial={{ width: 0 }}
-              whileInView={{ width: 80 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="h-0.5 bg-[#1C1C1C]/20"
-            />
-            <h2 className="text-6xl font-serif">
-              Ready to Make Your <span className="aurora-text-gradient-light">Mark</span>?
-            </h2>
-            <motion.span 
-              initial={{ width: 0 }}
-              whileInView={{ width: 80 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="h-0.5 bg-[#1C1C1C]/20"
-            />
+              className="font-mono text-sm tracking-wider aurora-text-gradient-light"
+              animate={{
+                backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+              }}
+              transition={{
+                duration: 5,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+              style={{
+                backgroundSize: "200% auto",
+              }}
+            >
+              FINAL CALL
+            </motion.span>
+            <div className="h-px w-8 bg-gradient-to-r from-[#FFFFF0]/0 via-[#FFFFF0]/20 to-[#FFFFF0]/0" />
           </div>
+
+          <h2 className="font-serif text-4xl lg:text-6xl mb-8">
+            Ready to Make Your <span className="aurora-text-gradient-light">Mark</span>?
+          </h2>
           
           <p className="text-xl text-[#1C1C1C]/70 mb-12 max-w-3xl mx-auto">
             Ready to build something <span className="aurora-text-gradient-light">meaningful</span>? Let&apos;s create a brand that resonates from the inside out, turning your vision into lasting impact.
