@@ -78,6 +78,10 @@ export function TransformationMessage() {
   const [y, setY] = useState(0);
   const [showInfo, setShowInfo] = useState(false);
   const [windowWidth, setWindowWidth] = useState(0);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+  const [isSwiping, setIsSwiping] = useState(false);
+  const [swipeDirection, setSwipeDirection] = useState<'left' | 'right' | null>(null);
 
   useEffect(() => {
     // Handle window resize
@@ -98,6 +102,49 @@ export function TransformationMessage() {
 
   const handlePrev = () => {
     setCurrentIndex((prev) => (prev - 1 + transformationStages.length) % transformationStages.length);
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStart(e.touches[0].clientX);
+    setIsSwiping(true);
+    setTouchEnd(e.touches[0].clientX); // Reset touchEnd to prevent unwanted swipes
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isSwiping) return;
+    
+    const currentTouch = e.touches[0].clientX;
+    const diff = touchStart - currentTouch;
+    
+    if (Math.abs(diff) > 5) { // Add a small threshold to detect intentional swipes
+      if (diff > 0) {
+        setSwipeDirection('left');
+      } else {
+        setSwipeDirection('right');
+      }
+      
+      setTouchEnd(currentTouch);
+    }
+  };
+
+  const handleTouchEnd = () => {
+    if (!isSwiping) return;
+    
+    const minSwipeDistance = 50;
+    const diff = touchStart - touchEnd;
+    
+    if (Math.abs(diff) > minSwipeDistance) {
+      if (diff > 0) {
+        handleNext();
+      } else {
+        handlePrev();
+      }
+    }
+    
+    setIsSwiping(false);
+    setSwipeDirection(null);
+    setTouchStart(0);
+    setTouchEnd(0);
   };
 
   const handleMouseMove = useCallback((e: React.MouseEvent) => {
@@ -143,11 +190,14 @@ export function TransformationMessage() {
   return (
     <section 
       ref={slideRef}
-      className="relative min-h-screen cursor-none transformation-message bg-[#1C1C1C] overflow-hidden"
-      onMouseMove={handleMouseMove}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      onClick={handleClick}
+      className={`relative min-h-screen ${windowWidth >= 1024 ? 'cursor-none' : ''} transformation-message bg-[#1C1C1C] overflow-hidden`}
+      onMouseMove={windowWidth >= 1024 ? handleMouseMove : undefined}
+      onMouseEnter={windowWidth >= 1024 ? handleMouseEnter : undefined}
+      onMouseLeave={windowWidth >= 1024 ? handleMouseLeave : undefined}
+      onClick={windowWidth >= 1024 ? handleClick : undefined}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
     >
       {/* Background Image Layer */}
         <AnimatePresence mode="wait">
@@ -312,12 +362,12 @@ export function TransformationMessage() {
               <motion.div
                 key={currentIndex}
                 className="relative w-[80%] max-w-[1700px] mx-auto"
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
+                initial={{ opacity: 0, x: swipeDirection === 'left' ? 100 : swipeDirection === 'right' ? -100 : 0 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: swipeDirection === 'left' ? -100 : swipeDirection === 'right' ? 100 : 0 }}
                 transition={{
-                  opacity: { duration: 0.4, delay: 0.1 },
-                  scale: { duration: 0.5, delay: 0.1 }
+                  opacity: { duration: 0.4 },
+                  x: { duration: 0.4, ease: "easeInOut" }
                 }}
               >
                 {/* Main Image Container */}
@@ -327,57 +377,116 @@ export function TransformationMessage() {
                     scale: 1,
                     transition: { duration: 0.6, ease: [0.32, 0.72, 0, 1] }
                   }}
-              >
-                <motion.div 
-                  className="absolute inset-0 bg-cover bg-center"
-                  initial={{ scale: 1.1 }}
-                  animate={{ scale: 1 }}
-                  transition={{ duration: 1.5, ease: [0.23, 1, 0.32, 1] }}
-                  style={{ 
-                    backgroundImage: `url(${transformationStages[currentIndex].image})`
-                  }}
-                />
-              </motion.div>
+                >
+                  <motion.div 
+                    className="absolute inset-0 bg-cover bg-center"
+                    initial={{ scale: 1.1 }}
+                    animate={{ scale: 1 }}
+                    transition={{ duration: 1.5, ease: [0.23, 1, 0.32, 1] }}
+                    style={{ 
+                      backgroundImage: `url(${transformationStages[currentIndex].image})`
+                    }}
+                  />
 
-                {/* Mobile Info Panel - Always visible on mobile */}
-                <div className="block lg:hidden mt-6">
-                  <div className="bg-gradient-to-br from-[#1C1C1C]/95 to-black/95 rounded-2xl shadow-2xl overflow-hidden border border-[#FFFFF0]/20 backdrop-blur-md">
-                    <div className="px-6 py-4 border-b border-[#FFFFF0]/20 bg-[#1C1C1C]/50">
-                      <span className="font-mono text-sm text-[#FFFFF0]/80">{transformationStages[currentIndex].category}</span>
+                  {/* Mobile Info Button */}
+                  {windowWidth < 1024 && (
+                    <motion.button
+                      className="absolute top-4 right-4 w-10 h-10 rounded-full bg-gradient-to-br from-[#FFFFF0]/10 to-[#1C1C1C]/90 backdrop-blur-sm border border-[#FFFFF0]/20 flex items-center justify-center z-20"
+                      onClick={(e: React.MouseEvent) => {
+                        e.stopPropagation();
+                        setShowInfo(!showInfo);
+                      }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <svg className="w-5 h-5 text-[#FFFFF0]/80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="10" className="stroke-current" strokeWidth="1.5"/>
+                        <path d="M12 16v-4m0-4h.01" className="stroke-current" strokeWidth="1.5" strokeLinecap="round"/>
+                      </svg>
+                    </motion.button>
+                  )}
+                </motion.div>
+
+                {/* Mobile Navigation Indicators */}
+                {windowWidth < 1024 && (
+                  <div className="mt-6 flex flex-col items-center gap-4">
+                    <div className="flex items-center gap-2">
+                      {transformationStages.map((_, index) => (
+                        <motion.div
+                          key={index}
+                          className={`w-1.5 h-1.5 rounded-full ${
+                            index === currentIndex 
+                              ? 'bg-white w-4' 
+                              : 'bg-white/30'
+                          }`}
+                          animate={index === currentIndex ? {
+                            scale: [1, 1.2, 1],
+                            opacity: [0.7, 1, 0.7]
+                          } : {}}
+                          transition={{
+                            duration: 2,
+                            repeat: Infinity,
+                            ease: "easeInOut"
+                          }}
+                        />
+                      ))}
                     </div>
+                    <motion.div 
+                      className="text-[#FFFFF0]/60 text-sm font-mono"
+                      animate={{ opacity: [0.6, 1, 0.6] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    >
+                      Swipe to navigate
+                    </motion.div>
+                  </div>
+                )}
 
-                    <div className="p-6 space-y-6">
-                      <div className="flex items-start gap-4">
-                        <div className="flex-1 space-y-4">
-                          <h3 className="text-xl md:text-2xl text-[#FFFFF0] font-serif">
-                            Initial Ask: {transformationStages[currentIndex].title}
-                          </h3>
-                          <p className="text-[#FFFFF0]/80">
-                            Brief: {transformationStages[currentIndex].description}
-                          </p>
+                {/* Mobile Info Panel */}
+                {windowWidth < 1024 && showInfo && (
+                  <motion.div
+                    className="mt-6"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 20 }}
+                    transition={{ duration: 0.3, ease: "easeOut" }}
+                  >
+                    <div className="bg-gradient-to-br from-[#1C1C1C]/95 to-black/95 rounded-2xl shadow-2xl overflow-hidden border border-[#FFFFF0]/20 backdrop-blur-md">
+                      <div className="px-6 py-4 border-b border-[#FFFFF0]/20 bg-[#1C1C1C]/50">
+                        <span className="font-mono text-sm text-[#FFFFF0]/80">{transformationStages[currentIndex].category}</span>
+                      </div>
 
-                          {/* Case Study Buttons */}
-                          <div className="flex flex-col gap-4 pt-4">
-                            <button className="w-full py-3 px-4 bg-[#FFFFF0]/10 backdrop-blur-sm rounded-lg transition-all duration-300 relative overflow-hidden group border border-[#FFFFF0]/20 hover:bg-[#FFFFF0]/20 flex items-center justify-center gap-3">
-                              <span className="relative z-10 text-[#FFFFF0]/80">Watch Case Study</span>
-                              <svg className="w-4 h-4 text-[#FFFFF0]/80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="12" cy="12" r="10" className="stroke-current" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                                <path className="fill-current" d="M15.4,12l-5.1,3c-0.2,0.1-0.4,0-0.4-0.2V9.2c0-0.2,0.2-0.3,0.4-0.2l5.1,3C15.6,12.1,15.6,11.9,15.4,12z"/>
-                              </svg>
-                            </button>
-                            <button className="w-full py-3 px-4 bg-[#FFFFF0]/10 backdrop-blur-sm rounded-lg transition-all duration-300 relative overflow-hidden group border border-[#FFFFF0]/20 hover:bg-[#FFFFF0]/20 flex items-center justify-center gap-3">
-                              <span className="relative z-10 text-[#FFFFF0]/80">Read Case Study</span>
-                              <svg className="w-4 h-4 text-[#FFFFF0]/80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect x="4" y="4" width="16" height="16" className="stroke-current" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                                <path className="stroke-current" d="M9 8h6M9 12h6M9 16h4" strokeWidth="1.5" strokeLinecap="round"/>
-                              </svg>
-                            </button>
+                      <div className="p-6 space-y-6">
+                        <div className="flex items-start gap-4">
+                          <div className="flex-1 space-y-4">
+                            <h3 className="text-xl text-[#FFFFF0] font-serif">
+                              Initial Ask: {transformationStages[currentIndex].title}
+                            </h3>
+                            <p className="text-[#FFFFF0]/80">
+                              Brief: {transformationStages[currentIndex].description}
+                            </p>
+
+                            {/* Case Study Buttons */}
+                            <div className="flex flex-col gap-4 pt-4">
+                              <button className="w-full py-3 px-4 bg-[#FFFFF0]/10 backdrop-blur-sm rounded-lg transition-all duration-300 relative overflow-hidden group border border-[#FFFFF0]/20 hover:bg-[#FFFFF0]/20 flex items-center justify-center gap-3">
+                                <span className="relative z-10 text-[#FFFFF0]/80">Watch Case Study</span>
+                                <svg className="w-4 h-4 text-[#FFFFF0]/80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <circle cx="12" cy="12" r="10" className="stroke-current" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                                  <path className="fill-current" d="M15.4,12l-5.1,3c-0.2,0.1-0.4,0-0.4-0.2V9.2c0-0.2,0.2-0.3,0.4-0.2l5.1,3C15.6,12.1,15.6,11.9,15.4,12z"/>
+                                </svg>
+                              </button>
+                              <button className="w-full py-3 px-4 bg-[#FFFFF0]/10 backdrop-blur-sm rounded-lg transition-all duration-300 relative overflow-hidden group border border-[#FFFFF0]/20 hover:bg-[#FFFFF0]/20 flex items-center justify-center gap-3">
+                                <span className="relative z-10 text-[#FFFFF0]/80">Read Case Study</span>
+                                <svg className="w-4 h-4 text-[#FFFFF0]/80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <rect x="4" y="4" width="16" height="16" className="stroke-current" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                                  <path className="stroke-current" d="M9 8h6M9 12h6M9 16h4" strokeWidth="1.5" strokeLinecap="round"/>
+                                </svg>
+                              </button>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-          </div>
+                  </motion.div>
+                )}
 
                 {/* Desktop Info Panel - Toggled by button */}
                 <AnimatePresence>
