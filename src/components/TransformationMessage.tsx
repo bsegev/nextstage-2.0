@@ -399,16 +399,16 @@ export function TransformationMessage() {
                     scale: 1,
                     transition: { duration: 0.6, ease: [0.32, 0.72, 0, 1] }
                   }}
-                >
-                  <motion.div 
-                    className="absolute inset-0 bg-cover bg-center"
-                    initial={{ scale: 1.1 }}
-                    animate={{ scale: 1 }}
-                    transition={{ duration: 1.5, ease: [0.23, 1, 0.32, 1] }}
-                    style={{ 
-                      backgroundImage: `url(${transformationStages[currentIndex].image})`
-                    }}
-                  />
+              >
+                <motion.div 
+                  className="absolute inset-0 bg-cover bg-center"
+                  initial={{ scale: 1.1 }}
+                  animate={{ scale: 1 }}
+                  transition={{ duration: 1.5, ease: [0.23, 1, 0.32, 1] }}
+                  style={{ 
+                    backgroundImage: `url(${transformationStages[currentIndex].image})`
+                  }}
+                />
 
                   {/* Mobile Info Button */}
                   {windowWidth < 1024 && (
@@ -426,7 +426,7 @@ export function TransformationMessage() {
                       </svg>
                     </motion.button>
                   )}
-                </motion.div>
+              </motion.div>
 
                 {/* Mobile Navigation Indicators */}
                 {windowWidth < 1024 && (
@@ -471,42 +471,42 @@ export function TransformationMessage() {
                     exit={{ opacity: 0, y: 20 }}
                     transition={{ duration: 0.3, ease: "easeOut" }}
                   >
-                    <div className="bg-gradient-to-br from-[#1C1C1C]/95 to-black/95 rounded-2xl shadow-2xl overflow-hidden border border-[#FFFFF0]/20 backdrop-blur-md">
-                      <div className="px-6 py-4 border-b border-[#FFFFF0]/20 bg-[#1C1C1C]/50">
-                        <span className="font-mono text-sm text-[#FFFFF0]/80">{transformationStages[currentIndex].category}</span>
-                      </div>
+                  <div className="bg-gradient-to-br from-[#1C1C1C]/95 to-black/95 rounded-2xl shadow-2xl overflow-hidden border border-[#FFFFF0]/20 backdrop-blur-md">
+                    <div className="px-6 py-4 border-b border-[#FFFFF0]/20 bg-[#1C1C1C]/50">
+                      <span className="font-mono text-sm text-[#FFFFF0]/80">{transformationStages[currentIndex].category}</span>
+                    </div>
 
-                      <div className="p-6 space-y-6">
-                        <div className="flex items-start gap-4">
-                          <div className="flex-1 space-y-4">
+                    <div className="p-6 space-y-6">
+                      <div className="flex items-start gap-4">
+                        <div className="flex-1 space-y-4">
                             <h3 className="text-xl text-[#FFFFF0] font-serif">
-                              Initial Ask: {transformationStages[currentIndex].title}
-                            </h3>
-                            <p className="text-[#FFFFF0]/80">
-                              Brief: {transformationStages[currentIndex].description}
-                            </p>
+                            Initial Ask: {transformationStages[currentIndex].title}
+                          </h3>
+                          <p className="text-[#FFFFF0]/80">
+                            Brief: {transformationStages[currentIndex].description}
+                          </p>
 
-                            {/* Case Study Buttons */}
-                            <div className="flex flex-col gap-4 pt-4">
-                              <button className="w-full py-3 px-4 bg-[#FFFFF0]/10 backdrop-blur-sm rounded-lg transition-all duration-300 relative overflow-hidden group border border-[#FFFFF0]/20 hover:bg-[#FFFFF0]/20 flex items-center justify-center gap-3">
-                                <span className="relative z-10 text-[#FFFFF0]/80">Watch Case Study</span>
-                                <svg className="w-4 h-4 text-[#FFFFF0]/80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                  <circle cx="12" cy="12" r="10" className="stroke-current" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                                  <path className="fill-current" d="M15.4,12l-5.1,3c-0.2,0.1-0.4,0-0.4-0.2V9.2c0-0.2,0.2-0.3,0.4-0.2l5.1,3C15.6,12.1,15.6,11.9,15.4,12z"/>
-                                </svg>
-                              </button>
-                              <button className="w-full py-3 px-4 bg-[#FFFFF0]/10 backdrop-blur-sm rounded-lg transition-all duration-300 relative overflow-hidden group border border-[#FFFFF0]/20 hover:bg-[#FFFFF0]/20 flex items-center justify-center gap-3">
-                                <span className="relative z-10 text-[#FFFFF0]/80">Read Case Study</span>
-                                <svg className="w-4 h-4 text-[#FFFFF0]/80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                  <rect x="4" y="4" width="16" height="16" className="stroke-current" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                                  <path className="stroke-current" d="M9 8h6M9 12h6M9 16h4" strokeWidth="1.5" strokeLinecap="round"/>
-                                </svg>
-                              </button>
-                            </div>
+                          {/* Case Study Buttons */}
+                          <div className="flex flex-col gap-4 pt-4">
+                            <button className="w-full py-3 px-4 bg-[#FFFFF0]/10 backdrop-blur-sm rounded-lg transition-all duration-300 relative overflow-hidden group border border-[#FFFFF0]/20 hover:bg-[#FFFFF0]/20 flex items-center justify-center gap-3">
+                              <span className="relative z-10 text-[#FFFFF0]/80">Watch Case Study</span>
+                              <svg className="w-4 h-4 text-[#FFFFF0]/80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="10" className="stroke-current" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                                <path className="fill-current" d="M15.4,12l-5.1,3c-0.2,0.1-0.4,0-0.4-0.2V9.2c0-0.2,0.2-0.3,0.4-0.2l5.1,3C15.6,12.1,15.6,11.9,15.4,12z"/>
+                              </svg>
+                            </button>
+                            <button className="w-full py-3 px-4 bg-[#FFFFF0]/10 backdrop-blur-sm rounded-lg transition-all duration-300 relative overflow-hidden group border border-[#FFFFF0]/20 hover:bg-[#FFFFF0]/20 flex items-center justify-center gap-3">
+                              <span className="relative z-10 text-[#FFFFF0]/80">Read Case Study</span>
+                              <svg className="w-4 h-4 text-[#FFFFF0]/80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="4" y="4" width="16" height="16" className="stroke-current" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                                <path className="stroke-current" d="M9 8h6M9 12h6M9 16h4" strokeWidth="1.5" strokeLinecap="round"/>
+                              </svg>
+                            </button>
                           </div>
                         </div>
                       </div>
                     </div>
+                  </div>
                   </motion.div>
                 )}
 

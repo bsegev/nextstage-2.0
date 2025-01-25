@@ -8,6 +8,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 const Hero = dynamic(() => import('@/components/HeroNEW').then(mod => ({ default: mod.Hero })), { ssr: false });
 const ValueProp = dynamic(() => import('@/components/ValueProp').then(mod => ({ default: mod.ValueProp })), { ssr: false });
 const WhyImportant = dynamic(() => import('@/components/WhyImportant').then(mod => ({ default: mod.WhyImportant })), { ssr: false });
+const KeyMetrics = dynamic(() => import('@/components/KeyMetrics').then(mod => ({ default: mod.KeyMetrics })), { ssr: false });
+const ProcessFlow = dynamic(() => import('@/components/ProcessFlow').then(mod => ({ default: mod.ProcessFlow })), { ssr: false });
 const TransformationMessage = dynamic(() => import('@/components/TransformationMessage').then(mod => ({ default: mod.TransformationMessage })), { ssr: false });
 const CoreOffering = dynamic(() => import('@/components/CoreOffering').then(mod => ({ default: mod.CoreOffering })), { ssr: false });
 const FinalCTA = dynamic(() => import('@/components/FinalCTA').then(mod => ({ default: mod.FinalCTA })), { ssr: false });
@@ -29,9 +31,11 @@ export default function Home() {
           >
             <Hero />
             <ValueProp />
-            <CoreOffering />
-            <WhyImportant />
             <TransformationMessage />
+            <CoreOffering />
+            <KeyMetrics />
+            <ProcessFlow />
+            {/* <WhyImportant /> */}
             <FinalCTA />
             <Outro />
           </motion.div>

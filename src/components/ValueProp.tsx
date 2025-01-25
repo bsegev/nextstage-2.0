@@ -462,7 +462,7 @@ export function ValueProp() {
             style={{ y, opacity }}
           >
             <div className="space-y-8">
-              {/* First Part */}
+              {/* Main Message */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -477,64 +477,85 @@ export function ValueProp() {
                   viewport={{ once: true, margin: "-100px" }}
                   transition={{ duration: 1, delay: 0.2 }}
                 />
-                <p className="relative text-2xl sm:text-3xl md:text-4xl font-light text-ethereal-dark/90 leading-relaxed tracking-tight">
-                  I build brands from the inside out, creating{" "}
-                  <motion.span 
-                    className="relative inline-flex items-center gap-2 font-medium"
-                    whileInView={{ opacity: [0, 1], y: [20, 0] }}
-                    viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 0.5, delay: 0.3 }}
-                  >
-                    {/* Connected */}
-                    <span className="relative px-2">
-                      <motion.span
-                        className="absolute inset-0 border border-blue-300/30 rounded-full -z-10"
-                        initial={{ scale: 0 }}
-                        whileInView={{ scale: 1 }}
-                        viewport={{ once: true, margin: "-100px" }}
-                        transition={{ duration: 0.4, delay: 0.4 }}
-                      />
-                      <span className="text-blue-500/70 drop-shadow-sm">connected</span>
-                    </span>
-
-                    {/* Connecting line */}
+                <div className="relative space-y-6">
+                  <h2 className="text-2xl font-light text-ethereal-dark/90">
+                    For founders and strategic leaders
+                  </h2>
+                  
+                  <p className="relative text-2xl sm:text-3xl md:text-4xl font-light text-ethereal-dark/90 leading-relaxed tracking-tight">
+                    I build brands by creating{" "}
                     <motion.span 
-                      className="relative w-6 h-0.5 inline-block"
+                      className="relative inline-flex items-center gap-2 font-medium"
+                      whileInView={{ opacity: [0, 1], y: [20, 0] }}
+                      viewport={{ once: true, margin: "-100px" }}
+                      transition={{ duration: 0.5, delay: 0.3 }}
                     >
-                      {/* Static line */}
-                      <span className="absolute inset-0 bg-blue-300/10" />
-                      
-                      {/* Animated beam */}
-                      <motion.span
-                        className="absolute inset-0 bg-gradient-to-r from-blue-400/0 via-blue-400/80 to-blue-400/0"
-                        animate={{
-                          x: ["-100%", "100%", "-100%"],
-                        }}
-                        transition={{
-                          duration: 2,
-                          repeat: Infinity,
-                          ease: "easeInOut"
-                        }}
-                      />
-                    </motion.span>
+                      {/* Connected */}
+                      <span className="relative px-2">
+                        <motion.span
+                          className="absolute inset-0 border border-blue-300/30 rounded-full -z-10"
+                          initial={{ scale: 0 }}
+                          whileInView={{ scale: 1 }}
+                          viewport={{ once: true, margin: "-100px" }}
+                          transition={{ duration: 0.4, delay: 0.4 }}
+                        />
+                        <span className="text-blue-500/70 drop-shadow-sm">connected</span>
+                      </span>
 
-                    {/* Systems */}
-                    <span className="relative px-2">
-                      <motion.span
-                        className="absolute inset-0 border border-blue-300/30 rounded-full -z-10"
-                        initial={{ scale: 0 }}
-                        whileInView={{ scale: 1 }}
-                        viewport={{ once: true, margin: "-100px" }}
-                        transition={{ duration: 0.4, delay: 0.8 }}
-                      />
-                      <span className="text-blue-500/70 drop-shadow-sm">systems</span>
-                    </span>
-                  </motion.span>
-                  that unite internal clarity with external expression.
-                </p>
+                      {/* Connecting line */}
+                      <motion.span 
+                        className="relative w-6 h-0.5 inline-block"
+                      >
+                        {/* Static line */}
+                        <span className="absolute inset-0 bg-blue-300/10" />
+                        
+                        {/* Animated beam */}
+                        <motion.span
+                          className="absolute inset-0 bg-gradient-to-r from-blue-400/0 via-blue-400/80 to-blue-400/0"
+                          animate={{
+                            x: ["-100%", "100%", "-100%"],
+                          }}
+                          transition={{
+                            duration: 2,
+                            repeat: Infinity,
+                            ease: "easeInOut"
+                          }}
+                        />
+                      </motion.span>
+
+                      {/* Systems */}
+                      <span className="relative px-2">
+                        <motion.span
+                          className="absolute inset-0 border border-blue-300/30 rounded-full -z-10"
+                          initial={{ scale: 0 }}
+                          whileInView={{ scale: 1 }}
+                          viewport={{ once: true, margin: "-100px" }}
+                          transition={{ duration: 0.4, delay: 0.8 }}
+                        />
+                        <span className="text-blue-500/70 drop-shadow-sm">systems</span>
+                      </span>
+                    </motion.span>
+                    {" "}that unite internal clarity with external expression.
+                  </p>
+
+                  <ul className="space-y-2 text-lg text-ethereal-dark/70 mt-8">
+                    <li className="flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-blue-400/70" />
+                      One partner replacing multiple specialists
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-blue-400/70" />
+                      Strategy, design, and story working as one
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-blue-400/70" />
+                      Deep integration, not just implementation
+                    </li>
+                  </ul>
+                </div>
               </motion.div>
 
-              {/* Second Part */}
+              {/* Concept Cards */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -542,22 +563,7 @@ export function ValueProp() {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="relative"
               >
-                <motion.div 
-                  className="absolute -inset-x-4 -inset-y-2 bg-gradient-to-r from-primary-100/0 via-primary-100/20 to-primary-100/0 rounded-lg"
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 1, delay: 0.4 }}
-                />
-                <p className="relative text-2xl sm:text-3xl md:text-4xl font-light text-ethereal-dark/90 leading-relaxed tracking-tight">
-                  This integrated approach combines:
-                </p>
-                
                 <ConceptCards />
-                
-                <p className="relative text-2xl sm:text-3xl md:text-4xl font-light text-ethereal-dark/90 leading-relaxed">
-                  in one direct partnership - eliminating the need for multiple specialists while delivering lasting impact.
-                </p>
               </motion.div>
             </div>
           </motion.div>
