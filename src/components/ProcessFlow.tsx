@@ -94,29 +94,32 @@ const processSteps = [
 const LoaderCore = ({
   loadingStates,
   value = 0,
+  title,
 }: {
   loadingStates: { text: string }[];
   value?: number;
+  title: string;
 }) => {
   return (
     <div className="flex relative justify-start max-w-xl mx-auto flex-col mt-40">
-      {loadingStates.map((loadingState, index) => {
+      {[{ text: title, isTitle: true }, ...loadingStates].map((state, index) => {
         const distance = Math.abs(index - value);
         const opacity = Math.max(1 - distance * 0.2, 0);
+        const isTitle = 'isTitle' in state;
 
         return (
           <motion.div
             key={index}
-            className={cn("text-left flex gap-2 mb-4")}
+            className={cn("text-left flex gap-2", isTitle ? "mb-6" : "mb-4")}
             initial={{ opacity: 0, y: -(value * 40) }}
             animate={{ opacity: opacity, y: -(value * 40) }}
             transition={{ duration: 0.5 }}
           >
             <div>
-              {index > value && (
+              {!isTitle && index > value && (
                 <CheckIcon className="text-ethereal-dark dark:text-white" />
               )}
-              {index <= value && (
+              {!isTitle && index <= value && (
                 <CheckFilled
                   className={cn(
                     "text-ethereal-dark dark:text-white",
@@ -129,10 +132,11 @@ const LoaderCore = ({
             <span
               className={cn(
                 "text-ethereal-dark dark:text-white",
-                value === index && "text-ethereal-dark dark:text-lime-500 opacity-100"
+                isTitle ? "font-serif text-2xl" : "",
+                value === index && !isTitle && "text-ethereal-dark dark:text-lime-500 opacity-100"
               )}
             >
-              {loadingState.text}
+              {state.text}
             </span>
           </motion.div>
         );
@@ -146,7 +150,6 @@ export function ProcessFlow() {
   const [activeStep, setActiveStep] = useState(0);
   const [showDetailedSteps, setShowDetailedSteps] = useState(false);
   const [currentDetailedStep, setCurrentDetailedStep] = useState(0);
-  const [isAutoScrolling, setIsAutoScrolling] = useState(true);
   
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -155,22 +158,42 @@ export function ProcessFlow() {
 
   const opacity = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], [0, 1, 1, 0]);
 
+  // Block scrolling when loader is open
   useEffect(() => {
-    if (!showDetailedSteps || !isAutoScrolling) {
+    if (showDetailedSteps) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+      // Reset current step when closing
       setCurrentDetailedStep(0);
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [showDetailedSteps]);
+
+  // Auto-scrolling effect for the current process step only
+  useEffect(() => {
+    if (!showDetailedSteps) {
       return;
     }
+
+    const currentStepDetails = processSteps[activeStep].detailedSteps;
     const timeout = setTimeout(() => {
-      setCurrentDetailedStep((prev) => {
-        if (prev === processSteps[activeStep].detailedSteps.length - 1) {
-          return isAutoScrolling ? 0 : prev; // Loop if auto-scrolling
-        }
-        return prev + 1;
-      });
-    }, 1200); // Faster timing (was 2000)
+      if (currentDetailedStep < currentStepDetails.length) {
+        setCurrentDetailedStep(prev => prev + 1);
+      }
+    }, 1200);
 
     return () => clearTimeout(timeout);
-  }, [currentDetailedStep, showDetailedSteps, activeStep, isAutoScrolling]);
+  }, [currentDetailedStep, showDetailedSteps, activeStep]);
+
+  // Handler for opening a specific step
+  const handleStepClick = (index: number) => {
+    setActiveStep(index);
+    setCurrentDetailedStep(0); // Reset to start of animation
+    setShowDetailedSteps(true);
+  };
 
   return (
     <section 
@@ -270,10 +293,7 @@ export function ProcessFlow() {
               transition={{ delay: index * 0.2 }}
             >
               <motion.button 
-                onClick={() => {
-                  setActiveStep(index);
-                  setShowDetailedSteps(true);
-                }}
+                onClick={() => handleStepClick(index)}
                 className={`relative flex items-start gap-6 mb-20 group cursor-pointer w-full text-left z-[103]
                          ${activeStep === index ? 'opacity-100' : 'opacity-70'}`}
                 onMouseEnter={() => setActiveStep(index)}
@@ -347,70 +367,11 @@ export function ProcessFlow() {
               </svg>
             </button>
 
-            {/* Controls moved to bottom */}
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2">
-              <button
-                onClick={() => {
-                  setIsAutoScrolling(false);
-                  setCurrentDetailedStep(prev => Math.max(0, prev - 1));
-                }}
-                className="p-2 rounded-full bg-surface-50/90 border border-ethereal-dark/20 hover:border-ethereal-dark/40 shadow-lg backdrop-blur-sm transition-all duration-200 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
-                disabled={currentDetailedStep === 0}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-5 h-5 text-ethereal-dark"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M15.75 19.5L8.25 12l7.5-7.5"
-                  />
-                </svg>
-              </button>
-
-              <button
-                onClick={() => setIsAutoScrolling(!isAutoScrolling)}
-                className="px-4 py-2 rounded-full bg-surface-50/90 border border-ethereal-dark/20 hover:border-ethereal-dark/40 shadow-lg backdrop-blur-sm transition-all duration-200 hover:scale-105 text-sm font-mono text-ethereal-dark"
-              >
-                {isAutoScrolling ? 'Pause' : 'Play'}
-              </button>
-
-              <button
-                onClick={() => {
-                  setIsAutoScrolling(false);
-                  setCurrentDetailedStep(prev => 
-                    Math.min(processSteps[activeStep].detailedSteps.length - 1, prev + 1)
-                  );
-                }}
-                className="p-2 rounded-full bg-surface-50/90 border border-ethereal-dark/20 hover:border-ethereal-dark/40 shadow-lg backdrop-blur-sm transition-all duration-200 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
-                disabled={currentDetailedStep === processSteps[activeStep].detailedSteps.length - 1}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-5 h-5 text-ethereal-dark"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M8.25 4.5l7.5 7.5-7.5 7.5"
-                  />
-                </svg>
-              </button>
-            </div>
-
             <div className="h-96 relative">
               <LoaderCore 
                 value={currentDetailedStep} 
-                loadingStates={processSteps[activeStep].detailedSteps} 
+                loadingStates={processSteps[activeStep].detailedSteps}
+                title={processSteps[activeStep].title}
               />
             </div>
             {/* Lower z-index for the gradient overlay */}

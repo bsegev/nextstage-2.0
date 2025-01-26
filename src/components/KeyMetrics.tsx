@@ -1,22 +1,29 @@
 "use client";
 
 import { motion } from 'framer-motion';
+import Lottie from 'lottie-react';
+import energyAnimation from '../../public/lotties/Energy (1).json';
+import discountAnimation from '../../public/lotties/Discount (2).json';
+import featureAnimation from '../../public/lotties/Feature (1).json';
 
 const metrics = [
   {
     title: "SPEED",
     value: "20x",
-    description: "Skip the hiring process & start now"
+    description: "Skip the hiring process & start now",
+    animation: energyAnimation
   },
   {
     title: "COST",
     value: "1/3",
-    description: "Of traditional agency rates"
+    description: "Of traditional agency rates",
+    animation: discountAnimation
   },
   {
     title: "QUALITY",
     value: "A+",
-    description: "10+ years of brand expertise"
+    description: "10+ years of brand expertise",
+    animation: featureAnimation
   }
 ];
 
@@ -119,37 +126,50 @@ export function KeyMetrics() {
                 <div className="text-sm font-mono text-[#FFFFF0]/60 mb-4">
                   {metric.title}
                 </div>
-                <motion.div 
-                  className="font-serif text-6xl lg:text-7xl mb-4"
-                  initial={{ scale: 0.9 }}
-                  animate={{ scale: 1 }}
-                  transition={{
-                    type: "spring",
-                    stiffness: 200,
-                    damping: 10
-                  }}
-                >
-                  <motion.span 
-                    className="inline-block"
-                    animate={{ 
-                      backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
-                    }}
-                    transition={{ 
-                      duration: 5,
-                      repeat: Infinity,
-                      ease: "linear"
-                    }}
-                    style={{
-                      backgroundSize: "200% auto",
-                      backgroundImage: "linear-gradient(90deg, #FFFFF0 0%, #E8E6D9 25%, #D4D1C1 50%, #E8E6D9 75%, #FFFFF0 100%)",
-                      WebkitBackgroundClip: "text",
-                      WebkitTextFillColor: "transparent",
-                      backgroundClip: "text"
+                <div className="flex items-center justify-between mb-4">
+                  <motion.div 
+                    className="font-serif text-6xl lg:text-7xl"
+                    initial={{ scale: 0.9 }}
+                    animate={{ scale: 1 }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 200,
+                      damping: 10
                     }}
                   >
-                    {metric.value}
-                  </motion.span>
-                </motion.div>
+                    <motion.span 
+                      className="inline-block"
+                      animate={{ 
+                        backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
+                      }}
+                      transition={{ 
+                        duration: 5,
+                        repeat: Infinity,
+                        ease: "linear"
+                      }}
+                      style={{
+                        backgroundSize: "200% auto",
+                        backgroundImage: "linear-gradient(90deg, #FFFFF0 0%, #E8E6D9 25%, #D4D1C1 50%, #E8E6D9 75%, #FFFFF0 100%)",
+                        WebkitBackgroundClip: "text",
+                        WebkitTextFillColor: "transparent",
+                        backgroundClip: "text"
+                      }}
+                    >
+                      {metric.value}
+                    </motion.span>
+                  </motion.div>
+                  <div className="w-24 h-24">
+                    <Lottie 
+                      animationData={metric.animation}
+                      loop={true}
+                      autoplay={true}
+                      style={{ width: '100%', height: '100%' }}
+                      rendererSettings={{
+                        preserveAspectRatio: 'xMidYMid slice'
+                      }}
+                    />
+                  </div>
+                </div>
               </div>
               {/* Dark strip at bottom for description */}
               <div className="px-8 py-4 bg-[#1C1C1C]/70 text-[#FFFFF0]/60">
