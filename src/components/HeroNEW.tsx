@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
+import { MenuButton } from './MenuButton';
 
 const words = ["Strategy", "Design", "Story", "Brand", "Impact", "Innovation", "Transformation"];
 const WORD_DURATION = 2.5; // seconds per word
@@ -214,6 +215,7 @@ export const Hero = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
     >
+      <MenuButton />
       {/* Background Video Layer */}
       <div className="absolute inset-0 select-none" style={{ zIndex: 0 }}>
         <motion.video

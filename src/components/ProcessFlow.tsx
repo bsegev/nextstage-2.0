@@ -3,6 +3,17 @@
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import { cn } from "@/lib/utils";
+import React from 'react';
+
+type IconComponent = ({ className }: { className?: string }) => JSX.Element;
+
+interface ProcessStep {
+  title: string;
+  description: string;
+  icon: IconComponent;
+  link: string;
+  detailedSteps: { text: string }[];
+}
 
 const CheckIcon = ({ className }: { className?: string }) => {
   return (
@@ -15,6 +26,67 @@ const CheckIcon = ({ className }: { className?: string }) => {
       className={cn("w-6 h-6", className)}
     >
       <path d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+    </svg>
+  );
+};
+
+const VisionIcon = ({ className }: { className?: string }) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={1.5}
+      stroke="currentColor"
+      className={cn("w-6 h-6", className)}
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+    </svg>
+  );
+};
+
+const StrategyIcon = ({ className }: { className?: string }) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={1.5}
+      stroke="currentColor"
+      className={cn("w-6 h-6", className)}
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605" />
+    </svg>
+  );
+};
+
+const CreativeIcon = ({ className }: { className?: string }) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={1.5}
+      stroke="currentColor"
+      className={cn("w-6 h-6", className)}
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" d="M9.53 16.122a3 3 0 0 0-5.78 1.128 2.25 2.25 0 0 1-2.4 2.245 4.5 4.5 0 0 0 8.4-2.245c0-.399-.078-.78-.22-1.128Zm0 0a15.998 15.998 0 0 0 3.388-1.62m-5.043-.025a15.994 15.994 0 0 1 1.622-3.395m3.42 3.42a15.995 15.995 0 0 0 4.764-4.648l3.876-5.814a1.151 1.151 0 0 0-1.597-1.597L14.146 6.32a15.996 15.996 0 0 0-4.649 4.763m3.42 3.42a6.776 6.776 0 0 0-3.42-3.42" />
+    </svg>
+  );
+};
+
+const RefinementIcon = ({ className }: { className?: string }) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={1.5}
+      stroke="currentColor"
+      className={cn("w-6 h-6", className)}
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
     </svg>
   );
 };
@@ -36,11 +108,11 @@ const CheckFilled = ({ className }: { className?: string }) => {
   );
 };
 
-const processSteps = [
+const processSteps: ProcessStep[] = [
   {
     title: "Vision Alignment",
     description: "Let's talk about where you want to go. Direct, focused conversations about your goals—no middlemen, just clarity.",
-    icon: "✧",
+    icon: VisionIcon,
     link: "/vision-alignment",
     detailedSteps: [
       { text: "Quick chat to understand your goals" },
@@ -53,7 +125,7 @@ const processSteps = [
   {
     title: "Strategic Architecture",
     description: "Together, we'll map out your path forward. Understanding your market and uncovering the best opportunities for growth.",
-    icon: "◇",
+    icon: StrategyIcon,
     link: "/strategic-architecture",
     detailedSteps: [
       { text: "Build your game plan" },
@@ -66,7 +138,7 @@ const processSteps = [
   {
     title: "Creative Evolution",
     description: "Bringing your vision to life through thoughtful design. Working directly with you to ensure every detail hits the mark.",
-    icon: "○",
+    icon: CreativeIcon,
     link: "/creative-evolution",
     detailedSteps: [
       { text: "Design your core look" },
@@ -79,7 +151,7 @@ const processSteps = [
   {
     title: "Continuous Refinement",
     description: "Quick, impactful improvements based on real results. Your success drives every decision and refinement.",
-    icon: "△",
+    icon: RefinementIcon,
     link: "/continuous-refinement",
     detailedSteps: [
       { text: "Track what matters" },
@@ -304,9 +376,7 @@ export function ProcessFlow() {
                 <div className="relative flex-shrink-0 w-12 h-12">
                   <div className="relative w-full h-full rounded-full bg-gradient-to-br from-primary-100 to-surface-200 
                                 border border-ethereal-dark/20 shadow-lg shadow-primary-100/20 backdrop-blur-sm flex items-center justify-center overflow-hidden">
-                    <span className="font-serif text-ethereal-dark/80 text-xl">
-                      {step.icon}
-                    </span>
+                    {React.createElement(step.icon, { className: "text-ethereal-dark/80 w-6 h-6" })}
                   </div>
                 </div>
 
