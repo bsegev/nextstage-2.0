@@ -394,7 +394,7 @@ export const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
           >
-            I help founders and teams build enduring brands by uniting strategy, design, and storytelling in one direct partnership. Together, we&apos;ll transform your vision into a distinctive brand that resonates and delivers results.
+            I help founders and teams build enduring brands by uniting strategy, design, and storytelling into one connected system. Together, we&apos;ll transform your vision into a distinctive brand that naturally resonates and grows with your business.
           </motion.p>
 
           <motion.div

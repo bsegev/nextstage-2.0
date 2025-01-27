@@ -29,7 +29,9 @@ import {
   PlayIcon,
   PaintBrushIcon,
   DocumentDuplicateIcon,
-  CameraIcon
+  CameraIcon,
+  ChevronRightIcon,
+  ChevronLeftIcon
 } from '@heroicons/react/24/outline';
 
 const serviceCategories = [
@@ -107,146 +109,91 @@ const serviceCategories = [
   }
 ];
 
-const deliverables = [
-  // Strategy & Research
+const systemCategories = [
   {
-    id: "brand-strategy",
-    title: "Brand Strategy",
-    icon: DocumentTextIcon
+    id: "foundation",
+    name: "FOUNDATION SYSTEMS",
+    description: "What you need to build on",
+    color: "blue",
+    borderColor: "border-blue-400/40",
+    hoverBorderColor: "hover:border-blue-400/60",
+    items: [
+      { id: "brand-strategy", title: "Brand Strategy", icon: DocumentTextIcon },
+      { id: "market-analysis", title: "Market Analysis", icon: ChartBarIcon },
+      { id: "business-plan", title: "Business Plan Review", icon: ClipboardDocumentCheckIcon },
+      { id: "audience-research", title: "Target Audience Research", icon: UserGroupIcon },
+      { id: "value-prop", title: "Value Proposition", icon: RocketLaunchIcon },
+      { id: "decision-framework", title: "Decision Framework", icon: CircleStackIcon },
+      { id: "brand-architecture", title: "Brand Architecture", icon: CubeTransparentIcon }
+    ]
   },
   {
-    id: "competitive-analysis",
-    title: "Competitive Analysis",
-    icon: ChartBarIcon
+    id: "communication",
+    name: "COMMUNICATION SYSTEMS",
+    description: "What you need to connect",
+    color: "purple",
+    borderColor: "border-purple-400/40",
+    hoverBorderColor: "hover:border-purple-400/60",
+    items: [
+      { id: "brand-voice", title: "Brand Voice Guidelines", icon: ChatBubbleBottomCenterTextIcon },
+      { id: "content-strategy", title: "Content Strategy", icon: DocumentTextIcon },
+      { id: "messaging", title: "Messaging Framework", icon: ChatBubbleBottomCenterTextIcon },
+      { id: "sales-deck", title: "Sales Deck", icon: PresentationChartBarIcon },
+      { id: "playbooks", title: "Team Playbooks", icon: DocumentDuplicateIcon },
+      { id: "training", title: "Training Programs", icon: UsersIcon },
+      { id: "internal-comms", title: "Internal Communications", icon: ChatBubbleBottomCenterTextIcon }
+    ]
   },
   {
-    id: "business-audit",
-    title: "Business Plan Audit",
-    icon: MagnifyingGlassCircleIcon
+    id: "visual",
+    name: "VISUAL SYSTEMS",
+    description: "What you need to show",
+    color: "rose",
+    borderColor: "border-rose-400/40",
+    hoverBorderColor: "hover:border-rose-400/60",
+    items: [
+      { id: "visual-identity", title: "Visual Identity", icon: SwatchIcon },
+      { id: "logo-design", title: "Logo Design", icon: PaintBrushIcon },
+      { id: "design-system", title: "Design System", icon: RectangleGroupIcon },
+      { id: "brand-guidelines", title: "Brand Guidelines", icon: ClipboardDocumentCheckIcon },
+      { id: "motion-design", title: "Motion Design", icon: PlayIcon },
+      { id: "digital-components", title: "Digital Components", icon: WindowIcon },
+      { id: "marketing-materials", title: "Marketing Materials", icon: DocumentDuplicateIcon }
+    ]
   },
   {
-    id: "go-to-market",
-    title: "Go-to-Market Strategy",
-    icon: RocketLaunchIcon
+    id: "activation",
+    name: "ACTIVATION SYSTEMS",
+    description: "What you need to launch",
+    color: "amber",
+    borderColor: "border-amber-400/40",
+    hoverBorderColor: "hover:border-amber-400/60",
+    items: [
+      { id: "website-design", title: "Website Design", icon: WindowIcon },
+      { id: "product-interface", title: "Product Interface", icon: RectangleGroupIcon },
+      { id: "campaign-design", title: "Campaign Design", icon: RocketLaunchIcon },
+      { id: "digital-marketing", title: "Digital Marketing", icon: SignalIcon },
+      { id: "social-media", title: "Social Media Strategy", icon: UsersIcon },
+      { id: "launch-programs", title: "Launch Programs", icon: RocketLaunchIcon },
+      { id: "content-calendar", title: "Content Calendar", icon: DocumentDuplicateIcon }
+    ]
   },
   {
-    id: "audience-development",
-    title: "Target Audience Development",
-    icon: UserGroupIcon
-  },
-  {
-    id: "user-personas",
-    title: "User Personas",
-    icon: UserCircleIcon
-  },
-  {
-    id: "messaging-framework",
-    title: "Messaging Framework",
-    icon: ChatBubbleBottomCenterTextIcon
-  },
-  {
-    id: "brand-voice",
-    title: "Brand Voice Guidelines",
-    icon: DocumentDuplicateIcon
-  },
-  {
-    id: "content-strategy",
-    title: "Content Strategy",
-    icon: DocumentTextIcon
-  },
-
-  // Design & Experience
-  {
-    id: "visual-identity",
-    title: "Visual Identity",
-    icon: SwatchIcon
-  },
-  {
-    id: "website-design",
-    title: "Website Design",
-    icon: WindowIcon
-  },
-  {
-    id: "landing-pages",
-    title: "Landing Pages",
-    icon: CursorArrowRaysIcon
-  },
-  {
-    id: "app-design",
-    title: "App Design",
-    icon: WindowIcon
-  },
-  {
-    id: "ux-ui",
-    title: "UX/UI Design",
-    icon: RectangleGroupIcon
-  },
-  {
-    id: "design-system",
-    title: "Design System",
-    icon: ClipboardDocumentCheckIcon
-  },
-  {
-    id: "product-interface",
-    title: "Product Interface",
-    icon: CircleStackIcon
-  },
-  {
-    id: "interactive-prototype",
-    title: "Interactive Prototype",
-    icon: CursorArrowRaysIcon
-  },
-  {
-    id: "design-workshop",
-    title: "Design Workshop",
-    icon: UsersIcon
-  },
-
-  // Growth & Communication
-  {
-    id: "pitch-deck",
-    title: "Pitch Deck",
-    icon: PresentationChartLineIcon
-  },
-  {
-    id: "investor-materials",
-    title: "Investor Materials",
-    icon: BriefcaseIcon
-  },
-  {
-    id: "sales-deck",
-    title: "Sales Deck",
-    icon: PresentationChartBarIcon
-  },
-  {
-    id: "explainer-video",
-    title: "Explainer Video",
-    icon: PlayIcon
-  },
-  {
-    id: "motion-system",
-    title: "Motion Design System",
-    icon: PlayIcon
-  },
-  {
-    id: "launch-campaign",
-    title: "Launch Campaign",
-    icon: RocketLaunchIcon
-  },
-  {
-    id: "email-design",
-    title: "Email Design",
-    icon: ChatBubbleBottomCenterTextIcon
-  },
-  {
-    id: "social-content",
-    title: "Social Content",
-    icon: DocumentDuplicateIcon
-  },
-  {
-    id: "brand-guidelines",
-    title: "Brand Guidelines",
-    icon: ClipboardDocumentCheckIcon
+    id: "growth",
+    name: "GROWTH SYSTEMS",
+    description: "What you need to scale",
+    color: "emerald",
+    borderColor: "border-emerald-400/40",
+    hoverBorderColor: "hover:border-emerald-400/60",
+    items: [
+      { id: "pitch-deck", title: "Pitch Deck", icon: PresentationChartLineIcon },
+      { id: "investor-materials", title: "Investor Materials", icon: DocumentTextIcon },
+      { id: "go-to-market", title: "Go-to-Market Strategy", icon: RocketLaunchIcon },
+      { id: "growth-plan", title: "Growth Plan", icon: ChartBarIcon },
+      { id: "marketing-roadmap", title: "Marketing Roadmap", icon: SignalIcon },
+      { id: "performance-metrics", title: "Performance Metrics", icon: ChartBarSquareIcon },
+      { id: "scale-strategy", title: "Scale Strategy", icon: RocketLaunchIcon }
+    ]
   }
 ];
 
@@ -260,6 +207,15 @@ const FEATURED_DELIVERABLES = [
   "onboarding-flows",    // Shows UX/product thinking
   "animated-explainers"   // Shows motion/technical capability
 ];
+
+const fullExperience = {
+  id: "all",
+  name: "FULL EXPERIENCE",
+  description: "View all capabilities",
+  color: "gray",
+  borderColor: "border-gray-400/40",
+  hoverBorderColor: "hover:border-gray-400/60",
+};
 
 const MovingBorder = ({ className }: { className?: string }) => {
   const pathRef = useRef<SVGRectElement>(null);
@@ -332,9 +288,111 @@ const MovingBorder = ({ className }: { className?: string }) => {
 
 export function CoreOffering() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const [isHovering, setIsHovering] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const filterScrollRef = useRef<HTMLDivElement>(null);
+  const [showLeftArrow, setShowLeftArrow] = useState(false);
+  const [showRightArrow, setShowRightArrow] = useState(false);
+
+  // Check if we're on mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const handleMouseEnter = (categoryId: string) => {
+    if (!isMobile) {
+      setIsHovering(true);
+      setActiveCategory(categoryId === "all" ? null : categoryId);
+    }
+  };
+
+  const handleSectionMouseLeave = (event: React.MouseEvent) => {
+    if (!isMobile) {
+      const rect = event.currentTarget.getBoundingClientRect();
+      const { clientX, clientY } = event;
+      
+      if (
+        clientX < rect.left ||
+        clientX > rect.right ||
+        clientY < rect.top ||
+        clientY > rect.bottom
+      ) {
+        setIsHovering(false);
+        setActiveCategory(null);
+      }
+    }
+  };
+
+  const handleItemMouseLeave = (event: React.MouseEvent) => {
+    if (!isMobile) {
+      const relatedTarget = event.relatedTarget as HTMLElement | null;
+      if (!relatedTarget?.closest?.('.deliverable-item') && !relatedTarget?.closest?.('.filter-item')) {
+        setIsHovering(false);
+        setActiveCategory(null);
+      }
+    }
+  };
+
+  const handleBackgroundClick = (event: React.MouseEvent) => {
+    if (!isMobile && event.target === event.currentTarget) {
+      setIsHovering(false);
+      setActiveCategory(null);
+    }
+  };
+
+  const handleClick = (categoryId: string) => {
+    if (categoryId === "all") {
+      setActiveCategory(null);
+      setIsHovering(false);
+    } else if (activeCategory === categoryId) {
+      setActiveCategory(null);
+      setIsHovering(false);
+    } else {
+      setActiveCategory(categoryId);
+      setIsHovering(true);
+    }
+  };
+
+  const isFocused = isHovering || activeCategory !== null;
+
+  // Add scroll position check
+  const checkScrollPosition = useCallback(() => {
+    const scrollContainer = filterScrollRef.current;
+    if (scrollContainer) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollContainer;
+      setShowLeftArrow(scrollLeft > 0);
+      setShowRightArrow(scrollLeft < scrollWidth - clientWidth - 10); // 10px buffer
+    }
+  }, []);
+
+  // Add scroll event listener
+  useEffect(() => {
+    const scrollContainer = filterScrollRef.current;
+    if (scrollContainer) {
+      checkScrollPosition();
+      scrollContainer.addEventListener('scroll', checkScrollPosition);
+      return () => scrollContainer.removeEventListener('scroll', checkScrollPosition);
+    }
+  }, [checkScrollPosition]);
+
+  // Check on resize
+  useEffect(() => {
+    window.addEventListener('resize', checkScrollPosition);
+    return () => window.removeEventListener('resize', checkScrollPosition);
+  }, [checkScrollPosition]);
 
   return (
-    <section className="py-24 sm:py-32 bg-white relative overflow-hidden font-['DM_Sans']">
+    <section 
+      className="py-24 sm:py-32 bg-white relative overflow-hidden font-['DM_Sans']"
+      onMouseLeave={handleSectionMouseLeave}
+      onClick={handleBackgroundClick}
+    >
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center mb-24">
           <motion.div
@@ -415,33 +473,195 @@ export function CoreOffering() {
           </motion.p>
         </div>
 
-        {/* Deliverables Tags */}
-        <div className="max-w-[1200px] mx-auto">
-          <div className="flex flex-wrap justify-center" style={{ gap: "16px 20px", padding: "0 20px" }}>
-            {deliverables.map((deliverable) => (
-              <motion.div
-                key={deliverable.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.4 }}
-                className="group"
+        {/* Mobile Filter Bar - Sticky */}
+        <div className="md:hidden sticky top-4 z-50 bg-white/80 backdrop-blur-lg py-3 shadow-sm relative">
+          <div className="px-4 relative">
+            <div 
+              ref={filterScrollRef}
+              className="flex overflow-x-auto gap-2 hide-scrollbar relative"
+              style={{ paddingLeft: "calc(env(safe-area-inset-left) + 12px)", paddingRight: "calc(env(safe-area-inset-right) + 12px)" }}
+            >
+              <motion.button
+                key="full-experience"
+                className={`flex-none inline-flex items-center gap-2 px-3 py-1.5 rounded-full 
+                          ${fullExperience.borderColor} border bg-white/50
+                          transition-all duration-200
+                          ${!activeCategory ? 'bg-white shadow-md ' + fullExperience.hoverBorderColor : ''}`}
+                onClick={() => handleClick("all")}
+                whileTap={{ scale: 0.95 }}
+                animate={{
+                  scale: !activeCategory ? 1.05 : 1,
+                  opacity: 1
+                }}
               >
-                <div className="flex items-center gap-3 px-6 py-3 rounded-full bg-white 
-                              hover:bg-gray-50/80
-                              transition-all duration-200
-                              border border-gray-200
-                              shadow-sm hover:shadow">
-                  <deliverable.icon className="w-5 h-5 text-gray-600" />
-                  <span className="text-base text-gray-800 whitespace-nowrap font-medium">
-                    {deliverable.title}
-                                </span>
-                </div>
+                <span className="text-sm font-medium text-gray-800 whitespace-nowrap">{fullExperience.name}</span>
+              </motion.button>
+
+              {systemCategories.map((category) => (
+                <motion.button
+                  key={category.id}
+                  className={`flex-none inline-flex items-center gap-2 px-3 py-1.5 rounded-full 
+                            ${category.borderColor} border bg-white/50
+                            transition-all duration-200
+                            ${activeCategory === category.id ? 'bg-white shadow-md ' + category.hoverBorderColor : ''}`}
+                  onClick={() => handleClick(category.id)}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <span className="text-sm font-medium text-gray-800 whitespace-nowrap">{category.name}</span>
+                </motion.button>
+              ))}
+            </div>
+
+            {/* Scroll Indicators */}
+            <AnimatePresence>
+              {showLeftArrow && (
+                <motion.div
+                  key="left-arrow"
+                  initial={{ opacity: 0, x: 10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 10 }}
+                  className="absolute left-0 top-[14px] bg-gradient-to-r from-white/80 via-white/80 to-transparent pl-1 pr-3 flex items-center pointer-events-none"
+                  style={{ height: '24px' }}
+                >
+                  <motion.div
+                    animate={{ x: [-3, 0, -3] }}
+                    transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                  >
+                    <ChevronLeftIcon className="w-5 h-5 text-gray-600" />
+                  </motion.div>
+                </motion.div>
+              )}
+
+              {showRightArrow && (
+                <motion.div
+                  key="right-arrow"
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -10 }}
+                  className="absolute right-0 top-[14px] bg-gradient-to-l from-white/80 via-white/80 to-transparent pr-1 pl-3 flex items-center pointer-events-none"
+                  style={{ height: '24px' }}
+                >
+                  <motion.div
+                    animate={{ x: [0, 3, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                  >
+                    <ChevronRightIcon className="w-5 h-5 text-gray-600" />
+                  </motion.div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        </div>
+
+        {/* Desktop Legend - Hide on Mobile */}
+        <div className="max-w-[1200px] mx-auto mb-12 hidden md:block">
+          <div className="flex flex-wrap justify-center gap-6">
+            {/* Full Experience Filter */}
+            <motion.div
+              className="text-center w-full md:w-auto mb-4 md:mb-0 filter-item"
+              onMouseEnter={() => handleMouseEnter("all")}
+              onMouseLeave={handleItemMouseLeave}
+            >
+              <motion.div 
+                className={`inline-flex items-center gap-2 px-4 py-2 rounded-full 
+                          ${fullExperience.borderColor} border bg-white/50 backdrop-blur-sm
+                          transition-all duration-200 cursor-pointer
+                          ${!activeCategory ? 'bg-white shadow-md ' + fullExperience.hoverBorderColor : ''}
+                          hover:bg-white hover:shadow-md hover:${fullExperience.hoverBorderColor}`}
+                onClick={() => handleClick("all")}
+                whileHover={{ scale: !isFocused ? 1.05 : 1 }}
+                animate={{
+                  scale: !activeCategory ? 1.05 : 1,
+                  opacity: 1
+                }}
+              >
+                <span className={`text-sm font-medium transition-colors duration-200
+                              ${!activeCategory ? 'text-gray-900' : 'text-gray-800'}`}>
+                  {fullExperience.name}
+                </span>
+              </motion.div>
+              <p className="text-xs text-gray-500 mt-1 hidden md:block">{fullExperience.description}</p>
+            </motion.div>
+
+            {/* System Categories */}
+            {systemCategories.map((category) => (
+              <motion.div
+                key={category.id}
+                className="text-center filter-item"
+                onClick={() => handleClick(category.id)}
+                onMouseEnter={() => handleMouseEnter(category.id)}
+                onMouseLeave={handleItemMouseLeave}
+              >
+                <motion.div 
+                  className={`inline-flex items-center gap-2 px-4 py-2 rounded-full 
+                            ${category.borderColor} border bg-white/50 backdrop-blur-sm
+                            transition-all duration-200 cursor-pointer
+                            ${activeCategory === category.id ? 'bg-white shadow-md ' + category.hoverBorderColor : ''}
+                            hover:bg-white hover:shadow-md hover:${category.hoverBorderColor}`}
+                  animate={{
+                    scale: activeCategory === category.id ? 1.05 : 1,
+                    opacity: !isFocused || activeCategory === category.id ? 1 : 0.3,
+                  }}
+                >
+                  <span className="text-sm font-medium text-gray-800">{category.name}</span>
+                </motion.div>
+                <p className="text-xs text-gray-500 mt-1 hidden md:block">{category.description}</p>
               </motion.div>
             ))}
-                        </div>
-                      </div>
+          </div>
+        </div>
+
+        {/* Deliverables Tags */}
+        <div className="max-w-[1200px] mx-auto" onClick={handleBackgroundClick}>
+          <div className="flex flex-wrap justify-center md:mt-0 mt-16 deliverables-container" style={{ gap: "12px 16px", padding: "0 16px" }}>
+            {systemCategories.map((category) => (
+              category.items.map((item) => (
+                <motion.div
+                  key={item.id}
+                  className={`group deliverable-item ${isMobile && activeCategory && activeCategory !== category.id ? 'hidden' : ''}`}
+                  onMouseEnter={() => handleMouseEnter(category.id)}
+                  onMouseLeave={handleItemMouseLeave}
+                >
+                  <motion.div 
+                    className={`flex items-center gap-2 md:gap-3 
+                              px-4 py-2 md:px-6 md:py-3 rounded-full bg-white 
+                              transition-all duration-300 cursor-pointer
+                              ${category.borderColor} ${category.hoverBorderColor} border
+                              shadow-sm hover:shadow`}
+                    animate={{
+                      scale: activeCategory === category.id ? 1.05 : 1,
+                      opacity: (!isHovering || activeCategory === category.id || activeCategory === null) ? 1 : 0.3,
+                      filter: (!isHovering || activeCategory === category.id || activeCategory === null) ? 'blur(0px)' : 'blur(1px)'
+                    }}
+                    whileHover={{
+                      scale: (activeCategory === category.id || !isFocused) && !isMobile ? 1.05 : 1,
+                    }}
+                    onClick={() => !isMobile && handleClick(category.id)}
+                  >
+                    <item.icon className={`w-4 h-4 md:w-5 md:h-5 transition-colors duration-200
+                                      ${activeCategory === category.id ? 'text-gray-800' : 'text-gray-600'}`} />
+                    <span className={`text-sm md:text-base whitespace-nowrap font-medium transition-colors duration-200
+                                  ${activeCategory === category.id ? 'text-gray-900' : 'text-gray-800'}`}>
+                      {item.title}
+                    </span>
+                  </motion.div>
+                </motion.div>
+              ))
+            ))}
+          </div>
+        </div>
       </div>
+
+      {/* Add styles for hiding scrollbar */}
+      <style jsx global>{`
+        .hide-scrollbar {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+      `}</style>
     </section>
   );
 } 

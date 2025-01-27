@@ -479,11 +479,11 @@ export function ValueProp() {
                 />
                 <div className="relative space-y-6">
                   <h2 className="text-2xl font-light text-ethereal-dark/90">
-                    For founders and strategic leaders
+                    For founders and teams
                   </h2>
                   
                   <p className="relative text-2xl sm:text-3xl md:text-4xl font-light text-ethereal-dark/90 leading-relaxed tracking-tight">
-                    I build brands by creating{" "}
+                    I build & align brands by creating{" "}
                     <motion.span 
                       className="relative inline-flex items-center gap-2 font-medium"
                       whileInView={{ opacity: [0, 1], y: [20, 0] }}
@@ -535,21 +535,21 @@ export function ValueProp() {
                         <span className="text-blue-500/70 drop-shadow-sm">systems</span>
                       </span>
                     </motion.span>
-                    {" "}that unite internal clarity with external expression.
+                    {" "}that turn your truth into your advantage.
                   </p>
 
                   <ul className="space-y-2 text-lg text-ethereal-dark/70 mt-8">
                     <li className="flex items-center gap-2">
                       <span className="w-1.5 h-1.5 rounded-full bg-blue-400/70" />
-                      One partner replacing multiple specialists
+                      One partner replacing scattered solutions
                     </li>
                     <li className="flex items-center gap-2">
                       <span className="w-1.5 h-1.5 rounded-full bg-blue-400/70" />
-                      Strategy, design, and story working as one
+                      Strategy, design, and story as one force
                     </li>
                     <li className="flex items-center gap-2">
                       <span className="w-1.5 h-1.5 rounded-full bg-blue-400/70" />
-                      Deep integration, not just implementation
+                      Built to grow stronger through use
                     </li>
                   </ul>
                 </div>
