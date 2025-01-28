@@ -45,10 +45,10 @@ const MenuContent = ({ triggerLottieRef, isScrolling }: { triggerLottieRef: Reac
             exit={{ opacity: 0, x: -20 }}
             transition={{ duration: 0.2 }}
           >
-            <a href="#hero" className="hover:text-primary-500 transition-colors">Home</a>
-            <a href="#process" className="hover:text-primary-500 transition-colors">Process</a>
-            <a href="#services" className="hover:text-primary-500 transition-colors">Services</a>
-            <a href="#contact" className="hover:text-primary-500 transition-colors">Contact</a>
+            <a href="#about" className="hover:text-primary-500 transition-colors">about</a>
+            <a href="#work" className="hover:text-primary-500 transition-colors">work</a>
+            <a href="#play" className="hover:text-primary-500 transition-colors">play</a>
+            <a href="#contact" className="hover:text-primary-500 transition-colors">let's talk</a>
           </motion.nav>
         </ModalContent>
       </ModalBody>
