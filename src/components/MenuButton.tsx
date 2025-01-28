@@ -4,6 +4,36 @@ import React, { useEffect, useRef, useState } from 'react';
 import lottie from 'lottie-web';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Modal, ModalBody, ModalContent, ModalTrigger, useModal } from './ui/animated-modal';
+import Lottie from 'lottie-react';
+import loadingLine from '../../public/lotties/loading-line.json';
+
+const NavItem = ({ href, children }: { href: string; children: React.ReactNode }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  
+  return (
+    <motion.a 
+      href={href}
+      className="relative group"
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
+    >
+      <span className="text-ethereal-dark">{children}</span>
+      <motion.div
+        className="absolute -bottom-1 left-0 w-full h-[45px] -translate-y-[10px]"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isHovered ? 1 : 0 }}
+        transition={{ duration: 0.2 }}
+      >
+        <Lottie
+          animationData={loadingLine}
+          loop={true}
+          autoplay={true}
+          style={{ width: '100%', height: '100%', transform: 'scale(1, 0.5)' }}
+        />
+      </motion.div>
+    </motion.a>
+  );
+};
 
 const MenuContent = ({ triggerLottieRef, isScrolling }: { triggerLottieRef: React.RefObject<HTMLDivElement>, isScrolling: boolean }) => {
   const { open, setOpen } = useModal();
@@ -39,16 +69,17 @@ const MenuContent = ({ triggerLottieRef, isScrolling }: { triggerLottieRef: Reac
       <ModalBody>
         <ModalContent className="pl-12 pr-[72px]">
           <motion.nav 
-            className="flex items-center gap-8 sm:gap-16 text-base sm:text-lg"
+            className="flex items-center gap-6 sm:gap-8 text-sm sm:text-base"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
             transition={{ duration: 0.2 }}
           >
-            <a href="#about" className="hover:text-primary-500 transition-colors">about</a>
-            <a href="#work" className="hover:text-primary-500 transition-colors">work</a>
-            <a href="#play" className="hover:text-primary-500 transition-colors">play</a>
-            <a href="#contact" className="hover:text-primary-500 transition-colors">let's talk</a>
+            <NavItem href="#about">about</NavItem>
+            <NavItem href="#work">work</NavItem>
+            <NavItem href="#play">play</NavItem>
+            <NavItem href="#library">library</NavItem>
+            <NavItem href="#contact">let's talk</NavItem>
           </motion.nav>
         </ModalContent>
       </ModalBody>

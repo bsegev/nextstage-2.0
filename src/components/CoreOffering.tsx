@@ -321,8 +321,10 @@ export function CoreOffering() {
 
   const handleMouseEnter = (categoryId: string) => {
     if (!isMobile) {
-      setIsHovering(true);
-      setActiveCategory(categoryId === "all" ? null : categoryId);
+      setTimeout(() => {
+        setIsHovering(true);
+        setActiveCategory(categoryId === "all" ? null : categoryId);
+      }, 100); // Add a slight delay before changing category
     }
   };
 
@@ -701,10 +703,18 @@ export function CoreOffering() {
                       animate={{
                         scale: activeCategory === category.id ? 1.05 : 1,
                         opacity: (!isHovering || activeCategory === category.id || activeCategory === null) ? 1 : 0.3,
-                        filter: (!isHovering || activeCategory === category.id || activeCategory === null) ? 'blur(0px)' : 'blur(1px)'
+                        filter: (!isHovering || activeCategory === category.id || activeCategory === null) ? 'blur(0px)' : 'blur(1px)',
+                        transition: {
+                          duration: 0.4,
+                          delay: 0.2
+                        }
                       }}
                       whileHover={{
                         scale: (activeCategory === category.id || !isFocused) && !isMobile ? 1.05 : 1,
+                        transition: {
+                          duration: 0.3,
+                          delay: 0.15
+                        }
                       }}
                       onClick={() => !isMobile && handleClick(category.id)}
                     >
