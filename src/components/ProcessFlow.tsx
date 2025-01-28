@@ -47,6 +47,10 @@ const VisionIcon = ({ className }: { className?: string }) => {
   );
 };
 
+const LaunchIcon = ({ className }: { className?: string }) => {
+  return <RocketLaunchIcon className={cn("w-6 h-6", className)} />;
+};
+
 const StrategyIcon = ({ className }: { className?: string }) => {
   return (
     <svg
@@ -172,7 +176,7 @@ const processSteps: ProcessStep[] = [
   {
     title: "Launch & Activate",
     description: "We make sure your brand isn't just built—but actually works.",
-    icon: RocketLaunchIcon,
+    icon: LaunchIcon,
     link: "/launch-activate",
     detailedSteps: [
       { text: "Launch your brand or campaign" },
