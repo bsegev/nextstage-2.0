@@ -14,7 +14,7 @@ const MenuContent = ({ triggerLottieRef, isScrolling }: { triggerLottieRef: Reac
 
   return (
     <>
-      <div onClick={toggleMenu} className="fixed bottom-8 right-8 z-50 group">
+      <div onClick={toggleMenu} className="fixed bottom-8 right-8 z-[100] group">
         <div className="relative">
           <AnimatePresence>
             {!isScrolling && (
@@ -26,7 +26,7 @@ const MenuContent = ({ triggerLottieRef, isScrolling }: { triggerLottieRef: Reac
                 transition={{ duration: 0.2 }}
               >
                 <div className="w-[60px] h-24 bg-white rounded-lg shadow-lg flex flex-col items-center pt-2">
-                  <span className="font-['Caveat'] text-lg text-secondary-600">menu</span>
+                  <span className="font-['Caveat'] text-base sm:text-lg text-secondary-600">menu</span>
                 </div>
               </motion.div>
             )}
@@ -39,7 +39,7 @@ const MenuContent = ({ triggerLottieRef, isScrolling }: { triggerLottieRef: Reac
       <ModalBody>
         <ModalContent className="pl-12 pr-[72px]">
           <motion.nav 
-            className="flex items-center gap-16 text-lg"
+            className="flex items-center gap-8 sm:gap-16 text-base sm:text-lg"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}

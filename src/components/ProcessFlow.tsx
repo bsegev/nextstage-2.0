@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import { useRef, useState, useEffect } from 'react';
 import { cn } from "@/lib/utils";
 import React from 'react';
+import { RocketLaunchIcon } from '@heroicons/react/24/outline';
 
 type IconComponent = ({ className }: { className?: string }) => JSX.Element;
 
@@ -108,57 +109,92 @@ const CheckFilled = ({ className }: { className?: string }) => {
   );
 };
 
+const OutcomeIcon = ({ className }: { className?: string }) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className={cn("w-6 h-6", className)}
+    >
+      <path
+        fillRule="evenodd"
+        d="M8.603 3.799A4.49 4.49 0 0112 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 013.498 1.307 4.491 4.491 0 011.307 3.497A4.49 4.49 0 0121.75 12a4.49 4.49 0 01-1.549 3.397 4.491 4.491 0 01-1.307 3.497 4.491 4.491 0 01-3.497 1.307A4.49 4.49 0 0112 21.75a4.49 4.49 0 01-3.397-1.549 4.49 4.49 0 01-3.498-1.306 4.491 4.491 0 01-1.307-3.498A4.49 4.49 0 012.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 011.307-3.497 4.49 4.49 0 013.497-1.307zm7.007 6.387a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
+        clipRule="evenodd"
+      />
+    </svg>
+  );
+};
+
 const processSteps: ProcessStep[] = [
   {
-    title: "Vision Alignment",
-    description: "Let's talk about where you want to go. Direct, focused conversations about your goals—no middlemen, just clarity.",
+    title: "Define & Align",
+    description: "Let's get clear on where you're headed and what's standing in the way.",
     icon: VisionIcon,
-    link: "/vision-alignment",
+    link: "/define-align",
     detailedSteps: [
-      { text: "Quick chat to understand your goals" },
-      { text: "Map out where you are now" },
-      { text: "Spot the best opportunities" },
-      { text: "Set clear targets" },
-      { text: "Define what success looks like" }
+      { text: "What's working?" },
+      { text: "What's not?" },
+      { text: "Where do you want to go?" },
+      { text: "Who do you need to reach?" },
+      { text: "What's the next move?" },
+      { text: "Outcome: A clear vision and direction before we build anything." }
     ]
   },
   {
-    title: "Strategic Architecture",
-    description: "Together, we'll map out your path forward. Understanding your market and uncovering the best opportunities for growth.",
+    title: "Build the Strategy",
+    description: "We build the roadmap that takes you from where you are to where you need to be.",
     icon: StrategyIcon,
-    link: "/strategic-architecture",
+    link: "/build-strategy",
     detailedSteps: [
-      { text: "Build your game plan" },
-      { text: "Create a clear roadmap" },
-      { text: "Plan your resources" },
-      { text: "Identify potential challenges" },
-      { text: "Set key milestones" }
+      { text: "Define your positioning" },
+      { text: "Spot the gaps and opportunities" },
+      { text: "Refine your brand message" },
+      { text: "Set clear priorities" },
+      { text: "Align your resources" },
+      { text: "Outcome: A structured plan that makes growth intentional, not accidental." }
     ]
   },
   {
-    title: "Creative Evolution",
-    description: "Bringing your vision to life through thoughtful design. Working directly with you to ensure every detail hits the mark.",
+    title: "Create & Design",
+    description: "We bring your brand to life—visually and strategically.",
     icon: CreativeIcon,
-    link: "/creative-evolution",
+    link: "/create-design",
     detailedSteps: [
-      { text: "Design your core look" },
-      { text: "Refine your brand voice" },
-      { text: "Make it user-friendly" },
-      { text: "Create key visuals" },
-      { text: "Review and polish" }
+      { text: "Develop your brand identity" },
+      { text: "Design your website and digital experience" },
+      { text: "Align messaging and visuals" },
+      { text: "Create marketing and sales materials" },
+      { text: "Ensure everything connects seamlessly" },
+      { text: "Outcome: A brand that looks, sounds, and feels like it belongs in the market." }
     ]
   },
   {
-    title: "Continuous Refinement",
-    description: "Quick, impactful improvements based on real results. Your success drives every decision and refinement.",
-    icon: RefinementIcon,
-    link: "/continuous-refinement",
+    title: "Launch & Activate",
+    description: "We make sure your brand isn't just built—but actually works.",
+    icon: RocketLaunchIcon,
+    link: "/launch-activate",
     detailedSteps: [
-      { text: "Track what matters" },
-      { text: "Learn from the data" },
-      { text: "Make quick improvements" },
-      { text: "Act on feedback" },
-      { text: "Keep growing" }
+      { text: "Launch your brand or campaign" },
+      { text: "Set up marketing and content systems" },
+      { text: "Align your team and tools" },
+      { text: "Optimize for real-world engagement" },
+      { text: "Track early performance and adjust" },
+      { text: "Outcome: A brand that's live, running, and positioned for success." }
+    ]
+  },
+  {
+    title: "Optimize & Grow",
+    description: "Growth doesn't stop at launch—we keep improving.",
+    icon: RefinementIcon,
+    link: "/optimize-grow",
+    detailedSteps: [
+      { text: "Track what's working" },
+      { text: "Fine-tune messaging and design" },
+      { text: "Expand your reach" },
+      { text: "Optimize conversions" },
+      { text: "Keep everything aligned as you grow" },
+      { text: "Outcome: A brand and business that evolve, staying relevant and impactful." }
     ]
   }
 ];
@@ -178,20 +214,25 @@ const LoaderCore = ({
         const distance = Math.abs(index - value);
         const opacity = Math.max(1 - distance * 0.2, 0);
         const isTitle = 'isTitle' in state;
+        const isOutcome = state.text.startsWith('Outcome:');
 
         return (
           <motion.div
             key={index}
-            className={cn("text-left flex gap-2", isTitle ? "mb-6" : "mb-4")}
+            className={cn(
+              "text-left flex gap-2",
+              isTitle ? "mb-6" : "mb-4",
+              isOutcome && "mt-2"
+            )}
             initial={{ opacity: 0, y: -(value * 40) }}
             animate={{ opacity: opacity, y: -(value * 40) }}
             transition={{ duration: 0.5 }}
           >
             <div>
-              {!isTitle && index > value && (
+              {!isTitle && !isOutcome && index > value && (
                 <CheckIcon className="text-ethereal-dark dark:text-white" />
               )}
-              {!isTitle && index <= value && (
+              {!isTitle && !isOutcome && index <= value && (
                 <CheckFilled
                   className={cn(
                     "text-ethereal-dark dark:text-white",
@@ -200,15 +241,31 @@ const LoaderCore = ({
                   )}
                 />
               )}
+              {!isTitle && isOutcome && (
+                <OutcomeIcon
+                  className={cn(
+                    "text-emerald-500 flex-shrink-0",
+                    value === index && "opacity-100"
+                  )}
+                />
+              )}
             </div>
             <span
               className={cn(
                 "text-ethereal-dark dark:text-white",
                 isTitle ? "font-serif text-2xl" : "",
-                value === index && !isTitle && "text-ethereal-dark dark:text-lime-500 opacity-100"
+                isOutcome ? "text-emerald-500 font-medium max-w-[280px] leading-snug" : "",
+                value === index && !isTitle && !isOutcome && "text-ethereal-dark dark:text-lime-500 opacity-100"
               )}
             >
-              {state.text}
+              {isOutcome ? (
+                <>
+                  <span className="font-medium block mb-1">Outcome:</span>
+                  <span className="block">{state.text.replace('Outcome: ', '')}</span>
+                </>
+              ) : (
+                state.text
+              )}
             </span>
           </motion.div>
         );

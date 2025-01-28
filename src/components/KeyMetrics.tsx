@@ -122,13 +122,13 @@ export function KeyMetrics() {
               transition={{ delay: index * 0.1 }}
               className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#FFFFF0]/10 to-[#1C1C1C]/90 border border-[#FFFFF0]/20 backdrop-blur-sm"
             >
-              <div className="p-8">
-                <div className="text-sm font-mono text-[#FFFFF0]/60 mb-4">
+              <div className="p-4 sm:p-6 md:p-8">
+                <div className="text-xs sm:text-sm font-mono text-[#FFFFF0]/60 mb-2 sm:mb-4">
                   {metric.title}
                 </div>
-                <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center justify-between mb-2 sm:mb-4">
                   <motion.div 
-                    className="font-serif text-6xl lg:text-7xl"
+                    className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl"
                     initial={{ scale: 0.9 }}
                     animate={{ scale: 1 }}
                     transition={{
@@ -158,7 +158,7 @@ export function KeyMetrics() {
                       {metric.value}
                     </motion.span>
                   </motion.div>
-                  <div className="w-24 h-24">
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24">
                     <Lottie 
                       animationData={metric.animation}
                       loop={true}
@@ -172,7 +172,7 @@ export function KeyMetrics() {
                 </div>
               </div>
               {/* Dark strip at bottom for description */}
-              <div className="px-8 py-4 bg-[#1C1C1C]/70 text-[#FFFFF0]/60">
+              <div className="px-4 sm:px-6 md:px-8 py-3 sm:py-4 bg-[#1C1C1C]/70 text-[#FFFFF0]/60 text-sm sm:text-base">
                 {metric.description}
               </div>
             </motion.div>
