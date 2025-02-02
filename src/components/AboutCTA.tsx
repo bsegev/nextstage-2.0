@@ -151,7 +151,7 @@ export function AboutCTA() {
                 backgroundSize: "200% auto",
               }}
             >
-              LET'S CONNECT
+              LET&apos;S CONNECT
             </motion.span>
             <div className="h-px w-8 bg-gradient-to-r from-[#FFFFF0]/0 via-[#FFFFF0]/20 to-[#FFFFF0]/0" />
           </div>

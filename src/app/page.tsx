@@ -2,24 +2,18 @@
 
 import { useEffect, useState } from 'react';
 import { AiEntryPoint } from '@/components/AiEntryPoint';
-import { Hero } from '@/components/Hero';
+import { Hero } from '@/components/HeroNEW';
 import { MenuButton } from '@/components/MenuButton';
 import { motion, AnimatePresence } from 'framer-motion';
 import dynamic from 'next/dynamic';
-import { Process } from '@/components/Process';
-import { CoreOffering } from '@/components/CoreOffering';
-import { TransformationMessage } from '@/components/TransformationMessage';
-import { TransformationCarousel } from '@/components/TransformationCarousel';
-import { ValueProp } from '@/components/ValueProp';
-import { Packages } from '@/components/Packages';
-import { Testimonials } from '@/components/Testimonials';
-import { FinalChorus } from '@/components/FinalChorus';
-import { FinalCTA } from '@/components/FinalCTA';
 
 // Dynamic imports for components that use browser APIs
-const WhyImportant = dynamic(() => import('@/components/WhyImportant').then(mod => ({ default: mod.WhyImportant })), { ssr: false });
+const ValueProp = dynamic(() => import('@/components/ValueProp').then(mod => ({ default: mod.ValueProp })), { ssr: false });
 const KeyMetrics = dynamic(() => import('@/components/KeyMetrics').then(mod => ({ default: mod.KeyMetrics })), { ssr: false });
 const ProcessFlow = dynamic(() => import('@/components/ProcessFlow').then(mod => ({ default: mod.ProcessFlow })), { ssr: false });
+const TransformationMessage = dynamic(() => import('@/components/TransformationMessage').then(mod => ({ default: mod.TransformationMessage })), { ssr: false });
+const CoreOffering = dynamic(() => import('@/components/CoreOffering').then(mod => ({ default: mod.CoreOffering })), { ssr: false });
+const FinalCTA = dynamic(() => import('@/components/FinalCTA').then(mod => ({ default: mod.FinalCTA })), { ssr: false });
 const Outro = dynamic(() => import('@/components/Outro').then(mod => ({ default: mod.Outro })), { ssr: false });
 const WorkTogether = dynamic(() => import('@/components/WorkTogether').then(mod => ({ default: mod.WorkTogether })), { ssr: false });
 
@@ -112,14 +106,9 @@ export default function Home() {
           <MenuButton />
           <Hero />
           <ScrollNudge />
-          <Process />
-          <CoreOffering />
-          <TransformationMessage />
-          <TransformationCarousel />
           <ValueProp />
-          <Packages />
-          <Testimonials />
-          <FinalChorus />
+          <TransformationMessage />
+          <CoreOffering />
           <KeyMetrics />
           <ProcessFlow />
           <WorkTogether />

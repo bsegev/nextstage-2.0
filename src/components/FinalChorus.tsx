@@ -59,7 +59,7 @@ export function FinalChorus() {
                   ease: "easeInOut",
                 }}
               />
-              <span className="relative z-10 font-mono text-lg aurora-text-gradient-light">Let's Create</span>
+              <span className="relative z-10 font-mono text-lg aurora-text-gradient-light">Let&apos;s Create</span>
             </motion.a>
 
             {/* Secondary CTA */}

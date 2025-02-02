@@ -1,8 +1,7 @@
 "use client";
 
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useRef, useEffect } from 'react';
-import { useInView } from 'react-intersection-observer';
 
 const processSteps = [
   {
@@ -102,11 +101,6 @@ export function MyProcess() {
   const activeIndex = processSteps.findIndex(step => step.id === activeStep);
   const prevIndex = processSteps.findIndex(step => step.id === prevStep);
   const direction = activeIndex > prevIndex ? 1 : -1;
-
-  const { scrollYProgress } = useScroll({ 
-    target: containerRef,
-    offset: ["start end", "end start"]
-  });
 
   useEffect(() => {
     const container = containerRef.current;

@@ -7,7 +7,6 @@ import { ArrowDownIcon } from '@heroicons/react/24/outline';
 export function Hero() {
   // Enhanced state management
   const [hasScrolled, setHasScrolled] = useState(false);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   

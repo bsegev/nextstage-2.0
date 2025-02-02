@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { 
   ChartBarIcon, 
@@ -106,8 +106,6 @@ const services = [
 ];
 
 export function WorkTogether() {
-  const containerRef = useRef<HTMLDivElement>(null);
-
   return (
     <section className="relative overflow-hidden">
       {/* Enhanced Background */}
@@ -324,19 +322,4 @@ export function WorkTogether() {
       </div>
     </section>
   );
-}
-
-const styles = `
-  @keyframes shimmer {
-    0% {
-      transform: translateX(-100%);
-    }
-    100% {
-      transform: translateX(100%);
-    }
-  }
-
-  .animate-shimmer {
-    animation: shimmer 3s ease-in-out infinite;
-  }
-`; 
+} 

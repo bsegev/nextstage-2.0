@@ -16,7 +16,6 @@ interface Plate {
 
 export function BackgroundEffect() {
   const [plates, setPlates] = useState<Plate[]>([]);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   // Initialize plates with more dynamic properties
   useEffect(() => {
@@ -31,19 +30,6 @@ export function BackgroundEffect() {
       direction: Math.random() > 0.5 ? 1 : -1 // Random direction
     }));
     setPlates(initialPlates);
-  }, []);
-
-  // Handle mouse movement
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      const { clientX, clientY } = e;
-      const x = (clientX / window.innerWidth) * 100;
-      const y = (clientY / window.innerHeight) * 100;
-      setMousePosition({ x, y });
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
   return (
