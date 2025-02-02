@@ -6,17 +6,16 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Modal, ModalBody, ModalContent, ModalTrigger, useModal } from './ui/animated-modal';
 import Lottie from 'lottie-react';
 import loadingLine from '../../public/lotties/loading-line.json';
+import { HomeIcon } from '@heroicons/react/24/outline';
+import Link from 'next/link';
 
-const NavItem = ({ href, children }: { href: string; children: React.ReactNode }) => {
+const NavItem = ({ href, children, icon: Icon }: { href: string; children: React.ReactNode; icon?: React.ComponentType<any> }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const isExternal = href.startsWith('#');
   
-  return (
-    <motion.a 
-      href={href}
-      className="relative group"
-      onHoverStart={() => setIsHovered(true)}
-      onHoverEnd={() => setIsHovered(false)}
-    >
+  const content = (
+    <>
+      {Icon && <Icon className="w-4 h-4 text-ethereal-dark" />}
       <span className="text-ethereal-dark">{children}</span>
       <motion.div
         className="absolute -bottom-1 left-0 w-full h-[45px] -translate-y-[10px]"
@@ -31,7 +30,32 @@ const NavItem = ({ href, children }: { href: string; children: React.ReactNode }
           style={{ width: '100%', height: '100%', transform: 'scale(1, 0.5)' }}
         />
       </motion.div>
-    </motion.a>
+    </>
+  );
+  
+  if (isExternal) {
+    return (
+      <motion.a 
+        href={href}
+        className="relative group flex items-center gap-2"
+        onHoverStart={() => setIsHovered(true)}
+        onHoverEnd={() => setIsHovered(false)}
+      >
+        {content}
+      </motion.a>
+    );
+  }
+
+  return (
+    <Link href={href} passHref>
+      <motion.div 
+        className="relative group flex items-center gap-2 cursor-pointer"
+        onHoverStart={() => setIsHovered(true)}
+        onHoverEnd={() => setIsHovered(false)}
+      >
+        {content}
+      </motion.div>
+    </Link>
   );
 };
 
@@ -75,7 +99,8 @@ const MenuContent = ({ triggerLottieRef, isScrolling }: { triggerLottieRef: Reac
             exit={{ opacity: 0, x: -20 }}
             transition={{ duration: 0.2 }}
           >
-            <NavItem href="#about">about</NavItem>
+            <NavItem href="/" icon={HomeIcon}>home</NavItem>
+            <NavItem href="/about">about</NavItem>
             <NavItem href="#work">work</NavItem>
             <NavItem href="#play">play</NavItem>
             <NavItem href="#library">library</NavItem>

@@ -394,7 +394,7 @@ export function TransformationMessage() {
               >
                 {/* Main Image Container */}
                 <motion.div 
-                  className="relative aspect-[16/9] overflow-hidden rounded-[2rem] shadow-2xl"
+                  className="relative aspect-[2/1] overflow-hidden rounded-[2rem] shadow-2xl"
                   animate={{ 
                     scale: 1,
                     transition: { duration: 0.6, ease: [0.32, 0.72, 0, 1] }

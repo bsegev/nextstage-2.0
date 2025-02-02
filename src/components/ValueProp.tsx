@@ -5,53 +5,118 @@ import { useRef, useEffect } from 'react';
 
 const CircleAnimation = () => {
   const controls = useAnimationControls();
+  const isMountedRef = useRef(true);
+  const animationRef = useRef<{
+    timeout?: NodeJS.Timeout;
+  }>({});
   
   useEffect(() => {
+    isMountedRef.current = true;
+
     const animate = async () => {
-      // Initial state
-      await controls.start({
-        rotateX: 0,
-        rotateY: 0,
-        scale: 1,
-        transition: { duration: 0 }
-      });
+      if (!isMountedRef.current) return;
 
-      while (true) {
-        // Draw outer circle
-        await controls.start({
-          pathLength: 1,
-          transition: { duration: 1.5, ease: "easeInOut" }
-        });
+      try {
+        // Initial state
+        await new Promise(resolve => 
+          requestAnimationFrame(async () => {
+            if (!isMountedRef.current) {
+              resolve(null);
+              return;
+            }
+            try {
+              await controls.start({
+                rotateX: 0,
+                rotateY: 0,
+                scale: 1,
+                pathLength: 0,
+                transition: { duration: 0 }
+              });
+            } catch (e) {
+              // Ignore animation errors during unmount
+            }
+            resolve(null);
+          })
+        );
 
-        // Rotate to perspective view
-        await controls.start({
-          rotateX: 45,
-          rotateY: 45,
-          scale: 0.8,
-          transition: { duration: 2, ease: "easeInOut" }
-        });
+        // Add delay before starting animation
+        animationRef.current.timeout = setTimeout(async () => {
+          if (!isMountedRef.current) return;
 
-        // Hold perspective view
-        await new Promise(resolve => setTimeout(resolve, 1000));
+          const runAnimation = async () => {
+            if (!isMountedRef.current) return;
+            try {
+              // Draw outer circle
+              await controls.start({
+                pathLength: 1,
+                transition: { duration: 1.5, ease: "easeInOut" }
+              });
 
-        // Return to flat view
-        await controls.start({
-          rotateX: 0,
-          rotateY: 0,
-          scale: 1,
-          transition: { duration: 2, ease: "easeInOut" }
-        });
+              if (!isMountedRef.current) return;
 
-        // Smoothly undraw the circle
-        await controls.start({
-          pathLength: 0,
-          transition: { duration: 1.5, ease: "easeInOut" }
-        });
+              // Rotate to perspective view
+              await controls.start({
+                rotateX: 45,
+                rotateY: 45,
+                scale: 0.8,
+                transition: { duration: 2, ease: "easeInOut" }
+              });
+
+              if (!isMountedRef.current) return;
+
+              // Hold perspective view
+              await new Promise(resolve => setTimeout(resolve, 1000));
+
+              if (!isMountedRef.current) return;
+
+              // Return to flat view
+              await controls.start({
+                rotateX: 0,
+                rotateY: 0,
+                scale: 1,
+                transition: { duration: 2, ease: "easeInOut" }
+              });
+
+              if (!isMountedRef.current) return;
+
+              // Smoothly undraw the circle
+              await controls.start({
+                pathLength: 0,
+                transition: { duration: 1.5, ease: "easeInOut" }
+              });
+
+              if (isMountedRef.current) {
+                runAnimation();
+              }
+            } catch (e) {
+              // Ignore animation errors during unmount
+            }
+          };
+
+          runAnimation();
+        }, 500);
+      } catch (error) {
+        // Ignore animation interruption errors
+        if (isMountedRef.current) {
+          console.error('Animation error:', error);
+        }
       }
     };
 
     animate();
-  }, [controls]);
+
+    return () => {
+      isMountedRef.current = false;
+      if (animationRef.current.timeout) {
+        clearTimeout(animationRef.current.timeout);
+      }
+      try {
+        controls.stop();
+      } catch (e) {
+        // Ignore errors during cleanup
+      }
+    };
+  }, []);  // Remove controls from dependencies
 
   return (
     <div className="relative w-full h-full flex items-center justify-center">
@@ -72,9 +137,8 @@ const CircleAnimation = () => {
         {/* Outer Circle - Draws and transforms */}
         <motion.svg
           className="absolute inset-0 w-full h-full"
-          initial={{ pathLength: 0 }}
+          initial={{ pathLength: 0, rotateX: 0, rotateY: 0, scale: 1 }}
           animate={controls}
-          style={{ rotateX: 0, rotateY: 0 }}
         >
           <defs>
             <linearGradient id="circleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
