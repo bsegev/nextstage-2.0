@@ -1,7 +1,8 @@
 'use client';
 
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef, useEffect } from 'react';
+import { useRef } from 'react';
+import Image from 'next/image';
 
 // Geometric shapes component for visual sophistication
 const BackgroundShapes = () => {
@@ -247,6 +248,10 @@ export function AboutHero() {
           </motion.div>
         </div>
       </motion.div>
+
+      <p className="text-xl text-ethereal-dark/70 max-w-3xl mx-auto">
+        Let&apos;s build something meaningful together.
+      </p>
     </motion.section>
   );
 } 

@@ -3,17 +3,6 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 
-const drawings = {
-  lightbulb: {
-    path: "M50,70 L50,80 M42,80 L58,80 M45,85 L55,85 M50,20 C35,20 25,30 25,45 C25,55 35,60 40,65 C45,70 45,70 45,75 L55,75 C55,70 55,70 60,65 C65,60 75,55 75,45 C75,30 65,20 50,20",
-    viewBox: "0 0 100 100"
-  },
-  blocks: {
-    path: "M20,80 L40,80 L40,60 L20,60 L20,80 M45,80 L65,80 L65,60 L45,60 L45,80 M32,55 L52,55 L52,35 L32,35 L32,55 M57,55 L77,55 L77,35 L57,35 L57,55 M45,30 L65,30 L65,10 L45,10 L45,30",
-    viewBox: "0 0 100 100"
-  }
-};
-
 export function AboutStory() {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -76,7 +65,7 @@ export function AboutStory() {
               className="text-xl text-ethereal-dark/70 max-w-3xl mx-auto"
               style={{ y }}
             >
-              I've always been fascinated by how things connect. Whether it's design and technology, 
+              I&apos;ve always been fascinated by how things connect. Whether it&apos;s design and technology, 
               strategy and storytelling, or brands and their audiences – I believe the magic happens 
               in these intersections.
             </motion.p>

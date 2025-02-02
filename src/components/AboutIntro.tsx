@@ -2,20 +2,22 @@
 
 import { motion } from 'framer-motion';
 import { useRef } from 'react';
-import { EyeIcon, PuzzlePieceIcon, ArrowPathIcon } from '@heroicons/react/24/outline';
+import { 
+  LightBulbIcon,
+  PuzzlePieceIcon,
+  ArrowPathIcon
+} from '@heroicons/react/24/outline';
 
 export function AboutIntro() {
-  const containerRef = useRef<HTMLDivElement>(null);
-
   const cards = [
     {
       title: "Vision & Direction",
-      description: "I believe in understanding the whole system before making any moves. Strategy isn't just planning—it's about creating a clear path forward that everyone can follow.",
-      icon: EyeIcon,
+      description: "Understanding the whole system and creating a clear path forward.",
+      icon: LightBulbIcon,
       color: "blue",
       borderColor: "border-blue-200/30",
       hoverBorderColor: "hover:border-blue-300/40",
-      iconGradient: "from-blue-500 to-blue-600",
+      iconGradient: "from-blue-500 to-blue-600"
     },
     {
       title: "Craft & Alignment",

@@ -161,7 +161,7 @@ export function AboutCTA() {
           </h2>
           
           <p className="text-xl text-[#1C1C1C]/70 mb-12 max-w-3xl mx-auto">
-            Let's explore how we can turn your vision into a <span className="aurora-text-gradient-light">lasting brand</span> that grows with your business and resonates with your audience.
+            Let&apos;s explore how we can turn your vision into a <span className="aurora-text-gradient-light">lasting brand</span> that grows with your business and resonates with your audience.
           </p>
 
           <div className="space-y-8">
