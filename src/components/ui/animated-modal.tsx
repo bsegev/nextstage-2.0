@@ -140,6 +140,9 @@ export const useOutsideClick = (
   callback: () => void
 ) => {
   React.useEffect(() => {
+    // Skip if we're not in the browser
+    if (typeof window === "undefined") return;
+
     const listener = (event: MouseEvent | TouchEvent) => {
       if (!ref.current || ref.current.contains(event.target as Node)) {
         return;
