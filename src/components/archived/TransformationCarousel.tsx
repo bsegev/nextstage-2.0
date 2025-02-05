@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useSwipeable } from 'react-swipeable';
 
 const transformationStages = [
@@ -42,6 +42,7 @@ const transformationStages = [
 export function TransformationCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
+  const slideRef = useRef<HTMLDivElement>(null);
 
   const handlers = useSwipeable({
     onSwipedLeft: () => handleNext(),

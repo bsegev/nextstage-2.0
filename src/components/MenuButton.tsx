@@ -1,20 +1,15 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from 'react';
-import lottie, { AnimationItem } from 'lottie-web';
+import lottie from 'lottie-web';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Modal, ModalBody, ModalContent, useModal } from './ui/animated-modal';
 import Lottie from 'lottie-react';
 import loadingLine from '../../public/lotties/loading-line.json';
 import { HomeIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
-import { ComponentType } from 'react';
 
-interface IconProps {
-  className?: string;
-}
-
-const NavItem = ({ href, children, icon: Icon }: { href: string; children: React.ReactNode; icon?: ComponentType<IconProps> }) => {
+const NavItem = ({ href, children, icon: Icon }: { href: string; children: React.ReactNode; icon?: React.ComponentType<any> }) => {
   const [isHovered, setIsHovered] = useState(false);
   const isExternal = href.startsWith('#');
   
@@ -109,7 +104,7 @@ const MenuContent = ({ triggerLottieRef, isScrolling }: { triggerLottieRef: Reac
             <NavItem href="#work">work</NavItem>
             <NavItem href="#play">play</NavItem>
             <NavItem href="#library">library</NavItem>
-            <NavItem href="#contact">let&apos;s talk</NavItem>
+            <NavItem href="#contact">let's talk</NavItem>
           </motion.nav>
         </ModalContent>
       </ModalBody>
@@ -119,7 +114,7 @@ const MenuContent = ({ triggerLottieRef, isScrolling }: { triggerLottieRef: Reac
 
 export const MenuButton = () => {
   const triggerLottieRef = useRef<HTMLDivElement>(null);
-  const lottieInstanceRef = useRef<AnimationItem | null>(null);
+  const lottieInstanceRef = useRef<any>(null);
   const lastScrollYRef = useRef(0);
   const scrollTimeoutRef = useRef<NodeJS.Timeout>();
   const [isScrolling, setIsScrolling] = useState(false);

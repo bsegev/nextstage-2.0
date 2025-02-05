@@ -1,9 +1,8 @@
 "use client";
 
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { cn } from "@/lib/utils";
-import React from 'react';
 import { RocketLaunchIcon } from '@heroicons/react/24/outline';
 
 type IconComponent = ({ className }: { className?: string }) => JSX.Element;

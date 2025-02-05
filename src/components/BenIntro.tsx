@@ -96,7 +96,7 @@ function BenIntro() {
                     transition={{ duration: 0.8, delay: 0.2 }}
                   >
                     <span className="relative inline-block">
-                      I&apos;m{' '}
+                      I'm{' '}
                       <motion.span
                         className="aurora-text-gradient-light"
                         animate={{

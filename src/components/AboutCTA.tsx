@@ -151,7 +151,7 @@ export function AboutCTA() {
                 backgroundSize: "200% auto",
               }}
             >
-              LET&apos;S CONNECT
+              LET'S CONNECT
             </motion.span>
             <div className="h-px w-8 bg-gradient-to-r from-[#FFFFF0]/0 via-[#FFFFF0]/20 to-[#FFFFF0]/0" />
           </div>
@@ -161,7 +161,7 @@ export function AboutCTA() {
           </h2>
           
           <p className="text-xl text-[#1C1C1C]/70 mb-12 max-w-3xl mx-auto">
-            Let&apos;s explore how we can turn your vision into a <span className="aurora-text-gradient-light">lasting brand</span> that grows with your business and resonates with your audience.
+            Let's explore how we can turn your vision into a <span className="aurora-text-gradient-light">lasting brand</span> that grows with your business and resonates with your audience.
           </p>
 
           <div className="space-y-8">

@@ -1,0 +1,5 @@
+# Temporarily ignore components during development
+src/components/archived/*
+src/components/ui/*
+src/components/*.tsx
+src/app/*.tsx 

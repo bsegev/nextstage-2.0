@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, useScroll, useTransform, useMotionTemplate, useMotionValue, useAnimationFrame, AnimatePresence } from 'framer-motion';
 import { useRef, useState, useCallback, useEffect } from 'react';
 import { 
   ChartBarSquareIcon, 
@@ -13,21 +13,130 @@ import {
   ChatBubbleBottomCenterTextIcon,
   UserCircleIcon,
   ChartBarIcon,
+  BuildingOfficeIcon,
+  ChevronDownIcon,
   UsersIcon,
   PresentationChartBarIcon,
   WindowIcon,
+  CursorArrowRaysIcon,
+  CircleStackIcon,
+  BriefcaseIcon,
   ClipboardDocumentCheckIcon,
   RocketLaunchIcon,
   SignalIcon,
+  CubeTransparentIcon,
   PlayIcon,
   PaintBrushIcon,
   DocumentDuplicateIcon,
+  ChevronRightIcon,
+  ChevronLeftIcon,
   AcademicCapIcon,
   SparklesIcon,
-  LightBulbIcon,
-  ChevronRightIcon,
-  ChevronLeftIcon
+  LightBulbIcon
 } from '@heroicons/react/24/outline';
+
+interface Category {
+  id: string;
+  name: string;
+  description: string;
+  color: string;
+  borderColor: string;
+  hoverBorderColor: string;
+  items: Array<{
+    id: string;
+    title: string;
+    icon: React.ForwardRefExoticComponent<
+      Omit<React.SVGProps<SVGSVGElement>, "ref"> & {
+        title?: string | undefined;
+        titleId?: string | undefined;
+      } & React.RefAttributes<SVGSVGElement>
+    >;
+  }>;
+}
+
+interface ExperienceType {
+  id: string;
+  name: string;
+  description: string;
+  color: string;
+  borderColor: string;
+  hoverBorderColor: string;
+}
+
+const serviceCategories = [
+  {
+    name: "Strategy",
+    description: "Chart the course with clarity",
+    services: [
+      {
+        title: "Strategic Vision",
+        shortDesc: "Transform ambition into actionable strategy",
+        icon: ChartBarSquareIcon,
+        outcomes: ["Market positioning", "Growth roadmap", "Opportunity mapping"]
+      },
+      {
+        title: "Brand Architecture",
+        shortDesc: "Build cohesive brand systems",
+        icon: CubeTransparentIcon,
+        outcomes: ["Brand framework", "Portfolio strategy", "Experience design"]
+      },
+      {
+        title: "Growth Advisory",
+        shortDesc: "Navigate complex decisions with confidence",
+        icon: BuildingOfficeIcon,
+        outcomes: ["Strategic planning", "Decision support", "Market analysis"]
+      }
+    ]
+  },
+  {
+    name: "Design",
+    description: "Craft experiences that resonate",
+    services: [
+      {
+        title: "Brand Identity",
+        shortDesc: "Design distinctive visual systems",
+        icon: SwatchIcon,
+        outcomes: ["Visual identity", "Design system", "Brand guidelines"]
+      },
+      {
+        title: "Digital Experience",
+        shortDesc: "Create intuitive digital touchpoints",
+        icon: WindowIcon,
+        outcomes: ["Website design", "Interface design", "Digital presence"]
+      },
+      {
+        title: "Creative Direction",
+        shortDesc: "Guide visual storytelling",
+        icon: RectangleGroupIcon,
+        outcomes: ["Art direction", "Visual strategy", "Asset creation"]
+      }
+    ]
+  },
+  {
+    name: "Story",
+    description: "Tell stories that move people",
+    services: [
+      {
+        title: "Narrative Design",
+        shortDesc: "Craft compelling brand stories",
+        icon: DocumentTextIcon,
+        outcomes: ["Story architecture", "Content strategy", "Message framework"]
+      },
+      {
+        title: "Pitch Materials",
+        shortDesc: "Present vision with impact",
+        icon: PresentationChartLineIcon,
+        outcomes: ["Pitch decks", "Investor materials", "Sales collateral"]
+      },
+      {
+        title: "Launch Strategy",
+        shortDesc: "Orchestrate memorable launches",
+        icon: RocketLaunchIcon,
+        outcomes: ["Launch planning", "Campaign design", "Go-to-market"]
+      }
+    ]
+  }
+];
 
 const systemCategories = [
   {
@@ -128,6 +237,17 @@ const systemCategories = [
   }
 ];
 
+// Strategic story through deliverables:
+// Strategy → Identity → Digital → Growth → Motion
+const FEATURED_DELIVERABLES = [
+  "strategic-blueprint",  // Shows strategic foundation
+  "brand-identity",       // Shows design capability
+  "marketing-website",    // Shows digital expertise
+  "pitch-deck",          // Shows growth focus
+  "onboarding-flows",    // Shows UX/product thinking
+  "animated-explainers"   // Shows motion/technical capability
+];
+
 const fullExperience = {
   id: "all",
   name: "FULL EXPERIENCE",
@@ -137,7 +257,196 @@ const fullExperience = {
   hoverBorderColor: "hover:border-gray-400/60",
 };
 
+const MovingBorder = ({ className }: { className?: string }) => {
+  const pathRef = useRef<SVGRectElement>(null);
+  const progress = useMotionValue<number>(0);
+
+  useAnimationFrame((time) => {
+    const length = pathRef.current?.getTotalLength();
+    if (length) {
+      const pxPerMillisecond = length / 3000; // 3s duration
+      progress.set((time * pxPerMillisecond) % length);
+    }
+  });
+
+  const x = useTransform(progress, (val) => pathRef.current?.getPointAtLength(val).x);
+  const y = useTransform(progress, (val) => pathRef.current?.getPointAtLength(val).y);
+  const transform = useMotionTemplate`translateX(${x}px) translateY(${y}px) translateX(-50%) translateY(-50%)`;
+
+  return (
+    <div className="absolute inset-0 -z-10">
+      <svg
+        className="absolute h-full w-full"
+        width="100%"
+        height="100%"
+        preserveAspectRatio="none"
+      >
+        <rect
+          fill="none"
+          stroke="url(#gradient)"
+          strokeWidth="1"
+          width="100%"
+          height="100%"
+          rx="1rem"
+          ref={pathRef}
+        />
+        <defs>
+          <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="rgba(147,197,253,0.3)" />
+            <stop offset="50%" stopColor="rgba(192,168,249,0.4)" />
+            <stop offset="100%" stopColor="rgba(244,163,235,0.3)" />
+          </linearGradient>
+        </defs>
+      </svg>
+      <motion.div
+        className={className}
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          display: "inline-block",
+          transform,
+        }}
+      >
+        <div className="relative h-2 w-2">
+          <div className="absolute inset-[-8px] rounded-full bg-[radial-gradient(circle,rgba(147,197,253,0.2)_0%,rgba(94,234,212,0.1)_30%,rgba(192,168,249,0.1)_60%,transparent_80%)] blur-[2px]" />
+          <div className="absolute inset-[-4px] rounded-full bg-[radial-gradient(circle,rgba(147,197,253,0.9)_0%,rgba(94,234,212,0.7)_30%,rgba(192,168,249,0.7)_50%,rgba(244,163,235,0.6)_70%,transparent_90%)]" />
+          <div className="absolute inset-[-1px] rounded-full bg-[radial-gradient(circle,white_0%,rgba(255,255,255,0.9)_30%,rgba(147,197,253,0.8)_60%,transparent_80%)]" />
+          <div className="absolute inset-[2px] rounded-full bg-white shadow-[0_0_2px_1px_rgba(255,255,255,0.9)]" />
+        </div>
+      </motion.div>
+    </div>
+  );
+};
+
+// Fix the mobile filter bar
+const MobileFilterBar = ({ 
+  activeCategory,
+  handleClick,
+  fullExperience,
+  systemCategories 
+}: { 
+  activeCategory: string | null;
+  handleClick: (categoryId: string) => void;
+  fullExperience: ExperienceType;
+  systemCategories: Category[];
+}) => {
+  const filterScrollRef = useRef<HTMLDivElement>(null);
+  const [showLeftArrow, setShowLeftArrow] = useState(false);
+  const [showRightArrow, setShowRightArrow] = useState(false);
+
+  const checkScrollPosition = useCallback(() => {
+    const scrollContainer = filterScrollRef.current;
+    if (scrollContainer) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollContainer;
+      setShowLeftArrow(scrollLeft > 0);
+      setShowRightArrow(scrollLeft < scrollWidth - clientWidth - 10);
+    }
+  }, []);
+
+  useEffect(() => {
+    const scrollContainer = filterScrollRef.current;
+    if (scrollContainer) {
+      checkScrollPosition();
+      scrollContainer.addEventListener('scroll', checkScrollPosition);
+      window.addEventListener('resize', checkScrollPosition);
+      return () => {
+        scrollContainer.removeEventListener('scroll', checkScrollPosition);
+        window.removeEventListener('resize', checkScrollPosition);
+      };
+    }
+  }, [checkScrollPosition]);
+
+  return (
+    <div className="md:hidden sticky top-4 z-40 bg-white/80 backdrop-blur-lg shadow-sm">
+      <div className="relative">
+        <div 
+          ref={filterScrollRef}
+          className="overflow-x-auto hide-scrollbar"
+        >
+          <div className="flex gap-2 py-3 px-4">
+            <motion.button
+              key="full-experience"
+              className={`flex-none inline-flex items-center gap-2 px-4 py-2 rounded-full 
+                        ${fullExperience.borderColor} border
+                        transition-all duration-300
+                        ${!activeCategory ? 
+                          'bg-white shadow-lg border-gray-300 ring-2 ring-gray-200 ring-offset-2 ring-offset-white' +
+                          ' after:absolute after:inset-0 after:rounded-full after:shadow-[0_0_0_1px_rgba(0,0,0,0.05),0_1px_2px_0_rgba(0,0,0,0.05)] after:z-[-1]' : 
+                          'bg-white/50'}`}
+              onClick={() => handleClick("all")}
+              whileTap={{ scale: 0.95 }}
+            >
+              <span className={`text-sm font-medium transition-colors duration-200
+                            ${!activeCategory ? 'text-gray-900 font-semibold' : 'text-gray-600'}`}>
+                {fullExperience.name}
+              </span>
+            </motion.button>
+
+            {systemCategories.map((category) => (
+              <motion.button
+                key={category.id}
+                className={`flex-none inline-flex items-center gap-2 px-4 py-2 rounded-full 
+                          ${category.borderColor} border
+                          transition-all duration-300
+                          ${activeCategory === category.id ? 
+                            `bg-white shadow-lg border-${category.color}-300 ring-2 ring-${category.color}-200 ring-offset-2 ring-offset-white` +
+                            ' after:absolute after:inset-0 after:rounded-full after:shadow-[0_0_0_1px_rgba(0,0,0,0.05),0_1px_2px_0_rgba(0,0,0,0.05)] after:z-[-1]' : 
+                            'bg-white/50'}`}
+                onClick={() => handleClick(category.id)}
+                whileTap={{ scale: 0.95 }}
+              >
+                <span className={`text-sm font-medium transition-colors duration-200
+                              ${activeCategory === category.id ? `text-${category.color}-900 font-semibold` : 'text-gray-600'}`}>
+                  {category.name}
+                </span>
+              </motion.button>
+            ))}
+          </div>
+        </div>
+
+        <AnimatePresence>
+          {showLeftArrow && (
+            <motion.div
+              key="left-arrow"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute left-0 top-0 bottom-0 bg-gradient-to-r from-white/95 via-white/95 to-transparent w-12 flex items-center justify-start pl-4 pointer-events-none"
+            >
+              <motion.div
+                animate={{ x: [-3, 0, -3] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <ChevronLeftIcon className="w-5 h-5 text-gray-600" />
+              </motion.div>
+            </motion.div>
+          )}
+
+          {showRightArrow && (
+            <motion.div
+              key="right-arrow"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute right-0 top-0 bottom-0 bg-gradient-to-l from-white/95 via-white/95 to-transparent w-12 flex items-center justify-end pr-4 pointer-events-none"
+            >
+              <motion.div
+                animate={{ x: [0, 3, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <ChevronRightIcon className="w-5 h-5 text-gray-600" />
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </div>
+  );
+};
+
 export function CoreOffering() {
+  const containerRef = useRef<HTMLDivElement>(null);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [isHovering, setIsHovering] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -213,32 +522,6 @@ export function CoreOffering() {
 
   const isFocused = isHovering || activeCategory !== null;
 
-  // Add scroll position check
-  const checkScrollPosition = useCallback(() => {
-    const scrollContainer = filterScrollRef.current;
-    if (scrollContainer) {
-      const { scrollLeft, scrollWidth, clientWidth } = scrollContainer;
-      setShowLeftArrow(scrollLeft > 0);
-      setShowRightArrow(scrollLeft < scrollWidth - clientWidth - 10); // 10px buffer
-    }
-  }, []);
-
-  // Add scroll event listener
-  useEffect(() => {
-    const scrollContainer = filterScrollRef.current;
-    if (scrollContainer) {
-      checkScrollPosition();
-      scrollContainer.addEventListener('scroll', checkScrollPosition);
-      return () => scrollContainer.removeEventListener('scroll', checkScrollPosition);
-    }
-  }, [checkScrollPosition]);
-
-  // Check on resize
-  useEffect(() => {
-    window.addEventListener('resize', checkScrollPosition);
-    return () => window.removeEventListener('resize', checkScrollPosition);
-  }, [checkScrollPosition]);
-
   return (
     <section 
       className="py-24 sm:py-32 bg-white relative overflow-hidden font-['DM_Sans']"
@@ -254,11 +537,34 @@ export function CoreOffering() {
             className="flex flex-col items-center gap-4"
           >
             <div className="inline-flex items-center gap-3">
-              <div className="h-px w-8 bg-ethereal-dark/20" />
-              <span className="font-mono text-sm text-ethereal-dark/60 tracking-wider uppercase">
+              <motion.div 
+                initial={{ width: 0 }}
+                animate={{ width: "2rem" }}
+                transition={{ duration: 1, delay: 0.3, ease: [0.23, 1, 0.32, 1] }}
+                className="h-px bg-ethereal-dark/20" 
+              />
+              <motion.span 
+                className="font-mono text-sm tracking-wider aurora-text-gradient-light"
+                animate={{
+                  backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                }}
+                transition={{
+                  duration: 5,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+                style={{
+                  backgroundSize: "200% auto",
+                }}
+              >
                 Deliverables
-              </span>
-              <div className="h-px w-8 bg-ethereal-dark/20" />
+              </motion.span>
+              <motion.div 
+                initial={{ width: 0 }}
+                animate={{ width: "2rem" }}
+                transition={{ duration: 1, delay: 0.3, ease: [0.23, 1, 0.32, 1] }}
+                className="h-px bg-ethereal-dark/20" 
+              />
             </div>
           </motion.div>
 
@@ -325,98 +631,13 @@ export function CoreOffering() {
           </motion.p>
         </div>
 
-        {/* Mobile Filter Bar - Sticky */}
-        <div className="md:hidden sticky top-4 z-40 bg-white/80 backdrop-blur-lg shadow-sm">
-          <div className="relative">
-            {/* Scroll Container */}
-            <div 
-              ref={filterScrollRef}
-              className="overflow-x-auto hide-scrollbar"
-            >
-              {/* Content Container with padding */}
-              <div className="flex gap-2 py-3" style={{ 
-                minWidth: "min-content",
-                paddingLeft: "16px",
-                paddingRight: "16px" // Match left side exactly
-              }}>
-                <motion.button
-                  key="full-experience"
-                  className={`flex-none inline-flex items-center gap-2 px-4 py-2 rounded-full 
-                            ${fullExperience.borderColor} border
-                            transition-all duration-300
-                            ${!activeCategory ? 
-                              'bg-white shadow-lg border-gray-300 ring-2 ring-gray-200 ring-offset-2 ring-offset-white' +
-                              ' after:absolute after:inset-0 after:rounded-full after:shadow-[0_0_0_1px_rgba(0,0,0,0.05),0_1px_2px_0_rgba(0,0,0,0.05)] after:z-[-1]' : 
-                              'bg-white/50'}`}
-                  onClick={() => handleClick("all")}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <span className={`text-sm font-medium transition-colors duration-200
-                                ${!activeCategory ? 'text-gray-900 font-semibold' : 'text-gray-600'}`}>
-                    {fullExperience.name}
-                  </span>
-                </motion.button>
-
-                {systemCategories.map((category) => (
-                  <motion.button
-                    key={category.id}
-                    className={`flex-none inline-flex items-center gap-2 px-4 py-2 rounded-full 
-                              ${category.borderColor} border
-                              transition-all duration-300
-                              ${activeCategory === category.id ? 
-                                `bg-white shadow-lg border-${category.color}-300 ring-2 ring-${category.color}-200 ring-offset-2 ring-offset-white` +
-                                ' after:absolute after:inset-0 after:rounded-full after:shadow-[0_0_0_1px_rgba(0,0,0,0.05),0_1px_2px_0_rgba(0,0,0,0.05)] after:z-[-1]' : 
-                                'bg-white/50'}`}
-                    onClick={() => handleClick(category.id)}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <span className={`text-sm font-medium transition-colors duration-200
-                                  ${activeCategory === category.id ? `text-${category.color}-900 font-semibold` : 'text-gray-600'}`}>
-                      {category.name}
-                    </span>
-                  </motion.button>
-                ))}
-              </div>
-            </div>
-
-            {/* Scroll Indicators */}
-            <AnimatePresence>
-              {showLeftArrow && (
-                <motion.div
-                  key="left-arrow"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="absolute left-0 top-0 bottom-0 bg-gradient-to-r from-white/95 via-white/95 to-transparent w-12 flex items-center justify-start pl-4 pointer-events-none"
-                >
-                  <motion.div
-                    animate={{ x: [-3, 0, -3] }}
-                    transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                  >
-                    <ChevronLeftIcon className="w-5 h-5 text-gray-600" />
-                  </motion.div>
-                </motion.div>
-              )}
-
-              {showRightArrow && (
-                <motion.div
-                  key="right-arrow"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="absolute right-0 top-0 bottom-0 bg-gradient-to-l from-white/95 via-white/95 to-transparent w-12 flex items-center justify-end pr-4 pointer-events-none"
-                >
-                  <motion.div
-                    animate={{ x: [0, 3, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                  >
-                    <ChevronRightIcon className="w-5 h-5 text-gray-600" />
-                  </motion.div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-        </div>
+        {/* Mobile Filter Bar */}
+        <MobileFilterBar 
+          activeCategory={activeCategory}
+          handleClick={handleClick}
+          fullExperience={fullExperience}
+          systemCategories={systemCategories}
+        />
 
         {/* Mobile Deliverables Container */}
         <div className="md:hidden">
@@ -596,6 +817,30 @@ export function CoreOffering() {
         .ring-amber-200 { --tw-ring-color: rgb(253, 230, 138); }
         .ring-emerald-200 { --tw-ring-color: rgb(167, 243, 208); }
         .ring-indigo-200 { --tw-ring-color: rgb(199, 210, 254); }
+        .aurora-text-gradient-light {
+          background: linear-gradient(
+            to right,
+            #3b82f6 0%,    /* Deep blue anchor */
+            #4f46e5 15%,   /* Deep indigo */
+            #38bdf8 30%,   /* Bright sky blue */
+            #818cf8 45%,   /* Soft indigo */
+            #2dd4bf 60%,   /* Teal accent */
+            #4f46e5 75%,   /* Back to deep indigo */
+            #38bdf8 90%,   /* Sky blue finish */
+            #3b82f6 100%   /* Deep blue anchor */
+          );
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+          text-fill-color: transparent;
+          background-size: 200% auto;
+          animation: aurora 6s ease infinite;
+        }
+        @keyframes aurora {
+          0% { background-position: 0% center; }
+          50% { background-position: 100% center; }
+          100% { background-position: 0% center; }
+        }
       `}</style>
     </section>
   );

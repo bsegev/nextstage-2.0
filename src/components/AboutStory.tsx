@@ -65,7 +65,7 @@ export function AboutStory() {
               className="text-xl text-ethereal-dark/70 max-w-3xl mx-auto"
               style={{ y }}
             >
-              I&apos;ve always been fascinated by how things connect. Whether it&apos;s design and technology, 
+              I've always been fascinated by how things connect. Whether it's design and technology, 
               strategy and storytelling, or brands and their audiences – I believe the magic happens 
               in these intersections.
             </motion.p>

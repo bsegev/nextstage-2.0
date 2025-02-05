@@ -11,7 +11,6 @@ const CircleAnimation = () => {
   }>({});
   
   useEffect(() => {
-    const animation = animationRef.current;
     isMountedRef.current = true;
 
     const animate = async () => {
@@ -33,7 +32,7 @@ const CircleAnimation = () => {
                 pathLength: 0,
                 transition: { duration: 0 }
               });
-            } catch (e) { // eslint-disable-line @typescript-eslint/no-unused-vars
+            } catch (e) {
               // Ignore animation errors during unmount
             }
             resolve(null);
@@ -41,7 +40,7 @@ const CircleAnimation = () => {
         );
 
         // Add delay before starting animation
-        const timeoutId = setTimeout(async () => {
+        animationRef.current.timeout = setTimeout(async () => {
           if (!isMountedRef.current) return;
 
           const runAnimation = async () => {
@@ -89,16 +88,13 @@ const CircleAnimation = () => {
               if (isMountedRef.current) {
                 runAnimation();
               }
-            } catch (e) { // eslint-disable-line @typescript-eslint/no-unused-vars
+            } catch (e) {
               // Ignore animation errors during unmount
             }
           };
 
           runAnimation();
         }, 500);
-
-        // Store the timeout ID for cleanup
-        animation.timeout = timeoutId;
       } catch (error) {
         // Ignore animation interruption errors
         if (isMountedRef.current) {
@@ -111,16 +107,16 @@ const CircleAnimation = () => {
 
     return () => {
       isMountedRef.current = false;
-      if (animation.timeout) {
-        clearTimeout(animation.timeout);
+      if (animationRef.current.timeout) {
+        clearTimeout(animationRef.current.timeout);
       }
       try {
         controls.stop();
-      } catch (e) { // eslint-disable-line @typescript-eslint/no-unused-vars
+      } catch (e) {
         // Ignore errors during cleanup
       }
     };
-  }, [controls]);  // Add controls to dependencies
+  }, []);  // Remove controls from dependencies
 
   return (
     <div className="relative w-full h-full flex items-center justify-center">

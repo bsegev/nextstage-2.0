@@ -1,13 +1,13 @@
 "use client";
 
 import { useEffect, useState } from 'react';
-import { AiEntryPoint } from '@/components/AiEntryPoint';
-import { Hero } from '@/components/HeroNEW';
-import { MenuButton } from '@/components/MenuButton';
 import { motion, AnimatePresence } from 'framer-motion';
 import dynamic from 'next/dynamic';
 
 // Dynamic imports for components that use browser APIs
+const MenuButton = dynamic(() => import('@/components/MenuButton').then(mod => ({ default: mod.MenuButton })), { ssr: false });
+const Hero = dynamic(() => import('@/components/HeroNEW').then(mod => ({ default: mod.Hero })), { ssr: false });
+const AiEntryPoint = dynamic(() => import('@/components/AiEntryPoint').then(mod => ({ default: mod.AiEntryPoint })), { ssr: false });
 const ValueProp = dynamic(() => import('@/components/ValueProp').then(mod => ({ default: mod.ValueProp })), { ssr: false });
 const KeyMetrics = dynamic(() => import('@/components/KeyMetrics').then(mod => ({ default: mod.KeyMetrics })), { ssr: false });
 const ProcessFlow = dynamic(() => import('@/components/ProcessFlow').then(mod => ({ default: mod.ProcessFlow })), { ssr: false });

@@ -224,7 +224,7 @@ export function AboutHero() {
               transition={{ duration: 0.8, delay: 0.8, ease: [0.23, 1, 0.32, 1] }}
               className="mt-8 text-xl sm:text-2xl text-ethereal-dark/90 font-light leading-relaxed tracking-tight"
             >
-              I help founders build brands that resonate and grow. After crafting 50+ brand systems and studying what works, I&apos;ve found success comes from aligning founder vision with market opportunity—wrapped in strategic design that connects.
+              I help founders build brands that resonate and grow. After crafting 50+ brand systems and studying what works, I've found success comes from aligning founder vision with market opportunity—wrapped in strategic design that connects.
             </motion.p>
           </div>
 

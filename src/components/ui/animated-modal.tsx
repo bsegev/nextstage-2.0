@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import React, { ReactNode, createContext, useContext, useRef, useState } from "react";
 
 interface ModalContextType {
@@ -56,7 +56,9 @@ export const ModalBody = ({
   children: ReactNode;
   className?: string;
 }) => {
-  const { open, setOpen } = useModal();
+  const { open } = useModal();
+  const shouldReduceMotion = useReducedMotion();
+  const { setOpen } = useModal();
   const menuRef = useRef(null);
 
   useOutsideClick(menuRef, () => setOpen(false));
@@ -137,17 +139,14 @@ export const ModalContent = ({
 
 export const useOutsideClick = (
   ref: React.RefObject<HTMLDivElement>,
-  callback: () => void
+  callback: Function
 ) => {
   React.useEffect(() => {
-    // Skip if we're not in the browser
-    if (typeof window === "undefined") return;
-
-    const listener = (event: MouseEvent | TouchEvent) => {
-      if (!ref.current || ref.current.contains(event.target as Node)) {
+    const listener = (event: any) => {
+      if (!ref.current || ref.current.contains(event.target)) {
         return;
       }
-      callback();
+      callback(event);
     };
 
     document.addEventListener("mousedown", listener);

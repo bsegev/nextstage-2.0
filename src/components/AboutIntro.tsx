@@ -1,9 +1,12 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { useRef } from 'react';
 import { EyeIcon, PuzzlePieceIcon, ArrowPathIcon } from '@heroicons/react/24/outline';
 
 export function AboutIntro() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
   const cards = [
     {
       title: "Vision & Direction",
