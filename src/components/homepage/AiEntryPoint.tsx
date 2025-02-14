@@ -7,16 +7,16 @@ import { preloadImage, preloadVideo } from '../../utils/preload';
 
 const questions = [
   {
-    question: "How do we turn vision into reality?",
-    response: "Through strategic clarity and design excellence. We transform abstract ideas into tangible impact."
+    question: "How do I turn my business idea into reality?",
+    response: "Start with clear strategy, then execute with precision. I'll help bridge the gap between your vision and real-world implementation."
   },
   {
-    question: "What makes a story resonate?",
-    response: "Authenticity meets craft. We help you find and amplify your unique narrative."
+    question: "What do I need to build a strong digital presence?",
+    response: "Beyond just a website—you need cohesive strategy, design, and technical execution. I guide you through each step, filling the exact gaps in your journey."
   },
   {
-    question: "When does design transcend aesthetics?",
-    response: "When it serves strategy. Every visual choice becomes a stepping stone toward your goals."
+    question: "How can I make my brand stand out online?",
+    response: "Through strategic design that drives real business outcomes. I help you build distinctive digital experiences that convert visitors into customers."
   }
 ];
 

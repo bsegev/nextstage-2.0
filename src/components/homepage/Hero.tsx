@@ -155,6 +155,18 @@ const BackgroundShapes = () => {
   );
 };
 
+// Add scroll helper function
+const scrollToElement = (elementId: string) => {
+  const element = document.getElementById(elementId);
+  if (element) {
+    const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+    window.scrollTo({
+      top: elementPosition,
+      behavior: 'smooth'
+    });
+  }
+};
+
 export const Hero = () => {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [videoEnded, setVideoEnded] = useState(false);
@@ -422,21 +434,21 @@ export const Hero = () => {
               animate={{ opacity: 0.7 }}
               transition={{ duration: 1, delay: 1.5 }}
             >
-              <motion.a
-                href="#work"
+              <motion.button
+                onClick={() => scrollToElement('case-studies')}
                 whileHover={{ opacity: 1, y: -1 }}
                 className="font-mono text-sm text-[#1C1C1C] hover:aurora-text-gradient-light transition-all duration-300"
               >
                 View My Work
-              </motion.a>
+              </motion.button>
               <div className="h-4 w-px bg-[#1C1C1C]/20" />
-              <motion.a
-                href="#contact"
+              <motion.button
+                onClick={() => scrollToElement('contact')}
                 whileHover={{ opacity: 1, y: -1 }}
                 className="font-mono text-sm text-[#1C1C1C] hover:aurora-text-gradient-light transition-all duration-300"
               >
                 Get in Touch
-              </motion.a>
+              </motion.button>
             </motion.div>
           </motion.div>
         </div>

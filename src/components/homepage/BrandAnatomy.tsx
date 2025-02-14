@@ -268,7 +268,7 @@ export function BrandAnatomy() {
       icon: SparklesIcon
     },
     {
-      title: "Marketing Materials",
+      title: "Marketing Assets",
       description: "Tell your story consistently across all channels and touchpoints",
       link: "#marketing",
       icon: DocumentIcon

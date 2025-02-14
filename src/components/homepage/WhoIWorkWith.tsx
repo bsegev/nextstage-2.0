@@ -8,8 +8,8 @@ import { cn } from '@/lib/utils';
 
 const collaborators = [
   {
-    title: "Leaders",
-    description: "Strategic partner for visionaries driving meaningful change",
+    title: "Decision Makers",
+    description: "Partnering with leaders who need to move fast and build right",
     accent: "blue",
     icon: (
       <svg className="w-12 h-12" viewBox="0 0 48 48" fill="none">
@@ -42,12 +42,12 @@ const collaborators = [
       </svg>
     ),
     detailedSteps: [
-      { text: "Founders & Entrepreneurs" },
-      { text: "Board Members & Advisors" },
-      { text: "C-Suite Executives" },
-      { text: "Department Leaders" },
-      { text: "Key Stakeholders" },
-      { text: "Outcome: Strategic alignment and accelerated growth through expert guidance and execution." }
+      { text: "Startup Founders needing to scale quickly and efficiently" },
+      { text: "CEOs & Executives facing digital transformation challenges" },
+      { text: "Product Leaders building the next generation of tools" },
+      { text: "Innovation Teams driving organizational change" },
+      { text: "Board Members seeking strategic digital direction" },
+      { text: "Outcome: Accelerated market success through expert strategy and hands-on execution that turns vision into reality." }
     ]
   },
   {

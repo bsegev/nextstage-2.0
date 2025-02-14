@@ -5,6 +5,7 @@ import Image from "next/image";
 import React from "react";
 import { CardBody, CardContainer, CardItem } from "../ui/3d-card";
 import Link from "next/link";
+import { ChevronRightIcon } from "@heroicons/react/24/outline";
 
 const caseStudies = [
   {
@@ -29,7 +30,7 @@ const caseStudies = [
 
 export function HomeCaseStudies() {
   return (
-    <section className="relative py-16 overflow-hidden font-sans bg-white">
+    <section id="case-studies" className="relative py-16 overflow-hidden font-sans bg-white">
       {/* Sophisticated background */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(59,130,246,0.03),transparent_70%)]" />
@@ -40,7 +41,7 @@ export function HomeCaseStudies() {
         <div className="max-w-[90rem] mx-auto">
           {/* Header */}
           <motion.div 
-            className="max-w-3xl mx-auto text-center mb-24"
+            className="max-w-3xl mx-auto text-center mb-8"
           >
             {/* Label with lines */}
             <motion.div 
@@ -119,7 +120,7 @@ export function HomeCaseStudies() {
           </motion.div>
 
           {/* Cards Grid */}
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-3 gap-3 md:gap-6">
             {caseStudies.map((study, index) => (
               <div key={study.category} className="h-[42rem] w-full flex items-center justify-center">
                 <CardContainer className="inter-var w-full">
@@ -180,6 +181,39 @@ export function HomeCaseStudies() {
               </div>
             ))}
           </div>
+          
+          {/* CTA to work page */}
+          <motion.div 
+            className="mt-8 text-center"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="group relative px-10 py-5 bg-[#1C1C1C] hover:bg-[#1C1C1C]/90 transition-all duration-300 rounded-xl overflow-hidden shadow-lg"
+            >
+              <Link href="/work" className="relative z-10">
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-[#38BDF8] via-[#818CF8] to-[#34D399] opacity-10"
+                  animate={{
+                    backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                  }}
+                  transition={{
+                    duration: 5,
+                    repeat: Infinity,
+                    ease: "linear",
+                  }}
+                  style={{
+                    backgroundSize: "200% auto",
+                  }}
+                />
+                <span className="relative z-10 font-mono text-lg text-[#FFFFF0]">View All Case Studies</span>
+              </Link>
+            </motion.button>
+          </motion.div>
         </div>
       </div>
     </section>
