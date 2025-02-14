@@ -87,13 +87,25 @@ export const ModalBody = ({
             width: "60px",
             transition: {
               type: "spring",
-              stiffness: 400,
-              damping: 25,
+              stiffness: 500,
+              damping: 35,
+              duration: 0.3
             }
           }}
         >
           <div className="flex items-center w-full">
-            {children}
+            <motion.div 
+              className="flex items-center w-full"
+              exit={{ 
+                opacity: 0,
+                transition: {
+                  duration: 0.15,
+                  ease: "easeOut"
+                }
+              }}
+            >
+              {children}
+            </motion.div>
           </div>
           <motion.button
             onClick={() => setOpen(false)}

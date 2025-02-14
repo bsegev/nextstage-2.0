@@ -2,27 +2,28 @@
 
 import { motion } from 'framer-motion';
 import Lottie from 'lottie-react';
-import energyAnimation from '../../public/lotties/Energy (1).json';
-import discountAnimation from '../../public/lotties/Discount (2).json';
-import featureAnimation from '../../public/lotties/Feature (1).json';
+import energyAnimation from '/public/lotties/Energy (1).json';
+import discountAnimation from '/public/lotties/Discount (2).json';
+import featureAnimation from '/public/lotties/Feature (1).json';
+import Link from 'next/link';
 
 const metrics = [
   {
     title: "SPEED",
     value: "20x",
-    description: "Skip the hiring process & start now",
+    description: "Direct collaboration, faster decisions",
     animation: energyAnimation
   },
   {
     title: "COST",
     value: "1/3",
-    description: "Of traditional agency rates",
+    description: "Budget-sensitive, no overhead",
     animation: discountAnimation
   },
   {
     title: "QUALITY",
     value: "A+",
-    description: "10+ years of brand expertise",
+    description: "Premium execution, every time",
     animation: featureAnimation
   }
 ];
@@ -106,8 +107,8 @@ export function KeyMetrics() {
               </span>
             </motion.span>
           </h2>
-          <p className="mt-6 text-center text-[#FFFFF0]/60 max-w-2xl mx-auto text-lg">
-            Direct collaboration and streamlined decision-making enable exceptional quality at every step. By eliminating layers and aligning vision with execution, we move faster and achieve more with less overhead.
+          <p className="mt-6 text-center text-[#FFFFF0]/60 max-w-2xl mx-auto text-xl md:text-2xl font-light leading-relaxed tracking-tight">
+            Working closely together, we enable exceptional quality at every step. Through direct collaboration and focused execution, you receive premium results faster, without the traditional overhead.
           </p>
         </motion.div>
 
@@ -178,6 +179,39 @@ export function KeyMetrics() {
             </motion.div>
           ))}
         </div>
+
+        {/* Simplified CTA Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="mt-24 text-center"
+        >
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="group relative px-10 py-5 bg-[#1C1C1C] hover:bg-[#1C1C1C]/90 transition-all duration-300 rounded-xl overflow-hidden shadow-lg"
+          >
+            <Link href="/work" className="relative z-10">
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-[#38BDF8] via-[#818CF8] to-[#34D399] opacity-10"
+                animate={{
+                  backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                }}
+                transition={{
+                  duration: 5,
+                  repeat: Infinity,
+                  ease: "linear",
+                }}
+                style={{
+                  backgroundSize: "200% auto",
+                }}
+              />
+              <span className="relative z-10 font-mono text-lg text-[#FFFFF0]">View Selected Projects</span>
+            </Link>
+          </motion.button>
+        </motion.div>
       </div>
     </section>
   );

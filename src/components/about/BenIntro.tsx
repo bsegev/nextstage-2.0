@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform, useSpring, useInView } from 'framer-motion';
 import { useRef, useEffect } from 'react';
 import Image from 'next/image';
+import { LightBulbIcon, RocketLaunchIcon, SparklesIcon } from '@heroicons/react/24/outline';
 
 function BenIntro() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -131,7 +132,7 @@ function BenIntro() {
                   >
                     <div className="space-y-6">
                       <p>
-                        I help founders and teams{' '}
+                        With roots in the arts and a degree in{' '}
                         <motion.span 
                           className="relative inline-flex items-center"
                           initial={{ opacity: 0 }}
@@ -145,29 +146,44 @@ function BenIntro() {
                               animate={isInView ? { scale: 1 } : {}}
                               transition={{ duration: 0.4, delay: 1 }}
                             />
-                            <span className="aurora-text-gradient-light">transform ideas</span>
+                            <span className="aurora-text-gradient-light">industrial engineering</span>
                           </span>
-                        </motion.span>{' '}
-                        into lasting brands.
+                        </motion.span>
+                        , I bridge the gap between creative vision and practical execution.
                       </p>
                       <p className="text-ethereal-dark/60">
-                        At the intersection of design, technology, and strategy, I turn complex challenges into elegant solutions that grow with your business.
+                        Having navigated every role from team lead to entrepreneur, I've seen firsthand how time and resources get wasted on poor partnerships. That's why I'm here—to give founders and teams the clear direction and quality execution they deserve, without the typical agency upsells or consulting bloat.
                       </p>
                     </div>
                   </motion.div>
 
-                  {/* Experience highlights with refined cards */}
+                  {/* Value pillars instead of metrics */}
                   <motion.div
-                    className="grid grid-cols-3 gap-6 lg:gap-8 pt-12"
+                    className="grid grid-cols-3 gap-6 lg:gap-8 pt-6"
                     initial={{ opacity: 0, y: 20 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.8, delay: 0.6 }}
                   >
                     {[
-                      { label: 'Experience', value: '15+', unit: 'years' },
-                      { label: 'Projects', value: '100+', unit: 'delivered' },
-                      { label: 'Industries', value: '12+', unit: 'served' }
-                    ].map((stat, i) => (
+                      { 
+                        label: 'Strategy', 
+                        value: 'Vision', 
+                        unit: 'into reality',
+                        icon: LightBulbIcon
+                      },
+                      { 
+                        label: 'Execution', 
+                        value: 'Action', 
+                        unit: 'not just ideas',
+                        icon: RocketLaunchIcon
+                      },
+                      { 
+                        label: 'Innovation', 
+                        value: 'Future', 
+                        unit: 'ready solutions',
+                        icon: SparklesIcon
+                      }
+                    ].map((pillar, i) => (
                       <motion.div
                         key={i}
                         className="group relative p-4 rounded-xl overflow-hidden"
@@ -183,8 +199,12 @@ function BenIntro() {
                         `} />
                         
                         <div className="relative">
+                          <div className="flex items-center gap-2 mb-2">
+                            <pillar.icon className="w-4 h-4 text-ethereal-dark/40" />
+                            <div className="text-sm text-ethereal-dark/50 font-light">{pillar.label}</div>
+                          </div>
                           <motion.div
-                            className="text-3xl font-light aurora-text-gradient-light mb-1"
+                            className="text-2xl font-light aurora-text-gradient-light"
                             animate={{
                               backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
                             }}
@@ -198,10 +218,9 @@ function BenIntro() {
                               backgroundSize: "200% auto",
                             }}
                           >
-                            {stat.value}
+                            {pillar.value}
                           </motion.div>
-                          <div className="text-sm text-ethereal-dark/50 font-light">{stat.label}</div>
-                          <div className="text-xs text-ethereal-dark/40 font-light">{stat.unit}</div>
+                          <div className="text-xs text-ethereal-dark/40 font-light mt-1">{pillar.unit}</div>
                         </div>
                       </motion.div>
                     ))}

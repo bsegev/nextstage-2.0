@@ -303,7 +303,7 @@ export function TransformationMessage() {
                     backgroundSize: "200% auto",
                   }}
                 >
-                  TRANSFORMATION
+                  CASE STUDIES
                 </motion.span>
                 <div className="h-px w-8 bg-gradient-to-r from-[#FFFFF0]/0 via-[#FFFFF0]/20 to-[#FFFFF0]/0" />
               </div>
@@ -317,7 +317,7 @@ export function TransformationMessage() {
               transition={{ delay: 0.2 }}
             >
               <span className="text-[#FFFFF0]">
-                Identity
+                From Vision
               </span>
               <motion.span
                 className="block mt-2 relative"
@@ -339,7 +339,7 @@ export function TransformationMessage() {
                     backgroundSize: "200% auto",
                   }}
                 >
-                  in Motion
+                  to Impact
                 </motion.span>
                 <motion.span
                   className="absolute inset-0 aurora-text-gradient-light"
@@ -355,10 +355,10 @@ export function TransformationMessage() {
                     backgroundSize: "200% auto",
                   }}
                 >
-                  in Motion
+                  to Impact
                 </motion.span>
                 <span className="relative aurora-text-gradient-light">
-                  in Motion
+                  to Impact
                 </span>
               </motion.span>
             </motion.h2>
@@ -370,8 +370,8 @@ export function TransformationMessage() {
               viewport={{ once: true }}
               transition={{ delay: 0.3 }}
             >
-              <p className="text-lg lg:text-xl text-[#FFFFF0]/70 leading-relaxed">
-                Turning foundational truth into business growth through unified brand expression
+              <p className="text-xl md:text-2xl text-[#FFFFF0]/70 font-light leading-relaxed tracking-tight">
+                Real transformations that showcase how strategic thinking and focused execution create lasting business impact.
               </p>
             </motion.div>
           </div>
@@ -383,7 +383,7 @@ export function TransformationMessage() {
             <AnimatePresence initial={false} mode="wait">
               <motion.div
                 key={currentIndex}
-                className="relative w-[90%] max-w-[1800px] mx-auto"
+                className="relative w-[90%] lg:w-[70%] max-w-[1800px] lg:max-w-[1400px] mx-auto"
                 initial={{ opacity: 0, x: swipeDirection === 'left' ? 100 : swipeDirection === 'right' ? -100 : 0 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: swipeDirection === 'left' ? -100 : swipeDirection === 'right' ? 100 : 0 }}
@@ -399,16 +399,16 @@ export function TransformationMessage() {
                     scale: 1,
                     transition: { duration: 0.6, ease: [0.32, 0.72, 0, 1] }
                   }}
-              >
-                <motion.div 
-                  className="absolute inset-0 bg-cover bg-center"
-                  initial={{ scale: 1.1 }}
-                  animate={{ scale: 1 }}
-                  transition={{ duration: 1.5, ease: [0.23, 1, 0.32, 1] }}
-                  style={{ 
-                    backgroundImage: `url(${transformationStages[currentIndex].image})`
-                  }}
-                />
+                >
+                  <motion.div 
+                    className="absolute inset-0 bg-cover bg-center"
+                    initial={{ scale: 1.1 }}
+                    animate={{ scale: 1 }}
+                    transition={{ duration: 1.5, ease: [0.23, 1, 0.32, 1] }}
+                    style={{ 
+                      backgroundImage: `url(${transformationStages[currentIndex].image})`
+                    }}
+                  />
 
                   {/* Mobile Info Button */}
                   {windowWidth < 1024 && (
@@ -426,7 +426,7 @@ export function TransformationMessage() {
                       </svg>
                     </motion.button>
                   )}
-              </motion.div>
+                </motion.div>
 
                 {/* Mobile Navigation Indicators */}
                 {windowWidth < 1024 && (

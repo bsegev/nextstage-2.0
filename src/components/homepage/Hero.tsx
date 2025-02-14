@@ -4,8 +4,9 @@ import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import { useRef, useState, useEffect } from 'react';
 import { MenuButton } from './MenuButton';
 
-const words = ["Strategy", "Design", "Story", "Brand", "Impact", "Innovation", "Transformation"];
-const WORD_DURATION = 2.5; // seconds per word
+// Updated words to align with new positioning
+const words = ["Strategy", "Vision", "Impact", "Growth", "Future", "Success"];
+const WORD_DURATION = 2.5;
 
 const auroraAnimation = {
   animate: {
@@ -19,7 +20,7 @@ const auroraAnimation = {
   }
 };
 
-// Add new geometric shapes component
+// Moved BackgroundShapes directly into Hero.tsx
 const BackgroundShapes = () => {
   const floatingAnimation = {
     y: [0, -15, 0],
@@ -157,7 +158,9 @@ const BackgroundShapes = () => {
 export const Hero = () => {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [videoEnded, setVideoEnded] = useState(false);
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"]
@@ -166,17 +169,15 @@ export const Hero = () => {
   // Simplified scroll animations
   const backgroundScale = useTransform(scrollYProgress, 
     [0, 1], 
-    [1, 1.05]  // Even more subtle scale
+    [1, 1.05]
   );
   
   const fadeOut = useTransform(scrollYProgress,
-    [0, 0.25],  // Faster fade out
+    [0, 0.25],
     [1, 0]
   );
 
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  // Video timing calculation
+  // Word rotation effect
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentWordIndex((prev) => (prev + 1) % words.length);
@@ -185,22 +186,9 @@ export const Hero = () => {
     return () => clearInterval(timer);
   }, []);
 
-  useEffect(() => {
-    // Load fonts
-    const link = document.createElement('link');
-    link.href = 'https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&display=swap';
-    link.rel = 'stylesheet';
-    document.head.appendChild(link);
-  }, []);
-
+  // Video ended handler
   useEffect(() => {
     if (videoRef.current) {
-      videoRef.current.addEventListener('loadedmetadata', () => {
-        const videoDuration = videoRef.current?.duration || 0;
-        console.log('Video duration:', videoDuration);
-      });
-
-      // Add ended event listener to handle video end
       videoRef.current.addEventListener('ended', () => {
         setVideoEnded(true);
       });
@@ -216,7 +204,8 @@ export const Hero = () => {
       transition={{ duration: 0.8 }}
     >
       <MenuButton />
-      {/* Background Video Layer */}
+      
+      {/* Keep video background but update final frame */}
       <div className="absolute inset-0 select-none" style={{ zIndex: 0 }}>
         <motion.video
           ref={videoRef}
@@ -241,7 +230,7 @@ export const Hero = () => {
         />
       </div>
 
-      {/* Frosted Glass Overlay */}
+      {/* Keep existing overlays */}
       <motion.div 
         className="absolute inset-0 backdrop-blur-[1px]"
         initial={{ opacity: 0 }}
@@ -254,7 +243,6 @@ export const Hero = () => {
         }}
       />
 
-      {/* Aurora Accent - moved above content */}
       <motion.div 
         className="absolute top-0 left-0 w-full h-1 bg-aurora-vivid"
         style={{ zIndex: 2 }}
@@ -263,12 +251,12 @@ export const Hero = () => {
         transition={{ duration: 1.5, ease: "easeOut", delay: 0.5 }}
       />
 
-      {/* Add BackgroundShapes before the main content */}
       <BackgroundShapes />
 
-      {/* Main Content */}
+      {/* Updated content section */}
       <div className="relative z-10 container mx-auto px-4 pt-20 pb-32">
         <div className="max-w-4xl mx-auto text-center">
+          {/* Updated tagline */}
           <motion.div 
             className="overflow-hidden mb-2"
             initial={{ opacity: 0 }}
@@ -290,10 +278,11 @@ export const Hero = () => {
                 backgroundSize: "200% auto",
               }}
             >
-              Design System Architecture
+              Strategic Design & Innovation
             </motion.span>
           </motion.div>
 
+          {/* Updated main headline */}
           <h1 className="font-serif text-5xl md:text-7xl font-bold leading-tight">
             <div className="h-[1.2em] relative overflow-hidden">
               <AnimatePresence mode="wait">
@@ -360,23 +349,23 @@ export const Hero = () => {
                   backgroundSize: "200% auto",
                 }}
               >
-                Built From Within
+                Solving Today.<br />Building Tomorrow.
               </motion.span>
               <motion.span
                 className="absolute inset-0 aurora-text-gradient-light"
                 animate={auroraAnimation.animate}
                 transition={{
                   ...auroraAnimation.transition,
-                  delay: 0.5 // Offset for layered effect
+                  delay: 0.5
                 }}
                 style={{
                   backgroundSize: "200% auto",
                 }}
               >
-                Built From Within
+                Solving Today.<br />Building Tomorrow.
               </motion.span>
               <span className="relative aurora-text-gradient-light">
-                Built From Within
+                Solving Today.<br />Building Tomorrow.
               </span>
             </motion.span>
           </h1>
@@ -388,39 +377,72 @@ export const Hero = () => {
             transition={{ duration: 1, delay: 0.8 }}
           />
 
+          {/* Updated subtitle */}
           <motion.p 
-            className="mt-8 text-xl sm:text-2xl text-ethereal-dark/90 font-light leading-relaxed tracking-tight"
+            className="mt-8 text-xl sm:text-2xl text-ethereal-dark/90 font-sans font-light leading-relaxed tracking-tight"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
           >
-            I solve problems in real time—bridging strategy, design, and execution to build what’s next.
+            I solve problems in real time—bridging strategy, design, and execution to build what's next.
           </motion.p>
 
+          {/* Updated CTA */}
           <motion.div
-            className="mt-12"
+            className="mt-16 flex flex-col items-center gap-8"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.2 }}
           >
-            <button className="group relative px-6 py-3 bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 hover:border-white/30 transition-all duration-300 shadow-sm">
-              <span className="relative z-10 font-mono text-sm aurora-text-gradient-light"
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="group relative px-10 py-5 bg-[#1C1C1C] hover:bg-[#1C1C1C]/90 transition-all duration-300 rounded-xl overflow-hidden shadow-lg"
+            >
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-[#38BDF8] via-[#818CF8] to-[#34D399] opacity-10"
+                animate={{
+                  backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                }}
+                transition={{
+                  duration: 5,
+                  repeat: Infinity,
+                  ease: "linear",
+                }}
                 style={{
                   backgroundSize: "200% auto",
                 }}
-              >View My Process</span>
-              <motion.div 
-                className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-indigo-300/10 to-blue-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-[inherit]"
-                initial={false}
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.2 }}
               />
-            </button>
+              <span className="relative z-10 font-mono text-lg text-[#FFFFF0]">Let's Build Something Remarkable</span>
+            </motion.button>
+
+            <motion.div 
+              className="flex items-center gap-6"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.7 }}
+              transition={{ duration: 1, delay: 1.5 }}
+            >
+              <motion.a
+                href="#work"
+                whileHover={{ opacity: 1, y: -1 }}
+                className="font-mono text-sm text-[#1C1C1C] hover:aurora-text-gradient-light transition-all duration-300"
+              >
+                View My Work
+              </motion.a>
+              <div className="h-4 w-px bg-[#1C1C1C]/20" />
+              <motion.a
+                href="#contact"
+                whileHover={{ opacity: 1, y: -1 }}
+                className="font-mono text-sm text-[#1C1C1C] hover:aurora-text-gradient-light transition-all duration-300"
+              >
+                Get in Touch
+              </motion.a>
+            </motion.div>
           </motion.div>
         </div>
       </div>
 
-      {/* Floating Elements */}
+      {/* Keep floating elements */}
       <motion.div
         className="absolute top-1/4 right-[15%] w-24 h-24 border border-ethereal-dark/20 rounded-full"
         style={{

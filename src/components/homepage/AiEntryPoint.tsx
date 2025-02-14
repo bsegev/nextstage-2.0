@@ -3,7 +3,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { SparklesIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
-import { preloadImage, preloadVideo } from '../utils/preload';
+import { preloadImage, preloadVideo } from '../../utils/preload';
 
 const questions = [
   {

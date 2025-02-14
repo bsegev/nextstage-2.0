@@ -3,9 +3,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import lottie from 'lottie-web';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Modal, ModalBody, ModalContent, useModal } from './ui/animated-modal';
+import { Modal, ModalBody, ModalContent, useModal } from '@/components/ui/animated-modal';
 import Lottie from 'lottie-react';
-import loadingLine from '../../public/lotties/loading-line.json';
+import loadingLine from '/public/lotties/loading-line.json';
 import { HomeIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 
@@ -62,22 +62,23 @@ const NavItem = ({ href, children, icon: Icon }: { href: string; children: React
 const MenuContent = ({ triggerLottieRef, isScrolling }: { triggerLottieRef: React.RefObject<HTMLDivElement>, isScrolling: boolean }) => {
   const { open, setOpen } = useModal();
 
-  const toggleMenu = () => {
-    setOpen(!open);
-  };
+  // Single state transition based on scroll
+  useEffect(() => {
+    setOpen(!isScrolling);
+  }, [isScrolling, setOpen]);
 
   return (
     <>
-      <div onClick={toggleMenu} className="fixed bottom-8 right-8 z-[100] group">
+      <div className="fixed bottom-8 right-8 z-[100] group">
         <div className="relative">
           <AnimatePresence>
             {!isScrolling && (
               <motion.div 
                 className="absolute bottom-[30px] -right-0"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 10 }}
-                transition={{ duration: 0.2 }}
+                initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 5, scale: 0.98 }}
+                transition={{ type: "spring", stiffness: 500, damping: 30 }}
               >
                 <div className="w-[60px] h-24 bg-white rounded-lg shadow-lg flex flex-col items-center pt-2">
                   <span className="font-['Caveat'] text-base sm:text-lg text-secondary-600">menu</span>
@@ -85,7 +86,7 @@ const MenuContent = ({ triggerLottieRef, isScrolling }: { triggerLottieRef: Reac
               </motion.div>
             )}
           </AnimatePresence>
-          <div className="relative z-10 w-[60px] h-[60px] rounded-full bg-white shadow-lg flex items-center justify-center cursor-pointer">
+          <div className="relative z-10 w-[60px] h-[60px] rounded-full bg-white shadow-lg flex items-center justify-center">
             <div ref={triggerLottieRef} className="w-[25px] h-[25px] scale-[2]" />
           </div>
         </div>
@@ -93,15 +94,14 @@ const MenuContent = ({ triggerLottieRef, isScrolling }: { triggerLottieRef: Reac
       <ModalBody>
         <ModalContent className="pl-12 pr-[72px]">
           <motion.nav 
-            className="flex items-center gap-6 sm:gap-8 text-sm sm:text-base"
+            className="flex items-center gap-6 sm:gap-8 text-sm sm:text-base font-sans"
             initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
-            transition={{ duration: 0.2 }}
+            animate={{ opacity: open ? 1 : 0, x: open ? 0 : -20 }}
+            transition={{ type: "spring", stiffness: 500, damping: 30 }}
           >
             <NavItem href="/" icon={HomeIcon}>home</NavItem>
             <NavItem href="/about">about</NavItem>
-            <NavItem href="#work">work</NavItem>
+            <NavItem href="/work">work</NavItem>
             <NavItem href="#play">play</NavItem>
             <NavItem href="#library">library</NavItem>
             <NavItem href="#contact">let's talk</NavItem>
@@ -116,8 +116,11 @@ export const MenuButton = () => {
   const triggerLottieRef = useRef<HTMLDivElement>(null);
   const lottieInstanceRef = useRef<any>(null);
   const lastScrollYRef = useRef(0);
-  const scrollTimeoutRef = useRef<NodeJS.Timeout>();
   const [isScrolling, setIsScrolling] = useState(false);
+  const scrollEndTimeoutRef = useRef<NodeJS.Timeout>();
+  const rafIdRef = useRef<number>();
+  const velocityRef = useRef(0);
+  const lastTimeRef = useRef(Date.now());
 
   const initLottie = (container: HTMLDivElement) => {
     if (lottieInstanceRef.current) {
@@ -128,11 +131,10 @@ export const MenuButton = () => {
       container,
       renderer: 'svg',
       loop: true,
-      autoplay: false,  // Start paused
+      autoplay: false,
       path: '/lotties/meta-loading (1).json',
     });
 
-    // Start paused at first frame
     lottieInstanceRef.current.goToAndStop(0, true);
     return lottieInstanceRef.current;
   };
@@ -144,47 +146,59 @@ export const MenuButton = () => {
 
     return () => {
       lottieInstanceRef.current?.destroy();
+      if (rafIdRef.current) {
+        cancelAnimationFrame(rafIdRef.current);
+      }
     };
   }, []);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolling(true);
+    const checkScrollEnd = () => {
+      const currentVelocity = Math.abs(velocityRef.current);
       
-      if (lottieInstanceRef.current) {
-        // Clear any existing timeout
-        if (scrollTimeoutRef.current) {
-          clearTimeout(scrollTimeoutRef.current);
+      if (currentVelocity < 0.1) {
+        if (lottieInstanceRef.current) {
+          lottieInstanceRef.current.pause();
         }
+        setIsScrolling(false);
+        return;
+      }
+      
+      rafIdRef.current = requestAnimationFrame(checkScrollEnd);
+    };
 
-        // Make sure animation is playing
-        if (lottieInstanceRef.current.isPaused) {
+    const handleScroll = () => {
+      const now = Date.now();
+      const deltaTime = now - lastTimeRef.current;
+      const deltaY = window.scrollY - lastScrollYRef.current;
+      
+      velocityRef.current = Math.abs(deltaY) / deltaTime;
+      
+      if (!isScrolling) {
+        setIsScrolling(true);
+        if (lottieInstanceRef.current?.isPaused) {
           lottieInstanceRef.current.play();
         }
-
-        const scrollVelocity = Math.abs(window.scrollY - lastScrollYRef.current);
-        const speed = Math.min(3, Math.max(1, scrollVelocity / 30));
-        lottieInstanceRef.current.setSpeed(speed);
-
-        // Pause animation and show menu text after scrolling stops
-        scrollTimeoutRef.current = setTimeout(() => {
-          if (lottieInstanceRef.current) {
-            lottieInstanceRef.current.pause();
-            setIsScrolling(false);
-          }
-        }, 150);
       }
+
+      if (rafIdRef.current) {
+        cancelAnimationFrame(rafIdRef.current);
+      }
+      
+      rafIdRef.current = requestAnimationFrame(checkScrollEnd);
+
       lastScrollYRef.current = window.scrollY;
+      lastTimeRef.current = now;
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      if (scrollTimeoutRef.current) {
-        clearTimeout(scrollTimeoutRef.current);
+      if (rafIdRef.current) {
+        cancelAnimationFrame(rafIdRef.current);
       }
     };
-  }, []);
+  }, [isScrolling]);
 
   return (
     <Modal>

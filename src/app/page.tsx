@@ -5,17 +5,16 @@ import { motion, AnimatePresence } from 'framer-motion';
 import dynamic from 'next/dynamic';
 
 // Dynamic imports for components that use browser APIs
-const MenuButton = dynamic(() => import('@/components/MenuButton').then(mod => ({ default: mod.MenuButton })), { ssr: false });
-const Hero = dynamic(() => import('@/components/HeroNEW').then(mod => ({ default: mod.Hero })), { ssr: false });
-const AiEntryPoint = dynamic(() => import('@/components/AiEntryPoint').then(mod => ({ default: mod.AiEntryPoint })), { ssr: false });
-const ValueProp = dynamic(() => import('@/components/ValueProp').then(mod => ({ default: mod.ValueProp })), { ssr: false });
-const KeyMetrics = dynamic(() => import('@/components/KeyMetrics').then(mod => ({ default: mod.KeyMetrics })), { ssr: false });
-const ProcessFlow = dynamic(() => import('@/components/ProcessFlow').then(mod => ({ default: mod.ProcessFlow })), { ssr: false });
-const TransformationMessage = dynamic(() => import('@/components/TransformationMessage').then(mod => ({ default: mod.TransformationMessage })), { ssr: false });
-const CoreOffering = dynamic(() => import('@/components/CoreOffering').then(mod => ({ default: mod.CoreOffering })), { ssr: false });
-const FinalCTA = dynamic(() => import('@/components/FinalCTA').then(mod => ({ default: mod.FinalCTA })), { ssr: false });
-const Outro = dynamic(() => import('@/components/Outro').then(mod => ({ default: mod.Outro })), { ssr: false });
-const WorkTogether = dynamic(() => import('@/components/WorkTogether').then(mod => ({ default: mod.WorkTogether })), { ssr: false });
+const MenuButton = dynamic(() => import('@/components/homepage/MenuButton').then(mod => ({ default: mod.MenuButton })), { ssr: false });
+const Hero = dynamic(() => import('@/components/homepage/Hero').then(mod => ({ default: mod.Hero })), { ssr: false });
+const AiEntryPoint = dynamic(() => import('@/components/homepage/AiEntryPoint').then(mod => ({ default: mod.AiEntryPoint })), { ssr: false });
+const HomeCaseStudies = dynamic(() => import('@/components/homepage/HomeCaseStudies').then(mod => ({ default: mod.HomeCaseStudies })), { ssr: false });
+const FinalCTA = dynamic(() => import('@/components/homepage/FinalCTA').then(mod => ({ default: mod.FinalCTA })), { ssr: false });
+const Outro = dynamic(() => import('@/components/homepage/Outro').then(mod => ({ default: mod.Outro })), { ssr: false });
+const WhoIAm = dynamic(() => import('@/components/homepage/WhoIAm').then(mod => ({ default: mod.WhoIAm })), { ssr: false });
+const KeyMetrics = dynamic(() => import('@/components/homepage/KeyMetrics').then(mod => ({ default: mod.KeyMetrics })), { ssr: false });
+const WhoIWorkWith = dynamic(() => import('@/components/homepage/WhoIWorkWith').then(mod => ({ default: mod.WhoIWorkWith })), { ssr: false });
+const BrandAnatomy = dynamic(() => import('@/components/homepage/BrandAnatomy').then(mod => ({ default: mod.BrandAnatomy })), { ssr: false });
 
 const ScrollNudge = () => {
   const [show, setShow] = useState(false);
@@ -98,22 +97,21 @@ export default function Home() {
   if (isLoading) return null;
 
   return (
-    <main className="relative">
+    <main className="relative font-['DM_Sans']">
       {showAiEntry ? (
         <AiEntryPoint onComplete={handleEntryComplete} />
       ) : (
         <>
           <MenuButton />
           <Hero />
-          <ScrollNudge />
-          <ValueProp />
-          <TransformationMessage />
-          <CoreOffering />
+          <WhoIAm />
+          <WhoIWorkWith />
+          <HomeCaseStudies />
+          <BrandAnatomy />
           <KeyMetrics />
-          <ProcessFlow />
-          <WorkTogether />
-          <FinalCTA />
+          <ScrollNudge />
           <Outro />
+          <FinalCTA />
         </>
       )}
     </main>

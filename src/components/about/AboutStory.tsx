@@ -14,27 +14,27 @@ export function AboutStory() {
 
   const beliefs = [
     {
-      text: "Good design should solve problems, not just look pretty",
+      text: "Strategy without execution is just theory – I bridge both worlds",
       gradient: "from-blue-500 to-blue-600",
       delay: 0
     },
     {
-      text: "Strategy without implementation is just a nice dream",
+      text: "Real impact comes from understanding the entire system, not just parts",
       gradient: "from-purple-500 to-pink-500",
       delay: 0.1
     },
     {
-      text: "The best solutions come from understanding the whole system",
+      text: "The best solutions emerge when vision, design, engineering, and strategy come together",
       gradient: "from-emerald-400 to-emerald-500",
       delay: 0.2
     },
     {
-      text: "Building things right the first time saves headaches later",
+      text: "Move fast, but build things right –speed shouldn't compromise quality",
       gradient: "from-blue-500 to-purple-500",
       delay: 0.3
     },
     {
-      text: "Your brand system should work for you, not the other way around",
+      text: "Every solution should scale and adapt as your needs evolve",
       gradient: "from-purple-500 to-emerald-500",
       delay: 0.4
     }
@@ -53,21 +53,21 @@ export function AboutStory() {
 
       <div className="relative z-10 container mx-auto px-6 sm:px-8 lg:px-12 py-32 sm:py-40">
         <div className="max-w-4xl mx-auto">
-          {/* Section Header */}
+          {/* Updated Section Header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="text-center mb-24"
           >
-            <h2 className="font-serif text-4xl lg:text-5xl text-ethereal-dark mb-6">My Story</h2>
+            <h2 className="font-serif text-4xl lg:text-5xl text-ethereal-dark mb-6">The Journey</h2>
             <motion.p 
               className="text-xl text-ethereal-dark/70 max-w-3xl mx-auto"
               style={{ y }}
             >
-              I've always been fascinated by how things connect. Whether it's design and technology, 
-              strategy and storytelling, or brands and their audiences – I believe the magic happens 
-              in these intersections.
+              From engineering to entrepreneurship, from leading teams to building products—each role has shaped 
+              my unique approach to solving complex challenges. I've learned that the most impactful solutions 
+              emerge when we bridge disciplines that others keep separate.
             </motion.p>
           </motion.div>
 
@@ -78,7 +78,9 @@ export function AboutStory() {
             viewport={{ once: true }}
             className="space-y-16"
           >
-            <h3 className="font-serif text-3xl text-ethereal-dark text-center mb-12">A Few Things I Believe In</h3>
+            <h3 className="font-serif text-3xl text-ethereal-dark text-center mb-12">
+              <span className="aurora-text-gradient-light">Principles</span> That Drive Me
+            </h3>
             
             <div className="space-y-8">
               {beliefs.map((belief, i) => (
@@ -121,6 +123,22 @@ export function AboutStory() {
                 </motion.div>
               ))}
             </div>
+
+            {/* Added Closing Statement */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.5 }}
+              className="text-center pt-16"
+            >
+              <p className="text-xl text-ethereal-dark/70">
+                I'm not just here to contribute – I'm here to ensure everything{' '}
+                <span className="aurora-text-gradient-light">holds together</span>, works at its{' '}
+                <span className="aurora-text-gradient-light">best</span>, and helps move you{' '}
+                <span className="aurora-text-gradient-light">forward</span>.
+              </p>
+            </motion.div>
           </motion.div>
         </div>
       </div>

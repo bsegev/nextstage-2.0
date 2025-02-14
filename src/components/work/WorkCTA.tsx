@@ -5,18 +5,18 @@ import { useRef } from 'react';
 import Image from 'next/image';
 
 const drawings = {
-  lightbulb: {
-    path: "M50,70 L50,80 M42,80 L58,80 M45,85 L55,85 M50,20 C35,20 25,30 25,45 C25,55 35,60 40,65 C45,70 45,70 45,75 L55,75 C55,70 55,70 60,65 C65,60 75,55 75,45 C75,30 65,20 50,20",
+  spiral: {
+    path: "M50,50 m0,-30 a30,30 0 1,1 0,60 a30,30 0 1,1 0,-60",
     viewBox: "0 0 100 100"
   },
-  blocks: {
-    path: "M20,80 L40,80 L40,60 L20,60 L20,80 M45,80 L65,80 L65,60 L45,60 L45,80 M32,55 L52,55 L52,35 L32,35 L32,55 M57,55 L77,55 L77,35 L57,35 L57,55 M45,30 L65,30 L65,10 L45,10 L45,30",
+  arrow: {
+    path: "M30,50 L70,50 M60,40 L70,50 L60,60",
     viewBox: "0 0 100 100"
   }
 };
 
-export function AboutCTA() {
-  const containerRef = useRef<HTMLDivElement>(null);
+export function WorkCTA() {
+  const containerRef = useRef(null);
   const isInView = useInView(containerRef, { 
     once: true,
     amount: 0.6,
@@ -70,7 +70,7 @@ export function AboutCTA() {
             </filter>
             <mask id="frost-mask">
               <rect width="100%" height="100%" fill="white" filter="url(#noise)" />
-              {/* Lightbulb - Left */}
+              {/* Spiral - Left */}
               <motion.g 
                 initial={{ opacity: 0 }}
                 animate={isInView ? { opacity: 1 } : {}}
@@ -78,9 +78,9 @@ export function AboutCTA() {
                 className="hidden md:block"
                 style={{ transform: 'translate(10vw, 15vh)' }}
               >
-                <svg width="400" height="400" viewBox={drawings.lightbulb.viewBox}>
+                <svg width="400" height="400" viewBox={drawings.spiral.viewBox}>
                   <motion.path
-                    d={drawings.lightbulb.path}
+                    d={drawings.spiral.path}
                     fill="none"
                     stroke="black"
                     strokeWidth={2}
@@ -92,7 +92,7 @@ export function AboutCTA() {
                   />
                 </svg>
               </motion.g>
-              {/* Blocks - Right */}
+              {/* Arrow - Right */}
               <motion.g 
                 initial={{ opacity: 0 }}
                 animate={isInView ? { opacity: 1 } : {}}
@@ -100,9 +100,9 @@ export function AboutCTA() {
                 className="hidden md:block"
                 style={{ transform: 'translate(calc(90vw - 400px), 15vh)' }}
               >
-                <svg width="400" height="400" viewBox={drawings.blocks.viewBox}>
+                <svg width="400" height="400" viewBox={drawings.arrow.viewBox}>
                   <motion.path
-                    d={drawings.blocks.path}
+                    d={drawings.arrow.path}
                     fill="none"
                     stroke="black"
                     strokeWidth={2}
@@ -151,50 +151,58 @@ export function AboutCTA() {
                 backgroundSize: "200% auto",
               }}
             >
-              LET'S CONNECT
+              START YOUR PROJECT
             </motion.span>
             <div className="h-px w-8 bg-gradient-to-r from-[#FFFFF0]/0 via-[#FFFFF0]/20 to-[#FFFFF0]/0" />
           </div>
 
           <h2 className="font-serif text-4xl lg:text-6xl mb-8">
-            Have an Idea Worth <span className="aurora-text-gradient-light">Building</span>?
+            Ready to Create Something <span className="aurora-text-gradient-light">Exceptional</span>?
           </h2>
           
           <p className="text-xl text-[#1C1C1C]/70 mb-12 max-w-3xl mx-auto">
-            Let's explore how we can turn your vision into a <span className="aurora-text-gradient-light">lasting brand</span> that grows with your business and resonates with your audience.
+            Let's discuss your project and explore how we can transform your vision into reality with strategic design and technical excellence.
           </p>
 
           <div className="space-y-8">
             <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="group relative px-8 py-4 bg-[#FFFFF0]/80 backdrop-blur-sm border border-[#1C1C1C]/10 hover:bg-[#FFFFF0] hover:border-[#1C1C1C]/20 transition-all duration-300 rounded-lg overflow-hidden"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="group relative px-10 py-5 bg-[#1C1C1C] hover:bg-[#1C1C1C]/90 transition-all duration-300 rounded-xl overflow-hidden shadow-lg"
             >
               <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-[#38BDF8]/10 via-[#818CF8]/10 to-[#34D399]/10"
+                className="absolute inset-0 bg-gradient-to-r from-[#38BDF8] via-[#818CF8] to-[#34D399] opacity-10"
                 animate={{
-                  opacity: [0.5, 1, 0.5],
-                  scale: [1, 1.2, 1],
+                  backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
                 }}
                 transition={{
-                  duration: 2,
+                  duration: 5,
                   repeat: Infinity,
-                  ease: "easeInOut",
+                  ease: "linear",
+                }}
+                style={{
+                  backgroundSize: "200% auto",
                 }}
               />
-              <span className="relative z-10 font-mono text-lg aurora-text-gradient-light">Schedule a Discovery Call</span>
+              <span className="relative z-10 font-mono text-lg text-[#FFFFF0]">Schedule a Discovery Call</span>
             </motion.button>
 
-            <div className="text-[#1C1C1C]/70">
-              Or send me a note at{' '}
+            <motion.div 
+              className="flex items-center justify-center gap-6"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.7 }}
+              transition={{ duration: 1, delay: 1.5 }}
+            >
               <motion.a
-                whileHover={{ scale: 1.05 }}
-                href="mailto:hello@yourdomain.co"
-                className="font-medium group-hover:aurora-text-gradient-light"
+                href="https://linkedin.com/in/bensegev"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ opacity: 1, y: -1 }}
+                className="font-mono text-sm text-[#1C1C1C] hover:aurora-text-gradient-light transition-all duration-300"
               >
-                hello@yourdomain.co
+                Connect on LinkedIn
               </motion.a>
-            </div>
+            </motion.div>
           </div>
         </motion.div>
       </div>

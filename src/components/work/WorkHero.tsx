@@ -3,90 +3,13 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 
-// Geometric shapes component for visual sophistication
-const BackgroundShapes = () => {
-  const floatingAnimation = {
-    y: [0, -15, 0],
-    x: [0, 10, 0],
-    rotate: [0, 5, 0],
-    transition: {
-      duration: 6,
-      repeat: Infinity,
-      ease: "easeInOut"
-    }
-  };
-
-  return (
-    <motion.div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ zIndex: 1 }}>
-      {/* Square */}
-      <motion.div
-        className="absolute w-32 h-32 border border-ethereal-dark/10"
-        style={{ top: '15%', right: '10%' }}
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ 
-          opacity: 1, 
-          scale: 1,
-          ...floatingAnimation,
-          transition: { ...floatingAnimation.transition, delay: 1 }
-        }}
-      />
-      
-      {/* Triangle */}
-      <motion.div
-        className="absolute w-32 h-32 border border-ethereal-dark/10"
-        style={{
-          top: '35%',
-          left: '15%',
-          clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)',
-        }}
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ 
-          opacity: 1, 
-          scale: 1,
-          ...floatingAnimation,
-          transition: { ...floatingAnimation.transition, delay: 1.2, duration: 7 }
-        }}
-      />
-      
-      {/* Circle */}
-      <motion.div
-        className="absolute w-36 h-36 border border-ethereal-dark/10 rounded-full"
-        style={{ top: '25%', right: '30%' }}
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ 
-          opacity: 1, 
-          scale: 1,
-          ...floatingAnimation,
-          transition: { ...floatingAnimation.transition, delay: 1.8, duration: 7.5 }
-        }}
-      />
-
-      {/* Grid */}
-      <motion.div
-        className="absolute inset-0"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.05 }}
-        transition={{ duration: 1, delay: 2 }}
-        style={{
-          backgroundImage: `
-            linear-gradient(to right, rgba(var(--primary-rgb), 0.1) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(var(--primary-rgb), 0.1) 1px, transparent 1px)
-          `,
-          backgroundSize: '40px 40px',
-        }}
-      />
-    </motion.div>
-  );
-};
-
-export function AboutHero() {
+export function WorkHero() {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"]
   });
 
-  // Scroll-based animations only for content fade
   const fadeOut = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
 
   return (
@@ -109,7 +32,7 @@ export function AboutHero() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
         >
-          <source src="/videos/about-hero-bg.mp4" type="video/mp4" />
+          <source src="/videos/work-hero-bg.mp4" type="video/mp4" />
         </motion.video>
       </div>
 
@@ -121,16 +44,14 @@ export function AboutHero() {
         transition={{ duration: 2, ease: "easeOut", delay: 0.5 }}
         style={{ opacity: fadeOut }}
       />
-
-      <BackgroundShapes />
       
-      {/* Content Container with enhanced visual hierarchy */}
+      {/* Content Container */}
       <motion.div 
         className="container mx-auto px-4 py-24 relative z-10"
         style={{ opacity: fadeOut }}
       >
         <div className="max-w-4xl mx-auto">
-          {/* Refined label animation */}
+          {/* Label */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -145,7 +66,7 @@ export function AboutHero() {
                 className="h-px bg-ethereal-dark/20" 
               />
               <span className="font-mono text-sm text-ethereal-dark/60 tracking-wider uppercase">
-                About
+                Selected Work
               </span>
               <motion.div 
                 initial={{ width: 0 }}
@@ -156,7 +77,7 @@ export function AboutHero() {
             </div>
           </motion.div>
 
-          {/* Enhanced title hierarchy */}
+          {/* Title */}
           <motion.h1
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -169,7 +90,7 @@ export function AboutHero() {
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 1, delay: 0.4, ease: [0.23, 1, 0.32, 1] }}
             >
-              Building Brands
+              Transforming ideas into
             </motion.span>
             <motion.span
               className="block relative"
@@ -191,7 +112,7 @@ export function AboutHero() {
                   backgroundSize: "200% auto",
                 }}
               >
-                With Purpose
+                impactful solutions
               </motion.span>
               <motion.span
                 className="absolute inset-0 aurora-text-gradient-light"
@@ -208,15 +129,15 @@ export function AboutHero() {
                   backgroundSize: "200% auto",
                 }}
               >
-                With Purpose
+                impactful solutions
               </motion.span>
               <span className="relative aurora-text-gradient-light">
-                With Purpose
+                impactful solutions
               </span>
             </motion.span>
           </motion.h1>
 
-          {/* Refined description animations */}
+          {/* Description */}
           <div className="space-y-6">
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -224,27 +145,9 @@ export function AboutHero() {
               transition={{ duration: 0.8, delay: 0.8, ease: [0.23, 1, 0.32, 1] }}
               className="mt-8 text-xl sm:text-2xl text-ethereal-dark/90 font-light leading-relaxed tracking-tight"
             >
-              I help founders build brands that resonate and grow. After crafting 50+ brand systems and studying what works, I've found success comes from aligning founder vision with market opportunity—wrapped in strategic design that connects.
+              A curated collection of projects that showcase how strategic design and technical expertise come together to create meaningful impact. Each case study reveals the journey from challenge to solution.
             </motion.p>
           </div>
-
-          {/* Enhanced decorative elements */}
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 0.08, scale: 1 }}
-            transition={{ duration: 2, delay: 0.5, ease: [0.23, 1, 0.32, 1] }}
-            className="absolute top-1/2 right-0 transform translate-x-1/2 -translate-y-1/2"
-          >
-            <div className="w-[600px] h-[600px] rounded-full bg-gradient-to-br from-primary-200 via-secondary-200 to-primary-100 blur-[100px]" />
-          </motion.div>
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 0.08, scale: 1 }}
-            transition={{ duration: 2, delay: 0.7, ease: [0.23, 1, 0.32, 1] }}
-            className="absolute bottom-0 left-0 transform -translate-x-1/2 translate-y-1/2"
-          >
-            <div className="w-[400px] h-[400px] rounded-full bg-gradient-to-tr from-secondary-200 via-primary-200 to-secondary-100 blur-[100px]" />
-          </motion.div>
         </div>
       </motion.div>
     </motion.section>
