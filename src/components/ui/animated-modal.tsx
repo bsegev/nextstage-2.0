@@ -69,7 +69,7 @@ export const ModalBody = ({
         <motion.div
           ref={menuRef}
           className={cn(
-            "fixed bottom-8 right-8 z-[200] h-[60px] bg-white dark:bg-neutral-950 rounded-[30px] shadow-lg border border-neutral-200 dark:border-neutral-800 flex items-center overflow-hidden",
+            "fixed top-4 right-4 md:top-auto md:bottom-8 md:right-8 z-[200] h-[60px] bg-white dark:bg-neutral-950 rounded-[30px] shadow-lg border border-neutral-200 dark:border-neutral-800 flex items-center overflow-hidden",
             className
           )}
           initial={{ width: "60px" }}

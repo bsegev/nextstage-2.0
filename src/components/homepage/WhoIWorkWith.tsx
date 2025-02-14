@@ -42,12 +42,12 @@ const collaborators = [
       </svg>
     ),
     detailedSteps: [
-      { text: "Startup Founders needing to scale quickly and efficiently" },
-      { text: "CEOs & Executives facing digital transformation challenges" },
-      { text: "Product Leaders building the next generation of tools" },
-      { text: "Innovation Teams driving organizational change" },
-      { text: "Board Members seeking strategic digital direction" },
-      { text: "Outcome: Accelerated market success through expert strategy and hands-on execution that turns vision into reality." }
+      { text: "Startup Founders" },
+      { text: "CEOs & CTOs" },
+      { text: "Product Directors" },
+      { text: "Innovation Leaders" },
+      { text: "Board Members" },
+      { text: "Outcome: Expert strategy and hands-on execution that turns vision into reality." }
     ]
   },
   {
@@ -521,7 +521,7 @@ export function WhoIWorkWith() {
           </motion.div>
 
           {/* Cards */}
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-1.5 md:gap-8">
             {collaborators.map((item, i) => (
               <motion.div
                 key={item.title}
@@ -532,9 +532,9 @@ export function WhoIWorkWith() {
                 transition={{ duration: 0.5, delay: i * 0.1 }}
               >
                 <motion.div 
-                  className={`relative aspect-square p-8 rounded-lg border border-transparent 
+                  className={`relative p-4 md:p-8 rounded-lg border border-transparent 
                     hover:border-${item.accent}-200/20 transition-all duration-500 
-                    flex flex-col items-center justify-center text-center cursor-pointer
+                    flex flex-col items-center justify-center text-center cursor-pointer aspect-[3/2] md:aspect-square
                     ${activeCard === i ? `border-${item.accent}-200/40 bg-${item.accent}-50/5` : ''}`}
                   onClick={() => handleCardClick(i)}
                   whileHover={{ scale: 1.02 }}
