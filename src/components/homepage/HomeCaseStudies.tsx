@@ -120,11 +120,11 @@ export function HomeCaseStudies() {
           </motion.div>
 
           {/* Cards Grid */}
-          <div className="grid md:grid-cols-3 gap-3 md:gap-6">
+          <div className="grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-3 md:gap-6">
             {caseStudies.map((study, index) => (
-              <div key={study.category} className="h-[42rem] w-full flex items-center justify-center">
+              <div key={study.category} className="w-full flex items-center justify-center">
                 <CardContainer className="inter-var w-full">
-                  <CardBody className="relative h-auto w-[450px] bg-gray-50 dark:bg-black border border-black/[0.1] dark:border-white/[0.1] rounded-xl p-8 flex flex-col bg-dot-black/[0.2] dark:bg-dot-white/[0.2] hover:border-black/20 dark:hover:border-white/20 transition-colors group/card hover:shadow-2xl hover:shadow-emerald-500/[0.1] dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1]">
+                  <CardBody className="relative h-auto w-full bg-gray-50 dark:bg-black border border-black/[0.1] dark:border-white/[0.1] rounded-xl p-4 sm:p-6 md:p-8 flex flex-col bg-dot-black/[0.2] dark:bg-dot-white/[0.2] hover:border-black/20 dark:hover:border-white/20 transition-colors group/card md:hover:shadow-2xl md:hover:shadow-emerald-500/[0.1] dark:md:hover:shadow-2xl dark:md:hover:shadow-emerald-500/[0.1]">
                     {/* Radial gradient for the container to give a faded look */}
                     <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)] rounded-xl" />
                     
@@ -151,27 +151,28 @@ export function HomeCaseStudies() {
                       translateZ="120" 
                       className="w-full mt-4"
                     >
-                      <Image
-                        src={study.image}
-                        height="1000"
-                        width="2000"
-                        className="h-[200px] w-full object-cover rounded-xl group-hover/card:shadow-xl"
-                        alt={study.title}
-                      />
+                      <div className="aspect-[16/9] w-full relative">
+                        <Image
+                          src={study.image}
+                          fill
+                          className="object-cover rounded-xl md:group-hover/card:shadow-xl"
+                          alt={study.title}
+                        />
+                      </div>
                     </CardItem>
-                    <div className="flex justify-between items-center mt-10">
+                    <div className="flex justify-between items-center mt-6 sm:mt-8 md:mt-10">
                       <CardItem
                         translateZ={20}
                         as={Link}
                         href="#"
-                        className="px-4 py-2 rounded-xl text-xs font-normal dark:text-white"
+                        className="px-3 sm:px-4 py-2 rounded-xl text-xs font-normal dark:text-white"
                       >
                         View Case Study →
                       </CardItem>
                       <CardItem
                         translateZ={20}
                         as="button"
-                        className="px-4 py-2 rounded-xl bg-black dark:bg-white dark:text-black text-white text-xs font-bold"
+                        className="px-3 sm:px-4 py-2 rounded-xl bg-black dark:bg-white dark:text-black text-white text-xs font-bold"
                       >
                         Watch Video
                       </CardItem>
