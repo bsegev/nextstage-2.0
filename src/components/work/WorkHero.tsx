@@ -1,16 +1,32 @@
 'use client';
 
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
 export function WorkHero() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768); // md breakpoint
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"]
   });
 
-  const fadeOut = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
+  const fadeOut = useTransform(
+    scrollYProgress,
+    [0, isMobile ? 0.5 : 0.25],  // Adjust fade points based on device
+    [1, 0]
+  );
 
   return (
     <motion.section 

@@ -8,7 +8,6 @@ const WorkHero = dynamic(() => import('@/components/work/WorkHero').then(mod => 
 const TransformationMessage = dynamic(() => import('@/components/homepage/TransformationMessage').then(mod => ({ default: mod.TransformationMessage })), { ssr: false });
 const WorkProcess = dynamic(() => import('@/components/work/WorkProcess').then(mod => ({ default: mod.WorkProcess })), { ssr: false });
 const WorkCTA = dynamic(() => import('@/components/work/WorkCTA').then(mod => ({ default: mod.WorkCTA })), { ssr: false });
-const FinalCTA = dynamic(() => import('@/components/homepage/FinalCTA').then(mod => ({ default: mod.FinalCTA })), { ssr: false });
 
 export default function WorkPage() {
   return (
@@ -18,7 +17,6 @@ export default function WorkPage() {
       <WorkProcess />
       <TransformationMessage />
       <WorkCTA />
-      <FinalCTA />
     </main>
   );
 } 

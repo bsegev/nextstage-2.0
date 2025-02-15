@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
 // Geometric shapes component for visual sophistication
 const BackgroundShapes = () => {
@@ -81,13 +81,29 @@ const BackgroundShapes = () => {
 
 export function AboutHero() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768); // md breakpoint
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"]
   });
 
-  // Scroll-based animations only for content fade
-  const fadeOut = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
+  // Scroll-based animations with mobile optimization
+  const fadeOut = useTransform(
+    scrollYProgress,
+    [0, isMobile ? 0.5 : 0.25],  // Adjust fade points based on device
+    [1, 0]
+  );
 
   return (
     <motion.section 
@@ -232,7 +248,7 @@ export function AboutHero() {
               transition={{ duration: 0.8, delay: 0.8, ease: [0.23, 1, 0.32, 1] }}
               className="mt-8 text-xl sm:text-2xl text-ethereal-dark/90 font-light leading-relaxed tracking-tight"
             >
-              Every great idea needs vision and structure. I help shape your idea, refine it into something tangible, and guide it through execution. Whether you're starting fresh, refining what’s already in motion, or facing a challenge that needs solving, I bring clarity, momentum, and a steady hand to make it work.
+              Every great idea needs vision and structure. I help shape your idea, refine it into something tangible, and guide it through execution. Whether you're starting fresh, refining what's already in motion, or facing a challenge that needs solving, I bring clarity, momentum, and a steady hand to make it work.
             </motion.p>
           </div>
 
