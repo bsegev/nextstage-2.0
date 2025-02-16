@@ -146,7 +146,7 @@ export function AboutHero() {
         style={{ opacity: fadeOut }}
       >
         <div className="max-w-4xl mx-auto">
-          {/* Refined label animation */}
+          {/* Label */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -172,20 +172,15 @@ export function AboutHero() {
             </div>
           </motion.div>
 
-          {/* Enhanced title hierarchy */}
-          <motion.h1
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="font-serif text-4xl sm:text-5xl lg:text-6xl text-center sm:text-left mb-6 relative space-y-2"
-          >
+          {/* Title */}
+          <h1 className="font-serif text-5xl md:text-7xl font-bold leading-tight">
             <motion.span
               className="block text-ethereal-dark"
               initial={{ y: 40, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 1, delay: 0.4, ease: [0.23, 1, 0.32, 1] }}
             >
-              Creative by nature, strategic by experience—
+              Bridging the Gap
             </motion.span>
             <motion.span
               className="block relative"
@@ -207,7 +202,7 @@ export function AboutHero() {
                   backgroundSize: "200% auto",
                 }}
               >
-                I help bring structure to ideas
+                Between Vision & Impact
               </motion.span>
               <motion.span
                 className="absolute inset-0 aurora-text-gradient-light"
@@ -224,23 +219,15 @@ export function AboutHero() {
                   backgroundSize: "200% auto",
                 }}
               >
-                I help bring structure to ideas
+                Between Vision & Impact
               </motion.span>
               <span className="relative aurora-text-gradient-light">
-                I help bring structure to ideas
+                Between Vision & Impact
               </span>
             </motion.span>
-            <motion.span
-              className="block text-ethereal-dark"
-              initial={{ y: 40, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 1, delay: 0.7, ease: [0.23, 1, 0.32, 1] }}
-            >
-              and ideas to life.
-            </motion.span>
-          </motion.h1>
+          </h1>
 
-          {/* Refined description animations */}
+          {/* Description */}
           <div className="space-y-6">
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -248,8 +235,70 @@ export function AboutHero() {
               transition={{ duration: 0.8, delay: 0.8, ease: [0.23, 1, 0.32, 1] }}
               className="mt-8 text-xl sm:text-2xl text-ethereal-dark/90 font-light leading-relaxed tracking-tight"
             >
-              Every great idea needs vision and structure. I help shape your idea, refine it into something tangible, and guide it through execution. Whether you're starting fresh, refining what's already in motion, or facing a challenge that needs solving, I bring clarity, momentum, and a steady hand to make it work.
+              I combine strategic thinking with hands-on execution to help ambitious founders and teams build what's next. Let's turn your vision into reality.
             </motion.p>
+
+            {/* CTA Section */}
+            <motion.div 
+              className="mt-12 flex flex-col items-center sm:items-start gap-8"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1 }}
+            >
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="group relative px-8 py-4 bg-[#1C1C1C] hover:bg-[#1C1C1C]/90 transition-all duration-300 rounded-xl overflow-hidden shadow-lg"
+              >
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-[#38BDF8] via-[#818CF8] to-[#34D399] opacity-10"
+                  animate={{
+                    backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                  }}
+                  transition={{
+                    duration: 5,
+                    repeat: Infinity,
+                    ease: "linear",
+                  }}
+                  style={{
+                    backgroundSize: "200% auto",
+                  }}
+                />
+                <span className="relative z-10 font-mono text-lg text-[#FFFFF0] flex items-center gap-3">
+                  <span>Let's Build Together</span>
+                  <motion.span 
+                    className="inline-block"
+                    animate={{ x: [0, 4, 0] }}
+                    transition={{
+                      duration: 1.5,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  >→</motion.span>
+                </span>
+              </motion.button>
+
+              <motion.div 
+                className="flex items-center gap-6"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 0.7 }}
+                transition={{ duration: 1, delay: 1.5 }}
+              >
+                <motion.button
+                  whileHover={{ opacity: 1, y: -1 }}
+                  className="font-mono text-sm text-[#1C1C1C] hover:aurora-text-gradient-light transition-all duration-300"
+                >
+                  My Approach
+                </motion.button>
+                <div className="h-4 w-px bg-[#1C1C1C]/20" />
+                <motion.button
+                  whileHover={{ opacity: 1, y: -1 }}
+                  className="font-mono text-sm text-[#1C1C1C] hover:aurora-text-gradient-light transition-all duration-300"
+                >
+                  My Story
+                </motion.button>
+              </motion.div>
+            </motion.div>
           </div>
 
           {/* Enhanced decorative elements */}

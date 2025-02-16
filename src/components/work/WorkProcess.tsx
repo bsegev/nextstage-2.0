@@ -17,19 +17,19 @@ const examples = [
     number: "01"
   },
   {
-    scenario: "Or maybe you're focused on strategy",
-    blend: "While we map out your direction, I'll help refine your brand identity to match your ambitions",
-    audience: "Ideal for growing businesses",
-    insight: "Every piece we create is designed to scale with you",
+    scenario: "Or you're starting out solo",
+    blend: "I'll stand by you as we validate your ideas, shape your vision, and build strong foundations for growth",
+    audience: "Perfect for early-stage founders",
+    insight: "Get the confidence and clarity to move forward with purpose",
     gradient: "from-[#818CF8] via-[#C084FC] to-[#F472B6]",
     colors: ["#818CF8", "#C084FC", "#F472B6"],
     number: "02"
   },
   {
-    scenario: "Perhaps you need a strategic eye",
-    blend: "As we explore your next moves, I'll ensure your vision stays strong through execution",
-    audience: "Great for creative & technical leaders",
-    insight: "Nothing gets lost in translation between vision and reality",
+    scenario: "Maybe you've got momentum but need guidance",
+    blend: "I'll help your team navigate complexity, align efforts, and stay focused on what matters most",
+    audience: "Great for growing teams & leaders",
+    insight: "Turn overwhelming possibilities into clear, confident decisions",
     gradient: "from-[#34D399] via-[#38BDF8] to-[#818CF8]",
     colors: ["#34D399", "#38BDF8", "#818CF8"],
     number: "03"

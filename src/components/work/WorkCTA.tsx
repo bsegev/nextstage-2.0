@@ -5,12 +5,12 @@ import { useRef } from 'react';
 import Image from 'next/image';
 
 const drawings = {
-  spiral: {
-    path: "M50,50 m0,-30 a30,30 0 1,1 0,60 a30,30 0 1,1 0,-60",
+  compass: {
+    path: "M50,20 L50,30 M50,70 L50,80 M20,50 L30,50 M70,50 L80,50 M50,50 m0,-30 a30,30 0 1,1 0,60 a30,30 0 1,1 0,-60 M50,35 L50,50 L65,50",  // Compass with needle
     viewBox: "0 0 100 100"
   },
-  arrow: {
-    path: "M30,50 L70,50 M60,40 L70,50 L60,60",
+  spark: {
+    path: "M50,20 L55,35 L70,40 L55,45 L50,60 L45,45 L30,40 L45,35 Z M60,30 L65,25 M40,30 L35,25 M60,50 L65,55 M40,50 L35,55",  // Starburst/spark with small radiating lines
     viewBox: "0 0 100 100"
   }
 };
@@ -70,7 +70,7 @@ export function WorkCTA() {
             </filter>
             <mask id="frost-mask">
               <rect width="100%" height="100%" fill="white" filter="url(#noise)" />
-              {/* Spiral - Left */}
+              {/* Compass - Left */}
               <motion.g 
                 initial={{ opacity: 0 }}
                 animate={isInView ? { opacity: 1 } : {}}
@@ -78,9 +78,9 @@ export function WorkCTA() {
                 className="hidden md:block"
                 style={{ transform: 'translate(10vw, 15vh)' }}
               >
-                <svg width="400" height="400" viewBox={drawings.spiral.viewBox}>
+                <svg width="400" height="400" viewBox={drawings.compass.viewBox}>
                   <motion.path
-                    d={drawings.spiral.path}
+                    d={drawings.compass.path}
                     fill="none"
                     stroke="black"
                     strokeWidth={2}
@@ -92,7 +92,7 @@ export function WorkCTA() {
                   />
                 </svg>
               </motion.g>
-              {/* Arrow - Right */}
+              {/* Spark - Right */}
               <motion.g 
                 initial={{ opacity: 0 }}
                 animate={isInView ? { opacity: 1 } : {}}
@@ -100,9 +100,9 @@ export function WorkCTA() {
                 className="hidden md:block"
                 style={{ transform: 'translate(calc(90vw - 400px), 15vh)' }}
               >
-                <svg width="400" height="400" viewBox={drawings.arrow.viewBox}>
+                <svg width="400" height="400" viewBox={drawings.spark.viewBox}>
                   <motion.path
-                    d={drawings.arrow.path}
+                    d={drawings.spark.path}
                     fill="none"
                     stroke="black"
                     strokeWidth={2}

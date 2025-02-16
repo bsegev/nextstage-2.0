@@ -93,20 +93,15 @@ export function WorkHero() {
             </div>
           </motion.div>
 
-          {/* Title */}
-          <motion.h1
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="font-serif text-4xl sm:text-5xl lg:text-6xl text-center sm:text-left mb-6 relative space-y-2"
-          >
+          {/* Updated main headline */}
+          <h1 className="font-serif text-5xl md:text-7xl font-bold leading-tight">
             <motion.span
               className="block text-ethereal-dark"
               initial={{ y: 40, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 1, delay: 0.4, ease: [0.23, 1, 0.32, 1] }}
             >
-              Transforming ideas into
+              From Concept to
             </motion.span>
             <motion.span
               className="block relative"
@@ -128,7 +123,7 @@ export function WorkHero() {
                   backgroundSize: "200% auto",
                 }}
               >
-                impactful solutions
+                Reality & Beyond
               </motion.span>
               <motion.span
                 className="absolute inset-0 aurora-text-gradient-light"
@@ -145,13 +140,13 @@ export function WorkHero() {
                   backgroundSize: "200% auto",
                 }}
               >
-                impactful solutions
+                Reality & Beyond
               </motion.span>
               <span className="relative aurora-text-gradient-light">
-                impactful solutions
+                Reality & Beyond
               </span>
             </motion.span>
-          </motion.h1>
+          </h1>
 
           {/* Description */}
           <div className="space-y-6">
@@ -161,8 +156,70 @@ export function WorkHero() {
               transition={{ duration: 0.8, delay: 0.8, ease: [0.23, 1, 0.32, 1] }}
               className="mt-8 text-xl sm:text-2xl text-ethereal-dark/90 font-light leading-relaxed tracking-tight"
             >
-              A curated collection of projects that showcase how strategic design and technical expertise come together to create meaningful impact. Each case study reveals the journey from challenge to solution.
+              This isn't just about building things—it's about crafting journeys that transform businesses. Let's explore how your vision can become something extraordinary.
             </motion.p>
+
+            {/* CTA Section */}
+            <motion.div 
+              className="mt-12 flex flex-col items-center sm:items-start gap-8"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1 }}
+            >
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="group relative px-8 py-4 bg-[#1C1C1C] hover:bg-[#1C1C1C]/90 transition-all duration-300 rounded-xl overflow-hidden shadow-lg"
+              >
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-[#38BDF8] via-[#818CF8] to-[#34D399] opacity-10"
+                  animate={{
+                    backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                  }}
+                  transition={{
+                    duration: 5,
+                    repeat: Infinity,
+                    ease: "linear",
+                  }}
+                  style={{
+                    backgroundSize: "200% auto",
+                  }}
+                />
+                <span className="relative z-10 font-mono text-lg text-[#FFFFF0] flex items-center gap-3">
+                  <span>Start Your Journey</span>
+                  <motion.span 
+                    className="inline-block"
+                    animate={{ x: [0, 4, 0] }}
+                    transition={{
+                      duration: 1.5,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  >→</motion.span>
+                </span>
+              </motion.button>
+
+              <motion.div 
+                className="flex items-center gap-6"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 0.7 }}
+                transition={{ duration: 1, delay: 1.5 }}
+              >
+                <motion.button
+                  whileHover={{ opacity: 1, y: -1 }}
+                  className="font-mono text-sm text-[#1C1C1C] hover:aurora-text-gradient-light transition-all duration-300"
+                >
+                  View Case Studies
+                </motion.button>
+                <div className="h-4 w-px bg-[#1C1C1C]/20" />
+                <motion.button
+                  whileHover={{ opacity: 1, y: -1 }}
+                  className="font-mono text-sm text-[#1C1C1C] hover:aurora-text-gradient-light transition-all duration-300"
+                >
+                  Explore Process
+                </motion.button>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
       </motion.div>

@@ -155,7 +155,7 @@ export function Outro() {
                     viewport={{ once: true }}
                     transition={{ delay: 0.6 }}
                   >
-                    clarified and brought to life
+                    born and brought to life
                   </motion.span>
                   .
                 </p>

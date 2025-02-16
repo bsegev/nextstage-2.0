@@ -44,10 +44,41 @@ export function AboutIntro() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="space-y-32"
+            className="space-y-16"
           >
+            {/* Section header */}
+            <div className="flex items-center gap-3 justify-center sm:justify-start">
+              <motion.div 
+                initial={{ width: 0 }}
+                animate={{ width: "2rem" }}
+                transition={{ duration: 1, delay: 0.3 }}
+                className="h-px bg-ethereal-dark/20" 
+              />
+              <span className="font-mono text-sm text-ethereal-dark/60 tracking-wider uppercase">
+                My Approach
+              </span>
+              <motion.div 
+                initial={{ width: 0 }}
+                animate={{ width: "2rem" }}
+                transition={{ duration: 1, delay: 0.3 }}
+                className="h-px bg-ethereal-dark/20" 
+              />
+            </div>
+
+            {/* Main header */}
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="text-4xl md:text-5xl lg:text-6xl font-serif text-ethereal-dark text-center sm:text-left"
+            >
+              How I Help You <br className="hidden sm:block" />
+              <span className="aurora-text-gradient-light">Build What's Next</span>
+            </motion.h2>
+
             {/* Opening statement */}
-            <div className="space-y-6">
+            <div>
               <motion.div 
                 className="relative"
                 initial={{ opacity: 0 }}
@@ -71,7 +102,7 @@ export function AboutIntro() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.7, delay: 0.3 }}
                   >
-                    I've witnessed the challenges firsthand—
+                    Each challenge presents an opportunity—
                   </motion.span>
                   <br className="hidden sm:block mb-8" />
                   <motion.span 
@@ -81,14 +112,14 @@ export function AboutIntro() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.8, delay: 0.6 }}
                   >
-                    That's why I've developed an approach that puts your success first.
+                    So I've crafted an approach that puts your success first.
                   </motion.span>
                 </div>
               </motion.div>
             </div>
 
             {/* Three Column Glare Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mt-16 md:mt-24">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
               <GlareCard className="aspect-[3/2] md:aspect-[17/21] bg-gradient-to-br from-[#1C1C1C]/[0.01] to-[#1C1C1C]/[0.07]">
                 <div className="p-6 md:p-8 h-full flex flex-col">
                   <div className="mb-auto">

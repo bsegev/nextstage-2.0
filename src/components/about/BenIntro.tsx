@@ -61,7 +61,7 @@ function BenIntro() {
               {/* Text Column */}
               <motion.div 
                 ref={textRef}
-                className="relative order-2 lg:order-1"
+                className="relative order-2 lg:order-1 mt-16 lg:mt-0"
                 style={{ y, opacity }}
               >
                 <div className="space-y-12">
