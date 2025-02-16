@@ -101,8 +101,8 @@ export function AboutHero() {
   // Scroll-based animations with mobile optimization
   const fadeOut = useTransform(
     scrollYProgress,
-    [0, isMobile ? 0.5 : 0.25],  // Adjust fade points based on device
-    [1, 0]
+    [0, isMobile ? 0.5 : 0.25, isMobile ? 1 : 0.5],  // Start fade at 50%, end at 100% for mobile
+    [1, 1, 0]  // Stay fully visible until fade point
   );
 
   return (
