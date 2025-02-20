@@ -8,15 +8,15 @@ import { preloadImage, preloadVideo } from '../../utils/preload';
 const questions = [
   {
     question: "How do I turn my business idea into reality?",
-    response: "We'll map your vision into actionable steps—from brand strategy to digital execution. I specialize in bridging the gap between 'what could be' and 'what is,' turning abstract ideas into tangible digital experiences that resonate with your audience."
+    response: "Let's break it down into clear, actionable steps. I'll help you validate your idea, define your target audience, and create a strategic roadmap. Then we'll bring it to life with a compelling brand and digital presence that resonates with your users."
   },
   {
     question: "What do I need to build a strong digital presence?",
-    response: "It starts with understanding your unique story. Then we'll craft a strategic foundation—your brand voice, visual identity, and digital touchpoints. I'll guide you through each phase, from initial strategy to final implementation, ensuring every element works together to amplify your impact."
+    response: "Start with a clear brand story and user-focused design. We'll craft your unique value proposition, design an engaging website, and implement the right digital touchpoints to reach and convert your ideal customers."
   },
   {
     question: "How can I make my brand stand out online?",
-    response: "By creating meaningful connections, not just visual appeal. We'll develop your brand's strategic architecture—from customer experience to digital innovation—building a presence that converts attention into engagement, and engagement into growth."
+    response: "By creating authentic connections through strategic design. We'll develop your brand's unique voice, craft memorable user experiences, and build digital solutions that turn visitors into loyal customers."
   }
 ];
 
