@@ -34,6 +34,9 @@ const caveat = Caveat({
 export const metadata: Metadata = {
   title: "NextStage - Turn Your Vision into Reality",
   description: "Strategic design and coaching for founders who want to make an impact.",
+  icons: {
+    icon: '/icon.ico'
+  }
 };
 
 const globalStyles = `
@@ -60,9 +63,6 @@ export default function RootLayout({
       'font-sans'
     )}>
       <head>
-        <link rel="icon" href="/favicon.png" type="image/png" />
-        <link rel="shortcut icon" href="/favicon.png" type="image/png" />
-        <link rel="apple-touch-icon" href="/favicon.png" />
         <style type="text/css">{globalStyles}</style>
       </head>
       <body className="bg-surface-50 text-secondary-900 antialiased">
