@@ -4,6 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { SmoothScroll } from '@/components/SmoothScroll'
 import { Analytics } from '@vercel/analytics/react';
+import { PageTransition } from '@/components/PageTransition';
 
 const inter = Inter({
   subsets: ["latin"],
@@ -33,7 +34,33 @@ const caveat = Caveat({
 export const metadata: Metadata = {
   title: "NextStage - Turn Your Vision into Reality",
   description: "Strategic design and coaching for founders who want to make an impact.",
+  icons: {
+    icon: {
+      url: '/favicon.png',
+      sizes: 'any',
+      type: 'image/png',
+      rel: 'icon mask',
+      media: '(prefers-color-scheme: light)',
+      color: '#FFFFFF',
+    },
+    apple: {
+      url: '/favicon.png',
+      type: 'image/png',
+      sizes: 'any',
+      rel: 'apple-touch-icon',
+    }
+  },
 };
+
+const globalStyles = `
+  link[rel*="icon"] {
+    border-radius: 50%;
+    mask-image: url("data:image/svg+xml,%3Csvg width='100%' height='100%' viewBox='0 0 100 100' version='1.1' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='50' cy='50' r='50'/%3E%3C/svg%3E");
+    mask-mode: alpha;
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg width='100%' height='100%' viewBox='0 0 100 100' version='1.1' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='50' cy='50' r='50'/%3E%3C/svg%3E");
+    -webkit-mask-mode: alpha;
+  }
+`;
 
 export default function RootLayout({
   children,
@@ -48,9 +75,14 @@ export default function RootLayout({
       caveat.variable,
       'font-sans'
     )}>
+      <head>
+        <style type="text/css">{globalStyles}</style>
+      </head>
       <body className="bg-surface-50 text-secondary-900 antialiased">
         <SmoothScroll>
-          {children}
+          <PageTransition>
+            {children}
+          </PageTransition>
         </SmoothScroll>
         <Analytics />
       </body>

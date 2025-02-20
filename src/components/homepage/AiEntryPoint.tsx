@@ -207,18 +207,21 @@ export function AiEntryPoint({ onComplete }: AiEntryPointProps) {
   const handleBeginJourney = () => {
     setIsExiting(true);
     setTimeout(() => {
-      onComplete();
-    }, 800);
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      setTimeout(() => {
+        onComplete();
+      }, 50);
+    }, 600);
   };
 
   return (
-    <AnimatePresence>
+    <AnimatePresence mode="wait">
       {!isExiting && (
         <motion.div 
           className="fixed inset-0 bg-gradient-to-br from-[#FFFFF0] to-[#1C1C1C] z-50 flex items-center justify-center p-4 overflow-hidden"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.8, ease: "easeInOut" }}
+          transition={{ duration: 0.6, ease: "easeInOut" }}
         >
           {/* Loading indicator */}
           {!isLoaded && (
@@ -306,7 +309,7 @@ export function AiEntryPoint({ onComplete }: AiEntryPointProps) {
                                              group border border-[#FFFFF0]/20 hover:bg-[#FFFFF0]/20"
                                   >
                                     <span className="relative z-10 aurora-text-gradient font-bold block">
-                                    Discover What’s Possible
+                                    Discover What's Possible
                                     </span>
                                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 
                                                  transition-opacity duration-700 bg-gradient-to-r 
@@ -318,7 +321,7 @@ export function AiEntryPoint({ onComplete }: AiEntryPointProps) {
                                       className="text-sm text-[#FFFFF0]/60 hover:text-[#FFFFF0]/80 
                                                transition-colors flex items-center justify-center gap-2"
                                     >
-                                      <span>Explore another perspective</span>
+                                      <span>Explore another question</span>
                                       <ChevronRightIcon className="w-4 h-4" />
                                     </button>
                                   )}

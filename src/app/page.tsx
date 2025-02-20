@@ -39,22 +39,27 @@ export default function Home() {
 
   return (
     <main className="relative font-['DM_Sans']">
-      {showAiEntry ? (
-        <AiEntryPoint onComplete={handleEntryComplete} />
-      ) : (
-        <>
-          <MenuButton />
-          <Hero />
-          <WhoIAm />
-          <WhoIWorkWith />
-          <ReassuranceBanner />
-          <HomeCaseStudies />
-          <BrandAnatomy />
-          <KeyMetrics />
-          <Outro />
-          <FinalCTA />
-        </>
-      )}
+      <AnimatePresence mode="wait">
+        {showAiEntry ? (
+          <AiEntryPoint onComplete={handleEntryComplete} />
+        ) : (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4, delay: 0.3 }}
+          >
+            <Hero />
+            <WhoIAm />
+            <WhoIWorkWith />
+            <ReassuranceBanner />
+            <HomeCaseStudies />
+            <BrandAnatomy />
+            <KeyMetrics />
+            <Outro />
+            <FinalCTA />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </main>
   );
 }
