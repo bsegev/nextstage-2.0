@@ -1,8 +1,9 @@
 "use client";
 
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import { ArrowDownIcon } from '@heroicons/react/24/outline';
+import { throttle } from 'lodash';
 
 export function Hero() {
   // Enhanced state management
@@ -24,27 +25,36 @@ export function Hero() {
   const gradientX = useTransform(mouseXSpring, [-1000, 1000], [-100, 100]);
   const gradientY = useTransform(mouseYSpring, [-1000, 1000], [-100, 100]);
 
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      const { left, top, width, height } = 
-        containerRef.current?.getBoundingClientRect() ?? { left: 0, top: 0, width: 0, height: 0 };
-      const x = e.clientX - left - width / 2;
-      const y = e.clientY - top - height / 2;
-      mouseX.set(x);
-      mouseY.set(y);
-    };
-
-    const handleScroll = () => {
-      setHasScrolled(window.scrollY > 50);
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('scroll', handleScroll);
-    };
+  const handleMouseMove = useCallback((e: MouseEvent) => {
+    const { left, top, width, height } = 
+      containerRef.current?.getBoundingClientRect() ?? { left: 0, top: 0, width: 0, height: 0 };
+    const x = e.clientX - left - width / 2;
+    const y = e.clientY - top - height / 2;
+    mouseX.set(x);
+    mouseY.set(y);
   }, [mouseX, mouseY]);
+
+  const handleScroll = useCallback(() => {
+    setHasScrolled(window.scrollY > 50);
+  }, []);
+
+  useEffect(() => {
+    // Throttle mouse move to ~60fps
+    const throttledMouseMove = throttle(handleMouseMove, 16);
+    // Throttle scroll to 100ms since scroll updates don't need to be as frequent
+    const throttledScroll = throttle(handleScroll, 100);
+
+    window.addEventListener('mousemove', throttledMouseMove);
+    window.addEventListener('scroll', throttledScroll);
+    
+    return () => {
+      window.removeEventListener('mousemove', throttledMouseMove);
+      window.removeEventListener('scroll', throttledScroll);
+      // Cancel any pending throttled calls
+      throttledMouseMove.cancel();
+      throttledScroll.cancel();
+    };
+  }, [handleMouseMove, handleScroll]);
 
   // Text reveal animation variants
   const textReveal = {

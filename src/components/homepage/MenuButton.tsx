@@ -166,8 +166,8 @@ const DesktopMenuContent = ({ triggerLottieRef, isScrolling }: { triggerLottieRe
             <DesktopNavItem href="/" icon={HomeIcon}>home</DesktopNavItem>
             <DesktopNavItem href="/about">about</DesktopNavItem>
             <DesktopNavItem href="/work">work</DesktopNavItem>
-            <DesktopNavItem href="#play">play</DesktopNavItem>
-            <DesktopNavItem href="#library">library</DesktopNavItem>
+            <DesktopNavItem href="/play">play</DesktopNavItem>
+            <DesktopNavItem href="#learn">learn</DesktopNavItem>
             <DesktopNavItem href="#contact">let's talk</DesktopNavItem>
           </motion.nav>
         </ModalContent>
@@ -254,8 +254,8 @@ const MobileMenu = () => {
                 <MobileNavItem href="/" index={0}>Home</MobileNavItem>
                 <MobileNavItem href="/about" index={1}>About</MobileNavItem>
                 <MobileNavItem href="/work" index={2}>Work</MobileNavItem>
-                <MobileNavItem href="#play" index={3}>Play</MobileNavItem>
-                <MobileNavItem href="#library" index={4}>Library</MobileNavItem>
+                <MobileNavItem href="/play" index={3}>Play</MobileNavItem>
+                <MobileNavItem href="#learn" index={4}>Learn</MobileNavItem>
                 <MobileNavItem href="#contact" index={5}>Let's Talk</MobileNavItem>
               </motion.nav>
 

@@ -154,9 +154,9 @@ export function WorkHero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.8, ease: [0.23, 1, 0.32, 1] }}
-              className="mt-8 text-xl sm:text-2xl text-ethereal-dark/90 font-light leading-relaxed tracking-tight"
+              className="mt-8 text-xl sm:text-2xl text-ethereal-dark/90 font-light leading-relaxed tracking-tight font-sans"
             >
-              This isn't just about building things—it's about crafting journeys that transform businesses. Let's explore how your vision can become something extraordinary.
+              This isn't just about building things – it's about crafting journeys that transform businesses. Let's explore how your vision can become something extraordinary.
             </motion.p>
 
             {/* CTA Section */}

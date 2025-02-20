@@ -8,8 +8,8 @@ import { cn } from '@/lib/utils';
 
 const collaborators = [
   {
-    title: "Decision Makers",
-    description: "Partnering with leaders who need to move fast and build right",
+    title: "Founders & Owners",
+    description: "Building something meaningful takes vision and execution",
     accent: "blue",
     icon: (
       <svg className="w-12 h-12" viewBox="0 0 48 48" fill="none">
@@ -42,17 +42,17 @@ const collaborators = [
       </svg>
     ),
     detailedSteps: [
-      { text: "Startup Founders" },
-      { text: "CEOs & CTOs" },
-      { text: "Product Directors" },
-      { text: "Innovation Leaders" },
-      { text: "Board Members" },
-      { text: "Outcome: Expert strategy and hands-on execution that turns vision into reality." }
+      { text: "Early-stage Startups" },
+      { text: "Small Business Owners" },
+      { text: "Solo Entrepreneurs" },
+      { text: "Tech Founders" },
+      { text: "Creative Agency Owners" },
+      { text: "Outcome: Transform your vision into a scalable reality with strategic design that grows with your business." }
     ]
   },
   {
-    title: "Teams",
-    description: "Expert guidance to elevate capabilities and outcomes",
+    title: "Team Leaders",
+    description: "Empowering your team to deliver their best work",
     accent: "purple",
     icon: (
       <svg className="w-12 h-12" viewBox="0 0 48 48" fill="none">
@@ -107,17 +107,17 @@ const collaborators = [
       </svg>
     ),
     detailedSteps: [
-      { text: "Engineering & Product Teams" },
-      { text: "Marketing & Growth Teams" },
-      { text: "Sales & Revenue Teams" },
-      { text: "Operations & Finance" },
-      { text: "Cross-functional Groups" },
-      { text: "Outcome: Enhanced team performance and seamless collaboration across functions." }
+      { text: "Product Team Leads" },
+      { text: "Design Directors" },
+      { text: "Engineering Managers" },
+      { text: "Marketing Leaders" },
+      { text: "Creative Directors" },
+      { text: "Outcome: Equip your team with the tools and systems they need to consistently deliver exceptional work." }
     ]
   },
   {
-    title: "Projects",
-    description: "Turning ambitious ideas into exceptional outcomes",
+    title: "Project Managers",
+    description: "Bringing structure and clarity to complex initiatives",
     accent: "emerald",
     icon: (
       <svg className="w-12 h-12" viewBox="0 0 48 48" fill="none">
@@ -160,12 +160,12 @@ const collaborators = [
       </svg>
     ),
     detailedSteps: [
-      { text: "Brand Strategy & Visual Identity" },
-      { text: "Websites & Digital Experiences" },
-      { text: "Pitch Decks & Presentations" },
-      { text: "Marketing & Sales Collateral" },
-      { text: "Growth & Launch Strategies" },
-      { text: "Outcome: Whether one deliverable or many, every project is strategically crafted to align with your vision and create lasting impact." }
+      { text: "Digital Project Managers" },
+      { text: "Product Owners" },
+      { text: "Scrum Masters" },
+      { text: "Implementation Leads" },
+      { text: "Program Coordinators" },
+      { text: "Outcome: Keep projects on track with clear processes and design systems that scale." }
     ]
   }
 ];
@@ -392,6 +392,18 @@ const OutcomeIcon = ({ className }: { className?: string }) => {
   );
 };
 
+// Add this helper function at the top with other utility functions
+const scrollToElement = (elementId: string) => {
+  const element = document.getElementById(elementId);
+  if (element) {
+    const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+    window.scrollTo({
+      top: elementPosition,
+      behavior: 'smooth'
+    });
+  }
+};
+
 export function WhoIWorkWith() {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -441,87 +453,59 @@ export function WhoIWorkWith() {
         <div className="max-w-6xl mx-auto">
           {/* Header */}
           <motion.div 
-            className="max-w-3xl mx-auto text-center mb-24"
+            className="max-w-3xl mx-auto text-center mb-16"
             style={{ y }}
           >
-            {/* Label with lines */}
-            <motion.div 
-              className="inline-flex items-center gap-3 mb-6"
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 400, damping: 10 }}
-            >
+            <div className="flex items-center justify-center gap-3 mb-4">
               <motion.div 
-                className="h-px w-8 bg-ethereal-dark/20"
                 initial={{ width: 0 }}
-                whileInView={{ width: 32 }}
-                transition={{ duration: 0.8 }}
+                animate={{ width: "2rem" }}
+                transition={{ duration: 1, delay: 0.3, ease: [0.23, 1, 0.32, 1] }}
+                className="h-px bg-ethereal-dark/20" 
               />
-              <span className="font-mono text-sm tracking-wider text-ethereal-dark/60 uppercase">
-                COLLABORATORS
+              <span className="font-mono text-sm text-ethereal-dark/60 tracking-wider uppercase">
+                Who I Work With
               </span>
               <motion.div 
-                className="h-px w-8 bg-ethereal-dark/20"
                 initial={{ width: 0 }}
-                whileInView={{ width: 32 }}
-                transition={{ duration: 0.8 }}
+                animate={{ width: "2rem" }}
+                transition={{ duration: 1, delay: 0.3, ease: [0.23, 1, 0.32, 1] }}
+                className="h-px bg-ethereal-dark/20" 
               />
-            </motion.div>
+            </div>
 
-            {/* Main title with animated gradient */}
-            <h2 className="font-serif text-4xl lg:text-6xl text-center text-ethereal-dark">
-              For Those Ready
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="text-4xl md:text-5xl lg:text-6xl font-serif text-ethereal-dark mb-6"
+            >
+              For Those Ready to
               <motion.span
-                className="block mt-2 relative"
+                className="block mt-2"
                 initial={{ y: 40, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
               >
-                <motion.span
-                  className="absolute inset-0 aurora-text-gradient-light opacity-50"
-                  animate={{
-                    backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-                  }}
-                  transition={{
-                    duration: 5,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                  style={{
-                    backgroundSize: "200% auto",
-                  }}
-                >
-                  To Build What's Next
-                </motion.span>
-                <motion.span
-                  className="absolute inset-0 aurora-text-gradient-light"
-                  animate={{
-                    backgroundPosition: ["100% 50%", "0% 50%", "100% 50%"],
-                  }}
-                  transition={{
-                    duration: 5,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                  style={{
-                    backgroundSize: "200% auto",
-                  }}
-                >
-                  To Build What's Next
-                </motion.span>
-                <span className="relative aurora-text-gradient-light">
-                  To Build What's Next
-                </span>
+                <span className="aurora-text-gradient-light">Build What's Next</span>
               </motion.span>
-            </h2>
+            </motion.h2>
 
             {/* Subtitle */}
-            <p className="mt-6 text-center text-ethereal-dark/70 max-w-2xl mx-auto text-lg font-sans">
-              I partner with ambitious teams and individuals who are ready to transform their vision into impact—whether for a specific project or as an ongoing partner.
-            </p>
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="text-lg text-ethereal-dark/70 max-w-2xl mx-auto font-light leading-relaxed"
+            >
+              I help teams build better digital products through strategic design systems and scalable UI architecture—turning complex challenges into elegant solutions.
+            </motion.p>
           </motion.div>
 
           {/* Cards */}
-          <div className="grid md:grid-cols-3 gap-1.5 md:gap-8">
+          <div className="grid md:grid-cols-3 gap-1.5 md:gap-8 mb-16">
             {collaborators.map((item, i) => (
               <motion.div
                 key={item.title}
@@ -541,7 +525,12 @@ export function WhoIWorkWith() {
                 >
                   {/* Hover effect */}
                   <motion.div
-                    className="absolute inset-0 bg-gradient-to-br from-white to-blue-50/50 opacity-0 group-hover:opacity-100 transition-all duration-500 rounded-lg"
+                    className={cn(
+                      "absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-500 rounded-lg",
+                      item.title === "Founders & Owners" && "bg-gradient-to-br from-white to-blue-50/50",
+                      item.title === "Team Leaders" && "bg-gradient-to-br from-white to-purple-50/50",
+                      item.title === "Project Managers" && "bg-gradient-to-br from-white to-emerald-50/50"
+                    )}
                     initial={false}
                     whileHover={{ scale: 1.02 }}
                   />
@@ -567,7 +556,7 @@ export function WhoIWorkWith() {
                   <div className="relative space-y-2">
                     <h3 className={cn(
                       "text-2xl font-sans font-light",
-                      item.title === "Projects" 
+                      item.title === "Project Managers" 
                         ? "bg-gradient-to-r from-emerald-500 to-teal-500 bg-clip-text text-transparent"
                         : `text-${item.accent}-600/90`
                     )}>
@@ -584,12 +573,22 @@ export function WhoIWorkWith() {
                       animate={{ opacity: 0.6 }}
                       whileHover={{ opacity: 1 }}
                     >
-                      <span className={`text-${item.accent}-600/90 font-mono tracking-wide`}>
+                      <span className={cn(
+                        "font-mono tracking-wide",
+                        item.title === "Founders & Owners" && "text-blue-600/90",
+                        item.title === "Team Leaders" && "text-purple-600/90",
+                        item.title === "Project Managers" && "text-emerald-600/90"
+                      )}>
                         Learn more
                       </span>
                       <motion.svg 
                         xmlns="http://www.w3.org/2000/svg" 
-                        className={`w-4 h-4 text-${item.accent}-600/90`}
+                        className={cn(
+                          "w-4 h-4",
+                          item.title === "Founders & Owners" && "text-blue-600/90",
+                          item.title === "Team Leaders" && "text-purple-600/90",
+                          item.title === "Project Managers" && "text-emerald-600/90"
+                        )}
                         viewBox="0 0 20 20" 
                         fill="currentColor"
                         initial={{ x: 0 }}
@@ -607,7 +606,12 @@ export function WhoIWorkWith() {
 
                   {/* Decorative line */}
                   <motion.div
-                    className={`absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-${item.accent}-300/30 to-transparent`}
+                    className={cn(
+                      "absolute bottom-0 left-0 right-0 h-px",
+                      item.title === "Founders & Owners" && "bg-gradient-to-r from-transparent via-blue-300/30 to-transparent",
+                      item.title === "Team Leaders" && "bg-gradient-to-r from-transparent via-purple-300/30 to-transparent",
+                      item.title === "Project Managers" && "bg-gradient-to-r from-transparent via-emerald-300/30 to-transparent"
+                    )}
                     initial={{ scaleX: 0 }}
                     whileInView={{ scaleX: 1 }}
                     viewport={{ once: true }}
@@ -617,6 +621,48 @@ export function WhoIWorkWith() {
               </motion.div>
             ))}
           </div>
+
+          {/* Primary CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="flex justify-center"
+          >
+            <motion.button
+              onClick={() => scrollToElement('brand-anatomy')}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="group relative px-10 py-5 bg-[#1C1C1C] hover:bg-[#1C1C1C]/90 transition-all duration-300 rounded-xl overflow-hidden shadow-lg"
+            >
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-[#38BDF8] via-[#818CF8] to-[#34D399] opacity-10"
+                animate={{
+                  backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                }}
+                transition={{
+                  duration: 5,
+                  repeat: Infinity,
+                  ease: "linear",
+                }}
+                style={{
+                  backgroundSize: "200% auto",
+                }}
+              />
+              <span className="relative z-10 font-mono text-lg text-[#FFFFF0] flex items-center gap-2">
+                View Full Capabilities
+                <svg 
+                  className="w-4 h-4 transition-transform group-hover:translate-y-0.5" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="2"
+                >
+                  <path d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+              </span>
+            </motion.button>
+          </motion.div>
         </div>
       </div>
 

@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import { MenuButton } from './MenuButton';
+import Link from 'next/link';
 
 // Updated words to align with new positioning
 const words = ["Strategy", "Vision", "Impact", "Growth", "Future", "Success"];
@@ -165,6 +166,95 @@ const scrollToElement = (elementId: string) => {
       behavior: 'smooth'
     });
   }
+};
+
+const ScrollNudge = () => {
+  const [show, setShow] = useState(false);
+  
+  useEffect(() => {
+    let hasScrolled = false;
+    const scrollHandler = () => {
+      hasScrolled = true;
+      setShow(false);
+      window.removeEventListener('scroll', scrollHandler);
+    };
+    
+    window.addEventListener('scroll', scrollHandler);
+    
+    const timer = setTimeout(() => {
+      if (!hasScrolled) setShow(true);
+    }, 3000);
+    
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('scroll', scrollHandler);
+    };
+  }, []);
+
+  return (
+    <AnimatePresence>
+      {show && (
+        <motion.div 
+          className="fixed left-1/2 -translate-x-1/2 bottom-16 z-50"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 10 }}
+          transition={{ duration: 0.5 }}
+        >
+          <motion.div 
+            className="flex flex-col items-center"
+            animate={{ 
+              y: [0, -8, 0],
+            }}
+            transition={{ 
+              duration: 3,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          >
+            <motion.span 
+              className="font-mono text-[10px] uppercase tracking-[0.2em] text-ethereal-dark/40 mb-3"
+              animate={{
+                opacity: [0.4, 0.7, 0.4]
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            >
+              scroll
+            </motion.span>
+            <div className="relative w-[1px] h-12 overflow-hidden">
+              <motion.div 
+                className="absolute inset-0 bg-gradient-to-b from-ethereal-dark/0 via-ethereal-dark/30 to-ethereal-dark/0"
+                animate={{ 
+                  y: [-48, 48]
+                }}
+                transition={{ 
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "linear"
+                }}
+              />
+            </div>
+            <motion.div 
+              className="w-1 h-1 rounded-full bg-ethereal-dark/30 mt-1"
+              animate={{
+                scale: [1, 1.5, 1],
+                opacity: [0.3, 0.6, 0.3]
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            />
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
 };
 
 export const Hero = () => {
@@ -442,13 +532,14 @@ export const Hero = () => {
                 View My Work
               </motion.button>
               <div className="h-4 w-px bg-[#1C1C1C]/20" />
-              <motion.button
-                onClick={() => scrollToElement('contact')}
-                whileHover={{ opacity: 1, y: -1 }}
-                className="font-mono text-sm text-[#1C1C1C] hover:aurora-text-gradient-light transition-all duration-300"
-              >
-                Get in Touch
-              </motion.button>
+              <Link href="/play">
+                <motion.button
+                  whileHover={{ opacity: 1, y: -1 }}
+                  className="font-mono text-sm text-[#1C1C1C] hover:aurora-text-gradient-light transition-all duration-300"
+                >
+                  View My Experiments
+                </motion.button>
+              </Link>
             </motion.div>
           </motion.div>
         </div>
@@ -478,6 +569,8 @@ export const Hero = () => {
         animate={{ scale: 1 }}
         transition={{ duration: 1, delay: 1.6 }}
       />
+
+      <ScrollNudge />
     </motion.section>
   );
 }; 

@@ -243,102 +243,108 @@ export function BrandAnatomy() {
   
   const columnTitles = [
     {
-      title: 'External Presence',
-      description: 'How you appear & engage',
+      title: 'External Layer',
+      description: 'First impressions & awareness',
       icon: ArrowsPointingOutIcon,
     },
     {
       title: 'Connection Layer',
-      description: 'Where value flows',
+      description: 'Converting interest into engagement',
       icon: ArrowsRightLeftIcon,
     },
     {
-      title: 'Internal Systems',
-      description: 'How you operate & grow',
+      title: 'Internal Layer',
+      description: 'Growth & retention systems',
       icon: ArrowsPointingInIcon,
     }
   ];
 
   const items = [
-    // Top row (1-6)
+    // External Layer Row 1
     {
       title: "Brand Identity",
-      description: "Define your unique voice and visual language that sets you apart",
+      description: "Your distinctive visual and verbal signature",
       link: "#brand-identity",
       icon: SparklesIcon
     },
     {
       title: "Marketing Assets",
-      description: "Tell your story consistently across all channels and touchpoints",
+      description: "Videos, social, and content that tell your story",
       link: "#marketing",
       icon: DocumentIcon
     },
+
+    // Connection Layer Row 1
     {
       title: "Website Design",
-      description: "Create intuitive digital experiences that convert visitors",
+      description: "Your digital home and conversion hub",
       link: "#website",
       icon: GlobeAltIcon
     },
     {
-      title: "Digital Products",
-      description: "Build tools and platforms that solve user problems",
-      link: "#products",
-      icon: CubeIcon
-    },
-    {
-      title: "Growth Strategy",
-      description: "Scale your business with clear, actionable roadmaps",
-      link: "#growth",
+      title: "Marketing Funnels",
+      description: "Guided pathways to engagement",
+      link: "#funnels",
       icon: ChartBarIcon
     },
-    {
-      title: "Launch Strategy",
-      description: "Go to market with confidence and maximum impact",
-      link: "#launch",
+
+     // Internal Layer Row 1
+     {
+      title: "Growth Strategy",
+      description: "Your roadmap for sustainable scaling",
+      link: "#growth",
       icon: RocketLaunchIcon
     },
-
-    // Bottom row (7-12)
     {
-      title: "Content Strategy",
-      description: "Create content that resonates with your target audience",
-      link: "#content",
-      icon: DocumentTextIcon
+      title: "Go-to-Market",
+      description: "Strategic launch and expansion plans",
+      link: "#gtm",
+      icon: PresentationChartLineIcon
     },
+
+       // External Layer Row 2
     {
       title: "Social Presence",
-      description: "Build community and drive engagement across platforms",
+      description: "How you show up across platforms",
       link: "#social",
       icon: ChatBubbleBottomCenterTextIcon
     },
     {
+      title: "Content Strategy",
+      description: "Consistent storytelling that attracts your audience",
+      link: "#content",
+      icon: DocumentTextIcon
+    },
+    // Connection Layer Row 2
+    {
       title: "Sales Enablement",
-      description: "Equip your team with tools to close more deals effectively",
+      description: "Tools to nurture relationships",
       link: "#sales",
       icon: ShoppingCartIcon
     },
     {
-      title: "Brand Guidelines",
-      description: "Maintain consistency across all brand touchpoints",
-      link: "#guidelines",
+      title: "Lead Nurture",
+      description: "Moving from interest to commitment",
+      link: "#nurture",
       icon: SwatchIcon
     },
-    {
-      title: "Pitch Decks",
-      description: "Present your vision with impact to investors and stakeholders",
-      link: "#pitch",
-      icon: PresentationChartLineIcon
-    },
+   // Internal Layer Row 2
     {
       title: "Team Resources",
-      description: "Align your team with clear processes and documentation",
+      description: "Internal processes and documentation",
       link: "#resources",
       icon: UserGroupIcon
+    },
+    {
+      title: "Operational Systems",
+      description: "How you deliver and retain value",
+      link: "#operations",
+      icon: CubeIcon
     }
   ];
 
   return (
-    <section className="relative py-32 lg:py-40 overflow-hidden">
+    <section id="brand-anatomy" className="relative py-32 lg:py-40 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-[0.02]" />

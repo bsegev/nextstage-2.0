@@ -8,15 +8,15 @@ import { preloadImage, preloadVideo } from '../../utils/preload';
 const questions = [
   {
     question: "How do I turn my business idea into reality?",
-    response: "Start with clear strategy, then execute with precision. I'll help bridge the gap between your vision and real-world implementation."
+    response: "We'll map your vision into actionable steps—from brand strategy to digital execution. I specialize in bridging the gap between 'what could be' and 'what is,' turning abstract ideas into tangible digital experiences that resonate with your audience."
   },
   {
     question: "What do I need to build a strong digital presence?",
-    response: "Beyond just a website—you need cohesive strategy, design, and technical execution. I guide you through each step, filling the exact gaps in your journey."
+    response: "It starts with understanding your unique story. Then we'll craft a strategic foundation—your brand voice, visual identity, and digital touchpoints. I'll guide you through each phase, from initial strategy to final implementation, ensuring every element works together to amplify your impact."
   },
   {
     question: "How can I make my brand stand out online?",
-    response: "Through strategic design that drives real business outcomes. I help you build distinctive digital experiences that convert visitors into customers."
+    response: "By creating meaningful connections, not just visual appeal. We'll develop your brand's strategic architecture—from customer experience to digital innovation—building a presence that converts attention into engagement, and engagement into growth."
   }
 ];
 
@@ -306,7 +306,7 @@ export function AiEntryPoint({ onComplete }: AiEntryPointProps) {
                                              group border border-[#FFFFF0]/20 hover:bg-[#FFFFF0]/20"
                                   >
                                     <span className="relative z-10 aurora-text-gradient font-bold block">
-                                      Begin Your Journey
+                                    Discover What’s Possible
                                     </span>
                                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 
                                                  transition-opacity duration-700 bg-gradient-to-r 

@@ -1,11 +1,13 @@
 "use client";
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import { motion, useScroll, useSpring, useTransform, AnimatePresence } from 'framer-motion';
 import { ArrowDownIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
 import { cn } from '@/lib/utils';
+import { throttle } from 'lodash';
 
 const rotatingWords = ["design", "strategy", "story", "innovation", "impact"];
+const WORD_ROTATION_INTERVAL = 3000;
 
 export function Hero2() {
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
@@ -13,6 +15,7 @@ export function Hero2() {
   const containerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const [isInView, setIsInView] = useState(false);
+  const intervalRef = useRef<NodeJS.Timeout>();
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -40,35 +43,56 @@ export function Hero2() {
     springConfig
   );
 
+  const handleMouseMove = useCallback((e: MouseEvent) => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width;
+    const y = (e.clientY - rect.top) / rect.height;
+    setCursorPosition({ x, y });
+  }, []);
+
+  const handleScroll = useCallback(() => {
+    if (!contentRef.current) return;
+    const rect = contentRef.current.getBoundingClientRect();
+    setIsInView(rect.top < window.innerHeight && rect.bottom > 0);
+  }, []);
+
+  // Word rotation effect
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!containerRef.current) return;
-      const rect = containerRef.current.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width;
-      const y = (e.clientY - rect.top) / rect.height;
-      setCursorPosition({ x, y });
-    };
-
-    const handleScroll = () => {
-      if (!contentRef.current) return;
-      const rect = contentRef.current.getBoundingClientRect();
-      setIsInView(rect.top < window.innerHeight && rect.bottom > 0);
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('scroll', handleScroll);
-    handleScroll();
-
-    const wordInterval = setInterval(() => {
+    const rotateWord = () => {
       setActiveWordIndex((prev) => (prev + 1) % rotatingWords.length);
-    }, 3000);
+    };
+
+    // Only start interval if component is in view
+    if (isInView) {
+      intervalRef.current = setInterval(rotateWord, WORD_ROTATION_INTERVAL);
+    }
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('scroll', handleScroll);
-      clearInterval(wordInterval);
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
     };
-  }, []);
+  }, [isInView]);
+
+  // Event listeners
+  useEffect(() => {
+    const throttledMouseMove = throttle(handleMouseMove, 16); // ~60fps
+    const throttledScroll = throttle(handleScroll, 100);
+
+    window.addEventListener('mousemove', throttledMouseMove);
+    window.addEventListener('scroll', throttledScroll);
+    
+    // Initial scroll check
+    handleScroll();
+
+    return () => {
+      window.removeEventListener('mousemove', throttledMouseMove);
+      window.removeEventListener('scroll', throttledScroll);
+      throttledMouseMove.cancel();
+      throttledScroll.cancel();
+    };
+  }, [handleMouseMove, handleScroll]);
 
   return (
     <div 
