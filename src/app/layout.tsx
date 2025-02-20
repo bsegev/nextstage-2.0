@@ -34,22 +34,12 @@ const caveat = Caveat({
 export const metadata: Metadata = {
   title: "NextStage - Turn Your Vision into Reality",
   description: "Strategic design and coaching for founders who want to make an impact.",
-  icons: {
-    icon: {
-      url: '/favicon.png',
-      sizes: 'any',
-      type: 'image/png',
-      rel: 'icon mask',
-      media: '(prefers-color-scheme: light)',
-      color: '#FFFFFF',
-    },
-    apple: {
-      url: '/favicon.png',
-      type: 'image/png',
-      sizes: 'any',
-      rel: 'apple-touch-icon',
-    }
-  },
+  icons: [
+    { rel: 'icon', url: '/favicon.ico' },
+    { rel: 'icon', type: 'image/png', sizes: '32x32', url: '/favicon-32x32.png' },
+    { rel: 'icon', type: 'image/png', sizes: '16x16', url: '/favicon-16x16.png' },
+    { rel: 'apple-touch-icon', sizes: '180x180', url: '/apple-touch-icon.png' }
+  ]
 };
 
 const globalStyles = `
