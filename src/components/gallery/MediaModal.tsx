@@ -29,8 +29,6 @@ export function MediaModal({ item, onClose, onNext, onPrevious }: MediaModalProp
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
-    
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
       if (e.key === 'ArrowRight' && onNext) onNext();

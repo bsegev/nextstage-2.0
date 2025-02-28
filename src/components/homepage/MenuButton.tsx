@@ -132,8 +132,6 @@ const DesktopMenuContent = ({ triggerLottieRef, isScrolling }: { triggerLottieRe
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
-    
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768); // 768px is our md breakpoint
     };
@@ -199,44 +197,6 @@ const DesktopMenuContent = ({ triggerLottieRef, isScrolling }: { triggerLottieRe
 // Mobile Menu Content
 const MobileMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isVisible, setIsVisible] = useState(true);
-  const [isMobile, setIsMobile] = useState(false);
-  const lastScrollYRef = useRef(0);
-
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768); // 768px is our md breakpoint
-    };
-    
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    
-    const handleScroll = () => {
-      const deltaY = window.scrollY - lastScrollYRef.current;
-      const isScrollingDown = deltaY > 0;
-
-      // Update visibility based on scroll direction and menu state
-      if (!isOpen) {
-        if (isScrollingDown) {
-          setIsVisible(false);
-        } else {
-          setIsVisible(true);
-        }
-      }
-
-      lastScrollYRef.current = window.scrollY;
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [isOpen]);
 
   return (
     <div className="md:hidden">

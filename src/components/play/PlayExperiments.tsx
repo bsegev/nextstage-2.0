@@ -171,7 +171,7 @@ export function PlayExperiments() {
     {
       title: "Generative AI Art",
       description: "Exploring the frontiers of visual creation with Midjourney, DALL-E, and Sora. Transforming concepts into striking images and videos through AI-powered tools.",
-      featuredLink: "#gallery",
+      featuredLink: "/play/gallery",
       allLink: "/play/ai-art/gallery",
       thumbnails: [
         "/images/gen-ai-art/zen-space.png",

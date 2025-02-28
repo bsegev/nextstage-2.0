@@ -196,8 +196,6 @@ const stageThemes = {
 // Update the scroll lock hook for better cross-browser support
 const useLockBodyScroll = (isLocked: boolean) => {
   useEffect(() => {
-    if (typeof window === 'undefined' || typeof document === 'undefined') return;
-    
     if (!isLocked) return;
     
     // Store original styles
