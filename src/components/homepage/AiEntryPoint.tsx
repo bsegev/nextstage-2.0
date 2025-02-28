@@ -8,15 +8,15 @@ import { preloadImage, preloadVideo } from '../../utils/preload';
 const questions = [
   {
     question: "How do I turn my business idea into reality?",
-    response: "Let's break it down into clear, actionable steps. I'll help you validate your idea, define your target audience, and create a strategic roadmap. Then we'll bring it to life with a compelling brand and digital presence that resonates with your users."
+    response: "Reduce time from idea to launch by weaving strategy and design into decision-making. We'll identify what matters most to users, then build only what creates real value."
   },
   {
     question: "What do I need to build a strong digital presence?",
-    response: "Start with a clear brand story and user-focused design. We'll craft your unique value proposition, design an engaging website, and implement the right digital touchpoints to reach and convert your ideal customers."
+    response: "Start with clarity, not complexity. Your digital footprint should tell one cohesive story across all touchpoints, making every interaction count toward building trust."
   },
   {
     question: "How can I make my brand stand out online?",
-    response: "By creating authentic connections through strategic design. We'll develop your brand's unique voice, craft memorable user experiences, and build digital solutions that turn visitors into loyal customers."
+    response: "Focus on value over volume. We'll craft experiences that demonstrate expertise through results, not promises. Users remember brands that solve real problems exceptionally well."
   }
 ];
 

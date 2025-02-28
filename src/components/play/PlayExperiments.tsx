@@ -3,12 +3,11 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-import { useEffect, useRef } from "react";
-import { motion } from "framer-motion";
-import { IconBrandYoutubeFilled, IconBrush } from "@tabler/icons-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { IconBrush, IconArrowRight, IconFolderPlus, IconX } from "@tabler/icons-react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import { CodeCompare } from "@/components/ui/code-compare";
+import { LinkPreview } from "@/components/ui/link-preview";
 
 const PlayCodeCompare = dynamic(() => import('./PlayCodeCompare').then(mod => ({ default: mod.PlayCodeCompare })), {
   ssr: false,
@@ -19,39 +18,343 @@ const PlayCodeCompare = dynamic(() => import('./PlayCodeCompare').then(mod => ({
   )
 });
 
+interface FeatureCardProps {
+  title: string;
+  description: string;
+  featuredLink: string;
+  allLink: string;
+  thumbnails?: string[];
+  children: React.ReactNode;
+}
+
+const FeatureCard: React.FC<FeatureCardProps> = ({ title, description, featuredLink, allLink, thumbnails = [], children }) => {
+  return (
+    <div className="bg-white/50 backdrop-blur-sm rounded-2xl border border-ethereal-glass-border overflow-hidden">
+      <div className="p-6">
+        {/* Header */}
+        <div className="mb-6">
+          <h3 className="text-xl md:text-2xl md:leading-snug text-ethereal-dark font-serif mb-3">
+            {title}
+          </h3>
+          <p className="text-sm md:text-base text-ethereal-dark/70 leading-relaxed">
+            {description}
+          </p>
+        </div>
+
+        {/* Content Area */}
+        <div className="relative mb-6 bg-gradient-to-br from-blue-500/[0.02] to-emerald-500/[0.02] rounded-xl overflow-hidden">
+          {children}
+        </div>
+
+        {/* Enhanced CTAs */}
+        <div className="flex flex-col sm:flex-row gap-3">
+          <LinkPreview
+            url={featuredLink}
+            title={title === "Better LLM Prompting" ? "The Art of the Prompt" : 
+                  title === "Micro Projects & MVPs" ? "Digital Paint: Interactive Canvas" :
+                  title === "Generative AI Art" ? "AI Art Gallery: Latest Works" :
+                  title === "One Day Brand Builds" ? "Featured Brand: Ethereal" :
+                  `Featured ${title}`}
+            description={title === "Better LLM Prompting" 
+              ? "A step-by-step guide to crafting effective prompts and unlocking the full potential of large language models."
+              : title === "Micro Projects & MVPs"
+              ? "Experiment with our interactive digital canvas. Create, blend, and explore with intuitive drawing tools."
+              : title === "Generative AI Art"
+              ? "Explore our latest AI-generated artworks, from abstract concepts to photorealistic scenes."
+              : title === "One Day Brand Builds"
+              ? "See how we transformed Ethereal's vision into a complete brand identity in 24 hours."
+              : "View featured projects and experiments in this category."}
+            thumbnailUrl={thumbnails?.[0]}
+          >
+            <div className="group relative px-6 py-4 bg-[#1C1C1C] hover:bg-[#1C1C1C]/90 transition-all duration-300 rounded-xl overflow-hidden shadow-lg text-center cursor-pointer">
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-[#38BDF8] via-[#818CF8] to-[#34D399] opacity-10"
+                animate={{
+                  backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                }}
+                transition={{
+                  duration: 5,
+                  repeat: Infinity,
+                  ease: "linear",
+                }}
+                style={{
+                  backgroundSize: "200% auto",
+                }}
+              />
+              <span className="relative z-10 font-mono text-base text-[#FFFFF0] flex items-center justify-center gap-2">
+                <span>
+                  {title === "Better LLM Prompting" ? "Get the Book" :
+                   title === "Micro Projects & MVPs" ? "Try Digital Paint" :
+                   title === "Generative AI Art" ? "View Gallery" :
+                   title === "One Day Brand Builds" ? "See Case Study" :
+                   "View Featured"}
+                </span>
+                <IconArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </span>
+            </div>
+          </LinkPreview>
+          
+          <LinkPreview
+            url="#coming-soon"
+            disabled={true}
+            title={title === "Better LLM Prompting" ? "Prompt Engineering Resources" :
+                  title === "Micro Projects & MVPs" ? "Explore All Experiments" :
+                  title === "Generative AI Art" ? "Digital Art Museum" :
+                  title === "One Day Brand Builds" ? "Brand Build Process" :
+                  `All ${title} Projects`}
+            description={title === "Better LLM Prompting"
+              ? "Explore additional resources, examples, and advanced techniques for prompt engineering."
+              : title === "Micro Projects & MVPs"
+              ? "Discover our collection of experimental tools, prototypes, and interactive demos."
+              : title === "Generative AI Art"
+              ? "Experience our full collection across different AI tools, styles, and mediums."
+              : title === "One Day Brand Builds"
+              ? "Learn about our rapid brand development process and explore other brand transformations."
+              : "Explore the complete collection of projects in this category."}
+            thumbnailUrl="/images/coming-soon.jpg"
+          >
+            <div className="group relative px-6 py-4 bg-white hover:bg-white/90 transition-all duration-300 rounded-xl overflow-hidden shadow-sm border border-ethereal-dark/10 text-center cursor-not-allowed">
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-blue-500/[0.02] to-emerald-500/[0.02] opacity-0 group-hover:opacity-100"
+                transition={{ duration: 0.3 }}
+              />
+              <span className="relative z-10 font-mono text-base text-ethereal-dark flex items-center justify-center gap-2">
+                <span>
+                  {title === "Better LLM Prompting" ? "Explore Resources" :
+                   title === "Micro Projects & MVPs" ? "All Experiments" :
+                   title === "Generative AI Art" ? "Visit Museum" :
+                   title === "One Day Brand Builds" ? "See Process" :
+                   "View All"}
+                </span>
+                <IconFolderPlus className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </span>
+            </div>
+          </LinkPreview>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export function PlayExperiments() {
   const features = [
     {
-      title: "AI & Design Systems",
-      description:
-        "Exploring the intersection of artificial intelligence and design systems. Creating tools and workflows that blend human creativity with machine intelligence.",
-      skeleton: <SkeletonOne />,
-      className:
-        "col-span-1 lg:col-span-3 border-b lg:border-r dark:border-neutral-800",
+      title: "Micro Projects & MVPs",
+      description: "Quick, impactful experiments that push the boundaries of what's possible. Building small but meaningful tools that solve real problems.",
+      featuredLink: "/play/paint",
+      allLink: "/play/micro-projects",
+      thumbnails: [
+        "/images/micro-projects/project1.png",
+        "/images/micro-projects/project2.png",
+        "/images/micro-projects/project3.png",
+        "/images/micro-projects/project4.png",
+        // Add more thumbnails
+      ],
+      content: (
+        <div className="relative h-[300px] md:h-[400px]">
+          <div className="absolute inset-0 mx-2">
+            <div className="relative w-full h-full bg-white shadow-2xl rounded-xl overflow-hidden">
+              <Image
+                src="/images/ai-x-design.png"
+                alt="AI and Design Systems"
+                fill
+                priority
+                className="object-contain"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                quality={100}
+              />
+            </div>
+          </div>
+        </div>
+      )
     },
     {
       title: "Generative AI Art",
-      description:
-        "Exploring the frontiers of visual creation with Midjourney, DALL-E, and Sora. Transforming concepts into striking images and videos through AI-powered tools.",
-      skeleton: <SkeletonTwo />,
-      className: "border-b col-span-1 lg:col-span-3 lg:border-r dark:border-neutral-800",
+      description: "Exploring the frontiers of visual creation with Midjourney, DALL-E, and Sora. Transforming concepts into striking images and videos through AI-powered tools.",
+      featuredLink: "#gallery",
+      allLink: "/play/ai-art/gallery",
+      thumbnails: [
+        "/images/gen-ai-art/zen-space.png",
+        "/images/gen-ai-art/watch-shoot.png",
+        "/images/gen-ai-art/tennis-shoot.png",
+        "/images/gen-ai-art/pop-model.png",
+        "/images/gen-ai-art/perfume-store.png",
+        "/images/gen-ai-art/desk-top.png",
+        "/images/gen-ai-art/dance-scene.png",
+        "/images/gen-ai-art/archi-render.png"
+      ],
+      content: (
+        <div id="gallery" className="relative h-[300px] md:h-[400px] overflow-hidden">
+          <div className="relative w-full h-full p-4">
+            {/* First Row */}
+            <div className="flex flex-row -ml-4 sm:-ml-20">
+              {[
+                "/images/gen-ai-art/zen-space.png",
+                "/images/gen-ai-art/watch-shoot.png",
+                "/images/gen-ai-art/tennis-shoot.png",
+                "/images/gen-ai-art/pop-model.png"
+              ].map((src, idx) => (
+                <motion.div
+                  key={`first-${src}`}
+                  className="rounded-xl -mr-1 sm:-mr-4 mt-4 p-1 bg-white/50 border border-neutral-100 flex-shrink-0 overflow-hidden"
+                  initial={{
+                    rotate: idx % 2 === 0 ? 12 : -12,
+                    translateY: idx * 10,
+                    scale: 1,
+                    zIndex: idx === 3 ? 1 : 'auto'
+                  }}
+                  whileHover={{
+                    rotate: 0,
+                    scale: 1.1,
+                    zIndex: 10,
+                    transition: { duration: 0.3, ease: "easeOut" }
+                  }}
+                  style={{
+                    WebkitTouchCallout: 'none',
+                    WebkitUserSelect: 'none',
+                    userSelect: 'none'
+                  }}
+                >
+                  <Image
+                    src={src}
+                    alt="AI generated art"
+                    width={100}
+                    height={100}
+                    sizes="(max-width: 640px) 100px, 160px"
+                    className="rounded-lg object-cover pointer-events-none w-[100px] h-[100px] sm:w-[160px] sm:h-[160px]"
+                    draggable={false}
+                  />
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Second Row */}
+            <div className="flex flex-row -ml-2 sm:-ml-12 mt-4">
+              {[
+                "/images/gen-ai-art/perfume-store.png",
+                "/images/gen-ai-art/desk-top.png",
+                "/images/gen-ai-art/dance-scene.png",
+                "/images/gen-ai-art/archi-render.png"
+              ].map((src, idx) => (
+                <motion.div
+                  key={`second-${src}`}
+                  className="rounded-xl -mr-1 sm:-mr-4 mt-4 p-1 bg-white/50 border border-neutral-100 flex-shrink-0 overflow-hidden"
+                  initial={{
+                    rotate: idx % 2 === 0 ? -10 : 10,
+                    translateY: -idx * 5,
+                    scale: 1,
+                    zIndex: idx === 0 ? 1 : 'auto'
+                  }}
+                  whileHover={{
+                    rotate: 0,
+                    scale: 1.1,
+                    zIndex: 10,
+                    transition: { duration: 0.3, ease: "easeOut" }
+                  }}
+                  style={{
+                    WebkitTouchCallout: 'none',
+                    WebkitUserSelect: 'none',
+                    userSelect: 'none'
+                  }}
+                >
+                  <Image
+                    src={src}
+                    alt="AI generated art"
+                    width={100}
+                    height={100}
+                    sizes="(max-width: 640px) 100px, 160px"
+                    className="rounded-lg object-cover pointer-events-none w-[100px] h-[100px] sm:w-[160px] sm:h-[160px]"
+                    draggable={false}
+                  />
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Gradient overlays */}
+            <div className="absolute left-0 z-[100] inset-y-0 w-12 sm:w-20 bg-gradient-to-r from-white to-transparent h-full pointer-events-none" />
+            <div className="absolute right-0 z-[100] inset-y-0 w-12 sm:w-20 bg-gradient-to-l from-white to-transparent h-full pointer-events-none" />
+          </div>
+        </div>
+      )
     },
     {
-      title: "Design Templates",
-      description:
-        "Crafting reusable design patterns and templates that help teams build better products faster. From components to full design systems.",
-      skeleton: <SkeletonThree />,
-      className:
-        "col-span-1 lg:col-span-3 lg:border-r dark:border-neutral-800",
+      title: "One Day Brand Builds",
+      description: "Rapid brand development experiments. Creating complete brand identities, from logo to design system, in just 24 hours.",
+      featuredLink: "/play/brand-builds/featured",
+      allLink: "/play/brand-builds",
+      content: (
+        <div className="relative h-[300px] md:h-[400px] flex items-center justify-center bg-gradient-to-br from-blue-500/[0.02] to-emerald-500/[0.02] overflow-hidden">
+          <div className="relative w-full h-full flex items-center justify-center transform hover:scale-[1.02] transition-all duration-700">
+            {/* Glow Platform Effect */}
+            <div className="absolute bottom-[-20px] left-1/2 -translate-x-1/2 w-[90%] h-[2px] bg-blue-400/50 blur-sm transition-all duration-500 group-hover:w-[95%] group-hover:blur-md" />
+            <div className="absolute bottom-[-20px] left-1/2 -translate-x-1/2 w-[80%] h-[1px] bg-blue-300 shadow-glow transition-all duration-500 group-hover:w-[85%]" />
+            
+            {/* Image Container */}
+            <div className="relative w-full h-full transform perspective-1000 transition-all duration-700 hover:scale-[1.4] hover:rotate-[15deg] hover:rotate-y-[15deg] hover:translate-y-4">
+              <div className="w-full h-full overflow-hidden rounded-xl">
+                <Image
+                  src="/images/branding-sprint.jpg"
+                  alt="Brand Sprint Process"
+                  width={1200}
+                  height={800}
+                  className="w-full h-full object-cover drop-shadow-[0_20px_50px_rgba(0,170,255,0.25)] transition-all duration-700 hover:drop-shadow-[0_40px_80px_rgba(0,170,255,0.4)]"
+                  priority
+                  quality={100}
+                />
+                
+                {/* Premium Overlay Effects */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/10 via-transparent to-emerald-500/10 mix-blend-overlay transition-opacity duration-700 hover:opacity-90" />
+                <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-blue-500/10 mix-blend-overlay transition-opacity duration-700 hover:opacity-90" />
+              </div>
+            </div>
+
+            {/* Background Circuit Pattern */}
+            <div className="absolute inset-[-100%] bg-[url('/grid.svg')] opacity-[0.03] pointer-events-none" />
+          </div>
+        </div>
+      )
     },
     {
-      title: "Creative AI",
-      description:
-        "Generating and exploring new forms of visual expression using AI. Pushing the boundaries of what's possible with machine learning in creative work.",
-      skeleton: <SkeletonFour />,
-      className: "col-span-1 lg:col-span-3 border-b lg:border-none",
-    },
+      title: "Better LLM Prompting",
+      description: "Experimenting with advanced prompt engineering techniques. Developing frameworks for more effective AI interactions and automation workflows.",
+      featuredLink: "/play/prompting/featured",
+      allLink: "/play/prompting",
+      thumbnails: [
+        "/images/artoftheprompt_book.png",
+        "/images/artoftheprompt_book.png"
+      ],
+      content: (
+        <div className="relative h-[300px] md:h-[400px] w-full flex items-center justify-center bg-gradient-to-br from-blue-500/[0.02] to-emerald-500/[0.02]">
+          <div className="relative w-full h-full flex items-center justify-center transform hover:scale-[1.05] hover:-translate-y-2 transition-all duration-500">
+            {/* Glow Platform Effect */}
+            <div className="absolute bottom-[-20px] left-1/2 -translate-x-1/2 w-[90%] h-[2px] bg-blue-400/50 blur-sm transition-all duration-500 group-hover:w-[95%] group-hover:blur-md" />
+            <div className="absolute bottom-[-20px] left-1/2 -translate-x-1/2 w-[80%] h-[1px] bg-blue-300 shadow-glow transition-all duration-500 group-hover:w-[85%]" />
+            
+            {/* Book with Enhanced Shadow */}
+            <div className="relative w-full max-w-[600px] transform rotate-y-[-5deg] perspective-1000 transition-all duration-500 hover:rotate-y-[-8deg]">
+              <Image
+                src="/images/artoftheprompt_book.png"
+                alt="The Art of the Prompt Book"
+                width={800}
+                height={1000}
+                className="w-full h-full object-contain drop-shadow-[0_20px_50px_rgba(0,170,255,0.25)] transition-all duration-500 hover:drop-shadow-[0_30px_60px_rgba(0,170,255,0.35)]"
+                priority
+                quality={100}
+              />
+              
+              {/* Premium Overlay Effects */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/10 via-transparent to-emerald-500/10 mix-blend-overlay transition-opacity duration-500 hover:opacity-75" />
+              <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-blue-500/10 mix-blend-overlay transition-opacity duration-500 hover:opacity-75" />
+            </div>
+
+            {/* Background Circuit Pattern */}
+            <div className="absolute inset-[-100%] bg-[url('/grid.svg')] opacity-[0.03] pointer-events-none" />
+          </div>
+        </div>
+      )
+    }
   ];
+
   return (
     <>
       <section className="relative py-32 overflow-hidden">
@@ -111,19 +414,26 @@ export function PlayExperiments() {
             </motion.div>
 
             {/* Features Grid */}
-            <div className="relative">
-              <div className="grid grid-cols-1 lg:grid-cols-6 mt-12 xl:border border-ethereal-dark/10 rounded-3xl dark:border-neutral-800 bg-white/50 dark:bg-black/20 backdrop-blur-sm overflow-hidden">
-                {features.map((feature) => (
-                  <FeatureCard key={feature.title} className={cn(
-                    feature.className,
-                    "border-ethereal-dark/10 dark:border-neutral-800"
-                  )}>
-                    <FeatureTitle>{feature.title}</FeatureTitle>
-                    <FeatureDescription>{feature.description}</FeatureDescription>
-                    <div className="h-full w-full">{feature.skeleton}</div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {features.map((feature, index) => (
+                <motion.div
+                  key={feature.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  <FeatureCard
+                    title={feature.title}
+                    description={feature.description}
+                    featuredLink={feature.featuredLink}
+                    allLink={feature.allLink}
+                    thumbnails={feature.thumbnails}
+                  >
+                    {feature.content}
                   </FeatureCard>
+                </motion.div>
                 ))}
-              </div>
             </div>
           </div>
         </div>
@@ -132,266 +442,3 @@ export function PlayExperiments() {
     </>
   );
 } 
-
-const FeatureCard = ({
-  children,
-  className,
-}: {
-  children?: React.ReactNode;
-  className?: string;
-}) => {
-  return (
-    <div className={cn(`p-4 sm:p-8 relative overflow-hidden`, className)}>
-      {children}
-    </div>
-  );
-};
-
-const FeatureTitle = ({ children }: { children?: React.ReactNode }) => {
-  return (
-    <p className="text-xl md:text-2xl md:leading-snug text-ethereal-dark font-serif">
-      {children}
-    </p>
-  );
-};
-
-const FeatureDescription = ({ children }: { children?: React.ReactNode }) => {
-  return (
-    <p className="text-sm md:text-base text-ethereal-dark/70 my-2 leading-relaxed">
-      {children}
-    </p>
-  );
-};
-
-const SkeletonOne = () => {
-  return (
-    <div className="relative">
-      <div className="h-[300px] md:h-[400px] relative">
-        <div className="absolute inset-0 mx-2 bg-white shadow-2xl rounded-xl overflow-hidden">
-          <div className="relative w-full h-full bg-white">
-            <Image
-              src="/images/ai-x-design.png"
-              alt="AI and Design Systems"
-              fill
-              priority
-              className="object-contain"
-              sizes="(max-width: 768px) 100vw, 50vw"
-              quality={100}
-            />
-          </div>
-        </div>
-        <div className="absolute top-0 z-40 inset-x-0 h-40 bg-gradient-to-b from-white via-transparent to-transparent" />
-      </div>
-      
-      {/* CTA Section Below Image */}
-      <Link href="/play/paint" className="group block">
-        <div className="mt-6 mx-2 p-4 rounded-xl bg-gradient-to-r from-blue-500/[0.05] to-emerald-500/[0.05] border border-ethereal-dark/5 group-hover:border-ethereal-dark/10 transition-all duration-200">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <IconBrush className="w-5 h-5 text-blue-500/70" />
-              <span className="text-ethereal-dark/90 font-medium">Try the Digital Canvas</span>
-            </div>
-            <span className="flex items-center gap-2 text-blue-500 font-medium">
-              Open Paint
-              <motion.span
-                initial={{ x: 0 }}
-                whileHover={{ x: 3 }}
-                className="inline-block"
-              >
-                →
-              </motion.span>
-            </span>
-          </div>
-        </div>
-      </Link>
-    </div>
-  );
-};
-
-const SkeletonThree = () => {
-  return (
-    <Link
-      href="/play/paint"
-      className="relative flex gap-10 h-full group/image"
-    >
-      <div className="w-full mx-auto bg-transparent dark:bg-transparent group h-full">
-        <div className="flex flex-1 w-full h-full flex-col space-y-2 relative">
-          <div className="absolute inset-0 z-10 flex items-center justify-center">
-            <IconBrush className="h-20 w-20 text-ethereal-dark/40" />
-          </div>
-          <div className="h-full w-full aspect-square rounded-sm bg-gradient-to-br from-blue-500/5 to-emerald-500/5 backdrop-blur-sm border border-ethereal-dark/10 group-hover/image:border-ethereal-dark/20 transition-all duration-200" />
-        </div>
-      </div>
-    </Link>
-  );
-};
-
-const SkeletonTwo = () => {
-  const images = [
-    "/images/gen-ai-art/zen-space.png",
-    "/images/gen-ai-art/watch-shoot.png",
-    "/images/gen-ai-art/tennis-shoot.png",
-    "/images/gen-ai-art/pop-model.png",
-    "/images/gen-ai-art/perfume-store.png",
-    "/images/gen-ai-art/desk-top.png",
-    "/images/gen-ai-art/dance-scene.png",
-    "/images/gen-ai-art/archi-render.png"
-  ];
-
-  const getRandomRotation = (idx: number, isFirstRow: boolean) => {
-    if (isFirstRow) {
-      // Alternate between positive and negative tilts for top row
-      const baseRotation = idx % 2 === 0 ? 12 : -12;
-      return baseRotation + (Math.random() * 6 - 3); // Add small random variation
-    } else {
-      // Opposite pattern for bottom row
-      const baseRotation = idx % 2 === 0 ? -10 : 10;
-      return baseRotation + (Math.random() * 6 - 3); // Add small random variation
-    }
-  };
-
-  const imageVariants = {
-    initial: {
-      scale: 1,
-      rotate: 0,
-      zIndex: 1,
-    },
-    whileHover: {
-      scale: 1.1,
-      rotate: 0, // Straighten out on hover
-      zIndex: 100,
-      transition: {
-        duration: 0.3,
-        ease: "easeOut"
-      }
-    },
-    whileTap: {
-      scale: 1.1,
-      rotate: 0,
-      zIndex: 100,
-    },
-  };
-
-  // Prevent context menu and dragging
-  const preventActions = (e: React.MouseEvent | React.DragEvent) => {
-    e.preventDefault();
-    return false;
-  };
-
-  return (
-    <div 
-      className="relative flex flex-col items-start p-8 gap-10 h-full overflow-hidden border-none"
-      onContextMenu={preventActions}
-    >
-      {/* First Row - Shifted left with extra image on right */}
-      <div className="flex flex-row -ml-20">
-        {[...images.slice(0, 3), images[7]].map((image, idx) => (
-          <motion.div
-            variants={imageVariants}
-            key={"images-first" + idx}
-            initial={{
-              rotate: getRandomRotation(idx, true),
-              scale: 1,
-              zIndex: idx === 3 ? 1 : 'auto'
-            }}
-            whileHover="whileHover"
-            whileTap="whileTap"
-            style={{
-              translateY: idx * 10,
-              WebkitTouchCallout: 'none',
-              WebkitUserSelect: 'none',
-              userSelect: 'none'
-            }}
-            className={cn(
-              "rounded-xl -mr-4 mt-4 p-1 bg-white/50 dark:bg-neutral-800/50 border border-neutral-100 dark:border-neutral-700 flex-shrink-0 overflow-hidden",
-              idx === 3 && "ml-4"
-            )}
-            onContextMenu={preventActions}
-            onDragStart={preventActions}
-          >
-            <Image
-              src={image}
-              alt="AI generated art"
-              width={500}
-              height={500}
-              className="rounded-lg h-20 w-20 md:h-40 md:w-40 object-cover flex-shrink-0 pointer-events-none"
-              draggable={false}
-              onContextMenu={preventActions}
-            />
-          </motion.div>
-        ))}
-      </div>
-
-      {/* Second Row - Shifted right with extra image on left */}
-      <div className="flex flex-row -ml-12">
-        {[images[4], ...images.slice(5, 7), images[3]].map((image, idx) => (
-          <motion.div
-            variants={imageVariants}
-            key={"images-second" + idx}
-            initial={{
-              rotate: getRandomRotation(idx, false),
-              scale: 1,
-              zIndex: idx === 0 ? 1 : 'auto'
-            }}
-            whileHover="whileHover"
-            whileTap="whileTap"
-            style={{
-              translateY: -idx * 5,
-              WebkitTouchCallout: 'none',
-              WebkitUserSelect: 'none',
-              userSelect: 'none'
-            }}
-            className={cn(
-              "rounded-xl -mr-4 mt-4 p-1 bg-white/50 dark:bg-neutral-800/50 border border-neutral-100 dark:border-neutral-700 flex-shrink-0 overflow-hidden",
-              idx === 0 && "-ml-8"
-            )}
-            onContextMenu={preventActions}
-            onDragStart={preventActions}
-          >
-            <Image
-              src={image}
-              alt="AI generated art"
-              width={500}
-              height={500}
-              className="rounded-lg h-20 w-20 md:h-40 md:w-40 object-cover flex-shrink-0 pointer-events-none"
-              draggable={false}
-              onContextMenu={preventActions}
-            />
-          </motion.div>
-        ))}
-      </div>
-
-      {/* Gradient overlays */}
-      <div className="absolute left-0 z-[100] inset-y-0 w-20 bg-gradient-to-r from-white dark:from-black to-transparent h-full pointer-events-none" />
-      <div className="absolute right-0 z-[100] inset-y-0 w-20 bg-gradient-to-l from-white dark:from-black to-transparent h-full pointer-events-none" />
-    </div>
-  );
-};
-
-const SkeletonFour = () => {
-  return (
-    <div className="h-60 md:h-60 flex items-center justify-center relative bg-transparent dark:bg-transparent mt-10">
-      <div className="relative w-full max-w-[300px] aspect-square rounded-full overflow-hidden">
-        <Image
-          src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2944&auto=format&fit=crop"
-          alt="Digital Globe"
-          fill
-          className="object-cover"
-          sizes="(max-width: 768px) 100vw, 300px"
-        />
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-emerald-500/20 mix-blend-overlay" />
-      </div>
-    </div>
-  );
-};
-
-const currentExplorations = [
-  {
-    title: "Digital Canvas",
-    description: "A modern painting tool with intuitive controls and a clean interface.",
-    link: "/play/paint",
-    image: "/images/paint_image.jpg",
-    category: "Interactive"
-  },
-  // ... existing items ...
-];

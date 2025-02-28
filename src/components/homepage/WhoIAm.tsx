@@ -626,7 +626,7 @@ export function WhoIAm() {
                       viewport={{ once: true }}
                       transition={{ duration: 0.3, delay: 0.2 }}
                     />
-                  </span> who turns your vision into a reality aligned with your goals.
+                  </span> who helps turn your idea into a reality.
                 </h3>
                 
                 <p className="text-xl text-ethereal-dark/70 mt-4 font-sans">

@@ -211,7 +211,7 @@ export function HomeCaseStudies() {
                     backgroundSize: "200% auto",
                   }}
                 />
-                <span className="relative z-10 font-mono text-lg text-[#FFFFF0]">View All Case Studies</span>
+                <span className="relative z-10 font-mono text-lg text-[#FFFFF0]">View More Work</span>
               </Link>
             </motion.button>
           </motion.div>

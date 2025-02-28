@@ -24,7 +24,7 @@ export function FinalCTA() {
   });
 
   return (
-    <section ref={containerRef} className="relative min-h-[70vh] flex items-center justify-center overflow-hidden bg-gradient-to-b from-white to-[#FFFFF0]/10">
+    <section ref={containerRef} className="relative min-h-[70vh] flex items-center justify-center overflow-hidden bg-gradient-to-b from-white to-[#FFFFF0]/10 font-['DM_Sans']">
       {/* Background Effects */}
       <div className="absolute inset-0">
         {/* Background Image */}
@@ -211,7 +211,7 @@ export function FinalCTA() {
             Let's Make It <span className="aurora-text-gradient-light">Happen</span>
           </h2>
           
-          <p className="text-xl text-[#1C1C1C]/70 mb-12 max-w-3xl mx-auto">
+          <p className="text-xl text-ethereal-dark/80 mb-12 max-w-3xl mx-auto leading-relaxed font-sans">
             Whether you need strategy, execution, or both—I'm here to ensure everything holds together, works at its best, and moves forward.
           </p>
 

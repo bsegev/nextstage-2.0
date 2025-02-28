@@ -486,7 +486,7 @@ export const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
           >
-            I solve problems in real time—bridging strategy, design, and execution to build what's next.
+            I solve problems in real time – bridging strategy, design, and execution to build what's next.
           </motion.p>
 
           {/* Updated CTA */}

@@ -152,7 +152,7 @@ function BenIntro() {
                         , I bridge the gap between creative vision and practical execution.
                       </p>
                       <p className="text-ethereal-dark/60">
-                        Having navigated every role from team lead to entrepreneur, I've seen firsthand how time and resources get wasted on poor partnerships. That's why I'm here—to give founders and teams the clear direction and quality execution they deserve, without the typical agency upsells or consulting bloat.
+                        Having navigated every role from team lead to entrepreneur, I've seen firsthand how time and resources get wasted on poor partnerships. That's why I'm here – to give founders and teams the clear direction and quality execution they deserve, without the typical agency upsells or consulting bloat.
                       </p>
                     </div>
                   </motion.div>

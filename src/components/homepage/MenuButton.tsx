@@ -8,11 +8,20 @@ import Lottie from 'lottie-react';
 import loadingLine from '/public/lotties/loading-line.json';
 import { HomeIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 // Desktop Navigation Item
 const DesktopNavItem = ({ href, children, icon: Icon }: { href: string; children: React.ReactNode; icon?: React.ComponentType<any> }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const router = useRouter();
   const isExternal = href.startsWith('#');
+  
+  const handleClick = (e: React.MouseEvent) => {
+    if (!isExternal) {
+      e.preventDefault();
+      router.push(href);
+    }
+  };
   
   const content = (
     <>
@@ -48,21 +57,30 @@ const DesktopNavItem = ({ href, children, icon: Icon }: { href: string; children
   }
 
   return (
-    <Link href={href} passHref>
-      <motion.div 
-        className="relative group flex items-center gap-2 cursor-pointer"
-        onHoverStart={() => setIsHovered(true)}
-        onHoverEnd={() => setIsHovered(false)}
-      >
-        {content}
-      </motion.div>
-    </Link>
+    <motion.a 
+      href={href}
+      onClick={handleClick}
+      className="relative group flex items-center gap-2 cursor-pointer"
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
+    >
+      {content}
+    </motion.a>
   );
 };
 
 // Mobile Navigation Item
-const MobileNavItem = ({ href, children, index }: { href: string; children: React.ReactNode; index: number }) => {
+const MobileNavItem = ({ href, children, index, onNavigate }: { href: string; children: React.ReactNode; index: number; onNavigate: () => void }) => {
+  const router = useRouter();
   const isExternal = href.startsWith('#');
+  
+  const handleClick = (e: React.MouseEvent) => {
+    if (!isExternal) {
+      e.preventDefault();
+      onNavigate();
+      router.push(href);
+    }
+  };
   
   const content = (
     <motion.div 
@@ -101,11 +119,11 @@ const MobileNavItem = ({ href, children, index }: { href: string; children: Reac
     </motion.div>
   );
   
-  if (isExternal) {
-    return <a href={href}>{content}</a>;
-  }
-
-  return <Link href={href}>{content}</Link>;
+  return (
+    <motion.a href={href} onClick={handleClick}>
+      {content}
+    </motion.a>
+  );
 };
 
 // Desktop Menu Content
@@ -167,7 +185,7 @@ const DesktopMenuContent = ({ triggerLottieRef, isScrolling }: { triggerLottieRe
             <DesktopNavItem href="/about">about</DesktopNavItem>
             <DesktopNavItem href="/work">work</DesktopNavItem>
             <DesktopNavItem href="/play">play</DesktopNavItem>
-            <DesktopNavItem href="#learn">learn</DesktopNavItem>
+            <DesktopNavItem href="/learn">learn</DesktopNavItem>
             <DesktopNavItem href="#contact">let's talk</DesktopNavItem>
           </motion.nav>
         </ModalContent>
@@ -197,7 +215,7 @@ const MobileMenu = () => {
       </motion.button>
 
       {/* Mobile Menu Overlay */}
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {isOpen && (
           <>
             {/* Backdrop */}
@@ -251,12 +269,12 @@ const MobileMenu = () => {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.2 }}
               >
-                <MobileNavItem href="/" index={0}>Home</MobileNavItem>
-                <MobileNavItem href="/about" index={1}>About</MobileNavItem>
-                <MobileNavItem href="/work" index={2}>Work</MobileNavItem>
-                <MobileNavItem href="/play" index={3}>Play</MobileNavItem>
-                <MobileNavItem href="#learn" index={4}>Learn</MobileNavItem>
-                <MobileNavItem href="#contact" index={5}>Let's Talk</MobileNavItem>
+                <MobileNavItem href="/" index={0} onNavigate={() => setIsOpen(false)}>Home</MobileNavItem>
+                <MobileNavItem href="/about" index={1} onNavigate={() => setIsOpen(false)}>About</MobileNavItem>
+                <MobileNavItem href="/work" index={2} onNavigate={() => setIsOpen(false)}>Work</MobileNavItem>
+                <MobileNavItem href="/play" index={3} onNavigate={() => setIsOpen(false)}>Play</MobileNavItem>
+                <MobileNavItem href="/learn" index={4} onNavigate={() => setIsOpen(false)}>Learn</MobileNavItem>
+                <MobileNavItem href="#contact" index={5} onNavigate={() => setIsOpen(false)}>Let's Talk</MobileNavItem>
               </motion.nav>
 
               {/* Footer */}

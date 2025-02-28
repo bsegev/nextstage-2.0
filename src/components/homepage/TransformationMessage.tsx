@@ -371,7 +371,7 @@ export function TransformationMessage() {
               transition={{ delay: 0.3 }}
             >
               <p className="text-xl md:text-2xl text-[#FFFFF0]/70 font-light leading-relaxed tracking-tight">
-                Real transformations that showcase how strategic thinking and focused execution create lasting business impact.
+                Brands, websites, MVPs, copywriting, decks, design systems, marketing assets – from quick wins to full systems. You get what you need, and more.
               </p>
             </motion.div>
           </div>

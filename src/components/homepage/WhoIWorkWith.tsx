@@ -107,17 +107,17 @@ const collaborators = [
       </svg>
     ),
     detailedSteps: [
-      { text: "Product Team Leads" },
-      { text: "Design Directors" },
-      { text: "Engineering Managers" },
-      { text: "Marketing Leaders" },
-      { text: "Creative Directors" },
-      { text: "Outcome: Equip your team with the tools and systems they need to consistently deliver exceptional work." }
+      { text: "Innovation Directors" },
+      { text: "Brand Strategists" },
+      { text: "UX Department Heads" },
+      { text: "Digital Transformation Leads" },
+      { text: "R&D Team Leaders" },
+      { text: "Outcome: Transform your team's capabilities with strategic frameworks and tools that elevate quality and accelerate delivery." }
     ]
   },
   {
-    title: "Project Managers",
-    description: "Bringing structure and clarity to complex initiatives",
+    title: "Project Leads",
+    description: "Delivering results when specific initiatives need expert execution",
     accent: "emerald",
     icon: (
       <svg className="w-12 h-12" viewBox="0 0 48 48" fill="none">
@@ -160,12 +160,12 @@ const collaborators = [
       </svg>
     ),
     detailedSteps: [
-      { text: "Digital Project Managers" },
-      { text: "Product Owners" },
-      { text: "Scrum Masters" },
-      { text: "Implementation Leads" },
-      { text: "Program Coordinators" },
-      { text: "Outcome: Keep projects on track with clear processes and design systems that scale." }
+      { text: "Product Managers" },
+      { text: "Project Owners" },
+      { text: "Marketing Leads" },
+      { text: "Development Leads" },
+      { text: "Initiative Owners" },
+      { text: "Outcome: Get strategic support and expert execution for your specific initiatives without adding permanent overhead." }
     ]
   }
 ];
@@ -500,7 +500,7 @@ export function WhoIWorkWith() {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="text-lg text-ethereal-dark/70 max-w-2xl mx-auto font-light leading-relaxed"
             >
-              I help teams build better digital products through strategic design systems and scalable UI architecture—turning complex challenges into elegant solutions.
+              I help build digital experiences & products through strategic design systems & deliverables – turning challenges into elegant solutions.
             </motion.p>
           </motion.div>
 
@@ -529,7 +529,7 @@ export function WhoIWorkWith() {
                       "absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-500 rounded-lg",
                       item.title === "Founders & Owners" && "bg-gradient-to-br from-white to-blue-50/50",
                       item.title === "Team Leaders" && "bg-gradient-to-br from-white to-purple-50/50",
-                      item.title === "Project Managers" && "bg-gradient-to-br from-white to-emerald-50/50"
+                      item.title === "Project Leads" && "bg-gradient-to-br from-white to-emerald-50/50"
                     )}
                     initial={false}
                     whileHover={{ scale: 1.02 }}
@@ -556,7 +556,7 @@ export function WhoIWorkWith() {
                   <div className="relative space-y-2">
                     <h3 className={cn(
                       "text-2xl font-sans font-light",
-                      item.title === "Project Managers" 
+                      item.title === "Project Leads" 
                         ? "bg-gradient-to-r from-emerald-500 to-teal-500 bg-clip-text text-transparent"
                         : `text-${item.accent}-600/90`
                     )}>
@@ -577,7 +577,7 @@ export function WhoIWorkWith() {
                         "font-mono tracking-wide",
                         item.title === "Founders & Owners" && "text-blue-600/90",
                         item.title === "Team Leaders" && "text-purple-600/90",
-                        item.title === "Project Managers" && "text-emerald-600/90"
+                        item.title === "Project Leads" && "text-emerald-600/90"
                       )}>
                         Learn more
                       </span>
@@ -587,7 +587,7 @@ export function WhoIWorkWith() {
                           "w-4 h-4",
                           item.title === "Founders & Owners" && "text-blue-600/90",
                           item.title === "Team Leaders" && "text-purple-600/90",
-                          item.title === "Project Managers" && "text-emerald-600/90"
+                          item.title === "Project Leads" && "text-emerald-600/90"
                         )}
                         viewBox="0 0 20 20" 
                         fill="currentColor"
@@ -610,7 +610,7 @@ export function WhoIWorkWith() {
                       "absolute bottom-0 left-0 right-0 h-px",
                       item.title === "Founders & Owners" && "bg-gradient-to-r from-transparent via-blue-300/30 to-transparent",
                       item.title === "Team Leaders" && "bg-gradient-to-r from-transparent via-purple-300/30 to-transparent",
-                      item.title === "Project Managers" && "bg-gradient-to-r from-transparent via-emerald-300/30 to-transparent"
+                      item.title === "Project Leads" && "bg-gradient-to-r from-transparent via-emerald-300/30 to-transparent"
                     )}
                     initial={{ scaleX: 0 }}
                     whileInView={{ scaleX: 1 }}
@@ -650,7 +650,7 @@ export function WhoIWorkWith() {
                 }}
               />
               <span className="relative z-10 font-mono text-lg text-[#FFFFF0] flex items-center gap-2">
-                View Full Capabilities
+                See What Can Be Done
                 <svg 
                   className="w-4 h-4 transition-transform group-hover:translate-y-0.5" 
                   viewBox="0 0 24 24" 
