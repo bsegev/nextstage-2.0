@@ -86,14 +86,13 @@ export function TransformationMessage() {
   const [touchEndY, setTouchEndY] = useState(0);
 
   useEffect(() => {
-    // Handle window resize
+    if (typeof window === 'undefined') return;
+    
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
     };
 
-    // Set initial width
     handleResize();
-
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);

@@ -394,6 +394,8 @@ const OutcomeIcon = ({ className }: { className?: string }) => {
 
 // Add this helper function at the top with other utility functions
 const scrollToElement = (elementId: string) => {
+  if (typeof window === 'undefined' || typeof document === 'undefined') return;
+  
   const element = document.getElementById(elementId);
   if (element) {
     const elementPosition = element.getBoundingClientRect().top + window.scrollY;

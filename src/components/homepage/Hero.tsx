@@ -158,6 +158,8 @@ const BackgroundShapes = () => {
 
 // Add scroll helper function
 const scrollToElement = (elementId: string) => {
+  if (typeof window === 'undefined' || typeof document === 'undefined') return;
+  
   const element = document.getElementById(elementId);
   if (element) {
     const elementPosition = element.getBoundingClientRect().top + window.scrollY;
@@ -172,6 +174,8 @@ const ScrollNudge = () => {
   const [show, setShow] = useState(false);
   
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
     let hasScrolled = false;
     const scrollHandler = () => {
       hasScrolled = true;
