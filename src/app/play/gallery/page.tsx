@@ -1,3 +1,4 @@
+// Gallery Page - Updated for Vercel deployment
 "use client";
 
 import { useState, useRef, useEffect } from 'react';
