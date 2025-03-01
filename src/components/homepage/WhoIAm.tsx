@@ -596,14 +596,8 @@ export function WhoIAm() {
               </div>
             </div>
 
-            {/* Cards Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 my-4 sm:my-6">
-              {/* Original ConceptCards content */}
-              <ConceptCards />
-            </div>
-
             {/* Desktop Timeline - Hidden on mobile */}
-            <div className="hidden sm:block relative">
+            <div className="block sm:block relative">
               {/* Original timeline code */}
               <div className="max-w-7xl mx-auto">
                 {/* Main content with grid layout */}
