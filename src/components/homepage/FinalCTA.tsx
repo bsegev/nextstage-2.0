@@ -24,7 +24,7 @@ export function FinalCTA() {
   });
 
   return (
-    <section ref={containerRef} className="relative min-h-[70vh] flex items-center justify-center overflow-hidden bg-gradient-to-b from-white to-[#FFFFF0]/10 font-['DM_Sans']">
+    <section ref={containerRef} className="relative min-h-[60vh] sm:min-h-[70vh] flex items-center justify-center overflow-hidden bg-gradient-to-b from-white to-[#FFFFF0]/10 font-['DM_Sans']">
       {/* Background Effects */}
       <div className="absolute inset-0">
         {/* Background Image */}
@@ -186,8 +186,8 @@ export function FinalCTA() {
           transition={{ duration: 0.6 }}
           className="text-center relative z-10"
         >
-          <div className="inline-flex items-center gap-3 mb-6">
-            <div className="h-px w-8 bg-gradient-to-r from-[#FFFFF0]/0 via-[#FFFFF0]/20 to-[#FFFFF0]/0" />
+          <div className="inline-flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+            <div className="h-px w-6 sm:w-8 bg-gradient-to-r from-[#FFFFF0]/0 via-[#FFFFF0]/20 to-[#FFFFF0]/0" />
             <motion.span 
               className="font-mono text-sm tracking-wider aurora-text-gradient-light"
               animate={{
@@ -204,22 +204,22 @@ export function FinalCTA() {
             >
               LET'S BUILD
             </motion.span>
-            <div className="h-px w-8 bg-gradient-to-r from-[#FFFFF0]/0 via-[#FFFFF0]/20 to-[#FFFFF0]/0" />
+            <div className="h-px w-6 sm:w-8 bg-gradient-to-r from-[#FFFFF0]/0 via-[#FFFFF0]/20 to-[#FFFFF0]/0" />
           </div>
 
-          <h2 className="font-serif text-4xl lg:text-6xl mb-8">
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-6xl mb-4 sm:mb-8">
             Let's Make It <span className="aurora-text-gradient-light">Happen</span>
           </h2>
           
-          <p className="text-xl text-ethereal-dark/80 mb-12 max-w-3xl mx-auto leading-relaxed font-sans">
+          <p className="text-lg sm:text-xl text-ethereal-dark/80 mb-8 sm:mb-12 max-w-3xl mx-auto leading-relaxed font-sans">
             Whether you need strategy, execution, or both—I'm here to ensure everything holds together, works at its best, and moves forward.
           </p>
 
-          <div className="space-y-8">
+          <div className="space-y-6 sm:space-y-8">
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="group relative px-8 py-4 bg-[#FFFFF0]/80 backdrop-blur-sm border border-[#1C1C1C]/10 hover:bg-[#FFFFF0] hover:border-[#1C1C1C]/20 transition-all duration-300 rounded-lg overflow-hidden"
+              className="group relative px-6 sm:px-8 py-3 sm:py-4 bg-[#FFFFF0]/80 backdrop-blur-sm border border-[#1C1C1C]/10 hover:bg-[#FFFFF0] hover:border-[#1C1C1C]/20 transition-all duration-300 rounded-lg overflow-hidden"
             >
               <motion.div
                 className="absolute inset-0 bg-gradient-to-r from-[#38BDF8]/10 via-[#818CF8]/10 to-[#34D399]/10"
@@ -233,10 +233,10 @@ export function FinalCTA() {
                   ease: "easeInOut",
                 }}
               />
-              <span className="relative z-10 font-mono text-lg aurora-text-gradient-light">Book a Strategy Call</span>
+              <span className="relative z-10 font-mono text-base sm:text-lg aurora-text-gradient-light">Book a Strategy Call</span>
             </motion.button>
 
-            <div className="text-[#1C1C1C]/70">
+            <div className="text-sm sm:text-base text-[#1C1C1C]/70">
               Direct message? Connect on{' '}
               <motion.a
                 whileHover={{ scale: 1.05 }}

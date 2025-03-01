@@ -1,6 +1,8 @@
 'use client';
 
 import dynamic from 'next/dynamic';
+import { motion } from 'framer-motion';
+import { Modal } from '@/components/ui/animated-modal';
 
 // Dynamic imports for components that use browser APIs
 const MenuButton = dynamic(() => import('@/components/homepage/MenuButton').then(mod => ({ default: mod.MenuButton })), { ssr: false });
@@ -13,14 +15,24 @@ const AboutCTA = dynamic(() => import('@/components/about/AboutCTA').then(mod =>
 
 export default function AboutPage() {
   return (
-    <main className="bg-white">
-      <MenuButton />
-      <AboutHero />
-      <AboutBanner />
-      <BenIntro />
-      <AboutIntro />
-      <AboutStory />
-      <AboutCTA />
-    </main>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.4, delay: 0.3 }}
+      className="relative w-full overflow-x-hidden"
+    >
+      <Modal>
+        <MenuButton />
+      </Modal>
+      
+      <main className="min-h-screen w-full bg-surface-50">
+        <AboutHero />
+        <AboutBanner />
+        <BenIntro />
+        <AboutIntro />
+        <AboutStory />
+        <AboutCTA />
+      </main>
+    </motion.div>
   );
 } 

@@ -284,7 +284,7 @@ const LoaderCore = ({
   title: string;
 }) => {
   return (
-    <div className="flex relative justify-start max-w-xl mx-auto flex-col mt-40">
+    <div className="flex relative justify-start max-w-xl mx-auto flex-col mt-16 sm:mt-40 px-4 sm:px-0">
       {[{ text: title, isTitle: true }, ...loadingStates].map((state, index) => {
         const distance = Math.abs(index - value);
         const opacity = Math.max(1 - distance * 0.2, 0);
@@ -296,40 +296,40 @@ const LoaderCore = ({
             key={index}
             className={cn(
               "text-left flex gap-2",
-              isTitle ? "mb-6" : "mb-4",
+              isTitle ? "mb-4 sm:mb-6" : "mb-3 sm:mb-4",
               isOutcome && "mt-2"
             )}
             initial={{ opacity: 0, y: -(value * 40) }}
             animate={{ opacity: opacity, y: -(value * 40) }}
             transition={{ duration: 0.5 }}
           >
-            <div>
+            <div className="flex-shrink-0">
               {!isTitle && !isOutcome && index > value && (
-                <CheckIcon className="text-ethereal-dark dark:text-white" />
+                <CheckIcon className="w-5 h-5 sm:w-6 sm:h-6 text-ethereal-dark dark:text-white" />
               )}
               {!isTitle && !isOutcome && index <= value && (
                 <CheckFilled className={cn(
-                  "text-ethereal-dark dark:text-white",
+                  "w-5 h-5 sm:w-6 sm:h-6 text-ethereal-dark dark:text-white",
                   value === index && "text-ethereal-dark dark:text-lime-500 opacity-100"
                 )} />
               )}
               {!isTitle && isOutcome && (
                 <OutcomeIcon className={cn(
-                  "text-emerald-500 flex-shrink-0",
+                  "w-5 h-5 sm:w-6 sm:h-6 text-emerald-500 flex-shrink-0",
                   value === index && "opacity-100"
                 )} />
               )}
             </div>
             <span className={cn(
-              "text-ethereal-dark dark:text-white",
-              isTitle ? "font-serif text-2xl" : "",
-              isOutcome ? "text-emerald-500 font-medium max-w-[280px] leading-snug" : "",
+              "text-ethereal-dark dark:text-white text-sm sm:text-base",
+              isTitle ? "font-serif text-xl sm:text-2xl" : "",
+              isOutcome ? "text-emerald-500 font-medium max-w-[280px] sm:max-w-[320px] leading-snug" : "",
               value === index && !isTitle && !isOutcome && "text-ethereal-dark dark:text-lime-500 opacity-100"
             )}>
               {isOutcome ? (
                 <>
                   <span className="font-medium block mb-1">Outcome:</span>
-                  <span className="block">{state.text.replace('Outcome: ', '')}</span>
+                  <span className="block text-sm sm:text-base">{state.text.replace('Outcome: ', '')}</span>
                 </>
               ) : (
                 state.text
@@ -505,7 +505,7 @@ export function WhoIWorkWith() {
           </motion.div>
 
           {/* Cards */}
-          <div className="grid md:grid-cols-3 gap-1.5 md:gap-8 mb-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-16 px-4 sm:px-0">
             {collaborators.map((item, i) => (
               <motion.div
                 key={item.title}
@@ -516,9 +516,9 @@ export function WhoIWorkWith() {
                 transition={{ duration: 0.5, delay: i * 0.1 }}
               >
                 <motion.div 
-                  className={`relative p-4 md:p-8 rounded-lg border border-transparent 
+                  className={`relative p-6 sm:p-8 rounded-lg border border-transparent 
                     hover:border-${item.accent}-200/20 transition-all duration-500 
-                    flex flex-col items-center justify-center text-center cursor-pointer aspect-[3/2] md:aspect-square
+                    flex flex-col items-center justify-center text-center cursor-pointer aspect-[4/3] sm:aspect-[3/2] lg:aspect-square
                     ${activeCard === i ? `border-${item.accent}-200/40 bg-${item.accent}-50/5` : ''}`}
                   onClick={() => handleCardClick(i)}
                   whileHover={{ scale: 1.02 }}
@@ -555,14 +555,14 @@ export function WhoIWorkWith() {
                   {/* Content */}
                   <div className="relative space-y-2">
                     <h3 className={cn(
-                      "text-2xl font-sans font-light",
+                      "text-xl sm:text-2xl font-sans font-light",
                       item.title === "Project Leads" 
                         ? "bg-gradient-to-r from-emerald-500 to-teal-500 bg-clip-text text-transparent"
                         : `text-${item.accent}-600/90`
                     )}>
                       {item.title}
                     </h3>
-                    <p className="text-ethereal-dark/70 font-sans">
+                    <p className="text-sm sm:text-base text-ethereal-dark/70 font-sans">
                       {item.description}
                     </p>
                     
@@ -673,7 +673,7 @@ export function WhoIWorkWith() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="w-full h-full fixed inset-0 z-[100] flex items-center justify-center bg-surface-50/80 backdrop-blur-xl"
+            className="w-full h-full fixed inset-0 z-[100] flex items-center justify-center bg-surface-50/80 backdrop-blur-xl p-4 sm:p-0"
           >
             {/* Close button */}
             <button
@@ -681,12 +681,12 @@ export function WhoIWorkWith() {
                 setShowDetailedSteps(false);
                 setCurrentDetailedStep(0);
               }}
-              className="absolute top-6 right-6 p-2 rounded-full bg-black hover:opacity-70 transition-opacity z-[102]"
+              className="absolute top-4 right-4 sm:top-6 sm:right-6 p-2 rounded-full bg-black hover:opacity-70 transition-opacity z-[102]"
             >
-              <XMarkIcon className="w-5 h-5 text-white" />
+              <XMarkIcon className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
             </button>
 
-            <div className="h-96 relative">
+            <div className="h-[80vh] sm:h-96 relative w-full max-w-lg sm:max-w-none">
               <LoaderCore 
                 value={currentDetailedStep} 
                 loadingStates={collaborators[activeCard].detailedSteps}

@@ -38,11 +38,7 @@ const BackgroundShapes = () => {
     <motion.div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ zIndex: 1 }}>
       {/* Square */}
       <motion.div
-        className="absolute w-32 h-32 border border-ethereal-dark/30"
-        style={{
-          top: '15%',
-          right: '10%',
-        }}
+        className="absolute w-20 h-20 sm:w-32 sm:h-32 border border-ethereal-dark/30 right-[5%] sm:right-[10%] top-[15%]"
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ 
           opacity: 1, 
@@ -57,10 +53,8 @@ const BackgroundShapes = () => {
       
       {/* Triangle */}
       <motion.div
-        className="absolute w-32 h-32 border border-ethereal-dark/30"
+        className="absolute w-24 h-24 sm:w-32 sm:h-32 border border-ethereal-dark/30 left-[5%] sm:left-[15%] top-[35%]"
         style={{
-          top: '35%',
-          left: '15%',
           clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)',
         }}
         initial={{ opacity: 0, scale: 0.8 }}
@@ -78,10 +72,8 @@ const BackgroundShapes = () => {
       
       {/* Cone */}
       <motion.div
-        className="absolute w-28 h-28 border border-ethereal-dark/30"
+        className="absolute w-20 h-20 sm:w-28 sm:h-28 border border-ethereal-dark/30 right-[10%] sm:right-[20%] bottom-[25%]"
         style={{
-          bottom: '25%',
-          right: '20%',
           clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)',
         }}
         initial={{ opacity: 0, scale: 0.8 }}
@@ -99,10 +91,8 @@ const BackgroundShapes = () => {
       
       {/* Pentagon */}
       <motion.div
-        className="absolute w-24 h-24 border border-ethereal-dark/30"
+        className="absolute w-16 h-16 sm:w-24 sm:h-24 border border-ethereal-dark/30 left-[15%] sm:left-[25%] top-[60%]"
         style={{
-          top: '60%',
-          left: '25%',
           clipPath: 'polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%)',
         }}
         initial={{ opacity: 0, scale: 0.8 }}
@@ -120,11 +110,7 @@ const BackgroundShapes = () => {
 
       {/* Circle */}
       <motion.div
-        className="absolute w-36 h-36 border border-ethereal-dark/30 rounded-full"
-        style={{
-          top: '25%',
-          right: '30%',
-        }}
+        className="absolute w-24 h-24 sm:w-36 sm:h-36 border border-ethereal-dark/30 rounded-full right-[20%] sm:right-[30%] top-[25%]"
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ 
           opacity: 1, 
@@ -315,7 +301,10 @@ export const Hero = () => {
           muted
           playsInline
           className="w-full h-full object-cover"
-          style={{ scale: backgroundScale }}
+          style={{ 
+            scale: backgroundScale,
+            transform: `scale(${window.innerWidth <= 768 ? 1.5 : 1})`
+          }}
         >
           <source src="/videos/ns_hero_bg_vid (1).mp4" type="video/mp4" />
         </motion.video>
@@ -327,20 +316,21 @@ export const Hero = () => {
           style={{ 
             scale: backgroundScale,
             opacity: videoEnded ? 1 : 0,
-            transition: 'opacity 0.5s ease-out'
+            transition: 'opacity 0.5s ease-out',
+            transform: `scale(${window.innerWidth <= 768 ? 1.5 : 1})`
           }}
         />
       </div>
 
       {/* Keep existing overlays */}
       <motion.div 
-        className="absolute inset-0 backdrop-blur-[1px]"
+        className="absolute inset-0 backdrop-blur-[1px] sm:backdrop-blur-[2px]"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 2, ease: "easeOut", delay: 0.5 }}
         style={{ 
           zIndex: 1,
-          backgroundColor: 'rgba(255, 255, 240, 0.65)',
+          backgroundColor: 'rgba(255, 255, 240, 0.75)',
           scale: backgroundScale
         }}
       />
@@ -360,13 +350,13 @@ export const Hero = () => {
         <div className="max-w-4xl mx-auto text-center">
           {/* Updated tagline */}
           <motion.div 
-            className="overflow-hidden mb-2"
+            className="overflow-hidden mb-2 px-4 sm:px-0"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <motion.span 
-              className="inline-block font-mono text-sm aurora-text-gradient-light"
+              className="inline-block font-mono text-xs sm:text-sm aurora-text-gradient-light"
               initial={{ y: 20 }}
               animate={{ 
                 y: 0,
@@ -385,7 +375,7 @@ export const Hero = () => {
           </motion.div>
 
           {/* Updated main headline */}
-          <h1 className="font-serif text-5xl md:text-7xl font-bold leading-tight">
+          <h1 className="font-serif text-4xl sm:text-5xl md:text-7xl font-bold leading-tight px-4 sm:px-0">
             <div className="h-[1.2em] relative overflow-hidden">
               <AnimatePresence mode="wait">
                 <motion.div
@@ -481,7 +471,7 @@ export const Hero = () => {
 
           {/* Updated subtitle */}
           <motion.p 
-            className="mt-8 text-xl sm:text-2xl text-ethereal-dark/90 font-sans font-light leading-relaxed tracking-tight"
+            className="mt-6 sm:mt-8 text-lg sm:text-xl md:text-2xl text-ethereal-dark/90 font-sans font-light leading-relaxed tracking-tight px-4 sm:px-0"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
@@ -491,7 +481,7 @@ export const Hero = () => {
 
           {/* Updated CTA */}
           <motion.div
-            className="mt-16 flex flex-col items-center gap-8"
+            className="mt-12 sm:mt-16 flex flex-col items-center gap-6 sm:gap-8 px-4 sm:px-0"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.2 }}

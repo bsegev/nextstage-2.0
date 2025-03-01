@@ -6,7 +6,7 @@ import cubeCircleLoader from '/public/lotties/cube-and-circle-preloader (1).json
 
 export function Outro() {
   return (
-    <section className="relative py-24 overflow-hidden bg-gradient-to-b from-white to-[#FFFFF0]/10">
+    <section className="relative py-16 sm:py-24 overflow-hidden bg-gradient-to-b from-white to-[#FFFFF0]/10">
       {/* Background Effects */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10" />
@@ -34,7 +34,7 @@ export function Outro() {
           className="max-w-3xl mx-auto text-center relative"
         >
           {/* Minimalist Circle */}
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 aspect-square w-[500px]">
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 aspect-square w-[280px] sm:w-[500px]">
             <motion.div
               className="relative w-full h-full"
               animate={{ 
@@ -79,7 +79,7 @@ export function Outro() {
           {/* Content */}
           <div className="relative space-y-0">
             {/* Cube and Circle Preloader */}
-            <div className="w-64 h-64 mx-auto -mb-24 relative">
+            <div className="w-48 h-48 sm:w-64 sm:h-64 mx-auto -mb-16 sm:-mb-24 relative">
               <div className="relative">
                 <Lottie 
                   animationData={cubeCircleLoader}
@@ -120,8 +120,8 @@ export function Outro() {
               </div>
             </div>
 
-            <div className="-mt-16 flex flex-col">
-              <p className="text-xl md:text-2xl text-[#1C1C1C]/80 leading-relaxed font-light max-w-2xl mx-auto">
+            <div className="mt-8 sm:mt-12"> {/* Reduced from mt-24 */}
+              <p className="text-lg sm:text-xl md:text-2xl text-[#1C1C1C]/80 leading-relaxed font-light max-w-2xl mx-auto">
                 Between vision and execution, between strategy and craft, there's a moment where{' '}
                 <motion.span 
                   className="aurora-text-gradient-light font-normal"
@@ -144,45 +144,29 @@ export function Outro() {
                 </motion.span>
                 .
               </p>
-
-              <div className="mt-12"> {/* Reduced from mt-24 */}
-                <p className="text-xl md:text-2xl text-[#1C1C1C]/80 leading-relaxed font-light max-w-2xl mx-auto">
-                  That's where enduring ideas are{' '}
-                  <motion.span 
-                    className="aurora-text-gradient-light font-normal"
-                    initial={{ opacity: 0.5 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.6 }}
-                  >
-                    born and brought to life
-                  </motion.span>
-                  .
-                </p>
-              </div>
-
-              <div className="mt-16"> {/* Reduced from mt-36 */}
-                <motion.p
-                  className="text-xl md:text-2xl font-serif max-w-xl mx-auto"
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.8 }}
-                >
-                  Let's create something <span className="aurora-text-gradient-light">meaningful</span>.
-                </motion.p>
-              </div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 1.2 }}
-                className="font-mono text-sm text-[#1C1C1C]/50 mt-2"
-              >
-                — Ben Segev
-              </motion.div>
             </div>
+
+            <div className="mt-12 sm:mt-16"> {/* Reduced from mt-36 */}
+              <motion.p
+                className="text-lg sm:text-xl md:text-2xl font-serif max-w-xl mx-auto"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.8 }}
+              >
+                Let's create something <span className="aurora-text-gradient-light">meaningful</span>.
+              </motion.p>
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 1.2 }}
+              className="font-mono text-sm text-[#1C1C1C]/50 mt-2"
+            >
+              — Ben Segev
+            </motion.div>
           </div>
         </motion.div>
       </div>

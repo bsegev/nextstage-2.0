@@ -7,9 +7,9 @@ import { ArrowRightIcon } from '@heroicons/react/24/outline';
 // Import the ConceptCards component directly
 // Add new component for the styled cards
 const ConceptCards = () => (
-  <div className="grid grid-cols-3 gap-4 my-6">
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 my-4 sm:my-6">
     {/* Strategic Thinking Card */}
-    <div className="group relative p-6 border border-blue-300/30 rounded-lg overflow-hidden min-h-[180px] flex items-center justify-center bg-white">
+    <div className="group relative p-4 sm:p-6 border border-blue-300/30 rounded-lg overflow-hidden min-h-[160px] sm:min-h-[180px] flex items-center justify-center bg-white">
       {/* Graph paper background */}
       <div 
         className="absolute inset-0 pointer-events-none"
@@ -104,7 +104,7 @@ const ConceptCards = () => (
     </div>
 
     {/* Creative Direction Card */}
-    <div className="relative p-6 border border-purple-300/30 rounded-lg min-h-[180px] flex items-center justify-center bg-white overflow-hidden group">
+    <div className="relative p-4 sm:p-6 border border-purple-300/30 rounded-lg min-h-[160px] sm:min-h-[180px] flex items-center justify-center bg-white overflow-hidden group">
       {/* Design tool background elements */}
       <div className="absolute inset-0 pointer-events-none">
         {/* Ruler guides with purple tint */}
@@ -194,7 +194,7 @@ const ConceptCards = () => (
     </div>
 
     {/* Tactical Execution Card */}
-    <div className="relative p-6 rounded-sm overflow-hidden group min-h-[180px] flex items-center justify-center bg-white">
+    <div className="relative p-4 sm:p-6 rounded-sm overflow-hidden group min-h-[160px] sm:min-h-[180px] flex items-center justify-center bg-white">
       {/* Radar background with green tint */}
       <div className="absolute inset-0 flex items-center justify-center">
         {/* Static circles */}
@@ -504,11 +504,11 @@ export function WhoIAm() {
         />
       </div>
 
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
           {/* Header with animated line */}
           <motion.div 
-            className="mb-16 relative"
+            className="mb-8 sm:mb-16 relative"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
@@ -517,7 +517,7 @@ export function WhoIAm() {
               className="h-px bg-gradient-to-r from-blue-500/50 via-indigo-500/50 to-blue-500/50"
               variants={lineAnimation}
             />
-            <h2 className="mt-8 text-4xl sm:text-5xl md:text-6xl font-serif text-ethereal-dark/90">
+            <h2 className="mt-6 sm:mt-8 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif text-ethereal-dark/90">
               <motion.span
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -579,131 +579,161 @@ export function WhoIAm() {
             </h2>
           </motion.div>
 
-          {/* Main content with grid layout */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
-            {/* Left column - Text and cards */}
-            <motion.div
-              style={{ y }}
-              className="space-y-16"
-            >
-              {/* Main statement */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
-                className="max-w-2xl"
-              >
-                <h3 className="text-2xl sm:text-3xl font-sans font-light text-ethereal-dark/90">
-                  A <span className="relative inline-block align-middle mx-1">
-                    <motion.span
-                      className="block relative"
-                      initial={{ y: 20, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      transition={{ duration: 0.8 }}
-                    >
-                      <motion.span
-                        className="font-['Caveat'] text-[145%] relative aurora-text-gradient-light leading-none inline-flex items-center px-1 pb-2"
-                        animate={{
-                          backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-                        }}
-                        transition={{
-                          duration: 5,
-                          repeat: Infinity,
-                          ease: "easeInOut"
-                        }}
-                        style={{
-                          backgroundSize: "200% auto",
-                        }}
-                      >
-                        high-impact partner
-                      </motion.span>
-                    </motion.span>
-                    <motion.div
-                      className="absolute -inset-x-6 -inset-y-2 bg-blue-50/50 rounded-lg -z-10"
-                      initial={{ opacity: 0 }}
-                      whileInView={{ opacity: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.3, delay: 0.2 }}
-                    />
-                  </span> who helps turn your idea into a reality.
-                </h3>
-                
-                <p className="text-xl text-ethereal-dark/70 mt-4 font-sans">
-                  I step in at the level you need most—whether as a strategic guide, embedded problem-solver, or hands-on advisor.
-                </p>
-              </motion.div>
-
-              {/* Concept Cards */}
-              <ConceptCards />
-
-              <div className="relative flex items-center justify-center mt-12">
+          {/* Main content area - Modified for mobile timeline */}
+          <div className="relative grid grid-cols-[60px_1fr] sm:block gap-4 sm:gap-0">
+            {/* Mobile Timeline - Only visible on mobile */}
+            <div className="relative block sm:hidden h-full">
+              <div className="sticky top-24 h-[calc(100vh-6rem)]">
                 {/* Timeline line */}
-                <motion.div 
-                  className="absolute h-px w-full max-w-2xl bg-gradient-to-r from-transparent via-blue-300/30 to-transparent"
-                  initial={{ scaleX: 0 }}
-                  whileInView={{ scaleX: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 1, delay: 0.5 }}
-                />
+                <div className="absolute left-1/2 top-[100px] bottom-8 w-px bg-gradient-to-b from-blue-400/20 via-purple-400/20 to-emerald-400/20 transform -translate-x-1/2" />
+                
+                {/* Timeline points - Adjusted to align with card centers */}
+                <div className="absolute left-1/2 transform -translate-x-1/2">
+                  <div className="w-2 h-2 rounded-full bg-blue-400 relative" style={{ top: '180px' }} />
+                  <div className="w-2 h-2 rounded-full bg-purple-400 relative" style={{ top: '380px' }} />
+                  <div className="w-2 h-2 rounded-full bg-emerald-400 relative" style={{ top: '580px' }} />
+                </div>
+              </div>
+            </div>
 
-                {/* Timeline points */}
-                <div className="relative flex justify-between w-full max-w-2xl px-8">
-                  {[
-                    { label: "Before", color: "blue" },
-                    { label: "During", color: "purple" },
-                    { label: "After", color: "emerald" }
-                  ].map((point, i) => (
+            {/* Cards Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 my-4 sm:my-6">
+              {/* Original ConceptCards content */}
+              <ConceptCards />
+            </div>
+
+            {/* Desktop Timeline - Hidden on mobile */}
+            <div className="hidden sm:block relative">
+              {/* Original timeline code */}
+              <div className="max-w-7xl mx-auto">
+                {/* Main content with grid layout */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-24 items-center">
+                  {/* Left column - Text and cards */}
+                  <motion.div
+                    style={{ y }}
+                    className="space-y-8 sm:space-y-16"
+                  >
+                    {/* Main statement */}
                     <motion.div
-                      key={point.label}
-                      className="flex flex-col items-center gap-2"
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: 0.7 + i * 0.1 }}
+                      transition={{ duration: 0.8 }}
+                      className="max-w-2xl"
                     >
-                      {/* Point */}
-                      <motion.div 
-                        className={`w-2 h-2 rounded-full bg-${point.color}-400/70`}
-                        initial={{ scale: 0 }}
-                        whileInView={{ scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ 
-                          type: "spring",
-                          duration: 0.5, 
-                          delay: 1 + i * 0.1 
-                        }}
-                      />
+                      <h3 className="text-xl sm:text-2xl md:text-3xl font-sans font-light text-ethereal-dark/90">
+                        A <span className="relative inline-block align-middle mx-1">
+                          <motion.span
+                            className="block relative"
+                            initial={{ y: 20, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            transition={{ duration: 0.8 }}
+                          >
+                            <motion.span
+                              className="font-['Caveat'] text-[145%] relative aurora-text-gradient-light leading-none inline-flex items-center px-1 pb-2"
+                              animate={{
+                                backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                              }}
+                              transition={{
+                                duration: 5,
+                                repeat: Infinity,
+                                ease: "easeInOut"
+                              }}
+                              style={{
+                                backgroundSize: "200% auto",
+                              }}
+                            >
+                              high-impact partner
+                            </motion.span>
+                          </motion.span>
+                          <motion.div
+                            className="absolute -inset-x-6 -inset-y-2 bg-blue-50/50 rounded-lg -z-10"
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.3, delay: 0.2 }}
+                          />
+                        </span> who helps turn your idea into a reality.
+                      </h3>
                       
-                      {/* Label */}
-                      <span className={`font-mono text-xs text-${point.color}-600/70 uppercase tracking-wider`}>
-                        {point.label}
-                      </span>
-
-                      {/* Connecting line to card */}
-                      <motion.div 
-                        className={`h-8 w-px bg-gradient-to-b from-${point.color}-400/30 to-transparent -mt-10`}
-                        initial={{ scaleY: 0 }}
-                        whileInView={{ scaleY: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.3, delay: 0.9 + i * 0.1 }}
-                      />
+                      <p className="text-lg sm:text-xl text-ethereal-dark/70 mt-3 sm:mt-4 font-sans">
+                        I step in at the level you need most—whether as a strategic guide, embedded problem-solver, or hands-on advisor.
+                      </p>
                     </motion.div>
-                  ))}
+
+                    {/* Concept Cards */}
+                    <ConceptCards />
+
+                    <div className="relative flex items-center justify-center mt-8 sm:mt-12">
+                      {/* Timeline line */}
+                      <motion.div 
+                        className="absolute h-px w-full max-w-sm sm:max-w-2xl bg-gradient-to-r from-transparent via-blue-300/30 to-transparent"
+                        initial={{ scaleX: 0 }}
+                        whileInView={{ scaleX: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1, delay: 0.5 }}
+                      />
+
+                      {/* Timeline points */}
+                      <div className="relative flex justify-between w-full max-w-sm sm:max-w-2xl px-4 sm:px-8">
+                        {[
+                          { label: "Before", color: "blue" },
+                          { label: "During", color: "purple" },
+                          { label: "After", color: "emerald" }
+                        ].map((point, i) => (
+                          <motion.div
+                            key={point.label}
+                            className="flex flex-col items-center gap-1 sm:gap-2"
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5, delay: 0.7 + i * 0.1 }}
+                          >
+                            {/* Point */}
+                            <motion.div 
+                              className={`w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-${point.color}-400/70`}
+                              initial={{ scale: 0 }}
+                              whileInView={{ scale: 1 }}
+                              viewport={{ once: true }}
+                              transition={{ 
+                                type: "spring",
+                                duration: 0.5, 
+                                delay: 1 + i * 0.1 
+                              }}
+                            />
+                            
+                            {/* Label */}
+                            <span className={`font-mono text-[10px] sm:text-xs text-${point.color}-600/70 uppercase tracking-wider`}>
+                              {point.label}
+                            </span>
+
+                            {/* Connecting line to card */}
+                            <motion.div 
+                              className={`h-6 sm:h-8 w-px bg-gradient-to-b from-${point.color}-400/30 to-transparent -mt-8 sm:-mt-10`}
+                              initial={{ scaleY: 0 }}
+                              whileInView={{ scaleY: 1 }}
+                              viewport={{ once: true }}
+                              transition={{ duration: 0.3, delay: 0.9 + i * 0.1 }}
+                            />
+                          </motion.div>
+                        ))}
+                      </div>
+                    </div>
+                  </motion.div>
+
+                  {/* Right column - Circle Animation */}
+                  <motion.div
+                    className="relative h-[300px] sm:h-[400px] lg:h-[600px] block lg:block"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1 }}
+                  >
+                    <CircleAnimation />
+                  </motion.div>
                 </div>
               </div>
-            </motion.div>
-
-            {/* Right column - Circle Animation */}
-            <motion.div
-              className="relative h-[600px] hidden lg:block"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1 }}
-            >
-              <CircleAnimation />
-            </motion.div>
+            </div>
           </div>
         </div>
       </div>

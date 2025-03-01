@@ -146,15 +146,15 @@ const HoverEffect = ({
 
 const MobileCard = ({ title, description, icon: Icon }: { title: string; description: string; icon: any }) => {
   return (
-    <div className="bg-white rounded-xl p-6 border border-[#1C1C1C]/10 relative overflow-hidden">
+    <div className="bg-white rounded-lg sm:rounded-xl p-4 sm:p-6 border border-[#1C1C1C]/10 relative overflow-hidden">
       {/* Gradient background similar to desktop */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#38BDF8]/[0.07] via-[#818CF8]/[0.07] to-[#34D399]/[0.07] opacity-50" />
       <div className="relative z-10">
-        <div className="flex items-center gap-4 mb-3">
-          <Icon className="w-5 h-5 text-[#1C1C1C]/40" />
-          <h4 className="text-xl font-serif text-[#1C1C1C]">{title}</h4>
+        <div className="flex items-center gap-3 sm:gap-4 mb-2 sm:mb-3">
+          <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-[#1C1C1C]/40" />
+          <h4 className="text-lg sm:text-xl font-serif text-[#1C1C1C]">{title}</h4>
         </div>
-        <p className="text-sm text-[#1C1C1C]/70 font-sans">{description}</p>
+        <p className="text-xs sm:text-sm text-[#1C1C1C]/70 font-sans">{description}</p>
       </div>
     </div>
   );
@@ -177,7 +177,7 @@ const MobilePill = ({
     <div className="group" onClick={onClick}>
       <div 
         className={cn(
-          "bg-white rounded-2xl px-4 py-2.5 border border-[#1C1C1C]/10 flex items-center gap-3 relative overflow-hidden hover:border-[#1C1C1C]/20 transition-all duration-300",
+          "bg-white rounded-xl sm:rounded-2xl px-3 sm:px-4 py-2 sm:py-2.5 border border-[#1C1C1C]/10 flex items-center gap-2 sm:gap-3 relative overflow-hidden hover:border-[#1C1C1C]/20 transition-all duration-300",
           isOpen && "rounded-b-none border-b-0"
         )}
       >
@@ -187,14 +187,14 @@ const MobilePill = ({
           isOpen ? "opacity-100" : "opacity-0 group-hover:opacity-100"
         )} />
         <Icon className={cn(
-          "w-4 h-4 relative z-10 transition-colors duration-300",
+          "w-3.5 h-3.5 sm:w-4 sm:h-4 relative z-10 transition-colors duration-300",
           isOpen ? "text-[#38BDF8]" : "text-[#1C1C1C]/40 group-hover:text-[#38BDF8]"
         )} />
-        <span className="font-['Caveat'] text-lg text-[#1C1C1C] relative z-10 flex-1">{title}</span>
+        <span className="font-['Caveat'] text-base sm:text-lg text-[#1C1C1C] relative z-10 flex-1">{title}</span>
         <motion.div
           animate={{ rotate: isOpen ? 180 : 0 }}
           transition={{ duration: 0.3 }}
-          className="relative z-10 w-4 h-4 text-[#1C1C1C]/40"
+          className="relative z-10 w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#1C1C1C]/40"
         >
           <svg 
             viewBox="0 0 24 24" 
@@ -228,8 +228,8 @@ const MobilePill = ({
             }}
             className="overflow-hidden"
           >
-            <div className="px-4 py-3 bg-white border border-t-0 border-[#1C1C1C]/10 rounded-b-2xl">
-              <p className="text-sm text-[#1C1C1C]/70 font-sans">{description}</p>
+            <div className="px-3 sm:px-4 py-2 sm:py-3 bg-white border border-t-0 border-[#1C1C1C]/10 rounded-b-xl sm:rounded-b-2xl">
+              <p className="text-xs sm:text-sm text-[#1C1C1C]/70 font-sans">{description}</p>
             </div>
           </motion.div>
         )}
@@ -344,47 +344,47 @@ export function BrandAnatomy() {
   ];
 
   return (
-    <section id="brand-anatomy" className="relative py-32 lg:py-40 overflow-hidden">
+    <section id="brand-anatomy" className="relative py-20 sm:py-32 lg:py-40 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-[0.02]" />
         <div className="absolute inset-0 bg-gradient-to-b from-white via-white/95 to-white" />
       </div>
 
-      <div className="relative z-10 container mx-auto px-6">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
           <motion.div 
-            className="max-w-3xl mx-auto text-center mb-24"
+            className="max-w-3xl mx-auto text-center mb-16 sm:mb-24"
           >
             {/* Label with lines */}
             <motion.div 
-              className="inline-flex items-center gap-3 mb-6"
+              className="inline-flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6"
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 400, damping: 10 }}
             >
               <motion.div 
-                className="h-px w-8 bg-ethereal-dark/20"
+                className="h-px w-6 sm:w-8 bg-ethereal-dark/20"
                 initial={{ width: 0 }}
-                whileInView={{ width: 32 }}
+                whileInView={{ width: "2rem" }}
                 transition={{ duration: 0.8 }}
               />
-              <span className="font-mono text-sm tracking-wider text-ethereal-dark/60 uppercase">
+              <span className="font-mono text-xs sm:text-sm tracking-wider text-ethereal-dark/60 uppercase">
                 Brand Anatomy
               </span>
               <motion.div 
-                className="h-px w-8 bg-ethereal-dark/20"
+                className="h-px w-6 sm:w-8 bg-ethereal-dark/20"
                 initial={{ width: 0 }}
-                whileInView={{ width: 32 }}
+                whileInView={{ width: "2rem" }}
                 transition={{ duration: 0.8 }}
               />
             </motion.div>
 
             {/* Main title with animated gradient */}
-            <h2 className="font-serif text-4xl lg:text-6xl text-center text-ethereal-dark">
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-6xl text-center text-ethereal-dark">
               The Complete
               <motion.span
-                className="block mt-2 relative"
+                className="block mt-1 sm:mt-2 relative"
                 initial={{ y: 40, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
@@ -428,13 +428,13 @@ export function BrandAnatomy() {
             </h2>
 
             {/* Subtitle */}
-            <p className="mt-6 text-center text-ethereal-dark/70 max-w-2xl mx-auto text-lg font-sans">
+            <p className="mt-4 sm:mt-6 text-center text-ethereal-dark/70 max-w-2xl mx-auto text-base sm:text-lg font-sans px-4 sm:px-0">
               Every brand needs these three interconnected layers to thrive digitally
             </p>
           </motion.div>
 
           {/* Mobile and Tablet Layout */}
-          <div className="lg:hidden space-y-16">
+          <div className="lg:hidden space-y-8 sm:space-y-16">
             {columnTitles.map((column, columnIndex) => (
               <motion.div
                 key={column.title}
@@ -442,13 +442,14 @@ export function BrandAnatomy() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: columnIndex * 0.1 }}
+                className="px-2 sm:px-0"
               >
                 <MobileCard 
                   title={column.title}
                   description={column.description}
                   icon={column.icon}
                 />
-                <div className="mt-6 grid grid-cols-2 gap-3">
+                <div className="mt-4 sm:mt-6 grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                   {/* External Presence */}
                   {columnIndex === 0 && [
                     items[0], // Brand Identity

@@ -30,7 +30,7 @@ const metrics = [
 
 export function KeyMetrics() {
   return (
-    <section className="relative py-32 lg:py-48 bg-gradient-to-br from-[#FFFFF0] to-[#1C1C1C]">
+    <section className="relative py-20 sm:py-32 lg:py-48 bg-gradient-to-br from-[#FFFFF0] to-[#1C1C1C]">
       {/* Enhanced Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Aurora background effect */}
@@ -46,15 +46,15 @@ export function KeyMetrics() {
         <div className="mystical-accent-3"></div>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="flex flex-col items-center gap-4 mb-20"
+          className="flex flex-col items-center gap-3 sm:gap-4 mb-12 sm:mb-20"
         >
-          <div className="inline-flex items-center gap-3">
+          <div className="inline-flex items-center gap-2 sm:gap-3">
             <div className="h-px w-8 bg-[#FFFFF0]/20" />
             <span className="font-mono text-sm tracking-wider aurora-text-gradient-light">
               THE ADVANTAGE
@@ -62,7 +62,7 @@ export function KeyMetrics() {
             <div className="h-px w-8 bg-[#FFFFF0]/20" />
           </div>
 
-          <h2 className="font-serif text-4xl lg:text-6xl text-center text-[#FFFFF0]">
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-6xl text-center text-[#FFFFF0]">
             Better Results,
             <motion.span
               className="block mt-2 relative"
@@ -107,13 +107,13 @@ export function KeyMetrics() {
               </span>
             </motion.span>
           </h2>
-          <p className="mt-6 text-center text-[#FFFFF0]/60 max-w-2xl mx-auto text-xl md:text-2xl font-light leading-relaxed tracking-tight">
+          <p className="mt-4 sm:mt-6 text-center text-[#FFFFF0]/60 max-w-2xl mx-auto text-lg sm:text-xl md:text-2xl font-light leading-relaxed tracking-tight">
             Working closely together, we enable exceptional quality at every step. Through direct collaboration and focused execution, you receive premium results faster, without the traditional overhead.
           </p>
         </motion.div>
 
         {/* Metrics Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-8 lg:gap-12">
           {metrics.map((metric, index) => (
             <motion.div
               key={metric.title}
@@ -121,7 +121,7 @@ export function KeyMetrics() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#FFFFF0]/10 to-[#1C1C1C]/90 border border-[#FFFFF0]/20 backdrop-blur-sm"
+              className="group relative overflow-hidden rounded-xl sm:rounded-2xl bg-gradient-to-br from-[#FFFFF0]/10 to-[#1C1C1C]/90 border border-[#FFFFF0]/20 backdrop-blur-sm"
             >
               <div className="p-4 sm:p-6 md:p-8">
                 <div className="text-xs sm:text-sm font-mono text-[#FFFFF0]/60 mb-2 sm:mb-4">
@@ -129,7 +129,7 @@ export function KeyMetrics() {
                 </div>
                 <div className="flex items-center justify-between mb-2 sm:mb-4">
                   <motion.div 
-                    className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl"
+                    className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-7xl"
                     initial={{ scale: 0.9 }}
                     animate={{ scale: 1 }}
                     transition={{
@@ -159,7 +159,7 @@ export function KeyMetrics() {
                       {metric.value}
                     </motion.span>
                   </motion.div>
-                  <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24">
+                  <div className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24">
                     <Lottie 
                       animationData={metric.animation}
                       loop={true}
@@ -173,7 +173,7 @@ export function KeyMetrics() {
                 </div>
               </div>
               {/* Dark strip at bottom for description */}
-              <div className="px-4 sm:px-6 md:px-8 py-3 sm:py-4 bg-[#1C1C1C]/70 text-[#FFFFF0]/60 text-sm sm:text-base">
+              <div className="px-4 sm:px-6 md:px-8 py-2 sm:py-3 md:py-4 bg-[#1C1C1C]/70 text-[#FFFFF0]/60 text-sm sm:text-base">
                 {metric.description}
               </div>
             </motion.div>
@@ -186,12 +186,12 @@ export function KeyMetrics() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="mt-24 text-center"
+          className="mt-16 sm:mt-24 text-center"
         >
           <motion.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className="group relative px-10 py-5 bg-[#1C1C1C] hover:bg-[#1C1C1C]/90 transition-all duration-300 rounded-xl overflow-hidden shadow-lg"
+            className="group relative px-6 sm:px-10 py-4 sm:py-5 bg-[#1C1C1C] hover:bg-[#1C1C1C]/90 transition-all duration-300 rounded-lg sm:rounded-xl overflow-hidden shadow-lg"
           >
             <Link href="/work" className="relative z-10">
               <motion.div
@@ -208,7 +208,7 @@ export function KeyMetrics() {
                   backgroundSize: "200% auto",
                 }}
               />
-              <span className="relative z-10 font-mono text-lg text-[#FFFFF0]">View Selected Projects</span>
+              <span className="relative z-10 font-mono text-base sm:text-lg text-[#FFFFF0]">View Selected Projects</span>
             </Link>
           </motion.button>
         </motion.div>
