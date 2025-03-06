@@ -61,8 +61,16 @@ export function Process() {
     if (!isInView || !animationActive) return;
     
     const interval = setInterval(() => {
-      setCurrentAnimatedStep(prev => (prev + 1) % steps.length);
-    }, 3000); // Change step every 3 seconds
+      // Fade out current step before changing
+      setAnimationActive(false);
+      
+      // Use setTimeout to create a smooth transition
+      setTimeout(() => {
+        setCurrentAnimatedStep(prev => (prev + 1) % steps.length);
+        setAnimationActive(true);
+      }, 300); // Short delay for fade transition
+      
+    }, 5000); // Increased time between transitions for better readability
     
     return () => clearInterval(interval);
   }, [isInView, animationActive]);
@@ -74,8 +82,12 @@ export function Process() {
       setActiveStep(null);
       // Find the index of the current step and set animation to start from the next one
       const currentIndex = steps.findIndex(s => s.id === stepId);
-      setCurrentAnimatedStep((currentIndex + 1) % steps.length);
-      setAnimationActive(true);
+      
+      // Add a small delay before starting animation again
+      setTimeout(() => {
+        setCurrentAnimatedStep((currentIndex + 1) % steps.length);
+        setAnimationActive(true);
+      }, 300);
     } else {
       // Opening a step
       setActiveStep(stepId);
@@ -187,9 +199,16 @@ export function Process() {
                 <motion.div
                   key={step.id}
                   initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  animate={isInView ? { 
+                    opacity: 1, 
+                    y: 0,
+                    transition: { 
+                      opacity: { duration: 0.5 },
+                      y: { duration: 0.5 }
+                    }
+                  } : {}}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className={`relative pt-14 pb-6 px-6 rounded-xl cursor-pointer transition-all duration-300 ${
+                  className={`relative pt-14 pb-6 px-6 rounded-xl cursor-pointer transition-all duration-500 ${
                     isActive || isAnimatedActive 
                       ? 'bg-white/70 shadow-lg ring-1 ring-gray-100' 
                       : 'bg-white/50'
@@ -220,17 +239,23 @@ export function Process() {
                               background: 'linear-gradient(90deg, #3B82F6, #8B5CF6, #10B981, #3B82F6)',
                               backgroundSize: '300% 100%'
                             }}
+                            initial={{ opacity: 0 }}
                             animate={{
+                              opacity: 1,
                               backgroundPosition: ['0% 0%', '100% 0%', '0% 0%'],
                             }}
+                            exit={{ opacity: 0 }}
                             transition={{
-                              duration: 8,
-                              repeat: Infinity,
-                              ease: "easeInOut"
+                              opacity: { duration: 0.3 },
+                              backgroundPosition: {
+                                duration: 8,
+                                repeat: Infinity,
+                                ease: "easeInOut"
+                              }
                             }}
                           />
                         ) : (
-                          <div className="absolute inset-0 rounded-full bg-gradient-to-br opacity-20 blur-[10px]" />
+                          <div className="absolute inset-0 rounded-full bg-gradient-to-br from-gray-300 to-gray-400 opacity-20 blur-[10px]" />
                         )}
                       </div>
 
@@ -302,9 +327,16 @@ export function Process() {
                 <motion.div
                   key={step.id}
                   initial={{ opacity: 0, x: -20 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : {}}
+                  animate={isInView ? { 
+                    opacity: 1, 
+                    x: 0,
+                    transition: { 
+                      opacity: { duration: 0.5 },
+                      x: { duration: 0.5 }
+                    }
+                  } : {}}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className={`relative rounded-xl p-4 pl-16 cursor-pointer transition-all duration-300 ${
+                  className={`relative rounded-xl p-4 pl-16 cursor-pointer transition-all duration-500 ${
                     isActive || isAnimatedActive 
                       ? 'bg-white/70 shadow-lg ring-1 ring-gray-100' 
                       : 'bg-white/50'
@@ -328,17 +360,23 @@ export function Process() {
                             background: 'linear-gradient(90deg, #3B82F6, #8B5CF6, #10B981, #3B82F6)',
                             backgroundSize: '300% 100%'
                           }}
+                          initial={{ opacity: 0 }}
                           animate={{
+                            opacity: 1,
                             backgroundPosition: ['0% 0%', '100% 0%', '0% 0%'],
                           }}
+                          exit={{ opacity: 0 }}
                           transition={{
-                            duration: 8,
-                            repeat: Infinity,
-                            ease: "easeInOut"
+                            opacity: { duration: 0.3 },
+                            backgroundPosition: {
+                              duration: 8,
+                              repeat: Infinity,
+                              ease: "easeInOut"
+                            }
                           }}
                         />
                       ) : (
-                        <div className={`absolute inset-0 rounded-full bg-gradient-to-br ${step.color} opacity-20 blur-[6px]`} />
+                        <div className={`absolute inset-0 rounded-full bg-gradient-to-br from-gray-300 to-gray-400 opacity-20 blur-[6px]`} />
                       )}
                     </div>
 
@@ -362,17 +400,23 @@ export function Process() {
                                 background: 'linear-gradient(90deg, #3B82F6, #8B5CF6, #10B981, #3B82F6)',
                                 backgroundSize: '300% 100%'
                               }}
+                              initial={{ opacity: 0 }}
                               animate={{
+                                opacity: 1,
                                 backgroundPosition: ['0% 0%', '100% 0%', '0% 0%'],
                               }}
+                              exit={{ opacity: 0 }}
                               transition={{
-                                duration: 8,
-                                repeat: Infinity,
-                                ease: "easeInOut"
+                                opacity: { duration: 0.3 },
+                                backgroundPosition: {
+                                  duration: 8,
+                                  repeat: Infinity,
+                                  ease: "easeInOut"
+                                }
                               }}
                             />
                           ) : (
-                            <div className={`absolute inset-0 rounded-full bg-gradient-to-br ${step.color} opacity-20 blur-[8px]`} />
+                            <div className={`absolute inset-0 rounded-full bg-gradient-to-br from-gray-300 to-gray-400 opacity-20 blur-[8px]`} />
                           )}
                         </div>
 
