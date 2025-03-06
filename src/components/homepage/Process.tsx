@@ -321,9 +321,25 @@ export function Process() {
                       <div className={`w-full h-full rounded-full bg-white shadow-md relative z-10 ${
                         isActive || isAnimatedActive ? 'scale-150' : ''
                       } transition-transform duration-300`} />
-                      <div className={`absolute inset-0 rounded-full bg-gradient-to-br ${step.color} opacity-20 blur-[6px] ${
-                        isActive || isAnimatedActive ? 'scale-200 opacity-60' : ''
-                      } transition-all duration-300`} />
+                      {(isActive || isAnimatedActive) ? (
+                        <motion.div 
+                          className="absolute inset-0 rounded-full blur-[6px] opacity-70 scale-200"
+                          style={{
+                            background: 'linear-gradient(90deg, #3B82F6, #8B5CF6, #10B981, #3B82F6)',
+                            backgroundSize: '300% 100%'
+                          }}
+                          animate={{
+                            backgroundPosition: ['0% 0%', '100% 0%', '0% 0%'],
+                          }}
+                          transition={{
+                            duration: 8,
+                            repeat: Infinity,
+                            ease: "easeInOut"
+                          }}
+                        />
+                      ) : (
+                        <div className={`absolute inset-0 rounded-full bg-gradient-to-br ${step.color} opacity-20 blur-[6px]`} />
+                      )}
                     </div>
 
                     <div>
@@ -339,9 +355,25 @@ export function Process() {
                                 : 'text-gray-400'
                             }`} />
                           </div>
-                          <div className={`absolute inset-0 rounded-full bg-gradient-to-br ${step.color} opacity-20 blur-[8px] transition-all duration-300 ${
-                            isActive || isAnimatedActive ? 'opacity-60 scale-150' : ''
-                          }`} />
+                          {(isActive || isAnimatedActive) ? (
+                            <motion.div 
+                              className="absolute inset-0 rounded-full blur-[8px] opacity-70 scale-150"
+                              style={{
+                                background: 'linear-gradient(90deg, #3B82F6, #8B5CF6, #10B981, #3B82F6)',
+                                backgroundSize: '300% 100%'
+                              }}
+                              animate={{
+                                backgroundPosition: ['0% 0%', '100% 0%', '0% 0%'],
+                              }}
+                              transition={{
+                                duration: 8,
+                                repeat: Infinity,
+                                ease: "easeInOut"
+                              }}
+                            />
+                          ) : (
+                            <div className={`absolute inset-0 rounded-full bg-gradient-to-br ${step.color} opacity-20 blur-[8px]`} />
+                          )}
                         </div>
 
                         {/* Title & Subtitle */}

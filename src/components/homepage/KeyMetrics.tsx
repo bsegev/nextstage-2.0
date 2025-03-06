@@ -126,37 +126,20 @@ export function KeyMetrics() {
                     {metric.title}
                   </div>
                   <div className="flex items-center justify-between flex-1">
-                    <motion.div 
-                      className="font-serif text-4xl sm:text-3xl md:text-5xl lg:text-6xl"
-                      initial={{ scale: 0.9 }}
-                      animate={{ scale: 1 }}
-                      transition={{
-                        type: "spring",
-                        stiffness: 200,
-                        damping: 10
-                      }}
-                    >
-                      <motion.span 
+                    <div className="font-serif text-3xl sm:text-3xl md:text-5xl lg:text-6xl">
+                      <span 
                         className="inline-block"
-                        animate={{ 
-                          backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
-                        }}
-                        transition={{ 
-                          duration: 5,
-                          repeat: Infinity,
-                          ease: "linear"
-                        }}
                         style={{
-                          backgroundSize: "200% auto",
                           backgroundImage: "linear-gradient(90deg, #FFFFF0 0%, #E8E6D9 25%, #D4D1C1 50%, #E8E6D9 75%, #FFFFF0 100%)",
                           WebkitBackgroundClip: "text",
                           WebkitTextFillColor: "transparent",
-                          backgroundClip: "text"
+                          backgroundClip: "text",
+                          backgroundSize: "200% auto"
                         }}
                       >
                         {metric.value}
-                      </motion.span>
-                    </motion.div>
+                      </span>
+                    </div>
                     <div className="w-14 h-14 sm:w-12 sm:h-12 md:w-16 md:h-16 lg:w-20 lg:h-20">
                       <Lottie 
                         animationData={metric.animation}
@@ -171,7 +154,7 @@ export function KeyMetrics() {
                   </div>
                 </div>
                 {/* Dark strip at bottom for description */}
-                <div className="px-4 py-3 bg-[#1C1C1C]/70 text-[#FFFFF0]/60 text-sm sm:text-xs md:text-sm lg:text-base font-serif">
+                <div className="hidden sm:block px-4 py-3 bg-[#1C1C1C]/70 text-[#FFFFF0]/60 text-sm sm:text-xs md:text-sm lg:text-base font-serif">
                   {metric.description}
                 </div>
               </div>

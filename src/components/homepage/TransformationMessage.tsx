@@ -125,25 +125,33 @@ export function TransformationMessage() {
     const currentTouchX = e.touches[0].clientX;
     const currentTouchY = e.touches[0].clientY;
     
-    // Calculate angle of swipe
+    // Calculate deltas
     const deltaX = currentTouchX - touchStart;
     const deltaY = currentTouchY - touchStartY;
+    
+    // Calculate angle of swipe
     const angle = Math.abs(Math.atan2(deltaY, deltaX) * 180 / Math.PI);
     
-    // If the angle is within 45 degrees of horizontal, treat it as a horizontal swipe
-    if (angle <= 45 || angle >= 135) {
-      e.preventDefault(); // Prevent vertical scrolling
+    // Set thresholds for horizontal vs vertical detection
+    const horizontalThreshold = 20; // Minimum horizontal movement to be considered a swipe
+    const angleThreshold = 45;      // Allow diagonal movement within 45 degrees of horizontal
+    
+    // If movement is more horizontal than vertical (within 45 degrees of horizontal)
+    // AND horizontal movement is significant
+    if ((angle <= angleThreshold || angle >= (180 - angleThreshold)) && Math.abs(deltaX) > horizontalThreshold) {
+      e.preventDefault(); // Prevent vertical scrolling when we detect horizontal intent
       
-      const diff = touchStart - currentTouchX;
-      if (Math.abs(diff) > 5) {
-        if (diff > 0) {
-          setSwipeDirection('left');
-        } else {
-          setSwipeDirection('right');
-        }
-        setTouchEnd(currentTouchX);
-        setTouchEndY(currentTouchY);
+      if (deltaX < 0) {
+        setSwipeDirection('left');
+      } else {
+        setSwipeDirection('right');
       }
+      setTouchEnd(currentTouchX);
+      setTouchEndY(currentTouchY);
+    } else {
+      // If it's more vertical than horizontal, update positions but don't prevent default
+      setTouchEnd(currentTouchX);
+      setTouchEndY(currentTouchY);
     }
   };
 
@@ -153,12 +161,18 @@ export function TransformationMessage() {
     const minSwipeDistance = 50;
     const diff = touchStart - touchEnd;
     
-    // Calculate final angle to ensure it was primarily horizontal
+    // Calculate final deltas
     const deltaX = touchEnd - touchStart;
     const deltaY = touchEndY - touchStartY;
+    
+    // Calculate angle of swipe
     const angle = Math.abs(Math.atan2(deltaY, deltaX) * 180 / Math.PI);
     
-    if (Math.abs(diff) > minSwipeDistance && (angle <= 45 || angle >= 135)) {
+    // Allow diagonal swipes within 45 degrees of horizontal
+    const angleThreshold = 45;
+    
+    // Only trigger swipe if horizontal movement is significant and primarily horizontal
+    if (Math.abs(diff) > minSwipeDistance && (angle <= angleThreshold || angle >= (180 - angleThreshold))) {
       if (diff > 0) {
         handleNext();
       } else {

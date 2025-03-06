@@ -402,7 +402,7 @@ export function ValueProp() {
                       </svg>
                     </motion.div>
                     <span className="aurora-text-gradient-light">
-                      Nextstage builds assets that move you forward
+                      NextStage builds assets that move you forward
                       <motion.span
                         className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-500 via-purple-500 to-emerald-500"
                         initial={{ scaleX: 0, opacity: 0 }}

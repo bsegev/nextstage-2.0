@@ -64,12 +64,20 @@ export const GlareCard = ({
     }
   };
 
+  // Check if device is mobile (no hover capability)
+  const isMobileDevice = () => {
+    return typeof window !== 'undefined' && window.matchMedia('(hover: none)').matches;
+  };
+
   return (
     <div
       style={containerStyle}
       className="relative isolate [contain:layout_style] [perspective:600px] delay-&lsqb;var(--delay)&rsqb; duration-&lsqb;var(--duration)&rsqb; ease-&lsqb;var(--easing)&rsqb; will-change-transform"
       ref={refElement}
       onPointerMove={(event) => {
+        // Skip interaction on mobile devices
+        if (isMobileDevice()) return;
+
         const rotateFactor = 0.4;
         const rect = event.currentTarget.getBoundingClientRect();
         const position = {
@@ -98,6 +106,9 @@ export const GlareCard = ({
         updateStyles();
       }}
       onPointerEnter={() => {
+        // Skip interaction on mobile devices
+        if (isMobileDevice()) return;
+
         isPointerInside.current = true;
         if (refElement.current) {
           setTimeout(() => {
@@ -108,6 +119,9 @@ export const GlareCard = ({
         }
       }}
       onPointerLeave={() => {
+        // Skip interaction on mobile devices
+        if (isMobileDevice()) return;
+
         isPointerInside.current = false;
         if (refElement.current) {
           refElement.current.style.removeProperty("--duration");

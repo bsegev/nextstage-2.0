@@ -121,7 +121,7 @@ export function Outro() {
             </div>
 
             <div className="mt-16 sm:mt-24">
-              <p className="text-lg sm:text-xl md:text-2xl text-[#1C1C1C]/80 leading-relaxed font-light max-w-2xl mx-auto">
+              <p className="text-xl sm:text-2xl md:text-3xl text-[#1C1C1C]/80 leading-relaxed font-sans max-w-2xl mx-auto">
                 Between vision and execution, between strategy and craft, there's a moment where{' '}
                 <motion.span 
                   className="aurora-text-gradient-light font-normal"

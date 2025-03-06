@@ -70,7 +70,7 @@ export function LearnCTA() {
             </filter>
             <mask id="frost-mask">
               <rect width="100%" height="100%" fill="white" filter="url(#noise)" />
-              {/* Book - Left */}
+              {/* Graph - Left (Desktop) */}
               <motion.g 
                 initial={{ opacity: 0 }}
                 animate={isInView ? { opacity: 1 } : {}}
@@ -92,7 +92,31 @@ export function LearnCTA() {
                   />
                 </svg>
               </motion.g>
-              {/* Lightbulb - Right */}
+              
+              {/* Graph - Left (Mobile) */}
+              <motion.g 
+                initial={{ opacity: 0 }}
+                animate={isInView ? { opacity: 1 } : {}}
+                transition={{ duration: 0.5 }}
+                className="block md:hidden"
+                style={{ transform: 'translate(5vw, 10vh)' }}
+              >
+                <svg width="150" height="150" viewBox={drawings.graph.viewBox}>
+                  <motion.path
+                    d={drawings.graph.path}
+                    fill="none"
+                    stroke="black"
+                    strokeWidth={2}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    initial={{ pathLength: 0 }}
+                    animate={isInView ? { pathLength: 1 } : {}}
+                    transition={{ duration: 1.5, delay: 0.2 }}
+                  />
+                </svg>
+              </motion.g>
+              
+              {/* Knowledge - Right (Desktop) */}
               <motion.g 
                 initial={{ opacity: 0 }}
                 animate={isInView ? { opacity: 1 } : {}}
@@ -101,6 +125,29 @@ export function LearnCTA() {
                 style={{ transform: 'translate(calc(90vw - 400px), 15vh)' }}
               >
                 <svg width="400" height="400" viewBox={drawings.knowledge.viewBox}>
+                  <motion.path
+                    d={drawings.knowledge.path}
+                    fill="none"
+                    stroke="black"
+                    strokeWidth={2}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    initial={{ pathLength: 0 }}
+                    animate={isInView ? { pathLength: 1 } : {}}
+                    transition={{ duration: 2, delay: 1.7 }}
+                  />
+                </svg>
+              </motion.g>
+              
+              {/* Knowledge - Right (Mobile) */}
+              <motion.g 
+                initial={{ opacity: 0 }}
+                animate={isInView ? { opacity: 1 } : {}}
+                transition={{ duration: 0.5, delay: 1.5 }}
+                className="block md:hidden"
+                style={{ transform: 'translate(calc(95vw - 150px), 10vh)' }}
+              >
+                <svg width="150" height="150" viewBox={drawings.knowledge.viewBox}>
                   <motion.path
                     d={drawings.knowledge.path}
                     fill="none"
