@@ -199,25 +199,104 @@ export function WorkHero() {
                 </span>
               </motion.button>
 
+              {/* Scroll Indicator (replacing mini CTAs) */}
               <motion.div 
-                className="flex items-center gap-6"
+                className="flex items-center justify-center w-full mt-6"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 0.7 }}
                 transition={{ duration: 1, delay: 1.5 }}
               >
-                <motion.button
-                  whileHover={{ opacity: 1, y: -1 }}
-                  className="font-mono text-sm text-[#1C1C1C] hover:aurora-text-gradient-light transition-all duration-300"
+                <motion.div
+                  className="cursor-pointer"
+                  animate={{ y: [0, 8, 0] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                  onClick={() => {
+                    const nextSection = document.querySelector('section:nth-of-type(2)');
+                    if (nextSection) {
+                      nextSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
+                  whileHover={{ 
+                    scale: 1.1,
+                    y: 5,
+                    transition: { duration: 0.2 }
+                  }}
                 >
-                  View Case Studies
-                </motion.button>
-                <div className="h-4 w-px bg-[#1C1C1C]/20" />
-                <motion.button
-                  whileHover={{ opacity: 1, y: -1 }}
-                  className="font-mono text-sm text-[#1C1C1C] hover:aurora-text-gradient-light transition-all duration-300"
-                >
-                  Explore Process
-                </motion.button>
+                  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    {/* First Chevron */}
+                    <motion.path
+                      d="M8 16 L24 32 L40 16"
+                      strokeWidth="4"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      stroke="url(#contentChevronGradient)"
+                      className="drop-shadow-lg"
+                      initial={{ pathLength: 0, opacity: 0.4 }}
+                      animate={{ 
+                        pathLength: [0, 1, 1, 0],
+                        opacity: [0.4, 1, 1, 0.4]
+                      }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        times: [0, 0.4, 0.6, 1]
+                      }}
+                    />
+                    
+                    {/* Second Chevron */}
+                    <motion.path
+                      d="M8 8 L24 24 L40 8"
+                      strokeWidth="4"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      stroke="url(#contentChevronGradient)"
+                      className="drop-shadow-lg"
+                      initial={{ pathLength: 0, opacity: 0.4 }}
+                      animate={{ 
+                        pathLength: [0, 1, 1, 0],
+                        opacity: [0.4, 1, 1, 0.4]
+                      }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        times: [0, 0.4, 0.6, 1],
+                        delay: 0.35
+                      }}
+                    />
+
+                    {/* Gradient Definitions */}
+                    <defs>
+                      <linearGradient id="contentChevronGradient" x1="8" y1="8" x2="40" y2="32" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stopColor="#3B82F6">
+                          <animate
+                            attributeName="stop-color"
+                            values="#3B82F6;#8B5CF6;#10B981;#3B82F6"
+                            dur="4s"
+                            repeatCount="indefinite"
+                          />
+                        </stop>
+                        <stop offset="50%" stopColor="#8B5CF6">
+                          <animate
+                            attributeName="stop-color"
+                            values="#8B5CF6;#10B981;#3B82F6;#8B5CF6"
+                            dur="4s"
+                            repeatCount="indefinite"
+                          />
+                        </stop>
+                        <stop offset="100%" stopColor="#10B981">
+                          <animate
+                            attributeName="stop-color"
+                            values="#10B981;#3B82F6;#8B5CF6;#10B981"
+                            dur="4s"
+                            repeatCount="indefinite"
+                          />
+                        </stop>
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                </motion.div>
               </motion.div>
             </motion.div>
           </div>

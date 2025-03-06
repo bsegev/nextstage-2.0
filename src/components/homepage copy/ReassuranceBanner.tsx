@@ -60,7 +60,7 @@ export function ReassuranceBanner() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.5 }}
                   >
-                    Hey, you've got this
+                    You're in the <span className="aurora-text-gradient-light">right place</span>
                   </motion.h3>
                   <motion.p 
                     className="text-base sm:text-lg text-ethereal-dark/70 leading-relaxed font-['Inter']"
@@ -69,7 +69,7 @@ export function ReassuranceBanner() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: 0.1 }}
                   >
-                    Building something new or scaling an existing business can feel overwhelming. But that's exactly why I'm here – to help you figure things out and make it real, whether you need a sounding board or someone to roll up their sleeves with you.
+                    Whether you're just getting started or planning a complete digital transformation, I'm here to help at whatever level makes sense for you right now.
                   </motion.p>
                 </div>
               </div>
@@ -150,7 +150,7 @@ export function ReassuranceBanner() {
                       />
                       <span className="relative z-10 font-mono text-base sm:text-lg text-[#FFFFF0] flex items-center justify-center sm:justify-start gap-2 sm:gap-3">
                         <IconCalendarEvent className="w-4 h-4 sm:w-5 sm:h-5" />
-                        <span>Schedule Call</span>
+                        <span>Book an intro meeting</span>
                         <motion.span 
                           className="inline-block"
                           animate={{ x: [0, 4, 0] }}

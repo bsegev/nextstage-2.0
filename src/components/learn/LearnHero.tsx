@@ -102,19 +102,117 @@ export function LearnHero() {
                 <div className="absolute inset-0 bg-gradient-to-r from-[#38BDF8] via-[#818CF8] to-[#34D399] opacity-10" />
                 <span className="relative z-10 font-mono text-lg text-[#FFFFF0] flex items-center gap-3">
                   <span>Explore Resources</span>
-                  <span className="transition-transform group-hover:translate-x-1">→</span>
+                  <motion.span 
+                    className="inline-block"
+                    animate={{ x: [0, 4, 0] }}
+                    transition={{
+                      duration: 1.5,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  >→</motion.span>
                 </span>
               </motion.button>
+              
+              {/* Scroll Indicator */}
+              <motion.div 
+                className="flex items-center justify-center w-full mt-6"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 0.7 }}
+                transition={{ duration: 1, delay: 1.5 }}
+              >
+                <motion.div
+                  className="cursor-pointer"
+                  animate={{ y: [0, 8, 0] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                  onClick={() => {
+                    const nextSection = document.querySelector('section:nth-of-type(2)');
+                    if (nextSection) {
+                      nextSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
+                  whileHover={{ 
+                    scale: 1.1,
+                    y: 5,
+                    transition: { duration: 0.2 }
+                  }}
+                >
+                  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    {/* First Chevron */}
+                    <motion.path
+                      d="M8 16 L24 32 L40 16"
+                      strokeWidth="4"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      stroke="url(#learnChevronGradient)"
+                      className="drop-shadow-lg"
+                      initial={{ pathLength: 0, opacity: 0.4 }}
+                      animate={{ 
+                        pathLength: [0, 1, 1, 0],
+                        opacity: [0.4, 1, 1, 0.4]
+                      }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        times: [0, 0.4, 0.6, 1]
+                      }}
+                    />
+                    
+                    {/* Second Chevron */}
+                    <motion.path
+                      d="M8 8 L24 24 L40 8"
+                      strokeWidth="4"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      stroke="url(#learnChevronGradient)"
+                      className="drop-shadow-lg"
+                      initial={{ pathLength: 0, opacity: 0.4 }}
+                      animate={{ 
+                        pathLength: [0, 1, 1, 0],
+                        opacity: [0.4, 1, 1, 0.4]
+                      }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        times: [0, 0.4, 0.6, 1],
+                        delay: 0.35
+                      }}
+                    />
 
-              <div className="flex items-center gap-6 text-ethereal-dark/70">
-                <button className="font-mono text-sm hover:text-ethereal-dark transition-colors">
-                  View Articles
-                </button>
-                <div className="h-4 w-px bg-[#1C1C1C]/20" />
-                <button className="font-mono text-sm hover:text-ethereal-dark transition-colors">
-                  Browse Guides
-                </button>
-              </div>
+                    {/* Gradient Definitions */}
+                    <defs>
+                      <linearGradient id="learnChevronGradient" x1="8" y1="8" x2="40" y2="32" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stopColor="#3B82F6">
+                          <animate
+                            attributeName="stop-color"
+                            values="#3B82F6;#8B5CF6;#10B981;#3B82F6"
+                            dur="4s"
+                            repeatCount="indefinite"
+                          />
+                        </stop>
+                        <stop offset="50%" stopColor="#8B5CF6">
+                          <animate
+                            attributeName="stop-color"
+                            values="#8B5CF6;#10B981;#3B82F6;#8B5CF6"
+                            dur="4s"
+                            repeatCount="indefinite"
+                          />
+                        </stop>
+                        <stop offset="100%" stopColor="#10B981">
+                          <animate
+                            attributeName="stop-color"
+                            values="#10B981;#3B82F6;#8B5CF6;#10B981"
+                            dur="4s"
+                            repeatCount="indefinite"
+                          />
+                        </stop>
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                </motion.div>
+              </motion.div>
             </motion.div>
           </div>
         </div>

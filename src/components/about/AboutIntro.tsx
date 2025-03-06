@@ -44,43 +44,53 @@ export function AboutIntro() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="space-y-16"
+            className="space-y-12 sm:space-y-16"
           >
             {/* Section header */}
-            <div className="flex items-center gap-3 justify-center sm:justify-start">
+            <motion.div 
+              className="inline-flex items-center gap-2 sm:gap-3 mb-6 justify-start"
+              animate={{ y: [0, -4, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            >
               <motion.div 
+                className="h-px w-6 sm:w-8 bg-gradient-to-r from-blue-500/80 to-purple-500/80"
                 initial={{ width: 0 }}
-                animate={{ width: "2rem" }}
-                transition={{ duration: 1, delay: 0.3 }}
-                className="h-px bg-ethereal-dark/20" 
+                whileInView={{ width: "2rem" }}
+                transition={{ duration: 0.8 }}
               />
-              <span className="font-mono text-sm text-ethereal-dark/60 tracking-wider uppercase">
+              <span className="font-mono text-xs sm:text-sm tracking-wider text-ethereal-dark uppercase">
                 My Approach
               </span>
               <motion.div 
+                className="h-px w-6 sm:w-8 bg-gradient-to-r from-purple-500/80 to-emerald-500/80"
                 initial={{ width: 0 }}
-                animate={{ width: "2rem" }}
-                transition={{ duration: 1, delay: 0.3 }}
-                className="h-px bg-ethereal-dark/20" 
+                whileInView={{ width: "2rem" }}
+                transition={{ duration: 0.8 }}
               />
-            </div>
+            </motion.div>
 
-            {/* Main header */}
-            <motion.h2 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-4xl md:text-5xl lg:text-6xl font-serif text-ethereal-dark text-center sm:text-left"
-            >
-              How I Help You <br className="hidden sm:block" />
-              <span className="aurora-text-gradient-light">Build What's Next</span>
-            </motion.h2>
+            {/* Main header with Gradient */}
+            <div className="relative mb-6 sm:mb-8">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif text-ethereal-dark text-left">
+                How I Help You <br className="hidden sm:block" />
+                <span className="block mt-2 sm:mt-3">
+                  <span className="aurora-text-gradient-light relative">
+                    Build What's Next
+                    <motion.span
+                      className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-500 via-purple-500 to-emerald-500"
+                      initial={{ scaleX: 0, opacity: 0 }}
+                      whileInView={{ scaleX: 1, opacity: 1 }}
+                      transition={{ duration: 1, delay: 0.5 }}
+                    />
+                  </span>
+                </span>
+              </h2>
+            </div>
 
             {/* Opening statement */}
             <div>
               <motion.div 
-                className="relative"
+                className="relative mt-8"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
@@ -119,45 +129,45 @@ export function AboutIntro() {
             </div>
 
             {/* Three Column Glare Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-              <GlareCard className="aspect-[3/2] md:aspect-[17/21] bg-gradient-to-br from-[#1C1C1C]/[0.01] to-[#1C1C1C]/[0.07]">
-                <div className="p-6 md:p-8 h-full flex flex-col">
-                  <div className="mb-auto">
-                    <BeakerIcon className="w-6 h-6 md:w-8 md:h-8 text-blue-500/80 mb-4 md:mb-6" />
-                    <h3 className="text-lg md:text-xl font-serif text-ethereal-dark mb-2 md:mb-3">Design × Engineering</h3>
-                    <p className="text-sm text-ethereal-dark/70">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 mt-12 md:mt-16">
+              <GlareCard className="aspect-auto md:aspect-[17/21] bg-gradient-to-br from-[#1C1C1C]/[0.01] to-[#1C1C1C]/[0.07]">
+                <div className="p-4 md:p-8 flex flex-col md:h-full">
+                  <div>
+                    <BeakerIcon className="w-5 h-5 md:w-8 md:h-8 text-blue-500/80 mb-2 md:mb-6 float-right md:float-none md:block" />
+                    <h3 className="text-lg md:text-xl font-serif text-ethereal-dark mb-1 md:mb-3">Design × Engineering</h3>
+                    <p className="text-base md:text-base text-ethereal-dark/80 leading-tight md:leading-relaxed">
                       Bridging aesthetics and functionality to create solutions that work beautifully.
                     </p>
                   </div>
-                  <div className="h-px w-full bg-[#1C1C1C]/[0.05] mt-auto mb-4 md:mb-6" />
+                  <div className="h-px w-full bg-[#1C1C1C]/[0.05] my-3 md:mt-auto md:mb-6" />
                   <div className="text-[10px] md:text-xs text-ethereal-dark/40 font-mono">01 — METHOD</div>
                 </div>
               </GlareCard>
 
-              <GlareCard className="aspect-[3/2] md:aspect-[17/21] bg-gradient-to-br from-[#1C1C1C]/[0.01] to-[#1C1C1C]/[0.07]">
-                <div className="p-6 md:p-8 h-full flex flex-col">
-                  <div className="mb-auto">
-                    <BoltIcon className="w-6 h-6 md:w-8 md:h-8 text-purple-500/80 mb-4 md:mb-6" />
-                    <h3 className="text-lg md:text-xl font-serif text-ethereal-dark mb-2 md:mb-3">Efficient × Mindful</h3>
-                    <p className="text-sm text-ethereal-dark/70">
+              <GlareCard className="aspect-auto md:aspect-[17/21] bg-gradient-to-br from-[#1C1C1C]/[0.01] to-[#1C1C1C]/[0.07]">
+                <div className="p-4 md:p-8 flex flex-col md:h-full">
+                  <div>
+                    <BoltIcon className="w-5 h-5 md:w-8 md:h-8 text-purple-500/80 mb-2 md:mb-6 float-right md:float-none md:block" />
+                    <h3 className="text-lg md:text-xl font-serif text-ethereal-dark mb-1 md:mb-3">Efficient × Mindful</h3>
+                    <p className="text-base md:text-base text-ethereal-dark/80 leading-tight md:leading-relaxed">
                       Moving with purpose while maintaining attention to detail and quality.
                     </p>
                   </div>
-                  <div className="h-px w-full bg-[#1C1C1C]/[0.05] mt-auto mb-4 md:mb-6" />
+                  <div className="h-px w-full bg-[#1C1C1C]/[0.05] my-3 md:mt-auto md:mb-6" />
                   <div className="text-[10px] md:text-xs text-ethereal-dark/40 font-mono">02 — PROCESS</div>
                 </div>
               </GlareCard>
 
-              <GlareCard className="aspect-[3/2] md:aspect-[17/21] bg-gradient-to-br from-[#1C1C1C]/[0.01] to-[#1C1C1C]/[0.07]">
-                <div className="p-6 md:p-8 h-full flex flex-col">
-                  <div className="mb-auto">
-                    <ShieldCheckIcon className="w-6 h-6 md:w-8 md:h-8 text-emerald-500/80 mb-4 md:mb-6" />
-                    <h3 className="text-lg md:text-xl font-serif text-ethereal-dark mb-2 md:mb-3">Guidance × Support</h3>
-                    <p className="text-sm text-ethereal-dark/70">
+              <GlareCard className="aspect-auto md:aspect-[17/21] bg-gradient-to-br from-[#1C1C1C]/[0.01] to-[#1C1C1C]/[0.07]">
+                <div className="p-4 md:p-8 flex flex-col md:h-full">
+                  <div>
+                    <ShieldCheckIcon className="w-5 h-5 md:w-8 md:h-8 text-emerald-500/80 mb-2 md:mb-6 float-right md:float-none md:block" />
+                    <h3 className="text-lg md:text-xl font-serif text-ethereal-dark mb-1 md:mb-3">Guidance × Support</h3>
+                    <p className="text-base md:text-base text-ethereal-dark/80 leading-tight md:leading-relaxed">
                       Providing direction while ensuring you have the backing to succeed.
                     </p>
                   </div>
-                  <div className="h-px w-full bg-[#1C1C1C]/[0.05] mt-auto mb-4 md:mb-6" />
+                  <div className="h-px w-full bg-[#1C1C1C]/[0.05] my-3 md:mt-auto md:mb-6" />
                   <div className="text-[10px] md:text-xs text-ethereal-dark/40 font-mono">03 — PARTNERSHIP</div>
                 </div>
               </GlareCard>

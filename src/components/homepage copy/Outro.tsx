@@ -77,7 +77,7 @@ export function Outro() {
           </div>
 
           {/* Content */}
-          <div className="relative">
+          <div className="relative space-y-0">
             {/* Cube and Circle Preloader */}
             <div className="w-48 h-48 sm:w-64 sm:h-64 mx-auto -mb-16 sm:-mb-24 relative">
               <div className="relative">
@@ -120,7 +120,7 @@ export function Outro() {
               </div>
             </div>
 
-            <div className="mt-16 sm:mt-24">
+            <div className="mt-8 sm:mt-12"> {/* Reduced from mt-24 */}
               <p className="text-lg sm:text-xl md:text-2xl text-[#1C1C1C]/80 leading-relaxed font-light max-w-2xl mx-auto">
                 Between vision and execution, between strategy and craft, there's a moment where{' '}
                 <motion.span 
@@ -146,7 +146,7 @@ export function Outro() {
               </p>
             </div>
 
-            <div className="mt-24 sm:mt-32">
+            <div className="mt-12 sm:mt-16"> {/* Reduced from mt-36 */}
               <motion.p
                 className="text-lg sm:text-xl md:text-2xl font-serif max-w-xl mx-auto"
                 initial={{ opacity: 0 }}
@@ -163,7 +163,7 @@ export function Outro() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 1.2 }}
-              className="font-mono text-sm text-[#1C1C1C]/50 mt-8"
+              className="font-mono text-sm text-[#1C1C1C]/50 mt-2"
             >
               — Ben Segev
             </motion.div>

@@ -374,43 +374,51 @@ export function PlayExperiments() {
               transition={{ duration: 0.8 }}
               className="max-w-2xl mb-32"
             >
-              <div className="flex items-center gap-3 mb-8">
+              {/* Label */}
+              <motion.div 
+                className="inline-flex items-center gap-2 sm:gap-3 mb-6"
+                animate={{ y: [0, -4, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              >
                 <motion.div 
+                  className="h-px w-6 sm:w-8 bg-gradient-to-r from-blue-500/80 to-purple-500/80"
                   initial={{ width: 0 }}
-                  animate={{ width: "2rem" }}
-                  transition={{ duration: 1, delay: 0.3, ease: [0.23, 1, 0.32, 1] }}
-                  className="h-px bg-ethereal-dark/20" 
+                  whileInView={{ width: "2rem" }}
+                  transition={{ duration: 0.8 }}
                 />
-                <span className="font-mono text-sm text-ethereal-dark/60 tracking-wider uppercase">
+                <span className="font-mono text-xs sm:text-sm tracking-wider text-ethereal-dark uppercase">
                   Experimental Lab
                 </span>
                 <motion.div 
+                  className="h-px w-6 sm:w-8 bg-gradient-to-r from-purple-500/80 to-emerald-500/80"
                   initial={{ width: 0 }}
-                  animate={{ width: "2rem" }}
-                  transition={{ duration: 1, delay: 0.3, ease: [0.23, 1, 0.32, 1] }}
-                  className="h-px bg-ethereal-dark/20" 
+                  whileInView={{ width: "2rem" }}
+                  transition={{ duration: 0.8 }}
                 />
+              </motion.div>
+
+              {/* Main Heading with Gradient */}
+              <div className="relative mb-6 sm:mb-8">
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif text-ethereal-dark">
+                  Creative Playground{' '}
+                  <span className="block mt-2 sm:mt-3">
+                    <span className="aurora-text-gradient-light relative">
+                      & Digital Experiments
+                      <motion.span
+                        className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-500 via-purple-500 to-emerald-500"
+                        initial={{ scaleX: 0, opacity: 0 }}
+                        whileInView={{ scaleX: 1, opacity: 1 }}
+                        transition={{ duration: 1, delay: 0.5 }}
+                      />
+                    </span>
+                  </span>
+                </h2>
               </div>
 
-              <motion.h2 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="text-4xl md:text-5xl lg:text-6xl font-serif text-ethereal-dark mb-8"
-              >
-                From Curiosity <br className="hidden sm:block" />
-                <span className="aurora-text-gradient-light">to Creation</span>
-              </motion.h2>
-
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.8, ease: [0.23, 1, 0.32, 1] }}
-                className="text-xl sm:text-2xl text-ethereal-dark/90 font-light leading-relaxed tracking-tight font-sans"
-              >
-                Pushing the limits of tech, design, and AI—driven by what's possible now.
-              </motion.p>
+              {/* Subheading */}
+              <p className="font-sans text-lg sm:text-xl text-ethereal-dark/70 max-w-3xl leading-relaxed">
+                A collection of creative explorations, technical experiments, and passion projects that push the boundaries of what's possible at the intersection of design and technology.
+              </p>
             </motion.div>
 
             {/* Features Grid */}

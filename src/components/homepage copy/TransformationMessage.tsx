@@ -84,7 +84,6 @@ export function TransformationMessage() {
   const [swipeDirection, setSwipeDirection] = useState<'left' | 'right' | null>(null);
   const [touchStartY, setTouchStartY] = useState(0);
   const [touchEndY, setTouchEndY] = useState(0);
-  const [showTutorial, setShowTutorial] = useState(true);
 
   useEffect(() => {
     // Handle window resize
@@ -98,10 +97,6 @@ export function TransformationMessage() {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-
-  const dismissTutorial = () => {
-    setShowTutorial(false);
-  };
 
   const handleNext = () => {
     setCurrentIndex((prev) => (prev + 1) % transformationStages.length);
@@ -178,11 +173,9 @@ export function TransformationMessage() {
     if (!slideRef.current) return;
     
     const rect = slideRef.current.getBoundingClientRect();
-    const x = e.clientX;
-    const y = e.clientY;
-    const relativeX = e.clientX - rect.left;
-    const relativeY = e.clientY - rect.top;
-    const newPosition = relativeX < rect.width / 2 ? 'left' : 'right';
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const newPosition = x < rect.width / 2 ? 'left' : 'right';
     
     if (cursorPosition !== newPosition) {
       if (cursorPosition === null) {
@@ -194,8 +187,8 @@ export function TransformationMessage() {
       }
     }
     setCursorPosition(newPosition);
-    setX(x);
-    setY(y);
+    setX(e.clientX - rect.left);
+    setY(e.clientY - rect.top);
   }, [cursorPosition]);
 
   const handleMouseEnter = useCallback(() => {
@@ -228,81 +221,10 @@ export function TransformationMessage() {
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
-      {/* Tutorial Overlay */}
-      <AnimatePresence>
-        {showTutorial && (
-          <motion.div 
-            className="absolute inset-0 z-30 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            <motion.div 
-              className="w-full max-w-[90%] sm:max-w-sm bg-white rounded-xl shadow-xl overflow-hidden"
-              initial={{ scale: 0.9, y: 20 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.9, y: 20 }}
-              transition={{ duration: 0.3 }}
-            >
-              <div className="flex justify-between items-center p-3 sm:p-4 border-b border-gray-100">
-                <h3 className="text-lg sm:text-xl font-medium text-gray-800">How to Navigate</h3>
-                <button 
-                  onClick={dismissTutorial}
-                  className="text-gray-400 hover:text-gray-600 transition-colors p-1"
-                >
-                  <svg className="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M18 6L6 18M6 6l12 12" className="stroke-current" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </button>
-              </div>
-              
-              <div className="p-4 sm:p-5 space-y-4 sm:space-y-5 max-h-[60vh] overflow-y-auto">
-                <div className="flex items-start sm:items-center gap-3 sm:gap-4">
-                  <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-blue-50 flex items-center justify-center">
-                    <svg className="w-5 h-5 sm:w-6 sm:h-6 text-blue-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M10 19l-7-7m0 0l7-7m-7 7h18" className="stroke-current" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                      <path d="M14 5l7 7m0 0l-7 7m7-7H3" className="stroke-current" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                  </div>
-                  <p className="text-sm sm:text-base text-gray-600">{windowWidth < 768 ? "Swipe left/right" : "Click the arrows"} to navigate between case studies</p>
-                </div>
-                
-                <div className="flex items-start sm:items-center gap-3 sm:gap-4">
-                  <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-green-50 flex items-center justify-center">
-                    <svg className="w-5 h-5 sm:w-6 sm:h-6 text-green-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <circle cx="12" cy="12" r="10" className="stroke-current" strokeWidth="1.5"/>
-                      <path d="M12 16v-4m0-4h.01" className="stroke-current" strokeWidth="1.5" strokeLinecap="round"/>
-                    </svg>
-                  </div>
-                  <p className="text-sm sm:text-base text-gray-600">Click the Details button to see more information about each case</p>
-                </div>
-                
-                <div className="flex items-start sm:items-center gap-3 sm:gap-4">
-                  <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-amber-50 flex items-center justify-center">
-                    <svg className="w-5 h-5 sm:w-6 sm:h-6 text-amber-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M15 10l-3 3m0 0l-3-3m3 3V4m-3 13a5 5 0 01-5-5V8h16v4a5 5 0 01-5 5h-6z" className="stroke-current" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                  </div>
-                  <p className="text-sm sm:text-base text-gray-600">Inside each case, you can read the full story or watch a video walkthrough</p>
-                </div>
-              </div>
-              
-              <button 
-                onClick={dismissTutorial}
-                className="w-full py-3 sm:py-4 bg-[#1C1C1C] text-white font-medium hover:bg-[#1C1C1C]/90 transition-colors"
-              >
-                Got it
-              </button>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
       {/* Background Image Layer */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={currentIndex}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentIndex}
           className="absolute inset-0 w-full h-full"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -311,15 +233,15 @@ export function TransformationMessage() {
             duration: 0.2,
             ease: "easeOut"
           }}
-        >
-          <motion.div 
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ 
+          >
+            <motion.div 
+              className="absolute inset-0 bg-cover bg-center"
+              style={{ 
               backgroundImage: `url(${transformationStages[currentIndex].bgImage})`
-            }}
-          />
-        </motion.div>
-      </AnimatePresence>
+              }}
+            />
+          </motion.div>
+        </AnimatePresence>
 
       {/* Grid and Effects Layer */}
       <div className="absolute inset-0">
@@ -365,47 +287,81 @@ export function TransformationMessage() {
               viewport={{ once: true }}
               className="flex flex-col items-center gap-4"
             >
-              {/* Label */}
-              <motion.div 
-                className="inline-flex items-center gap-2 sm:gap-3 mb-6"
-                animate={{ y: [0, -4, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              >
-                <motion.div 
-                  className="h-px w-6 sm:w-8 bg-gradient-to-r from-blue-500/80 to-purple-500/80"
-                  initial={{ width: 0 }}
-                  whileInView={{ width: "2rem" }}
-                  transition={{ duration: 0.8 }}
-                />
-                <span className="font-mono text-xs sm:text-sm tracking-wider text-[#FFFFF0] uppercase">
+              <div className="inline-flex items-center gap-3">
+                <div className="h-px w-8 bg-gradient-to-r from-[#FFFFF0]/0 via-[#FFFFF0]/20 to-[#FFFFF0]/0" />
+                <motion.span 
+                  className="font-mono text-sm tracking-wider aurora-text-gradient-light"
+                  animate={{
+                    backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                  }}
+                  transition={{
+                    duration: 5,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                  style={{
+                    backgroundSize: "200% auto",
+                  }}
+                >
                   CASE STUDIES
-                </span>
-                <motion.div 
-                  className="h-px w-6 sm:w-8 bg-gradient-to-r from-purple-500/80 to-emerald-500/80"
-                  initial={{ width: 0 }}
-                  whileInView={{ width: "2rem" }}
-                  transition={{ duration: 0.8 }}
-                />
-              </motion.div>
+                </motion.span>
+                <div className="h-px w-8 bg-gradient-to-r from-[#FFFFF0]/0 via-[#FFFFF0]/20 to-[#FFFFF0]/0" />
+              </div>
             </motion.div>
 
-            {/* Main Heading with Gradient */}
-            <div className="relative mb-6 sm:mb-8">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif text-[#FFFFF0]">
-                From Vision{' '}
-                <span className="block mt-2 sm:mt-3">
-                  <span className="aurora-text-gradient-light relative">
-                    to Impact
-                    <motion.span
-                      className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-500 via-purple-500 to-emerald-500"
-                      initial={{ scaleX: 0, opacity: 0 }}
-                      whileInView={{ scaleX: 1, opacity: 1 }}
-                      transition={{ duration: 1, delay: 0.5 }}
-                    />
-                  </span>
+            <motion.h2
+              className="font-serif text-4xl lg:text-6xl mb-8"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+            >
+              <span className="text-[#FFFFF0]">
+                From Vision
+              </span>
+              <motion.span
+                className="block mt-2 relative"
+                initial={{ y: 40, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+              >
+                <motion.span
+                  className="absolute inset-0 aurora-text-gradient-light opacity-50"
+                  animate={{
+                    backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                  }}
+                  transition={{
+                    duration: 5,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                  style={{
+                    backgroundSize: "200% auto",
+                  }}
+                >
+                  to Impact
+                </motion.span>
+                <motion.span
+                  className="absolute inset-0 aurora-text-gradient-light"
+                  animate={{
+                    backgroundPosition: ["100% 50%", "0% 50%", "100% 50%"],
+                  }}
+                  transition={{
+                    duration: 5,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                  style={{
+                    backgroundSize: "200% auto",
+                  }}
+                >
+                  to Impact
+                </motion.span>
+                <span className="relative aurora-text-gradient-light">
+                  to Impact
                 </span>
-              </h2>
-            </div>
+              </motion.span>
+            </motion.h2>
 
             <motion.div
               className="max-w-2xl mx-auto mt-12 text-center space-y-8"
@@ -414,7 +370,7 @@ export function TransformationMessage() {
               viewport={{ once: true }}
               transition={{ delay: 0.3 }}
             >
-              <p className="font-sans text-lg sm:text-xl text-[#FFFFF0]/70 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-xl md:text-2xl text-[#FFFFF0]/70 font-light leading-relaxed tracking-tight">
                 Brands, websites, MVPs, copywriting, decks, design systems, marketing assets – from quick wins to full systems. You get what you need, and more.
               </p>
             </motion.div>
@@ -457,29 +413,17 @@ export function TransformationMessage() {
                   {/* Mobile Info Button */}
                   {windowWidth < 1024 && (
                     <motion.button
-                      className="absolute bottom-4 right-4 px-4 py-2 rounded-full bg-gradient-to-br from-[#FFFFF0]/20 to-[#1C1C1C]/90 backdrop-blur-sm border border-[#FFFFF0]/30 flex items-center justify-center gap-2 z-20 shadow-lg"
+                      className="absolute top-4 right-4 w-10 h-10 rounded-full bg-gradient-to-br from-[#FFFFF0]/10 to-[#1C1C1C]/90 backdrop-blur-sm border border-[#FFFFF0]/20 flex items-center justify-center z-20"
                       onClick={(e: React.MouseEvent) => {
                         e.stopPropagation();
                         setShowInfo(!showInfo);
                       }}
-                      whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      animate={{
-                        y: [0, -3, 0],
-                      }}
-                      transition={{
-                        y: {
-                          duration: 2,
-                          repeat: Infinity,
-                          ease: "easeInOut"
-                        }
-                      }}
                     >
-                      <svg className="w-5 h-5 text-[#FFFFF0]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <svg className="w-5 h-5 text-[#FFFFF0]/80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="12" cy="12" r="10" className="stroke-current" strokeWidth="1.5"/>
                         <path d="M12 16v-4m0-4h.01" className="stroke-current" strokeWidth="1.5" strokeLinecap="round"/>
                       </svg>
-                      <span className="text-sm font-medium text-[#FFFFF0]">View Details</span>
                     </motion.button>
                   )}
                 </motion.div>
@@ -669,19 +613,19 @@ export function TransformationMessage() {
                 {/* Info Tag Button - Desktop Only */}
                 {windowWidth >= 1024 && (
                   <motion.button
-                    className={`absolute top-0 right-0 px-4 py-3 rounded-bl-lg bg-[#1C1C1C]/80 backdrop-blur-sm border-l border-b border-[#FFFFF0]/20 flex items-center justify-center gap-3 group z-20 shadow-lg transition-all duration-300 ${
-                      showInfo ? 'bg-[#1C1C1C]/90 border-[#FFFFF0]/30' : ''
+                    className={`absolute -right-10 top-8 w-20 h-20 rounded-2xl bg-gradient-to-br from-[#FFFFF0]/10 to-[#1C1C1C]/90 backdrop-blur-sm border border-[#FFFFF0]/20 flex items-center justify-center group overflow-hidden z-20 shadow-2xl transition-all duration-300 ${
+                      showInfo ? 'bg-[#FFFFF0]/20 border-[#FFFFF0]/40' : ''
                     }`}
                     onClick={(e: React.MouseEvent) => {
                       e.stopPropagation();
                       setShowInfo(!showInfo);
                     }}
-                    whileHover={{ 
-                      backgroundColor: 'rgba(28, 28, 28, 0.9)',
-                      borderColor: 'rgba(255, 255, 240, 0.3)'
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    animate={{
+                      x: showInfo ? -20 : 0,
                     }}
-                    whileTap={{ scale: 0.98 }}
-                    transition={{ duration: 0.3, ease: "easeOut" }}
+                    transition={{ duration: 0.5, ease: [0.32, 0.72, 0, 1] }}
                     onMouseEnter={(e: React.MouseEvent) => {
                       e.stopPropagation();
                       setCursorPosition('info');
@@ -695,18 +639,32 @@ export function TransformationMessage() {
                       }
                     }}
                   >
-                    <div className="relative w-5 h-5">
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-r from-[#38BDF8]/20 via-[#818CF8]/20 to-[#34D399]/20"
+                      animate={{
+                        opacity: showInfo ? [0.8, 1, 0.8] : [0.5, 1, 0.5],
+                        scale: [1, 1.2, 1],
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                    />
+                    <div className="relative w-8 h-8">
                       <motion.svg 
-                        className="absolute inset-0 text-[#FFFFF0] transition-all duration-300"
+                        className="absolute inset-0 text-[#FFFFF0]/80 transition-all duration-300 group-hover:scale-110"
                         initial={{ opacity: 1, scale: 1, rotate: 0 }}
                         animate={{ 
                           opacity: showInfo ? 0 : 1,
                           scale: showInfo ? 0.5 : 1,
-                          rotate: showInfo ? 90 : 0,
+                          rotate: showInfo ? 180 : 0,
                         }}
                         transition={{ 
-                          duration: 0.3,
-                          ease: "easeInOut"
+                          duration: 0.4,
+                          scale: { duration: 0.2 },
+                          opacity: { duration: 0.2 },
+                          rotate: { duration: 0.4, ease: "easeInOut" }
                         }}
                         viewBox="0 0 24 24" 
                         fill="none" 
@@ -716,27 +674,26 @@ export function TransformationMessage() {
                         <path d="M12 16v-4m0-4h.01" className="stroke-current" strokeWidth="1.5" strokeLinecap="round"/>
                       </motion.svg>
                       <motion.svg
-                        className="absolute inset-0 text-[#FFFFF0] transition-all duration-300"
-                        initial={{ opacity: 0, scale: 0.5, rotate: -90 }}
+                        className="absolute inset-0 text-[#FFFFF0] transition-all duration-300 group-hover:scale-110"
+                        initial={{ opacity: 0, scale: 0.5, rotate: -180 }}
                         animate={{ 
                           opacity: showInfo ? 1 : 0,
                           scale: showInfo ? 1 : 0.5,
-                          rotate: showInfo ? 0 : -90,
+                          rotate: showInfo ? 0 : -180,
                         }}
                         transition={{ 
-                          duration: 0.3,
-                          ease: "easeInOut"
+                          duration: 0.4,
+                          scale: { duration: 0.2, delay: 0.2 },
+                          opacity: { duration: 0.2, delay: 0.2 },
+                          rotate: { duration: 0.4, ease: "easeInOut" }
                         }}
-                        viewBox="0 0 24 24" 
-                        fill="none" 
+                        viewBox="0 0 24 24"
+                        fill="none"
                         xmlns="http://www.w3.org/2000/svg"
                       >
-                        <path d="M18 6L6 18M6 6l12 12" className="stroke-current" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        <path d="M6 6l12 12M6 18L18 6" className="stroke-current" strokeWidth="1.5" strokeLinecap="round"/>
                       </motion.svg>
                     </div>
-                    <span className="text-base font-medium text-[#FFFFF0]">
-                      {showInfo ? 'Close' : 'Details'}
-                    </span>
                   </motion.button>
                 )}
               </motion.div>
@@ -747,13 +704,11 @@ export function TransformationMessage() {
 
       {/* Custom Cursor */}
       <motion.div
-        className="fixed pointer-events-none z-50 mix-blend-difference"
+        className="absolute top-0 left-0 w-20 h-20 pointer-events-none z-50 mix-blend-difference"
         style={{
-          left: x,
-          top: y,
-          transform: 'translate(-50%, -50%)',
-          width: '60px',
-          height: '60px'
+          x,
+          y,
+          transform: `translate(-50%, -50%)`
         }}
       >
         {/* Dark circle background */}
@@ -779,7 +734,7 @@ export function TransformationMessage() {
         >
           <svg 
             viewBox="0 0 24 24" 
-            className="w-8 h-8"
+            className="w-10 h-10"
             style={{ filter: 'drop-shadow(0 0 8px rgba(255,255,255,0.4))' }}
           >
             <defs>
@@ -812,7 +767,7 @@ export function TransformationMessage() {
           }}
           transition={{ duration: 0.2 }}
         >
-          <div className="w-3 h-3 rounded-full bg-[#FFFFF0]/80" />
+          <div className="w-4 h-4 rounded-full bg-[#FFFFF0]/80" />
         </motion.div>
       </motion.div>
 

@@ -4,169 +4,81 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { XMarkIcon } from '@heroicons/react/24/outline';
+import { RocketLaunchIcon, ArrowTrendingUpIcon, WrenchScrewdriverIcon } from '@heroicons/react/24/outline';
 import { cn } from '@/lib/utils';
+import { 
+  BrainCircuit, 
+  Workflow, 
+  LayoutPanelTop,
+  Sparkles,
+  ArrowUpDown,
+  GitBranch
+} from 'lucide-react';
 
 const collaborators = [
   {
-    title: "Founders & Owners",
-    description: "Building something meaningful takes vision and execution",
+    title: "Launch",
+    subtitle: "From Idea to Market",
+    description: "For founders and businesses ready to build a strong foundation.",
     accent: "blue",
     icon: (
-      <svg className="w-12 h-12" viewBox="0 0 48 48" fill="none">
-        <motion.path
-          d="M24 8L8 16V32L24 40L40 32V16L24 8Z"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ 
-            pathLength: 1, 
-            opacity: 1,
-            transition: { duration: 1.5, ease: "easeInOut" }
-          }}
-        />
-        <motion.path
-          d="M24 8V24M8 16L24 24L40 16"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ 
-            pathLength: 1, 
-            opacity: 1,
-            transition: { duration: 1.5, delay: 0.5, ease: "easeInOut" }
-          }}
-        />
-      </svg>
+      <RocketLaunchIcon className="w-12 h-12 stroke-[1.5]" />
     ),
     detailedSteps: [
-      { text: "Early-stage Startups" },
-      { text: "Small Business Owners" },
-      { text: "Solo Entrepreneurs" },
-      { text: "Tech Founders" },
-      { text: "Creative Agency Owners" },
-      { text: "Outcome: Transform your vision into a scalable reality with strategic design that grows with your business." }
-    ]
+      { text: "1. Brand & Positioning Strategy" },
+      { text: "2. Website & Core Assets" },
+      { text: "3. AI-Enhanced Operations" },
+      { text: "Outcome: Launch-ready brand and systems that position you for growth." }
+    ],
+    cta: "See Launch Process"
   },
   {
-    title: "Team Leaders",
-    description: "Empowering your team to deliver their best work",
+    title: "Scale",
+    subtitle: "From Market to Growth",
+    description: "For businesses ready to accelerate and optimize.",
     accent: "purple",
     icon: (
-      <svg className="w-12 h-12" viewBox="0 0 48 48" fill="none">
-        <motion.path
-          d="M24 16C26.2091 16 28 14.2091 28 12C28 9.79086 26.2091 8 24 8C21.7909 8 20 9.79086 20 12C20 14.2091 21.7909 16 24 16Z"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ 
-            pathLength: 1, 
-            opacity: 1,
-            transition: { duration: 1.5, ease: "easeInOut" }
-          }}
-        />
-        <motion.path
-          d="M12 36C14.2091 36 16 34.2091 16 32C16 29.7909 14.2091 28 12 28C9.79086 28 8 29.7909 8 32C8 34.2091 9.79086 36 12 36Z"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ 
-            pathLength: 1, 
-            opacity: 1,
-            transition: { duration: 1.5, ease: "easeInOut" }
-          }}
-        />
-        <motion.path
-          d="M36 36C38.2091 36 40 34.2091 40 32C40 29.7909 38.2091 28 36 28C33.7909 28 32 29.7909 32 32C32 34.2091 33.7909 36 36 36Z"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ 
-            pathLength: 1, 
-            opacity: 1,
-            transition: { duration: 1.5, ease: "easeInOut" }
-          }}
-        />
-        <motion.path
-          d="M24 16V28M16 32L20 28M32 32L28 28"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ 
-            pathLength: 1, 
-            opacity: 1,
-            transition: { duration: 1.5, delay: 0.5, ease: "easeInOut" }
-          }}
-        />
-      </svg>
+      <ArrowTrendingUpIcon className="w-12 h-12 stroke-[1.5]" />
     ),
     detailedSteps: [
-      { text: "Innovation Directors" },
-      { text: "Brand Strategists" },
-      { text: "UX Department Heads" },
-      { text: "Digital Transformation Leads" },
-      { text: "R&D Team Leaders" },
-      { text: "Outcome: Transform your team's capabilities with strategic frameworks and tools that elevate quality and accelerate delivery." }
-    ]
+      { text: "1. Growth Strategy & Systems" },
+      { text: "2. Sales & Marketing Automation" },
+      { text: "3. Process Optimization" },
+      { text: "Outcome: Efficient systems and assets that help you compete at a higher level." }
+    ],
+    cta: "See Scale Process"
   },
   {
-    title: "Project Leads",
-    description: "Delivering results when specific initiatives need expert execution",
+    title: "Pivot",
+    subtitle: "Strategic Realignment",
+    description: "For established businesses changing direction.",
     accent: "emerald",
     icon: (
-      <svg className="w-12 h-12" viewBox="0 0 48 48" fill="none">
-        <motion.path
-          d="M12 8H36C37.1046 8 38 8.89543 38 10V38C38 39.1046 37.1046 40 36 40H12C10.8954 40 10 39.1046 10 38V10C10 8.89543 10.8954 8 12 8Z"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ 
-            pathLength: 1, 
-            opacity: 1,
-            transition: { duration: 1.5, ease: "easeInOut" }
-          }}
-        />
-        <motion.path
-          d="M16 16H32M16 24H32M16 32H24"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ 
-            pathLength: 1, 
-            opacity: 1,
-            transition: { duration: 1.5, delay: 0.5, ease: "easeInOut" }
-          }}
-        />
-        <motion.path
-          d="M38 16L42 16M38 24L42 24M38 32L42 32"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ 
-            pathLength: 1, 
-            opacity: 1,
-            transition: { duration: 1.5, delay: 0.75, ease: "easeInOut" }
-          }}
-        />
-      </svg>
+      <GitBranch className="w-12 h-12 stroke-[1.5]" />
     ),
     detailedSteps: [
-      { text: "Product Managers" },
-      { text: "Project Owners" },
-      { text: "Marketing Leads" },
-      { text: "Development Leads" },
-      { text: "Initiative Owners" },
-      { text: "Outcome: Get strategic support and expert execution for your specific initiatives without adding permanent overhead." }
-    ]
+      { text: "1. Market Transition Plan" },
+      { text: "2. Brand & Message Evolution" },
+      { text: "3. Systems Adaptation" },
+      { text: "Outcome: Smooth transition that maintains momentum and trust." }
+    ],
+    cta: "See Pivot Process"
+  },
+  {
+    title: "Support",
+    subtitle: "Reliable External Help",
+    description: "For lean teams who need reliable external support and optimization.",
+    accent: "amber",
+    icon: (
+      <WrenchScrewdriverIcon className="w-12 h-12 stroke-[1.5]" />
+    ),
+    detailedSteps: [
+      { text: "1. Team & Process Assessment" },
+      { text: "2. Support System Design" },
+      { text: "3. Ongoing Optimization" },
+      { text: "Outcome: Reliable external support that helps your team stay lean and effective." }
+    ],
+    cta: "See Support Process"
   }
 ];
 
@@ -283,8 +195,13 @@ const LoaderCore = ({
   value?: number;
   title: string;
 }) => {
+  const getIconForTitle = (title: string) => {
+    const collaborator = collaborators.find(c => c.title === title);
+    return collaborator?.icon || null;
+  };
+
   return (
-    <div className="flex relative justify-start max-w-xl mx-auto flex-col mt-16 sm:mt-40 px-4 sm:px-0">
+    <div className="flex relative justify-start max-w-xl mx-auto flex-col px-4 sm:px-0">
       {[{ text: title, isTitle: true }, ...loadingStates].map((state, index) => {
         const distance = Math.abs(index - value);
         const opacity = Math.max(1 - distance * 0.2, 0);
@@ -295,100 +212,66 @@ const LoaderCore = ({
           <motion.div
             key={index}
             className={cn(
-              "text-left flex gap-2",
-              isTitle ? "mb-4 sm:mb-6" : "mb-3 sm:mb-4",
-              isOutcome && "mt-2"
+              "text-left flex gap-3 sm:gap-4",
+              isTitle ? "mb-6 sm:mb-8" : "mb-4 sm:mb-6",
+              isOutcome && "mt-4"
             )}
             initial={{ opacity: 0, y: -(value * 40) }}
             animate={{ opacity: opacity, y: -(value * 40) }}
             transition={{ duration: 0.5 }}
           >
-            <div className="flex-shrink-0">
-              {!isTitle && !isOutcome && index > value && (
-                <CheckIcon className="w-5 h-5 sm:w-6 sm:h-6 text-ethereal-dark dark:text-white" />
-              )}
-              {!isTitle && !isOutcome && index <= value && (
-                <CheckFilled className={cn(
-                  "w-5 h-5 sm:w-6 sm:h-6 text-ethereal-dark dark:text-white",
-                  value === index && "text-ethereal-dark dark:text-lime-500 opacity-100"
-                )} />
-              )}
-              {!isTitle && isOutcome && (
-                <OutcomeIcon className={cn(
-                  "w-5 h-5 sm:w-6 sm:h-6 text-emerald-500 flex-shrink-0",
-                  value === index && "opacity-100"
-                )} />
+            <div className="flex-shrink-0 mt-1">
+              {isTitle ? (
+                <div className="w-12 h-12 mb-2">
+                  {getIconForTitle(state.text)}
+                </div>
+              ) : (
+                !isOutcome && (
+                  <div className={cn(
+                    "w-5 h-5 rounded-full border-2 flex items-center justify-center",
+                    index <= value 
+                      ? "border-ethereal-dark bg-ethereal-dark" 
+                      : "border-ethereal-dark/30"
+                  )}>
+                    {index <= value && (
+                      <svg className="w-3 h-3 text-white" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    )}
+                  </div>
+                )
               )}
             </div>
-            <span className={cn(
-              "text-ethereal-dark dark:text-white text-sm sm:text-base",
-              isTitle ? "font-serif text-xl sm:text-2xl" : "",
-              isOutcome ? "text-emerald-500 font-medium max-w-[280px] sm:max-w-[320px] leading-snug" : "",
-              value === index && !isTitle && !isOutcome && "text-ethereal-dark dark:text-lime-500 opacity-100"
+            <div className={cn(
+              "flex-grow py-1",
+              isTitle && "pt-1"
             )}>
-              {isOutcome ? (
+              {isTitle ? (
                 <>
-                  <span className="font-medium block mb-1">Outcome:</span>
-                  <span className="block text-sm sm:text-base">{state.text.replace('Outcome: ', '')}</span>
+                  <h3 className="text-2xl font-serif text-ethereal-dark mb-2">
+                    {state.text}
+                  </h3>
+                  <p className="text-ethereal-dark/70 text-base">
+                    {loadingStates[0].text}
+                  </p>
                 </>
               ) : (
-                state.text
+                <span className={cn(
+                  "text-base leading-relaxed",
+                  isOutcome 
+                    ? "text-emerald-600 font-medium" 
+                    : index <= value 
+                      ? "text-ethereal-dark" 
+                      : "text-ethereal-dark/50"
+                )}>
+                  {state.text}
+                </span>
               )}
-            </span>
+            </div>
           </motion.div>
         );
       })}
     </div>
-  );
-};
-
-// Add these icon components at the top of the file
-const CheckIcon = ({ className }: { className?: string }) => {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      strokeWidth={1.5}
-      stroke="currentColor"
-      className={cn("w-6 h-6", className)}
-    >
-      <path d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-    </svg>
-  );
-};
-
-const CheckFilled = ({ className }: { className?: string }) => {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      className={cn("w-6 h-6", className)}
-    >
-      <path
-        fillRule="evenodd"
-        d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z"
-        clipRule="evenodd"
-      />
-    </svg>
-  );
-};
-
-const OutcomeIcon = ({ className }: { className?: string }) => {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      className={cn("w-6 h-6", className)}
-    >
-      <path
-        fillRule="evenodd"
-        d="M8.603 3.799A4.49 4.49 0 0112 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 013.498 1.307 4.491 4.491 0 011.307 3.497A4.49 4.49 0 0121.75 12a4.49 4.49 0 01-1.549 3.397 4.491 4.491 0 01-1.307 3.497 4.491 4.491 0 01-3.497 1.307A4.49 4.49 0 0112 21.75a4.49 4.49 0 01-3.397-1.549 4.49 4.49 0 01-3.498-1.306 4.491 4.491 0 01-1.307-3.498A4.49 4.49 0 012.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 011.307-3.497 4.49 4.49 0 013.497-1.307zm7.007 6.387a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
-        clipRule="evenodd"
-      />
-    </svg>
   );
 };
 
@@ -441,71 +324,106 @@ export function WhoIWorkWith() {
   return (
     <motion.section
       ref={containerRef}
-      className="relative py-32 overflow-hidden font-sans bg-white"
+      className="relative py-24 sm:py-32 lg:py-40 overflow-hidden font-sans"
     >
-      {/* Sophisticated background */}
+      {/* Premium background elements */}
+      <div className="absolute inset-0 bg-gradient-to-b from-white via-gray-50/50 to-white">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(59,130,246,0.08),transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,_rgba(147,51,234,0.08),transparent_50%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(45deg,rgba(255,255,255,0.9),rgba(255,255,255,0.4)_50%,rgba(255,255,255,0.9))]" />
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(59,130,246,0.03),transparent_70%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,_rgba(147,51,234,0.03),transparent_70%)]" />
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-200/20 rounded-full mix-blend-multiply filter blur-3xl animate-blob" />
+          <div className="absolute top-0 right-1/4 w-96 h-96 bg-purple-200/20 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000" />
+          <div className="absolute bottom-0 left-1/3 w-96 h-96 bg-emerald-200/20 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-4000" />
+        </div>
+        <div className="absolute inset-0 backdrop-blur-[100px]" />
       </div>
 
-      <div className="container mx-auto px-4">
-        <div className="max-w-6xl mx-auto">
-          {/* Header */}
+      <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[90rem] mx-auto">
+          {/* Header with enhanced styling */}
           <motion.div 
-            className="max-w-3xl mx-auto text-center mb-16"
+            className="max-w-3xl mx-auto text-center mb-16 sm:mb-20"
             style={{ y }}
           >
-            <div className="flex items-center justify-center gap-3 mb-4">
+            {/* Label with lines */}
+            <motion.div 
+              className="inline-flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6"
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+            >
               <motion.div 
+                className="h-px w-6 sm:w-8 bg-ethereal-dark/20"
                 initial={{ width: 0 }}
-                animate={{ width: "2rem" }}
-                transition={{ duration: 1, delay: 0.3, ease: [0.23, 1, 0.32, 1] }}
-                className="h-px bg-ethereal-dark/20" 
+                whileInView={{ width: "2rem" }}
+                transition={{ duration: 0.8 }}
               />
-              <span className="font-mono text-sm text-ethereal-dark/60 tracking-wider uppercase">
-                Who I Work With
+              <span className="font-mono text-xs sm:text-sm tracking-wider text-ethereal-dark/60 uppercase">
+                How I Can Help
               </span>
               <motion.div 
+                className="h-px w-6 sm:w-8 bg-ethereal-dark/20"
                 initial={{ width: 0 }}
-                animate={{ width: "2rem" }}
-                transition={{ duration: 1, delay: 0.3, ease: [0.23, 1, 0.32, 1] }}
-                className="h-px bg-ethereal-dark/20" 
+                whileInView={{ width: "2rem" }}
+                transition={{ duration: 0.8 }}
               />
-            </div>
+            </motion.div>
 
-            <motion.h2 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-4xl md:text-5xl lg:text-6xl font-serif text-ethereal-dark mb-6"
-            >
-              For Those Ready to
+            {/* Main title with animated gradient */}
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-6xl text-center text-ethereal-dark">
+              The NextStage
               <motion.span
-                className="block mt-2"
+                className="block mt-1 sm:mt-2 relative"
                 initial={{ y: 40, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
               >
-                <span className="aurora-text-gradient-light">Build What's Next</span>
+                <motion.span
+                  className="absolute inset-0 aurora-text-gradient-light opacity-50"
+                  animate={{
+                    backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                  }}
+                  transition={{
+                    duration: 5,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                  style={{
+                    backgroundSize: "200% auto",
+                  }}
+                >
+                  Framework
+                </motion.span>
+                <motion.span
+                  className="absolute inset-0 aurora-text-gradient-light"
+                  animate={{
+                    backgroundPosition: ["100% 50%", "0% 50%", "100% 50%"],
+                  }}
+                  transition={{
+                    duration: 5,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                  style={{
+                    backgroundSize: "200% auto",
+                  }}
+                >
+                  Framework
+                </motion.span>
+                <span className="relative aurora-text-gradient-light">
+                  Framework
+                </span>
               </motion.span>
-            </motion.h2>
+            </h2>
 
             {/* Subtitle */}
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-lg text-ethereal-dark/70 max-w-2xl mx-auto font-light leading-relaxed"
-            >
-              I help build digital experiences & products through strategic design systems & deliverables – turning challenges into elegant solutions.
-            </motion.p>
+            <p className="mt-4 sm:mt-6 text-center text-ethereal-dark/70 max-w-2xl mx-auto text-base sm:text-lg font-sans">
+              Most businesses struggle because they lack one of three things—a solid strategy, an effective brand, or the right tech to scale. I help solve that.
+            </p>
           </motion.div>
 
-          {/* Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-16 px-4 sm:px-0">
+          {/* Cards with enhanced premium styling */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 lg:gap-12 mb-24 max-w-[90rem] mx-auto">
             {collaborators.map((item, i) => (
               <motion.div
                 key={item.title}
@@ -516,84 +434,95 @@ export function WhoIWorkWith() {
                 transition={{ duration: 0.5, delay: i * 0.1 }}
               >
                 <motion.div 
-                  className={`relative p-6 sm:p-8 rounded-lg border border-transparent 
-                    hover:border-${item.accent}-200/20 transition-all duration-500 
-                    flex flex-col items-center justify-center text-center cursor-pointer aspect-[4/3] sm:aspect-[3/2] lg:aspect-square
-                    ${activeCard === i ? `border-${item.accent}-200/40 bg-${item.accent}-50/5` : ''}`}
+                  className={cn(
+                    "relative p-8 sm:p-10 rounded-3xl h-full min-h-[380px]",
+                    "transition-all duration-500 cursor-pointer",
+                    "bg-white/40 backdrop-blur-xl",
+                    "border border-white/60 group-hover:border-white",
+                    "shadow-[0_8px_16px_rgb(0_0_0/0.04)] group-hover:shadow-[0_16px_32px_rgb(0_0_0/0.08)]",
+                    "before:absolute before:inset-0 before:rounded-3xl before:bg-gradient-to-b before:from-white/80 before:to-white/20 before:opacity-80 before:-z-10",
+                    activeCard === i && `ring-2 ring-${item.accent}-400/50 ring-offset-2 ring-offset-white`
+                  )}
                   onClick={() => handleCardClick(i)}
-                  whileHover={{ scale: 1.02 }}
+                  whileHover={{ scale: 1.02, y: -4 }}
                 >
-                  {/* Hover effect */}
-                  <motion.div
-                    className={cn(
-                      "absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-500 rounded-lg",
-                      item.title === "Founders & Owners" && "bg-gradient-to-br from-white to-blue-50/50",
-                      item.title === "Team Leaders" && "bg-gradient-to-br from-white to-purple-50/50",
-                      item.title === "Project Leads" && "bg-gradient-to-br from-white to-emerald-50/50"
-                    )}
-                    initial={false}
-                    whileHover={{ scale: 1.02 }}
-                  />
-                  
-                  {/* Icon */}
-                  <motion.div
-                    className={`text-4xl mb-6 text-${item.accent}-500/80`}
-                    animate={{
-                      rotate: [0, 10, 0],
-                      scale: [1, 1.1, 1],
-                    }}
-                    transition={{
-                      duration: 4,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                      delay: i * 0.2,
-                    }}
-                  >
+                  {/* Premium icon container */}
+                  <div className="flex items-start gap-6 mb-10">
+                    <div className={cn(
+                      "p-5 rounded-2xl bg-gradient-to-br from-white to-white/90",
+                      `text-${item.accent}-500 shadow-lg group-hover:shadow-xl transition-all duration-500`,
+                      `group-hover:bg-gradient-to-br group-hover:from-${item.accent}-50/90 group-hover:to-white`,
+                      "border border-white group-hover:border-white/80",
+                      "relative overflow-hidden"
+                    )}>
+                      <div className={cn(
+                        "absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500",
+                        `bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-from),transparent_70%)]`,
+                        `from-${item.accent}-100/40`
+                      )} />
+                      <div className="w-16 h-16 stroke-[1.5] relative">
                     {item.icon}
-                  </motion.div>
-
-                  {/* Content */}
-                  <div className="relative space-y-2">
+                      </div>
+                    </div>
+                    <div className="text-left pt-2">
                     <h3 className={cn(
-                      "text-xl sm:text-2xl font-sans font-light",
-                      item.title === "Project Leads" 
-                        ? "bg-gradient-to-r from-emerald-500 to-teal-500 bg-clip-text text-transparent"
-                        : `text-${item.accent}-600/90`
+                        "text-3xl font-serif mb-3",
+                        `text-${item.accent}-600 group-hover:text-${item.accent}-700`
                     )}>
                       {item.title}
                     </h3>
-                    <p className="text-sm sm:text-base text-ethereal-dark/70 font-sans">
+                      <p className={cn(
+                        "text-sm font-mono tracking-wide",
+                        `text-${item.accent}-500/90 group-hover:text-${item.accent}-600`,
+                        "relative inline-block"
+                      )}>
+                        {item.subtitle}
+                        <motion.div 
+                          className={`absolute -bottom-1 left-0 right-0 h-px bg-${item.accent}-400/30`}
+                          initial={{ scaleX: 0 }}
+                          whileInView={{ scaleX: 1 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.8, delay: 0.2 }}
+                        />
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Premium description */}
+                  <p className="font-sans text-lg leading-relaxed text-ethereal-dark/80 mb-16">
                       {item.description}
                     </p>
                     
-                    {/* Learn more hint stays the same */}
+                  {/* Premium CTA */}
+                  <div className="absolute bottom-8 sm:bottom-10 left-8 sm:left-10 right-8 sm:right-10">
                     <motion.div 
-                      className="mt-4 flex items-center justify-center gap-1.5 text-sm"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 0.6 }}
-                      whileHover={{ opacity: 1 }}
+                      className={cn(
+                        "flex items-center justify-between",
+                        "p-4 rounded-xl transition-all duration-300",
+                        `group-hover:bg-${item.accent}-50/90`,
+                        "border border-transparent group-hover:border-white/20",
+                        "relative overflow-hidden"
+                      )}
+                      whileHover={{ x: 5 }}
                     >
+                      <div className={cn(
+                        "absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500",
+                        `bg-gradient-to-r from-${item.accent}-50/20 to-transparent`
+                      )} />
                       <span className={cn(
-                        "font-mono tracking-wide",
-                        item.title === "Founders & Owners" && "text-blue-600/90",
-                        item.title === "Team Leaders" && "text-purple-600/90",
-                        item.title === "Project Leads" && "text-emerald-600/90"
+                        "text-sm font-mono font-medium relative",
+                        `text-${item.accent}-600 group-hover:text-${item.accent}-700`
                       )}>
-                        Learn more
+                        {item.cta}
                       </span>
                       <motion.svg 
-                        xmlns="http://www.w3.org/2000/svg" 
                         className={cn(
-                          "w-4 h-4",
-                          item.title === "Founders & Owners" && "text-blue-600/90",
-                          item.title === "Team Leaders" && "text-purple-600/90",
-                          item.title === "Project Leads" && "text-emerald-600/90"
+                          "w-5 h-5 relative",
+                          `text-${item.accent}-500 group-hover:text-${item.accent}-600`
                         )}
                         viewBox="0 0 20 20" 
                         fill="currentColor"
-                        initial={{ x: 0 }}
-                        whileHover={{ x: 3 }}
-                        transition={{ type: "spring", stiffness: 400 }}
+                        whileHover={{ x: 2 }}
                       >
                         <path 
                           fillRule="evenodd" 
@@ -603,26 +532,12 @@ export function WhoIWorkWith() {
                       </motion.svg>
                     </motion.div>
                   </div>
-
-                  {/* Decorative line */}
-                  <motion.div
-                    className={cn(
-                      "absolute bottom-0 left-0 right-0 h-px",
-                      item.title === "Founders & Owners" && "bg-gradient-to-r from-transparent via-blue-300/30 to-transparent",
-                      item.title === "Team Leaders" && "bg-gradient-to-r from-transparent via-purple-300/30 to-transparent",
-                      item.title === "Project Leads" && "bg-gradient-to-r from-transparent via-emerald-300/30 to-transparent"
-                    )}
-                    initial={{ scaleX: 0 }}
-                    whileInView={{ scaleX: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1, delay: 0.5 + i * 0.1 }}
-                  />
                 </motion.div>
               </motion.div>
             ))}
           </div>
 
-          {/* Primary CTA */}
+          {/* Enhanced Primary CTA with premium styling */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -633,10 +548,14 @@ export function WhoIWorkWith() {
               onClick={() => scrollToElement('brand-anatomy')}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="group relative px-10 py-5 bg-[#1C1C1C] hover:bg-[#1C1C1C]/90 transition-all duration-300 rounded-xl overflow-hidden shadow-lg"
+              className="group relative px-16 py-7 overflow-hidden rounded-2xl"
             >
+              {/* Premium gradient background */}
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-emerald-600 opacity-90 group-hover:opacity-100 transition-opacity" />
+              
+              {/* Animated gradient overlay */}
               <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-[#38BDF8] via-[#818CF8] to-[#34D399] opacity-10"
+                className="absolute inset-0 bg-gradient-to-r from-blue-400 via-purple-400 to-emerald-400"
                 animate={{
                   backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
                 }}
@@ -647,33 +566,44 @@ export function WhoIWorkWith() {
                 }}
                 style={{
                   backgroundSize: "200% auto",
+                  opacity: 0.4,
                 }}
               />
-              <span className="relative z-10 font-mono text-lg text-[#FFFFF0] flex items-center gap-2">
-                See What Can Be Done
-                <svg 
-                  className="w-4 h-4 transition-transform group-hover:translate-y-0.5" 
+              
+              {/* Shine effect */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000" />
+              </div>
+              
+              {/* Border gradient */}
+              <div className="absolute inset-0 p-[1px] rounded-2xl overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-r from-white/40 via-white/60 to-white/40 opacity-50" />
+              </div>
+              
+              {/* Content */}
+              <span className="relative font-mono text-xl text-white flex items-center gap-4">
+                Schedule Call
+                <motion.svg 
+                  className="w-5 h-5 transition-transform group-hover:translate-x-1" 
                   viewBox="0 0 24 24" 
                   fill="none" 
                   stroke="currentColor" 
                   strokeWidth="2"
                 >
-                  <path d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                </svg>
+                  <path d="M9 5l7 7-7 7" />
+                </motion.svg>
               </span>
             </motion.button>
           </motion.div>
-        </div>
-      </div>
 
-      {/* Add the modal */}
+          {/* Modal */}
       <AnimatePresence mode="wait">
         {showDetailedSteps && activeCard !== null && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="w-full h-full fixed inset-0 z-[100] flex items-center justify-center bg-surface-50/80 backdrop-blur-xl p-4 sm:p-0"
+                className="fixed inset-0 z-[100] flex items-center justify-center bg-white"
           >
             {/* Close button */}
             <button
@@ -681,24 +611,23 @@ export function WhoIWorkWith() {
                 setShowDetailedSteps(false);
                 setCurrentDetailedStep(0);
               }}
-              className="absolute top-4 right-4 sm:top-6 sm:right-6 p-2 rounded-full bg-black hover:opacity-70 transition-opacity z-[102]"
+                  className="absolute top-4 right-4 p-2 rounded-full bg-black hover:opacity-70 transition-opacity z-[102]"
             >
-              <XMarkIcon className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+                  <XMarkIcon className="w-4 h-4 text-white" />
             </button>
 
-            <div className="h-[80vh] sm:h-96 relative w-full max-w-lg sm:max-w-none">
+                <div className="w-full h-full flex items-center justify-center px-6 sm:px-4">
               <LoaderCore 
                 value={currentDetailedStep} 
                 loadingStates={collaborators[activeCard].detailedSteps}
                 title={collaborators[activeCard].title}
               />
             </div>
-            
-            {/* Background gradient */}
-            <div className="bg-gradient-to-t inset-x-0 z-[101] bottom-0 bg-surface-50 h-full absolute [mask-image:radial-gradient(900px_at_center,transparent_30%,white)]" />
           </motion.div>
         )}
       </AnimatePresence>
+        </div>
+      </div>
     </motion.section>
   );
 } 

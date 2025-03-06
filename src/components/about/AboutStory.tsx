@@ -61,35 +61,47 @@ export function AboutStory() {
             className="space-y-16"
           >
             {/* Section header */}
-            <div className="flex items-center gap-3 justify-center">
+            <div className="flex justify-center w-full">
               <motion.div 
-                initial={{ width: 0 }}
-                animate={{ width: "2rem" }}
-                transition={{ duration: 1, delay: 0.3 }}
-                className="h-px bg-ethereal-dark/20" 
-              />
-              <span className="font-mono text-sm text-ethereal-dark/60 tracking-wider uppercase">
-                The Journey
-              </span>
-              <motion.div 
-                initial={{ width: 0 }}
-                animate={{ width: "2rem" }}
-                transition={{ duration: 1, delay: 0.3 }}
-                className="h-px bg-ethereal-dark/20" 
-              />
+                className="inline-flex items-center gap-2 sm:gap-3 mb-6"
+                animate={{ y: [0, -4, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <motion.div 
+                  className="h-px w-6 sm:w-8 bg-gradient-to-r from-blue-500/80 to-purple-500/80"
+                  initial={{ width: 0 }}
+                  whileInView={{ width: "2rem" }}
+                  transition={{ duration: 0.8 }}
+                />
+                <span className="font-mono text-xs sm:text-sm tracking-wider text-ethereal-dark uppercase">
+                  The Journey
+                </span>
+                <motion.div 
+                  className="h-px w-6 sm:w-8 bg-gradient-to-r from-purple-500/80 to-emerald-500/80"
+                  initial={{ width: 0 }}
+                  whileInView={{ width: "2rem" }}
+                  transition={{ duration: 0.8 }}
+                />
+              </motion.div>
             </div>
 
-            {/* Main header */}
-            <motion.h2 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-4xl md:text-5xl lg:text-6xl font-serif text-ethereal-dark text-center"
-            >
-              Lessons Learned<br />
-              <span className="aurora-text-gradient-light">& Principles Applied</span>
-            </motion.h2>
+            {/* Main header with Gradient */}
+            <div className="relative mb-6 sm:mb-8">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif text-ethereal-dark text-center">
+                Lessons Learned<br />
+                <span className="block mt-2 sm:mt-3">
+                  <span className="aurora-text-gradient-light relative">
+                    & Principles Applied
+                    <motion.span
+                      className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-500 via-purple-500 to-emerald-500"
+                      initial={{ scaleX: 0, opacity: 0 }}
+                      whileInView={{ scaleX: 1, opacity: 1 }}
+                      transition={{ duration: 1, delay: 0.5 }}
+                    />
+                  </span>
+                </span>
+              </h2>
+            </div>
 
             {/* Description */}
             <motion.p 
@@ -125,28 +137,30 @@ export function AboutStory() {
                     viewport={{ once: true }}
                     transition={{ delay: belief.delay, duration: 0.5 }}
                   >
-                    <div className="relative flex items-center gap-6 p-4 rounded-xl group-hover:bg-white/5 transition-all duration-500">
+                    <div className="relative flex items-start md:items-center gap-6 p-4 rounded-xl group-hover:bg-white/5 transition-all duration-500">
                       {/* Animated line */}
                       <motion.div 
-                        className={`h-px w-16 bg-gradient-to-r ${belief.gradient}`}
+                        className={`h-px w-16 bg-gradient-to-r ${belief.gradient} mt-3 md:mt-0 flex-shrink-0`}
                         initial={{ width: 0 }}
                         whileInView={{ width: 64 }}
                         viewport={{ once: true }}
                         transition={{ delay: belief.delay + 0.3, duration: 0.8 }}
                       />
                       
-                      {/* Text with hover effect */}
+                      {/* Text with hover effect - fixed for mobile */}
                       <motion.p 
                         className="flex-1 text-lg text-ethereal-dark/80 group-hover:text-ethereal-dark transition-colors duration-300"
-                        whileHover={{ x: 5 }}
-                        transition={{ duration: 0.2 }}
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: belief.delay + 0.2, duration: 0.5 }}
                       >
                         {belief.text}
                       </motion.p>
 
                       {/* Gradient dot */}
                       <motion.div 
-                        className={`w-2 h-2 rounded-full bg-gradient-to-r ${belief.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
+                        className={`w-2 h-2 rounded-full bg-gradient-to-r ${belief.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex-shrink-0`}
                         initial={{ scale: 0 }}
                         whileInView={{ scale: 1 }}
                         viewport={{ once: true }}

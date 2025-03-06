@@ -154,6 +154,95 @@ const scrollToElement = (elementId: string) => {
   }
 };
 
+const ScrollNudge = () => {
+  const [show, setShow] = useState(false);
+  
+  useEffect(() => {
+    let hasScrolled = false;
+    const scrollHandler = () => {
+      hasScrolled = true;
+      setShow(false);
+      window.removeEventListener('scroll', scrollHandler);
+    };
+    
+    window.addEventListener('scroll', scrollHandler);
+    
+    const timer = setTimeout(() => {
+      if (!hasScrolled) setShow(true);
+    }, 3000);
+    
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('scroll', scrollHandler);
+    };
+  }, []);
+
+  return (
+    <AnimatePresence>
+      {show && (
+        <motion.div 
+          className="fixed left-1/2 -translate-x-1/2 bottom-16 z-50"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 10 }}
+          transition={{ duration: 0.5 }}
+        >
+          <motion.div 
+            className="flex flex-col items-center"
+            animate={{ 
+              y: [0, -8, 0],
+            }}
+            transition={{ 
+              duration: 3,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          >
+            <motion.span 
+              className="font-mono text-[10px] uppercase tracking-[0.2em] text-ethereal-dark/40 mb-3"
+              animate={{
+                opacity: [0.4, 0.7, 0.4]
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            >
+              scroll
+            </motion.span>
+            <div className="relative w-[1px] h-12 overflow-hidden">
+              <motion.div 
+                className="absolute inset-0 bg-gradient-to-b from-ethereal-dark/0 via-ethereal-dark/30 to-ethereal-dark/0"
+                animate={{ 
+                  y: [-48, 48]
+                }}
+                transition={{ 
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "linear"
+                }}
+              />
+            </div>
+            <motion.div 
+              className="w-1 h-1 rounded-full bg-ethereal-dark/30 mt-1"
+              animate={{
+                scale: [1, 1.5, 1],
+                opacity: [0.3, 0.6, 0.3]
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            />
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+};
+
 export const Hero = () => {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [videoEnded, setVideoEnded] = useState(false);
@@ -197,7 +286,7 @@ export const Hero = () => {
   return (
     <motion.section 
       ref={containerRef}
-      className="relative h-[100vh] flex items-center justify-center overflow-hidden font-['DM_Sans'] select-none"
+      className="relative min-h-[100vh] flex items-center justify-center overflow-hidden font-['DM_Sans'] select-none"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
@@ -257,8 +346,8 @@ export const Hero = () => {
       <BackgroundShapes />
 
       {/* Updated content section */}
-      <div className="relative z-10 container mx-auto px-4 flex items-center justify-center h-full">
-        <div className="max-w-4xl mx-auto text-center my-auto">
+      <div className="relative z-10 container mx-auto px-4 pt-20 pb-32">
+        <div className="max-w-4xl mx-auto text-center">
           {/* Updated tagline */}
           <motion.div 
             className="overflow-hidden mb-2 px-4 sm:px-0"
@@ -352,7 +441,7 @@ export const Hero = () => {
                   backgroundSize: "200% auto",
                 }}
               >
-                Turn Concepts into Companies<br />& Ideas into Impact.
+                Solving Today.<br />Building Tomorrow.
               </motion.span>
               <motion.span
                 className="absolute inset-0 aurora-text-gradient-light"
@@ -365,10 +454,10 @@ export const Hero = () => {
                   backgroundSize: "200% auto",
                 }}
               >
-                Turn Concepts into Companies<br />& Ideas into Impact.
+                Solving Today.<br />Building Tomorrow.
               </motion.span>
               <span className="relative aurora-text-gradient-light">
-              Turn Concepts into Companies<br />& Ideas into Impact.
+                Solving Today.<br />Building Tomorrow.
               </span>
             </motion.span>
           </h1>
@@ -387,7 +476,7 @@ export const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
           >
-             Helping founders and teams start, scale, and sustain with clarity and execution.
+            I solve problems in real time – bridging strategy, design, and execution to build what's next.
           </motion.p>
 
           {/* Updated CTA */}
@@ -416,107 +505,31 @@ export const Hero = () => {
                   backgroundSize: "200% auto",
                 }}
               />
-              <span className="relative z-10 font-mono text-lg text-[#FFFFF0]">Let's Talk</span>
+              <span className="relative z-10 font-mono text-lg text-[#FFFFF0]">Let's Build Something Remarkable</span>
             </motion.button>
-            
-            {/* Chevron below Let's Talk button */}
-            <motion.div 
-              className="mt-8 flex justify-center"
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 2 }}
-            >
-              <motion.div
-                className="cursor-pointer"
-                animate={{ y: [0, 8, 0] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                onClick={() => {
-                  const nextSection = document.querySelector('section:nth-of-type(2)');
-                  if (nextSection) {
-                    nextSection.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
-                whileHover={{ 
-                  scale: 1.1,
-                  y: 5,
-                  transition: { duration: 0.2 }
-                }}
-              >
-                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  {/* First Chevron */}
-                  <motion.path
-                    d="M8 16 L24 32 L40 16"
-                    strokeWidth="4"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    stroke="url(#contentChevronGradient)"
-                    className="drop-shadow-lg"
-                    initial={{ pathLength: 0, opacity: 0.4 }}
-                    animate={{ 
-                      pathLength: [0, 1, 1, 0],
-                      opacity: [0.4, 1, 1, 0.4]
-                    }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                      times: [0, 0.4, 0.6, 1]
-                    }}
-                  />
-                  
-                  {/* Second Chevron */}
-                  <motion.path
-                    d="M8 8 L24 24 L40 8"
-                    strokeWidth="4"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    stroke="url(#contentChevronGradient)"
-                    className="drop-shadow-lg"
-                    initial={{ pathLength: 0, opacity: 0.4 }}
-                    animate={{ 
-                      pathLength: [0, 1, 1, 0],
-                      opacity: [0.4, 1, 1, 0.4]
-                    }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                      times: [0, 0.4, 0.6, 1],
-                      delay: 0.35
-                    }}
-                  />
 
-                  {/* Gradient Definitions */}
-                  <defs>
-                    <linearGradient id="contentChevronGradient" x1="8" y1="8" x2="40" y2="32" gradientUnits="userSpaceOnUse">
-                      <stop offset="0%" stopColor="#3B82F6">
-                        <animate
-                          attributeName="stop-color"
-                          values="#3B82F6;#8B5CF6;#10B981;#3B82F6"
-                          dur="4s"
-                          repeatCount="indefinite"
-                        />
-                      </stop>
-                      <stop offset="50%" stopColor="#8B5CF6">
-                        <animate
-                          attributeName="stop-color"
-                          values="#8B5CF6;#10B981;#3B82F6;#8B5CF6"
-                          dur="4s"
-                          repeatCount="indefinite"
-                        />
-                      </stop>
-                      <stop offset="100%" stopColor="#10B981">
-                        <animate
-                          attributeName="stop-color"
-                          values="#10B981;#3B82F6;#8B5CF6;#10B981"
-                          dur="4s"
-                          repeatCount="indefinite"
-                        />
-                      </stop>
-                    </linearGradient>
-                  </defs>
-                </svg>
-              </motion.div>
+            <motion.div 
+              className="flex items-center gap-6"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.7 }}
+              transition={{ duration: 1, delay: 1.5 }}
+            >
+              <motion.button
+                onClick={() => scrollToElement('case-studies')}
+                whileHover={{ opacity: 1, y: -1 }}
+                className="font-mono text-sm text-[#1C1C1C] hover:aurora-text-gradient-light transition-all duration-300"
+              >
+                View My Work
+              </motion.button>
+              <div className="h-4 w-px bg-[#1C1C1C]/20" />
+              <Link href="/play">
+                <motion.button
+                  whileHover={{ opacity: 1, y: -1 }}
+                  className="font-mono text-sm text-[#1C1C1C] hover:aurora-text-gradient-light transition-all duration-300"
+                >
+                  View My Experiments
+                </motion.button>
+              </Link>
             </motion.div>
           </motion.div>
         </div>
@@ -524,9 +537,30 @@ export const Hero = () => {
 
       {/* Keep floating elements */}
       <motion.div
-        className="hidden md:block absolute -bottom-20 -right-20 w-64 h-64 opacity-40"
+        className="absolute top-1/4 right-[15%] w-24 h-24 border border-ethereal-dark/20 rounded-full"
+        style={{
+          zIndex: 2,
+          background: 'radial-gradient(circle at center, rgba(28, 28, 28, 0.05), transparent)',
+          opacity: fadeOut
+        }}
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 1, delay: 1.4 }}
+      />
+      <motion.div
+        className="absolute bottom-1/4 left-[15%] w-16 h-16 border border-ethereal-dark/20"
+        style={{
+          zIndex: 2,
+          background: 'linear-gradient(45deg, rgba(28, 28, 28, 0.05), transparent)',
+          transform: 'rotate(45deg)',
+          opacity: fadeOut
+        }}
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
         transition={{ duration: 1, delay: 1.6 }}
       />
+
+      <ScrollNudge />
     </motion.section>
   );
 }; 

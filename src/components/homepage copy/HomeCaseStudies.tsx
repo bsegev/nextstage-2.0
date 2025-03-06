@@ -115,7 +115,7 @@ export function HomeCaseStudies() {
 
             {/* Subtitle */}
             <p className="mt-4 sm:mt-6 text-center text-ethereal-dark/70 max-w-2xl mx-auto text-base sm:text-lg font-sans px-4 sm:px-0">
-            Each project is designed not just to look good – but to solve problems, drive engagement, and build lasting value.
+              Real transformations that showcase how strategic thinking and focused execution create lasting business impact.
             </p>
           </motion.div>
 

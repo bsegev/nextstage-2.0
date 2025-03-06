@@ -19,8 +19,7 @@ const DesktopNavItem = ({ href, children, icon: Icon }: { href: string; children
   const handleClick = (e: React.MouseEvent) => {
     if (!isExternal) {
       e.preventDefault();
-      // Force a hard navigation to ensure proper page loading
-      window.location.href = href;
+      router.push(href);
     }
   };
   
@@ -79,8 +78,7 @@ const MobileNavItem = ({ href, children, index, onNavigate }: { href: string; ch
     if (!isExternal) {
       e.preventDefault();
       onNavigate();
-      // Force a hard navigation to ensure proper page loading
-      window.location.href = href;
+      router.push(href);
     }
   };
   

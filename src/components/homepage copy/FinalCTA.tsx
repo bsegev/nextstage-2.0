@@ -212,7 +212,7 @@ export function FinalCTA() {
           </h2>
           
           <p className="text-lg sm:text-xl text-ethereal-dark/80 mb-8 sm:mb-12 max-w-3xl mx-auto leading-relaxed font-sans">
-            Whether you need strategy, execution, or both – I'm here to ensure everything holds together, works at its best, and moves forward.
+            Whether you need strategy, execution, or both—I'm here to ensure everything holds together, works at its best, and moves forward.
           </p>
 
           <div className="space-y-6 sm:space-y-8">
@@ -233,7 +233,7 @@ export function FinalCTA() {
                   ease: "easeInOut",
                 }}
               />
-              <span className="relative z-10 font-mono text-base sm:text-lg aurora-text-gradient-light"> Schedule Call</span>
+              <span className="relative z-10 font-mono text-base sm:text-lg aurora-text-gradient-light">Book a Strategy Call</span>
             </motion.button>
 
             <div className="text-sm sm:text-base text-[#1C1C1C]/70">

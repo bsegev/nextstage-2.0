@@ -244,17 +244,17 @@ export function BrandAnatomy() {
   const columnTitles = [
     {
       title: 'External Layer',
-      description: 'How the world sees you',
+      description: 'First impressions & awareness',
       icon: ArrowsPointingOutIcon,
     },
     {
       title: 'Connection Layer',
-      description: 'How you engage & convert',
+      description: 'Converting interest into engagement',
       icon: ArrowsRightLeftIcon,
     },
     {
       title: 'Internal Layer',
-      description: 'How you operate & scale',
+      description: 'Growth & retention systems',
       icon: ArrowsPointingInIcon,
     }
   ];
@@ -262,82 +262,83 @@ export function BrandAnatomy() {
   const items = [
     // External Layer Row 1
     {
-      title: "Brand Story & Presence",
-      description: "Your complete brand narrative and positioning",
-      link: "#brand-story",
+      title: "Brand Identity",
+      description: "Your distinctive visual and verbal signature",
+      link: "#brand-identity",
       icon: SparklesIcon
     },
     {
-      title: "Conversion-Ready Creative",
-      description: "Assets designed to drive action",
-      link: "#creative",
+      title: "Marketing Assets",
+      description: "Videos, social, and content that tell your story",
+      link: "#marketing",
       icon: DocumentIcon
-    },
-    // External Layer Row 2
-    {
-      title: "Market Positioning & Influence",
-      description: "How you stand out and lead",
-      link: "#positioning",
-      icon: ChatBubbleBottomCenterTextIcon
-    },
-    {
-      title: "Narrative & Thought Leadership",
-      description: "Your voice in the industry",
-      link: "#narrative",
-      icon: DocumentTextIcon
     },
 
     // Connection Layer Row 1
     {
-      title: "Website & Digital Experience",
-      description: "Your high-converting digital presence",
+      title: "Website Design",
+      description: "Your digital home and conversion hub",
       link: "#website",
       icon: GlobeAltIcon
     },
     {
-      title: "Acquisition & Retention Strategy",
-      description: "Systems to grow and keep customers",
-      link: "#acquisition",
+      title: "Marketing Funnels",
+      description: "Guided pathways to engagement",
+      link: "#funnels",
       icon: ChartBarIcon
     },
-    // Connection Layer Row 2
-    {
-      title: "Lead Nurturing & Pipeline Growth",
-      description: "Converting interest into revenue",
-      link: "#pipeline",
-      icon: ShoppingCartIcon
-    },
-    {
-      title: "Personalization & Engagement",
-      description: "Tailored customer journeys",
-      link: "#engagement",
-      icon: SwatchIcon
-    },
 
-    // Internal Layer Row 1
-    {
-      title: "Scalable Infrastructure",
-      description: "Systems that grow with you",
-      link: "#infrastructure",
+     // Internal Layer Row 1
+     {
+      title: "Growth Strategy",
+      description: "Your roadmap for sustainable scaling",
+      link: "#growth",
       icon: RocketLaunchIcon
     },
     {
-      title: "Expansion & Market Entry",
-      description: "Strategies for new opportunities",
-      link: "#expansion",
+      title: "Go-to-Market",
+      description: "Strategic launch and expansion plans",
+      link: "#gtm",
       icon: PresentationChartLineIcon
     },
-    // Internal Layer Row 2
+
+       // External Layer Row 2
     {
-      title: "Operational Playbooks & AI",
-      description: "Smart processes that scale",
-      link: "#playbooks",
+      title: "Social Presence",
+      description: "How you show up across platforms",
+      link: "#social",
+      icon: ChatBubbleBottomCenterTextIcon
+    },
+    {
+      title: "Content Strategy",
+      description: "Consistent storytelling that attracts your audience",
+      link: "#content",
+      icon: DocumentTextIcon
+    },
+    // Connection Layer Row 2
+    {
+      title: "Sales Enablement",
+      description: "Tools to nurture relationships",
+      link: "#sales",
+      icon: ShoppingCartIcon
+    },
+    {
+      title: "Lead Nurture",
+      description: "Moving from interest to commitment",
+      link: "#nurture",
+      icon: SwatchIcon
+    },
+   // Internal Layer Row 2
+    {
+      title: "Team Resources",
+      description: "Internal processes and documentation",
+      link: "#resources",
       icon: UserGroupIcon
     },
     {
-      title: "Execution & Optimization",
-      description: "Continuous improvement systems",
-      link: "#optimization",
+      title: "Operational Systems",
+      description: "How you deliver and retain value",
+      link: "#operations",
       icon: CubeIcon
     }
   ];
@@ -428,7 +429,7 @@ export function BrandAnatomy() {
 
             {/* Subtitle */}
             <p className="mt-4 sm:mt-6 text-center text-ethereal-dark/70 max-w-2xl mx-auto text-base sm:text-lg font-sans px-4 sm:px-0">
-              Every business faces three key challenges: standing out in the market, converting attention into growth, and scaling efficiently. This framework helps identify and fix gaps at each layer.
+              Every brand needs these three interconnected layers to thrive digitally
             </p>
           </motion.div>
 
@@ -451,10 +452,10 @@ export function BrandAnatomy() {
                 <div className="mt-4 sm:mt-6 grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                   {/* External Presence */}
                   {columnIndex === 0 && [
-                    items[0], // Brand Story & Presence
-                    items[1], // Conversion-Ready Creative
-                    items[2], // Market Positioning & Influence
-                    items[3], // Narrative & Thought Leadership
+                    items[0], // Brand Identity
+                    items[1], // Marketing Materials
+                    items[6], // Content Strategy
+                    items[7], // Social Presence
                   ].map((item, idx) => {
                     const itemIndex = columnIndex * 4 + idx;
                     return (
@@ -472,10 +473,10 @@ export function BrandAnatomy() {
                   })}
                   {/* Connection Layer */}
                   {columnIndex === 1 && [
-                    items[4], // Website & Digital Experience
-                    items[5], // Acquisition & Retention Strategy
-                    items[6], // Lead Nurturing & Pipeline Growth
-                    items[7], // Personalization & Engagement Systems
+                    items[2], // Website Design
+                    items[3], // Digital Products
+                    items[8], // Sales Enablement
+                    items[9], // Brand Guidelines
                   ].map((item, idx) => {
                     const itemIndex = columnIndex * 4 + idx;
                     return (
@@ -493,10 +494,10 @@ export function BrandAnatomy() {
                   })}
                   {/* Internal Systems */}
                   {columnIndex === 2 && [
-                    items[8], // Scalable Business Infrastructure
-                    items[9], // Expansion & Market Entry
-                    items[10], // Operational Playbooks & AI Integration
-                    items[11], // Execution & Process Optimization
+                    items[4], // Growth Strategy
+                    items[5], // Launch Strategy
+                    items[10], // Pitch Decks
+                    items[11], // Team Resources
                   ].map((item, idx) => {
                     const itemIndex = columnIndex * 4 + idx;
                     return (

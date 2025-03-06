@@ -1,57 +1,66 @@
 NEXTSTAGE – FINAL WEBSITE OUTLINE
 HOME
 🔹 Hero: "Solving today. Building tomorrow."
-🔹 Subtitle: “I solve problems in real time—bridging strategy, design, and execution to build what’s next.”
+🔹 Subtitle: "I solve problems in real time—bridging strategy, design, and execution to build what's next."
 
 📌 Sections:
 
-Who I Am – A brief, human introduction.
-Who I Work With – Speaking directly to ideal collaborators.
-Carousel (Selected Work / Impact Overview) – Case studies framed as Before → Process → Outcome stories.
-Metrics – Concrete proof of impact (e.g., “XX projects delivered,” “XX clients transformed,” “XX industries navigated”).
+Who I Am – A brief, human introduction focused on adaptability across business stages.
+
+Who I Work With – Three clear segments:
+✅ Launch Stage – Founders and teams launching new products or seeking investment
+✅ Scale Stage – Growing businesses needing alignment and infrastructure
+✅ Innovation Stage – Established organizations seeking fresh perspectives
+
+Selected Work – Case studies organized by business stage, showing clear before/after results.
+
 What I Do (Core Capabilities):
-✅ “Strategic Leadership & Direction – For organizations and teams needing a high-level thinker to orchestrate vision, strategy, and execution.”
-✅ “Problem-Solving & Execution – For projects that need a high-impact expert to step in and build where it matters most.”
-✅ “Guidance & Advisory – For individuals or teams who need structured insight into what to do next and how to make the best decisions.”
-Testimonials – Real voices validating your impact.
-CTA: "Let’s build something remarkable."
+✅ "Strategic Leadership & Direction – From initial concept to scale to innovation."
+✅ "Problem-Solving & Execution – Adapting approach to your specific stage and needs."
+✅ "Guidance & Advisory – Clear, actionable insights for your next stage of growth."
+
+Testimonials – Real voices from different stages of business growth.
+
+CTA: "Let's build something remarkable"
+
 ABOUT
-🔹 Hero: "I solve problems by seeing what others don’t. I create by bridging worlds that others keep separate."
+🔹 Hero: "I solve problems by seeing what others don't. I create by bridging worlds that others keep separate."
 
 📌 Sections:
+My Background – Journey and expertise across different business stages
+My Passion – What drives me to help businesses at every stage
+My Approach – How I adapt to different needs while maintaining excellence
+How I Can Help You – Clear breakdown of services by business stage
+My Stack – Tools and expertise that scale with your needs
 
-My Background – Your journey and why your diverse expertise makes you uniquely valuable.
-My Passion – What fuels your curiosity and drives you to push creative and technical boundaries.
-My Approach – How you balance analytical precision and creative exploration.
-How I Can Help You – A direct invitation—where and how you fit into a client’s or collaborator’s world.
-My Stack (Tools & Expertise) – Visually engaging showcase of tools, frameworks, and methodologies.
-CTA: "Work with me / Collaborate."
 STUDIO
 🔹 Hero: "Where Your Vision Gets Built."
 🔹 Subtitle: "Turning strategy, design, and engineering into results that matter."
 
 📌 Sections:
+Selected Work – Case studies organized by:
+- Launch Stories
+- Scale & Growth
+- Enterprise Innovation
 
-Carousel (Selected Work / Visual Storytelling) – Case studies framed as Before → Process → Outcome stories.
-Process (How I Work, Not Just What I Do):
-🔹 How you deconstruct problems
-🔹 How you merge creativity and logic
-🔹 How you adapt execution to different industries/needs
-CTA: "Have a project? Let’s build."
+Process Overview:
+🔹 Understanding Your Stage
+🔹 Clarifying the Path Forward
+🔹 Building with Purpose
 
 LAB
 🔹 Hero: "From Curiosity to Creation."
-🔹 Subtitle: "Pushing the limits of tech, design, and AI—driven by what’s possible now."
+🔹 Subtitle: "Pushing the limits of tech, design, and AI—driven by what's possible now."
 
 📌 Sections:
 
-Current Explorations – Evolving R&D projects with context on what’s being explored and why.
+Current Explorations – Evolving R&D projects with context on what's being explored and why.
 Pet Projects – Self-initiated explorations in design, speculative tech, AI-driven tools, or workflow optimization.
-Pushing Limits (What You’re Testing, Hacking, or Reimagining):
+Pushing Limits (What You're Testing, Hacking, or Reimagining):
 🔹 Experimental tech applications
 🔹 AI-driven workflows
 🔹 Future-forward design systems
-CTA: "Curious? Let’s explore together."
+CTA: "Curious? Let's explore together."
 SHOP
 🔹 Hero: "Tools for today. Thinking for tomorrow."
 🔹 Subtitle: "Curated resources designed for creators, strategists, and innovators."
@@ -65,22 +74,21 @@ RESOURCES
 🔹 Hero: "Insight, strategy, and innovation—shared freely."
 
 📌 Sections:
-
-Articles & Essays – Perspectives on design, engineering, AI, and creative problem-solving.
-Guides & Frameworks – Actionable, structured insights.
-Case Studies – Breakdowns of past work, highlighting the process + impact.
-CTA: "Stay ahead. Subscribe / Follow." (Newsletter subscription form will be added later.)
+Articles & Essays – Insights for different business stages
+Guides & Frameworks – Tools for growth at any stage
+Case Studies – Real transformation stories
+CTA: "Stay ahead. Subscribe / Follow."
 CONTACT
-🔹 Hero: "Let’s make it happen."
-🔹 Subtitle: "Whether it’s strategy, execution, or both—let’s talk."
+🔹 Hero: "Let's make it happen."
+🔹 Subtitle: "Whether you're launching, scaling, or innovating—let's talk."
 
 📌 Ways to Connect:
-✅ Book a Meeting (via Cal/Calendly) – “Let’s explore how I can help. Whether you need strategy, execution, or a mix of both—let’s talk.”
-✅ Connect on LinkedIn – Direct link to your profile.
+✅ Book a Meeting – "Let's explore how I can help at your stage of growth."
+✅ Connect on LinkedIn – Direct link to profile
 
 📌 CTA Options:
-📍 Shop digital products & tools – "Explore my curated collection of practical resources—designed to empower creatives, strategists, and innovators."
-📍 Apply for high-impact consulting & solutions – "For tailored, high-level strategic or executional support, let's discuss how I can shape your next big move."
+📍 Shop digital products & tools – "Resources for every stage of growth"
+📍 Apply for consulting – "Get the right support for your stage"
 
 FINAL POSITIONING STATEMENT
-🔹 "I’m not just here to contribute—I’m here to make sure everything holds together, works at its best, and moves forward."
+🔹 "I'm here to make sure everything holds together, works at its best, and moves forward—no matter your stage of growth."
