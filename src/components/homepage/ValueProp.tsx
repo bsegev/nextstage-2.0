@@ -464,7 +464,8 @@ export function ValueProp() {
 
                 {/* CTA Button - Mobile optimization */}
                 <div className="flex justify-center lg:justify-start pl-4 sm:pl-6 lg:pl-8">
-                  <motion.button
+                  <motion.a
+                    href="/about"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     className="group relative inline-flex items-center gap-2 w-full sm:w-auto justify-center px-6 sm:px-8 py-3.5 sm:py-4 bg-[#1C1C1C] hover:bg-[#1C1C1C]/90 transition-all duration-300 rounded-xl overflow-hidden shadow-lg"
@@ -490,10 +491,10 @@ export function ValueProp() {
                     </div>
                     
                     <span className="relative z-10 font-mono text-base sm:text-lg text-[#FFFFF0] font-medium">
-                      Let's Talk
+                      See About
                     </span>
                     <ArrowRight className="w-4 h-4 text-[#FFFFF0] transition-transform group-hover:translate-x-0.5" />
-                  </motion.button>
+                  </motion.a>
                 </div>
               </motion.div>
             </motion.div>
