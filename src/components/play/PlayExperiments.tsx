@@ -372,11 +372,11 @@ export function PlayExperiments() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="max-w-2xl mb-32"
+              className="max-w-2xl mb-32 mx-auto sm:mx-0 text-center sm:text-left"
             >
               {/* Label */}
               <motion.div 
-                className="inline-flex items-center gap-2 sm:gap-3 mb-6"
+                className="inline-flex items-center gap-2 sm:gap-3 mb-6 mx-auto sm:mx-0"
                 animate={{ y: [0, -4, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               >
@@ -416,7 +416,7 @@ export function PlayExperiments() {
               </div>
 
               {/* Subheading */}
-              <p className="font-sans text-lg sm:text-xl text-ethereal-dark/70 max-w-3xl leading-relaxed">
+              <p className="font-sans text-lg sm:text-xl text-ethereal-dark/70 max-w-3xl mx-auto sm:mx-0 leading-relaxed">
                 A collection of creative explorations, technical experiments, and passion projects that push the boundaries of what's possible at the intersection of design and technology.
               </p>
             </motion.div>

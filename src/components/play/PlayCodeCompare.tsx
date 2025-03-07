@@ -5,19 +5,19 @@ import { CodeCompare } from "@/components/ui/code-compare";
 
 export function PlayCodeCompare() {
   return (
-    <section className="relative py-8 md:py-16 overflow-hidden">
+    <section className="relative py-12 md:py-16 overflow-hidden">
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-[0.04]" />
         <div className="absolute inset-0 bg-gradient-to-b from-surface-50 via-surface-50/95 to-surface-50" />
         <div className="absolute inset-0 bg-gradient-to-br from-blue-500/[0.02] to-emerald-500/[0.02]" />
       </div>
-      <div className="relative z-10 container mx-auto px-2 sm:px-6">
+      <div className="relative z-10 container mx-auto px-6">
         <div className="max-w-7xl mx-auto">
           {/* Header Section */}
-          <div className="mb-12 md:mb-16">
+          <div className="mb-12 md:mb-16 text-center sm:text-left">
             {/* Label */}
             <motion.div 
-              className="inline-flex items-center gap-2 sm:gap-3 mb-6"
+              className="inline-flex items-center gap-2 sm:gap-3 mb-6 mx-auto sm:mx-0"
               animate={{ y: [0, -4, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             >
@@ -57,7 +57,7 @@ export function PlayCodeCompare() {
             </div>
 
             {/* Subheading */}
-            <p className="font-sans text-lg sm:text-xl text-ethereal-dark/70 max-w-3xl leading-relaxed">
+            <p className="font-sans text-lg sm:text-xl text-ethereal-dark/70 max-w-3xl mx-auto sm:mx-0 leading-relaxed">
               Compare design iterations side by side to see how our approach has evolved. Witness the transformation from concept to polished implementation.
             </p>
           </div>
