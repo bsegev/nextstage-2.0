@@ -307,16 +307,16 @@ export function AiEntryPoint({ onComplete }: AiEntryPointProps) {
                   <div className="mystical-accent-3"></div>
                 </div>
 
-                <div className="flex flex-col items-center gap-12 max-w-3xl w-full">
+                <div className="flex flex-col items-center gap-6 md:gap-12 max-w-3xl w-full">
                   {/* Welcome Message */}
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
-                    className="text-center space-y-4"
+                    className="text-center space-y-2 md:space-y-4"
                   >
                     <motion.h1 
-                      className="text-4xl md:text-6xl text-[#FFFFF0] font-serif"
+                      className="text-3xl md:text-6xl text-[#FFFFF0] font-serif"
                     >
                       {welcomeText}
                       {welcomeText.length < "Welcome to NextStage".length && (
@@ -324,7 +324,7 @@ export function AiEntryPoint({ onComplete }: AiEntryPointProps) {
                       )}
                     </motion.h1>
                     <motion.p 
-                      className="text-xl md:text-2xl text-[#FFFFF0]/80 font-light"
+                      className="text-lg md:text-2xl text-[#FFFFF0]/80 font-light px-4 md:px-0"
                     >
                       {welcomeSubtext}
                       {welcomeText.length === "Welcome to NextStage".length && 
@@ -340,19 +340,19 @@ export function AiEntryPoint({ onComplete }: AiEntryPointProps) {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.5 }}
-                      className="w-full relative"
+                      className="w-full relative px-4 md:px-0"
                     >
                       <div className="bg-gradient-to-br from-[#FFFFF0]/10 to-[#1C1C1C]/90 rounded-2xl shadow-2xl overflow-hidden border border-[#FFFFF0]/20 backdrop-blur-sm">
                         {/* Header */}
-                        <div className="px-6 py-4 border-b border-[#FFFFF0]/20 flex items-center gap-3">
-                          <SparklesIcon className="w-5 h-5 text-[#FFFFF0]/80" />
-                          <span className="font-mono text-sm text-[#FFFFF0]/80">Strategic Design Partner</span>
+                        <div className="px-4 md:px-6 py-3 md:py-4 border-b border-[#FFFFF0]/20 flex items-center gap-3">
+                          <SparklesIcon className="w-4 h-4 md:w-5 md:h-5 text-[#FFFFF0]/80" />
+                          <span className="font-mono text-xs md:text-sm text-[#FFFFF0]/80">Strategic Design Partner</span>
                         </div>
 
                         {/* Chat area */}
-                        <div className="p-6 space-y-6">
+                        <div className="p-4 md:p-6 space-y-4 md:space-y-6">
                           <div className="flex items-start gap-4">
-                            <div className="flex-1 space-y-4">
+                            <div className="flex-1 space-y-3 md:space-y-4">
                               <motion.p 
                                 key={`q-${currentQuestion}`}
                                 initial={{ opacity: 0 }}
@@ -371,9 +371,9 @@ export function AiEntryPoint({ onComplete }: AiEntryPointProps) {
                                   key={`r-${currentQuestion}`}
                                   initial={{ opacity: 0, y: 10 }}
                                   animate={{ opacity: 1, y: 0 }}
-                                  className="space-y-4"
+                                  className="space-y-3 md:space-y-4"
                                 >
-                                  <p className="text-[#FFFFF0]/80">
+                                  <p className="text-base md:text-lg text-[#FFFFF0]/80">
                                     {displayedResponse}
                                     {isTypingResponse && displayedResponse.length < questions[currentQuestion].response.length && (
                                       <span className={`${showCursor ? 'opacity-100' : 'opacity-0'} 
@@ -387,17 +387,17 @@ export function AiEntryPoint({ onComplete }: AiEntryPointProps) {
                                       initial={{ opacity: 0 }}
                                       animate={{ opacity: 1 }}
                                       transition={{ delay: 0.5 }}
-                                      className="space-y-4"
+                                      className="space-y-3 md:space-y-4"
                                     >
                                       <div className="h-px w-12 bg-[#FFFFF0]/50" />
-                                      <div className="flex flex-col gap-3">
+                                      <div className="flex flex-col gap-2 md:gap-3">
                                         <button 
                                           onClick={handleBeginJourney}
-                                          className="w-full py-3 px-4 bg-[#FFFFF0]/10 backdrop-blur-sm
+                                          className="w-full py-2.5 md:py-3 px-4 bg-[#FFFFF0]/10 backdrop-blur-sm
                                                    rounded-lg transition-all duration-300 relative overflow-hidden 
                                                    group border border-[#FFFFF0]/20 hover:bg-[#FFFFF0]/20"
                                         >
-                                          <span className="relative z-10 aurora-text-gradient font-bold block">
+                                          <span className="relative z-10 aurora-text-gradient font-bold block text-sm md:text-base">
                                           See Website
                                           </span>
                                           <div className="absolute inset-0 opacity-0 group-hover:opacity-100 
@@ -407,11 +407,11 @@ export function AiEntryPoint({ onComplete }: AiEntryPointProps) {
                                         {currentQuestion < questions.length - 1 && showNextIndicator && (
                                           <button
                                             onClick={handleNextQuestion}
-                                            className="text-sm text-[#FFFFF0]/60 hover:text-[#FFFFF0]/80 
+                                            className="text-xs md:text-sm text-[#FFFFF0]/60 hover:text-[#FFFFF0]/80 
                                                      transition-colors flex items-center justify-center gap-2"
                                           >
                                             <span>Explore another question</span>
-                                            <ChevronRightIcon className="w-4 h-4" />
+                                            <ChevronRightIcon className="w-3 h-3 md:w-4 md:h-4" />
                                           </button>
                                         )}
                                       </div>
@@ -424,8 +424,8 @@ export function AiEntryPoint({ onComplete }: AiEntryPointProps) {
                         </div>
 
                         {/* Footer */}
-                        <div className="px-6 py-4 bg-[#1C1C1C]/70 flex justify-between items-center">
-                          <span className="text-xs text-[#FFFFF0]/60 font-mono">
+                        <div className="px-4 md:px-6 py-3 md:py-4 bg-[#1C1C1C]/70 flex justify-between items-center">
+                          <span className="text-[10px] md:text-xs text-[#FFFFF0]/60 font-mono">
                             {currentQuestion + 1} / {questions.length}
                           </span>
                         </div>
