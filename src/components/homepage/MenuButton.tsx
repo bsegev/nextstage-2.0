@@ -199,107 +199,114 @@ const DesktopMenuContent = ({ triggerLottieRef, isScrolling }: { triggerLottieRe
 // Mobile Menu Content
 const MobileMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const menuIconRef = useRef<HTMLDivElement>(null);
+  const menuLottieRef = useRef<any>(null);
+
+  useEffect(() => {
+    if (menuIconRef.current) {
+      menuLottieRef.current = lottie.loadAnimation({
+        container: menuIconRef.current,
+        renderer: 'svg',
+        loop: false,
+        autoplay: false,
+        animationData: require('/public/lotties/menu.json'),
+      });
+
+      menuLottieRef.current.goToAndStop(0, true);
+    }
+
+    return () => {
+      if (menuLottieRef.current) {
+        menuLottieRef.current.destroy();
+      }
+    };
+  }, []);
+
+  const toggleMenu = () => {
+    if (!menuLottieRef.current) return;
+
+    if (isOpen) {
+      // X to hamburger (frames 30-50)
+      menuLottieRef.current.playSegments([30, 50], true);
+    } else {
+      // Hamburger to X (frames 0-20)
+      menuLottieRef.current.playSegments([0, 20], true);
+    }
+    setIsOpen(!isOpen);
+  };
 
   return (
     <div className="md:hidden">
-      {/* Mobile Trigger Button */}
+      {/* Floating Menu Button */}
       <motion.button 
-        onClick={() => setIsOpen(true)}
-        className="fixed top-4 right-4 z-[100] w-[50px] h-[50px] bg-white rounded-full shadow-lg flex items-center justify-center"
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
+        onClick={toggleMenu}
+        className="fixed top-6 right-6 z-[202] w-14 h-14 bg-white/80 backdrop-blur-xl rounded-2xl shadow-lg flex items-center justify-center"
+        whileHover={{ scale: 1.02, backgroundColor: 'rgba(255, 255, 255, 0.95)' }}
+        whileTap={{ scale: 0.98 }}
       >
-        <motion.div className="w-6 h-6 flex flex-col items-center justify-center gap-1.5">
-          <motion.span className="w-5 h-px bg-ethereal-dark/70 block" />
-          <motion.span className="w-4 h-px bg-ethereal-dark/70 block" />
-          <motion.span className="w-3 h-px bg-ethereal-dark/70 block" />
-        </motion.div>
+        <div ref={menuIconRef} className="w-7 h-7 relative z-10" style={{ pointerEvents: 'none' }} />
       </motion.button>
 
-      {/* Mobile Menu Overlay */}
+      {/* Refined Mobile Menu */}
       <AnimatePresence mode="wait">
         {isOpen && (
           <>
-            {/* Backdrop */}
+            {/* Elegant Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-[200] bg-white"
-            >
-              {/* Background Pattern */}
-              <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'url("/grid.svg")' }} />
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/[0.02] to-emerald-500/[0.02]" />
-            </motion.div>
+              transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
+              className="fixed inset-0 z-[200] bg-white/90 backdrop-blur-2xl"
+            />
 
             {/* Content Container */}
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 z-[201] flex flex-col"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 10 }}
+              transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
+              className="fixed inset-0 z-[201] flex flex-col pt-28 pb-12 px-8"
             >
-              {/* Header */}
-              <motion.div 
-                className="flex items-center justify-between px-6 py-4 border-b border-ethereal-dark/5"
-                initial={{ y: -20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.2 }}
-              >
-                <motion.span 
-                  className="font-serif text-lg text-ethereal-dark/90"
-                  initial={{ x: -20, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  transition={{ delay: 0.3 }}
-                >
-                  Navigation
-                </motion.span>
-                <motion.button
-                  onClick={() => setIsOpen(false)}
-                  className="w-[50px] h-[50px] rounded-full bg-white shadow-lg flex items-center justify-center"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <XMarkIcon className="w-6 h-6 text-ethereal-dark/70" />
-                </motion.button>
-              </motion.div>
-
-              {/* Navigation */}
-              <motion.nav
-                className="flex-1 overflow-auto py-8"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.2 }}
-              >
-                <MobileNavItem href="/" index={0} onNavigate={() => setIsOpen(false)}>Home</MobileNavItem>
-                <MobileNavItem href="/about" index={1} onNavigate={() => setIsOpen(false)}>About</MobileNavItem>
-                <MobileNavItem href="/work" index={2} onNavigate={() => setIsOpen(false)}>Work</MobileNavItem>
-                <MobileNavItem href="/play" index={3} onNavigate={() => setIsOpen(false)}>Play</MobileNavItem>
-                <MobileNavItem href="/learn" index={4} onNavigate={() => setIsOpen(false)}>Learn</MobileNavItem>
-                <MobileNavItem href="#contact" index={5} onNavigate={() => setIsOpen(false)}>Let's Talk</MobileNavItem>
+              {/* Navigation Links */}
+              <motion.nav className="flex-1">
+                <div className="max-w-md mx-auto space-y-6">
+                  {[
+                    { href: "/", label: "home", index: 0 },
+                    { href: "/about", label: "about", index: 1 },
+                    { href: "/work", label: "work", index: 2 },
+                    { href: "/play", label: "play", index: 3 },
+                    { href: "/learn", label: "learn", index: 4 },
+                    { href: "#contact", label: "let's talk", index: 5 }
+                  ].map(({ href, label, index }) => (
+                    <MobileNavItem 
+                      key={href} 
+                      href={href} 
+                      index={index} 
+                      onNavigate={() => setIsOpen(false)}
+                    >
+                      {label}
+                    </MobileNavItem>
+                  ))}
+                </div>
               </motion.nav>
 
-              {/* Footer */}
+              {/* Minimalist Footer */}
               <motion.div 
-                className="px-8 py-6 border-t border-ethereal-dark/5"
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
                 transition={{ delay: 0.4 }}
+                className="mt-auto pt-12 max-w-md mx-auto w-full"
               >
-                <motion.div 
-                  className="flex flex-col gap-2"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.6 }}
-                >
-                  <span className="text-sm text-ethereal-dark/40 font-mono">Get in touch</span>
+                <div className="flex flex-col items-center gap-4 text-center">
+                  <span className="text-sm text-ethereal-dark/50 tracking-wide">get in touch</span>
                   <a 
                     href="mailto:hello@example.com" 
-                    className="text-ethereal-dark/90 hover:text-ethereal-dark transition-colors"
+                    className="text-ethereal-dark/90 hover:text-ethereal-dark transition-colors text-lg"
                   >
                     hello@example.com
                   </a>
-                </motion.div>
+                </div>
               </motion.div>
             </motion.div>
           </>
