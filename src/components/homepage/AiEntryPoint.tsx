@@ -59,6 +59,36 @@ export function AiEntryPoint({ onComplete }: AiEntryPointProps) {
   const [showNextIndicator, setShowNextIndicator] = useState(false);
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [mainContentProgress, setMainContentProgress] = useState(0);
+  const [showWelcome, setShowWelcome] = useState(true);
+  const [welcomeText, setWelcomeText] = useState('');
+  const [welcomeSubtext, setWelcomeSubtext] = useState('');
+
+  // Welcome text typing animation
+  useEffect(() => {
+    if (!isLoaded) return;
+
+    const text = "Welcome to NextStage";
+    const subtext = "Where vision meets execution";
+    let currentIndex = 0;
+    let currentSubIndex = 0;
+    let timeout: NodeJS.Timeout;
+
+    const typeText = () => {
+      if (currentIndex <= text.length) {
+        setWelcomeText(text.slice(0, currentIndex));
+        currentIndex++;
+        timeout = setTimeout(typeText, 50);
+      } else if (currentSubIndex <= subtext.length) {
+        setWelcomeSubtext(subtext.slice(0, currentSubIndex));
+        currentSubIndex++;
+        timeout = setTimeout(typeText, 30);
+      }
+    };
+
+    typeText();
+    return () => clearTimeout(timeout);
+  }, [isLoaded]);
 
   // Preload assets
   useEffect(() => {
@@ -67,9 +97,12 @@ export function AiEntryPoint({ onComplete }: AiEntryPointProps) {
 
     const updateProgress = () => {
       loadedAssets++;
-      setLoadingProgress((loadedAssets / totalAssets) * 100);
+      const progress = (loadedAssets / totalAssets) * 100;
+      setLoadingProgress(progress);
       if (loadedAssets === totalAssets) {
         setIsLoaded(true);
+        // Start simulating main content loading progress
+        simulateMainContentLoading();
       }
     };
 
@@ -139,6 +172,19 @@ export function AiEntryPoint({ onComplete }: AiEntryPointProps) {
 
     preloadAnimations();
   }, []);
+
+  // Simulate main content loading progress
+  const simulateMainContentLoading = () => {
+    let progress = 0;
+    const interval = setInterval(() => {
+      progress += Math.random() * 15;
+      if (progress > 100) {
+        progress = 100;
+        clearInterval(interval);
+      }
+      setMainContentProgress(Math.min(progress, 100));
+    }, 500);
+  };
 
   // Handle question typing animation
   useEffect(() => {
@@ -214,138 +260,190 @@ export function AiEntryPoint({ onComplete }: AiEntryPointProps) {
     }, 600);
   };
 
+  const handleStartChat = () => {
+    setShowWelcome(false);
+  };
+
   return (
-    <AnimatePresence mode="wait">
-      {!isExiting && (
-        <motion.div 
-          className="fixed inset-0 bg-gradient-to-br from-[#FFFFF0] to-[#1C1C1C] z-50 flex items-center justify-center p-4 overflow-hidden"
-          initial={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.6, ease: "easeInOut" }}
-        >
-          {/* Loading indicator */}
-          {!isLoaded && (
-            <div className="absolute bottom-8 left-8 font-mono text-xs text-[#FFFFF0]/60">
-              Loading: {Math.round(loadingProgress)}%
-            </div>
-          )}
-
-          {/* Only show content when loaded */}
-          {isLoaded && (
-            <>
-              {/* Aurora background effect */}
-              <div className="absolute inset-0 overflow-hidden">
-                <div className="aurora-bg" style={{
-                  backgroundImage: `url(${encodeURI('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-CCFsxRTCZvCqB3oJFvQvePpyd0hO0L.png')})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  opacity: 0.15,
-                  mixBlendMode: 'screen'
-                }} />
-                <div className="mystical-accent-1"></div>
-                <div className="mystical-accent-2"></div>
-                <div className="mystical-accent-3"></div>
+    <div className="fixed inset-0 z-[100] bg-[#1C1C1C]">
+      <AnimatePresence mode="wait">
+        {!isExiting && (
+          <motion.div 
+            className="fixed inset-0 bg-gradient-to-br from-[#FFFFF0] to-[#1C1C1C] z-[100] flex items-center justify-center p-4 overflow-hidden"
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.6, ease: "easeInOut" }}
+          >
+            {/* Loading indicators */}
+            {!isLoaded ? (
+              <div className="absolute bottom-8 left-8 font-mono text-xs text-[#FFFFF0]/60">
+                Loading Assets: {Math.round(loadingProgress)}%
               </div>
+            ) : mainContentProgress < 100 && (
+              <div className="absolute bottom-8 left-8 font-mono text-xs text-[#FFFFF0]/60">
+                Loading Site: {Math.round(mainContentProgress)}%
+              </div>
+            )}
 
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                className="w-full max-w-3xl relative z-10"
-              >
-                <div className="bg-gradient-to-br from-[#FFFFF0]/10 to-[#1C1C1C]/90 rounded-2xl shadow-2xl overflow-hidden border border-[#FFFFF0]/20 backdrop-blur-sm">
-                  {/* Header */}
-                  <div className="px-6 py-4 border-b border-[#FFFFF0]/20 flex items-center gap-3">
-                    <SparklesIcon className="w-5 h-5 text-[#FFFFF0]/80" />
-                    <span className="font-mono text-sm text-[#FFFFF0]/80">Strategic Design Partner</span>
-                  </div>
+            {/* Only show content when loaded */}
+            {isLoaded && (
+              <>
+                {/* Aurora background effect */}
+                <div className="absolute inset-0 overflow-hidden">
+                  <div className="aurora-bg" style={{
+                    backgroundImage: `url(${encodeURI('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-CCFsxRTCZvCqB3oJFvQvePpyd0hO0L.png')})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    opacity: 0.15,
+                    mixBlendMode: 'screen'
+                  }} />
+                  <div className="mystical-accent-1"></div>
+                  <div className="mystical-accent-2"></div>
+                  <div className="mystical-accent-3"></div>
+                </div>
 
-                  {/* Chat area */}
-                  <div className="p-6 space-y-6">
-                    <div className="flex items-start gap-4">
-                      <div className="flex-1 space-y-4">
-                        <motion.p 
-                          key={`q-${currentQuestion}`}
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          className="text-xl md:text-2xl text-[#FFFFF0] font-serif"
+                {showWelcome ? (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    className="text-center space-y-6"
+                  >
+                    <motion.h1 
+                      className="text-4xl md:text-6xl text-[#FFFFF0] font-serif"
+                    >
+                      {welcomeText}
+                      <span className={`${showCursor ? 'opacity-100' : 'opacity-0'} transition-opacity duration-75`}>|</span>
+                    </motion.h1>
+                    <motion.p 
+                      className="text-xl md:text-2xl text-[#FFFFF0]/80 font-light"
+                    >
+                      {welcomeSubtext}
+                    </motion.p>
+                    {welcomeSubtext.length === "Where vision meets execution".length && (
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.5 }}
+                      >
+                        <button
+                          onClick={handleStartChat}
+                          className="mt-8 px-8 py-3 bg-[#FFFFF0]/10 backdrop-blur-sm
+                                   rounded-lg transition-all duration-300 relative overflow-hidden 
+                                   group border border-[#FFFFF0]/20 hover:bg-[#FFFFF0]/20"
                         >
-                          {displayedText}
-                          {!isTypingDone && (
-                            <span className={`${showCursor ? 'opacity-100' : 'opacity-0'} 
-                                          transition-opacity duration-75 text-[#FFFFF0]`}>|</span>
-                          )}
-                        </motion.p>
-                        
-                        {showResponse && (
-                          <motion.div
-                            key={`r-${currentQuestion}`}
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            className="space-y-4"
-                          >
-                            <p className="text-[#FFFFF0]/80">
-                              {displayedResponse}
-                              {isTypingResponse && displayedResponse.length < questions[currentQuestion].response.length && (
+                          <span className="relative z-10 aurora-text-gradient font-bold">
+                            Let's Begin
+                          </span>
+                          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 
+                                       transition-opacity duration-700 bg-gradient-to-r 
+                                       from-[#FFFFFF]/20 via-[#E6E9FF]/20 to-[#FFFFFF]/20" />
+                        </button>
+                      </motion.div>
+                    )}
+                  </motion.div>
+                ) : (
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    className="w-full max-w-3xl relative z-10"
+                  >
+                    <div className="bg-gradient-to-br from-[#FFFFF0]/10 to-[#1C1C1C]/90 rounded-2xl shadow-2xl overflow-hidden border border-[#FFFFF0]/20 backdrop-blur-sm">
+                      {/* Header */}
+                      <div className="px-6 py-4 border-b border-[#FFFFF0]/20 flex items-center gap-3">
+                        <SparklesIcon className="w-5 h-5 text-[#FFFFF0]/80" />
+                        <span className="font-mono text-sm text-[#FFFFF0]/80">Strategic Design Partner</span>
+                      </div>
+
+                      {/* Chat area */}
+                      <div className="p-6 space-y-6">
+                        <div className="flex items-start gap-4">
+                          <div className="flex-1 space-y-4">
+                            <motion.p 
+                              key={`q-${currentQuestion}`}
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              className="text-xl md:text-2xl text-[#FFFFF0] font-serif"
+                            >
+                              {displayedText}
+                              {!isTypingDone && (
                                 <span className={`${showCursor ? 'opacity-100' : 'opacity-0'} 
                                               transition-opacity duration-75 text-[#FFFFF0]`}>|</span>
                               )}
-                            </p>
+                            </motion.p>
                             
-                            {/* Show entry point after each response */}
-                            {displayedResponse.length === questions[currentQuestion].response.length && (
+                            {showResponse && (
                               <motion.div
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                transition={{ delay: 0.5 }}
+                                key={`r-${currentQuestion}`}
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
                                 className="space-y-4"
                               >
-                                <div className="h-px w-12 bg-[#FFFFF0]/50" />
-                                <div className="flex flex-col gap-3">
-                                  <button 
-                                    onClick={handleBeginJourney}
-                                    className="w-full py-3 px-4 bg-[#FFFFF0]/10 backdrop-blur-sm
-                                             rounded-lg transition-all duration-300 relative overflow-hidden 
-                                             group border border-[#FFFFF0]/20 hover:bg-[#FFFFF0]/20"
-                                  >
-                                    <span className="relative z-10 aurora-text-gradient font-bold block">
-                                    Discover What's Possible
-                                    </span>
-                                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 
-                                                 transition-opacity duration-700 bg-gradient-to-r 
-                                                 from-[#FFFFFF]/20 via-[#E6E9FF]/20 to-[#FFFFFF]/20" />
-                                  </button>
-                                  {currentQuestion < questions.length - 1 && showNextIndicator && (
-                                    <button
-                                      onClick={handleNextQuestion}
-                                      className="text-sm text-[#FFFFF0]/60 hover:text-[#FFFFF0]/80 
-                                               transition-colors flex items-center justify-center gap-2"
-                                    >
-                                      <span>Explore another question</span>
-                                      <ChevronRightIcon className="w-4 h-4" />
-                                    </button>
+                                <p className="text-[#FFFFF0]/80">
+                                  {displayedResponse}
+                                  {isTypingResponse && displayedResponse.length < questions[currentQuestion].response.length && (
+                                    <span className={`${showCursor ? 'opacity-100' : 'opacity-0'} 
+                                                  transition-opacity duration-75 text-[#FFFFF0]`}>|</span>
                                   )}
-                                </div>
+                                </p>
+                                
+                                {/* Show entry point after each response */}
+                                {displayedResponse.length === questions[currentQuestion].response.length && (
+                                  <motion.div
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    transition={{ delay: 0.5 }}
+                                    className="space-y-4"
+                                  >
+                                    <div className="h-px w-12 bg-[#FFFFF0]/50" />
+                                    <div className="flex flex-col gap-3">
+                                      <button 
+                                        onClick={handleBeginJourney}
+                                        className="w-full py-3 px-4 bg-[#FFFFF0]/10 backdrop-blur-sm
+                                                 rounded-lg transition-all duration-300 relative overflow-hidden 
+                                                 group border border-[#FFFFF0]/20 hover:bg-[#FFFFF0]/20"
+                                      >
+                                        <span className="relative z-10 aurora-text-gradient font-bold block">
+                                        Discover What's Possible
+                                        </span>
+                                        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 
+                                                     transition-opacity duration-700 bg-gradient-to-r 
+                                                     from-[#FFFFFF]/20 via-[#E6E9FF]/20 to-[#FFFFFF]/20" />
+                                      </button>
+                                      {currentQuestion < questions.length - 1 && showNextIndicator && (
+                                        <button
+                                          onClick={handleNextQuestion}
+                                          className="text-sm text-[#FFFFF0]/60 hover:text-[#FFFFF0]/80 
+                                                   transition-colors flex items-center justify-center gap-2"
+                                        >
+                                          <span>Explore another question</span>
+                                          <ChevronRightIcon className="w-4 h-4" />
+                                        </button>
+                                      )}
+                                    </div>
+                                  </motion.div>
+                                )}
                               </motion.div>
                             )}
-                          </motion.div>
-                        )}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Footer */}
+                      <div className="px-6 py-4 bg-[#1C1C1C]/70 flex justify-between items-center">
+                        <span className="text-xs text-[#FFFFF0]/60 font-mono">
+                          {currentQuestion + 1} / {questions.length}
+                        </span>
                       </div>
                     </div>
-                  </div>
-
-                  {/* Footer */}
-                  <div className="px-6 py-4 bg-[#1C1C1C]/70 flex justify-between items-center">
-                    <span className="text-xs text-[#FFFFF0]/60 font-mono">
-                      {currentQuestion + 1} / {questions.length}
-                    </span>
-                  </div>
-                </div>
-              </motion.div>
-            </>
-          )}
-        </motion.div>
-      )}
-    </AnimatePresence>
+                  </motion.div>
+                )}
+              </>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   );
 } 
