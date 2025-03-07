@@ -159,10 +159,10 @@ export function Services() {
             {/* Main Heading with Gradient */}
             <div className="relative mb-6 sm:mb-8">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif text-ethereal-dark">
-                3 Ways I Help You Get To{' '}
+                3 Ways To Get To The{' '}
                 <span className="block mt-2 sm:mt-3">
                   <span className="aurora-text-gradient-light relative">
-                    The NextStage & Beyond
+                    NextStage & Beyond
                     <motion.span
                       className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-500 via-purple-500 to-emerald-500"
                       initial={{ scaleX: 0, opacity: 0 }}

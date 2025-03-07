@@ -452,7 +452,7 @@ export function TransformationMessage() {
               >
                 {/* Main Image Container */}
                 <motion.div 
-                  className="relative aspect-[2/1] overflow-hidden rounded-[2rem] shadow-2xl"
+                  className="relative aspect-[2/1] overflow-hidden rounded-lg sm:rounded-xl lg:rounded-[2rem] shadow-2xl"
                   animate={{ 
                     scale: 1,
                     transition: { duration: 0.6, ease: [0.32, 0.72, 0, 1] }
@@ -471,7 +471,7 @@ export function TransformationMessage() {
                   {/* Mobile Info Button */}
                   {windowWidth < 1024 && (
                     <motion.button
-                      className="absolute bottom-4 right-4 px-4 py-2 rounded-full bg-gradient-to-br from-[#FFFFF0]/20 to-[#1C1C1C]/90 backdrop-blur-sm border border-[#FFFFF0]/30 flex items-center justify-center gap-2 z-20 shadow-lg"
+                      className="absolute bottom-4 right-4 px-4 py-2 rounded-lg sm:rounded-xl bg-gradient-to-br from-[#FFFFF0]/20 to-[#1C1C1C]/90 backdrop-blur-sm border border-[#FFFFF0]/30 flex items-center justify-center gap-2 z-20 shadow-lg"
                       onClick={(e: React.MouseEvent) => {
                         e.stopPropagation();
                         setShowInfo(!showInfo);

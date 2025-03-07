@@ -170,7 +170,7 @@ export function KeyMetrics() {
           transition={{ duration: 0.8, delay: 0.3 }}
           className="mt-16 sm:mt-24 text-center"
         >
-          <Link href="/work">
+          <Link href="/play">
             <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
@@ -178,7 +178,7 @@ export function KeyMetrics() {
             >
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-emerald-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <span className="relative font-mono text-white">
-                View Selected Projects
+                See Experiements
               </span>
               <ArrowRight className="w-4 h-4 text-white transition-transform group-hover:translate-x-0.5" />
             </motion.button>

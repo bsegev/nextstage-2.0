@@ -113,7 +113,30 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ title, description, featuredL
               : "Explore the complete collection of projects in this category."}
             thumbnailUrl="/images/coming-soon.jpg"
           >
-            <div className="group relative px-6 py-4 bg-white hover:bg-white/90 transition-all duration-300 rounded-xl overflow-hidden shadow-sm border border-ethereal-dark/10 text-center cursor-not-allowed">
+            <div 
+              onClick={(e) => {
+                e.preventDefault();
+                const tooltip = document.createElement('div');
+                tooltip.className = 'fixed z-50 px-4 py-2 text-sm text-[#FFFFF0] bg-[#1C1C1C] rounded-lg shadow-lg transition-all duration-300';
+                tooltip.style.left = `${e.clientX}px`;
+                tooltip.style.top = `${e.clientY - 40}px`;
+                tooltip.textContent = '🚧 Coming soon! Check back in a few days.';
+                document.body.appendChild(tooltip);
+                
+                // Fade in
+                requestAnimationFrame(() => {
+                  tooltip.style.opacity = '1';
+                });
+
+                // Animate out and remove
+                setTimeout(() => {
+                  tooltip.style.opacity = '0';
+                  tooltip.style.transform = 'translateY(-10px)';
+                  setTimeout(() => tooltip.remove(), 300);
+                }, 2000);
+              }}
+              className="group relative px-6 py-4 bg-white hover:bg-white/90 transition-all duration-300 rounded-xl overflow-hidden shadow-sm border border-ethereal-dark/10 text-center cursor-help"
+            >
               <motion.div
                 className="absolute inset-0 bg-gradient-to-r from-blue-500/[0.02] to-emerald-500/[0.02] opacity-0 group-hover:opacity-100"
                 transition={{ duration: 0.3 }}

@@ -196,7 +196,7 @@ export function WorkProcess() {
 
                   {/* Content */}
                   <span className="relative font-mono text-base text-white/90 tracking-wide">
-                    See what we can do together
+                    See if We're a Good Fit
                   </span>
                   
                   {/* Animated Arrow */}

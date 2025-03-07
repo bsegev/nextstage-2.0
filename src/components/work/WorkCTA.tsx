@@ -231,7 +231,7 @@ export function WorkCTA() {
                   backgroundSize: "200% auto",
                 }}
               />
-              <span className="relative z-10 font-mono text-lg text-[#FFFFF0]">Schedule a Discovery Call</span>
+              <span className="relative z-10 font-mono text-lg text-[#FFFFF0]">Schedule Call</span>
             </motion.button>
 
             <motion.div 

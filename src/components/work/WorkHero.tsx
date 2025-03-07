@@ -186,7 +186,7 @@ export function WorkHero() {
                   }}
                 />
                 <span className="relative z-10 font-mono text-lg text-[#FFFFF0] flex items-center gap-3">
-                  <span>Start Your Journey</span>
+                  <span>Start Building</span>
                   <motion.span 
                     className="inline-block"
                     animate={{ x: [0, 4, 0] }}

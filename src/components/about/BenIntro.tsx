@@ -157,9 +157,9 @@ function BenIntro() {
                     </div>
                   </motion.div>
 
-                  {/* Value pillars instead of metrics */}
+                  {/* Value pillars with improved responsive design */}
                   <motion.div
-                    className="grid grid-cols-3 gap-6 lg:gap-8 pt-6"
+                    className="grid grid-cols-3 gap-3 sm:gap-6 lg:gap-8 pt-6"
                     initial={{ opacity: 0, y: 20 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.8, delay: 0.6 }}
@@ -186,7 +186,7 @@ function BenIntro() {
                     ].map((pillar, i) => (
                       <motion.div
                         key={i}
-                        className="group relative p-4 rounded-xl overflow-hidden"
+                        className="group relative p-3 sm:p-4 rounded-xl overflow-hidden"
                         whileHover={{ y: -2 }}
                         transition={{ duration: 0.2 }}
                       >
@@ -199,12 +199,14 @@ function BenIntro() {
                         `} />
                         
                         <div className="relative">
-                          <div className="flex items-center gap-2 mb-2">
-                            <pillar.icon className="w-4 h-4 text-ethereal-dark/40" />
-                            <div className="text-sm text-ethereal-dark/50 font-light">{pillar.label}</div>
+                          <div className="flex items-center gap-2 mb-1.5 sm:mb-2">
+                            <div className="flex items-center justify-center w-5 h-5 sm:w-6 sm:h-6">
+                              <pillar.icon className="w-full h-full text-ethereal-dark/40" />
+                            </div>
+                            <div className="text-xs sm:text-sm text-ethereal-dark/50 font-light">{pillar.label}</div>
                           </div>
                           <motion.div
-                            className="text-2xl font-light aurora-text-gradient-light"
+                            className="text-lg sm:text-xl lg:text-2xl font-light aurora-text-gradient-light mb-1 sm:mb-1.5"
                             animate={{
                               backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
                             }}
@@ -220,7 +222,7 @@ function BenIntro() {
                           >
                             {pillar.value}
                           </motion.div>
-                          <div className="text-xs text-ethereal-dark/40 font-light mt-1">{pillar.unit}</div>
+                          <div className="text-xs sm:text-sm text-ethereal-dark/60 font-light">{pillar.unit}</div>
                         </div>
                       </motion.div>
                     ))}

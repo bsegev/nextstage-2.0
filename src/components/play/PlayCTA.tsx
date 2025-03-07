@@ -232,25 +232,8 @@ export function PlayCTA() {
                   backgroundSize: "200% auto",
                 }}
               />
-              <span className="relative z-10 font-mono text-lg text-[#FFFFF0]">Start a Conversation</span>
+              <span className="relative z-10 font-mono text-lg text-[#FFFFF0]">Schedule Call</span>
             </motion.button>
-
-            <motion.div 
-              className="flex items-center justify-center gap-6"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 0.7 }}
-              transition={{ duration: 1, delay: 1.5 }}
-            >
-              <motion.a
-                href="https://github.com/bsegev"
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ opacity: 1, y: -1 }}
-                className="font-mono text-sm text-[#1C1C1C] hover:aurora-text-gradient-light transition-all duration-300"
-              >
-                View on GitHub
-              </motion.a>
-            </motion.div>
           </div>
         </motion.div>
       </div>
