@@ -173,14 +173,14 @@ export function AboutHero() {
           </motion.div>
 
           {/* Title */}
-          <h1 className="font-serif text-5xl md:text-7xl font-bold leading-tight">
+          <h1 className="font-serif text-4xl md:text-7xl font-bold leading-tight text-center sm:text-left">
             <motion.span
               className="block text-ethereal-dark"
               initial={{ y: 40, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 1, delay: 0.4, ease: [0.23, 1, 0.32, 1] }}
             >
-              Bridging the Gap
+              Bridge Between
             </motion.span>
             <motion.span
               className="block relative"
@@ -202,7 +202,7 @@ export function AboutHero() {
                   backgroundSize: "200% auto",
                 }}
               >
-                Between Vision & Impact
+                Vision & Impact
               </motion.span>
               <motion.span
                 className="absolute inset-0 aurora-text-gradient-light"
@@ -219,10 +219,10 @@ export function AboutHero() {
                   backgroundSize: "200% auto",
                 }}
               >
-                Between Vision & Impact
+                Vision & Impact
               </motion.span>
               <span className="relative aurora-text-gradient-light">
-                Between Vision & Impact
+                Vision & Impact
               </span>
             </motion.span>
           </h1>
@@ -233,7 +233,7 @@ export function AboutHero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.8, ease: [0.23, 1, 0.32, 1] }}
-              className="mt-8 text-xl sm:text-2xl text-ethereal-dark/90 font-light leading-relaxed tracking-tight font-sans"
+              className="mt-8 text-lg sm:text-xl md:text-2xl text-ethereal-dark/90 font-light leading-relaxed tracking-tight font-sans text-center sm:text-left"
             >
               I combine strategic thinking with hands-on execution to help ambitious founders and teams build what's next. Let's turn your vision into reality.
             </motion.p>

@@ -57,7 +57,7 @@ export function LearnHero() {
           </motion.div>
 
           {/* Main headline */}
-          <h1 className="font-serif text-5xl md:text-7xl font-bold leading-tight">
+          <h1 className="font-serif text-4xl md:text-7xl font-bold leading-tight text-center sm:text-left">
             <motion.span
               className="block text-ethereal-dark"
               initial={{ y: 40, opacity: 0 }}
@@ -82,7 +82,7 @@ export function LearnHero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.8, ease: [0.23, 1, 0.32, 1] }}
-              className="mt-8 text-xl sm:text-2xl text-ethereal-dark/90 font-light leading-relaxed tracking-tight font-sans"
+              className="mt-8 text-lg sm:text-xl md:text-2xl text-ethereal-dark/90 font-light leading-relaxed tracking-tight font-sans text-center sm:text-left"
             >
               Practical insights and frameworks for creators, strategists, and innovators. Explore guides, case studies, and resources that help you build better digital experiences.
             </motion.p>

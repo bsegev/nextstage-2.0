@@ -94,14 +94,14 @@ export function WorkHero() {
           </motion.div>
 
           {/* Updated main headline */}
-          <h1 className="font-serif text-5xl md:text-7xl font-bold leading-tight">
+          <h1 className="font-serif text-4xl md:text-7xl font-bold leading-tight text-center sm:text-left">
             <motion.span
               className="block text-ethereal-dark"
               initial={{ y: 40, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 1, delay: 0.4, ease: [0.23, 1, 0.32, 1] }}
             >
-              From Concept to
+              Bring Your Idea to
             </motion.span>
             <motion.span
               className="block relative"
@@ -123,7 +123,7 @@ export function WorkHero() {
                   backgroundSize: "200% auto",
                 }}
               >
-                Reality & Beyond
+                Market & Beyond
               </motion.span>
               <motion.span
                 className="absolute inset-0 aurora-text-gradient-light"
@@ -140,10 +140,10 @@ export function WorkHero() {
                   backgroundSize: "200% auto",
                 }}
               >
-                Reality & Beyond
+                Market & Beyond
               </motion.span>
               <span className="relative aurora-text-gradient-light">
-                Reality & Beyond
+                Market & Beyond
               </span>
             </motion.span>
           </h1>
@@ -154,7 +154,7 @@ export function WorkHero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.8, ease: [0.23, 1, 0.32, 1] }}
-              className="mt-8 text-xl sm:text-2xl text-ethereal-dark/90 font-light leading-relaxed tracking-tight font-sans"
+              className="mt-8 text-lg sm:text-xl md:text-2xl text-ethereal-dark/90 font-light leading-relaxed tracking-tight font-sans text-center sm:text-left"
             >
               This isn't just about building things – it's about crafting journeys that transform businesses. Let's explore how your vision can become something extraordinary.
             </motion.p>
