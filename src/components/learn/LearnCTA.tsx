@@ -231,7 +231,7 @@ export function LearnCTA() {
                   backgroundSize: "200% auto",
                 }}
               />
-              <span className="relative z-10 font-mono text-lg text-[#FFFFF0]">Schedule a Strategy Session</span>
+              <span className="relative z-10 font-mono text-lg text-[#FFFFF0]">Schedule Session</span>
             </motion.button>
 
             <motion.div 

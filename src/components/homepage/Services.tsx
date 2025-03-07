@@ -454,14 +454,15 @@ export function Services() {
           transition={{ duration: 0.5, delay: 0.8 }}
           className="mt-16 text-center"
         >
-          <motion.button
+          <motion.a
+            href="/work"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             className="inline-flex items-center gap-2 px-8 py-4 text-base font-mono text-white bg-gray-900 rounded-xl hover:bg-gray-800 transition-colors duration-300"
           >
-            Explore Services
+            See Work
             <ArrowRight className="h-4 w-4" />
-          </motion.button>
+          </motion.a>
         </motion.div>
       </div>
     </section>

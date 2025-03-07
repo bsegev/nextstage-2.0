@@ -140,11 +140,11 @@ export function PlayExperiments() {
   const features = [
     {
       title: "Micro Projects & MVPs",
-      description: "Quick, impactful experiments that push the boundaries of what's possible. Building small but meaningful tools that solve real problems.",
+      description: "Quick, impactful experiments that show what's possible. Building small but interactive tools guided by curiosity and fun.",
       featuredLink: "/play/paint",
       allLink: "/play/micro-projects",
       thumbnails: [
-        "/images/micro-projects/project1.png",
+        "/images/ai-x-design.png",
         "/images/micro-projects/project2.png",
         "/images/micro-projects/project3.png",
         "/images/micro-projects/project4.png",
