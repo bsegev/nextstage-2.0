@@ -40,29 +40,26 @@ export function PlayHero() {
       transition={{ duration: 0.8 }}
     >
       {/* Background Video */}
-      {!videoError && (
-        <video
-          ref={videoRef}
-          autoPlay
-          loop
-          muted
-          playsInline
-          poster="/images/play-hero-poster.jpg"
-          onError={() => setVideoError(true)}
-          onLoadedData={() => setIsVideoLoaded(true)}
-          className="absolute inset-0 w-full h-full object-cover"
-          style={{ opacity: isVideoLoaded ? 1 : 0 }}
-        >
-          <source src="/videos/play-hero-bg.webm" type="video/webm" />
-          <source src="/videos/play-hero-bg.mp4" type="video/mp4" />
-        </video>
-      )}
+      <video
+        ref={videoRef}
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="auto"
+        className="absolute inset-0 w-full h-full object-cover"
+        onError={(e) => {
+          console.error('Video loading error:', e);
+          setVideoError(true);
+        }}
+      >
+        <source src="/videos/play-hero-bg.mp4" type="video/mp4" />
+      </video>
 
-      {/* Fallback Image for Video Error */}
+      {/* Fallback for Video Error */}
       {videoError && (
         <div 
-          className="absolute inset-0 w-full h-full bg-cover bg-center"
-          style={{ backgroundImage: 'url(/images/play-hero-poster.jpg)' }}
+          className="absolute inset-0 w-full h-full bg-gradient-to-b from-blue-500/5 to-emerald-500/5"
         />
       )}
 
