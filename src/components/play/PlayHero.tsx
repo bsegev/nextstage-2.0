@@ -5,7 +5,10 @@ import { useRef, useState, useEffect } from 'react';
 
 export function PlayHero() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [videoError, setVideoError] = useState(false);
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -37,15 +40,31 @@ export function PlayHero() {
       transition={{ duration: 0.8 }}
     >
       {/* Background Video */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute inset-0 w-full h-full object-cover"
-      >
-        <source src="/videos/play-hero-bg.mp4" type="video/mp4" />
-      </video>
+      {!videoError && (
+        <video
+          ref={videoRef}
+          autoPlay
+          loop
+          muted
+          playsInline
+          poster="/images/play-hero-poster.jpg"
+          onError={() => setVideoError(true)}
+          onLoadedData={() => setIsVideoLoaded(true)}
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ opacity: isVideoLoaded ? 1 : 0 }}
+        >
+          <source src="/videos/play-hero-bg.webm" type="video/webm" />
+          <source src="/videos/play-hero-bg.mp4" type="video/mp4" />
+        </video>
+      )}
+
+      {/* Fallback Image for Video Error */}
+      {videoError && (
+        <div 
+          className="absolute inset-0 w-full h-full bg-cover bg-center"
+          style={{ backgroundImage: 'url(/images/play-hero-poster.jpg)' }}
+        />
+      )}
 
       {/* Frosted Glass Overlay */}
       <motion.div 

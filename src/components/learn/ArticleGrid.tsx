@@ -7,19 +7,22 @@ const featuredArticles = [
     title: "Why I Unsubscribed from Every Newsletter—and Ended Up a Better Email Marketer",
     excerpt: "A personal experiment that reveals counterintuitive strategies.",
     category: "Marketing",
-    readTime: "7 min"
+    readTime: "7 min",
+    image: "/images/articles/unsubscribe.png"
   },
   {
     title: "The Month I Let AI Run My Schedule: Lessons in Trust, Delegation, and Sanity",
     excerpt: "A peek into balancing convenience with caution when using automation.",
     category: "Productivity",
-    readTime: "8 min"
+    readTime: "8 min",
+    image: "/images/articles/ai-schedule.png"
   },
   {
     title: "How My Worst Logo Redesign Taught Me the Value of Brand Authenticity",
     excerpt: "Emphasizes learning from mistakes to refine brand strategy.",
     category: "Design",
-    readTime: "6 min"
+    readTime: "6 min",
+    image: "/images/articles/logo-redesign.jpg"
   }
 ];
 
@@ -81,7 +84,17 @@ export function ArticleGrid() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <div className="aspect-video bg-gradient-to-br from-blue-500/5 to-emerald-500/5" />
+              <div className="aspect-video relative overflow-hidden">
+                <motion.img
+                  src={article.image}
+                  alt={article.title}
+                  className="absolute inset-0 w-full h-full object-cover"
+                  initial={{ scale: 1 }}
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </div>
               <div className="p-6">
                 <div className="flex items-center gap-3 mb-4">
                   <span className="text-xs font-mono text-secondary-500">{article.category}</span>
