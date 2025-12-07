@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Lottie from 'lottie-react';
-import cubeCircleLoader from '/public/lotties/cube-and-circle-preloader (1).json';
+import cubeCircleLoader from '../../../public/lotties/cube-and-circle-preloader (1).json';
 
 export function Outro() {
   return (

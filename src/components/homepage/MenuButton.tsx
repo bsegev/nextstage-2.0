@@ -5,7 +5,7 @@ import lottie from 'lottie-web';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Modal, ModalBody, ModalContent, useModal } from '@/components/ui/animated-modal';
 import Lottie from 'lottie-react';
-import loadingLine from '/public/lotties/loading-line.json';
+import loadingLine from '../../../public/lotties/loading-line.json';
 import { HomeIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -209,7 +209,7 @@ const MobileMenu = () => {
         renderer: 'svg',
         loop: false,
         autoplay: false,
-        animationData: require('/public/lotties/menu.json'),
+        animationData: require('../../../public/lotties/menu.json'),
       });
 
       menuLottieRef.current.goToAndStop(0, true);

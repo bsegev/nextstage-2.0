@@ -2,9 +2,9 @@
 
 import { motion } from 'framer-motion';
 import Lottie from 'lottie-react';
-import energyAnimation from '/public/lotties/Energy (1).json';
-import discountAnimation from '/public/lotties/Discount (2).json';
-import featureAnimation from '/public/lotties/Feature (1).json';
+import energyAnimation from '../../../public/lotties/Energy (1).json';
+import discountAnimation from '../../../public/lotties/Discount (2).json';
+import featureAnimation from '../../../public/lotties/Feature (1).json';
 import Link from 'next/link';
 
 const metrics = [
